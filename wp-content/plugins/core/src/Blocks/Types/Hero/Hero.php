@@ -31,7 +31,7 @@ class Hero extends Block_Config implements Cta_Field {
 	/**
 	 * Register the block
 	 */
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Hero', 'tribe' ),
 			'description' => __( 'Hero block', 'tribe' ),
@@ -70,9 +70,9 @@ class Hero extends Block_Config implements Cta_Field {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label'       => __( 'Lead in', 'tribe' ),
+				'label'       => esc_html__( 'Lead in', 'tribe' ),
 				'name'        => self::LEAD_IN,
 				'type'        => 'text',
 				'placeholder' => __( 'Lead in (optional)', 'tribe' ),
@@ -81,12 +81,12 @@ class Hero extends Block_Config implements Cta_Field {
 				],
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
+				'label' => esc_html__( 'Title', 'tribe' ),
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
+				'label'        => esc_html__( 'Description', 'tribe' ),
 				'name'         => self::DESCRIPTION,
 				'type'         => 'wysiwyg',
 				'toolbar'      => Classic_Editor_Formats::MINIMAL,
@@ -99,11 +99,11 @@ class Hero extends Block_Config implements Cta_Field {
 
 		$this->add_section( new Field_Section( self::SECTION_BACKGROUND, __( 'Background', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::IMAGE, [
-					 'label'         => __( 'Image', 'tribe' ),
+					 'label'         => esc_html__( 'Image', 'tribe' ),
 					 'name'          => self::IMAGE,
 					 'type'          => 'image',
-					 'return_format' => 'id',
-					 'instructions'  => __( 'Landscape orientation recommended. Minimum 1700px wide.', 'tribe' ),
+					 'return_format' => 'array',
+					 'instructions'  => esc_html__( 'Landscape orientation recommended. Minimum 1700px wide.', 'tribe' ),
 					 'wrapper'       => [
 						 'class' => 'tribe-acf-hide-label',
 					 ],
@@ -116,8 +116,8 @@ class Hero extends Block_Config implements Cta_Field {
 				 'type'          => 'button_group',
 				 'name'          => self::LAYOUT,
 				 'choices'       => [
-					 self::LAYOUT_LEFT   => __( 'Left', 'tribe' ),
-					 self::LAYOUT_CENTER => __( 'Center', 'tribe' ),
+					 self::LAYOUT_LEFT   => esc_html__( 'Left', 'tribe' ),
+					 self::LAYOUT_CENTER => esc_html__( 'Center', 'tribe' ),
 				 ],
 				 'default_value' => self::LAYOUT_CENTER,
 			 ] ) );

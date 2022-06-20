@@ -2,21 +2,17 @@
 
 namespace Tribe\Project\Templates\Components;
 
-class Deferred_Component extends \ArrayObject {
+use ArrayObject;
 
-	/**
-	 * @var string
-	 */
-	private $path;
+class Deferred_Component extends ArrayObject {
 
-	/**
-	 * @var string|null
-	 */
-	private $name;
+	private string $path;
+	private ?string $name;
 
 	public function __construct( string $path, ?string $name = null, array $args = [] ) {
 		$this->path = $path;
 		$this->name = $name;
+
 		parent::__construct( $args );
 	}
 
@@ -28,7 +24,7 @@ class Deferred_Component extends \ArrayObject {
 		return $this->path;
 	}
 
-	public function name() {
+	public function name(): ?string {
 		return $this->name;
 	}
 

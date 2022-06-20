@@ -2,15 +2,18 @@
 
 namespace Tribe\Project\Theme\Config;
 
+/**
+ * @TODO rename to a proper class
+ */
 class Web_Fonts {
 
-	public const  PROVIDER_TYPEKIT = 'typekit';
-	public const  PROVIDER_GOOGLE  = 'google';
 	public const  PROVIDER_CUSTOM  = 'custom';
+	public const  PROVIDER_GOOGLE  = 'google';
+	public const  PROVIDER_TYPEKIT = 'typekit';
 	private const TYPEKIT_API      = 'https://use.typekit.net';
 
 	/**
-	 * @var array
+	 * @var array<string, string>
 	 */
 	private array $fonts;
 
@@ -54,10 +57,11 @@ class Web_Fonts {
 	}
 
 	/**
-	 * Setup the font URLs array for use throughout.
+	 * Set up the font URLs array for use throughout.
 	 */
 	private function get_font_urls(): array {
 		$urls = [];
+
 		// Typekit
 		if ( ! empty( $this->fonts[ self::PROVIDER_TYPEKIT ] ) ) {
 			$urls[ self::PROVIDER_TYPEKIT ] = $this->get_typekit_url();

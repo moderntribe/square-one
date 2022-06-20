@@ -10,17 +10,23 @@ class Analytics_Settings extends ACF\ACF_Meta_Group {
 
 	public const GOOGLE_TAG_MANAGER = 'id_google_tag_manager';
 
-	public function get_keys() {
+	public function get_keys(): array {
 		return [
 			static::GOOGLE_TAG_MANAGER,
 		];
 	}
 
+	/**
+	 * @param string|int $key
+	 * @param string|int $post_id
+	 *
+	 * @return mixed|null
+	 */
 	public function get_value( $key, $post_id = 'option' ) {
 		return in_array( $key, $this->get_keys(), true ) ? get_field( $key, $post_id ) : null;
 	}
 
-	public function get_group_config() {
+	public function get_group_config(): array {
 		$group = new ACF\Group( self::NAME, $this->object_types );
 		$group->set( 'title', __( 'Site Analytics Settings', 'tribe' ) );
 
@@ -29,7 +35,7 @@ class Analytics_Settings extends ACF\ACF_Meta_Group {
 		return $group->get_attributes();
 	}
 
-	private function get_site_tag_gtm_field() {
+	private function get_site_tag_gtm_field(): ACF\Field {
 		$field = new ACF\Field( self::NAME . '_' . self::GOOGLE_TAG_MANAGER );
 		$field->set_attributes( [
 			'label'       => __( 'Google Tag Manager ID', 'tribe' ),

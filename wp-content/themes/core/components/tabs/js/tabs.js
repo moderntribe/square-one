@@ -273,7 +273,7 @@ const cacheElements = () => {};
  * @description Initializes the class if the element(s) to work on are found.
  */
 const init = () => {
-	if ( ! el.tabsComponents ) {
+	if ( el.tabsComponents.length === 0 ) {
 		return;
 	}
 

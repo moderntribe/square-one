@@ -17,10 +17,9 @@ class Links extends Block_Config implements Cta_Field {
 
 	public const NAME = 'links';
 
-	public const SECTION_CONTENT = 's-content';
-	public const LEAD_IN         = 'leadin';
-	public const TITLE           = 'title';
-	public const DESCRIPTION     = 'description';
+	public const LEAD_IN     = 'leadin';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
 
 	public const SECTION_LINKS = 's-links';
 	public const LINKS_TITLE   = 'links_title';
@@ -33,7 +32,7 @@ class Links extends Block_Config implements Cta_Field {
 	public const LAYOUT_INLINE      = 'inline';
 	public const LAYOUT_STACKED     = 'stacked';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => esc_html__( 'Links', 'tribe' ),
 			'description' => esc_html__( 'A list of links', 'tribe' ),
@@ -97,7 +96,7 @@ class Links extends Block_Config implements Cta_Field {
 		] ) );
 	}
 
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 				'label'       => esc_html__( 'Lead in', 'tribe' ),
 				'name'        => self::LEAD_IN,
@@ -129,7 +128,7 @@ class Links extends Block_Config implements Cta_Field {
 				'label'       => esc_html__( 'Link List Title', 'tribe' ),
 				'name'        => self::LINKS_TITLE,
 				'type'        => 'text',
-				'placeholder' => esc_html( 'Link List Title (optional)', 'tribe' ),
+				'placeholder' => esc_html__( 'Link List Title (optional)', 'tribe' ),
 				'wrapper'     => [
 					'class' => 'tribe-acf-hide-label',
 				],

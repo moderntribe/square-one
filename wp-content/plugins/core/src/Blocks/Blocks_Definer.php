@@ -19,16 +19,16 @@ use Tribe\Project\Blocks\Types\Links\Links;
 use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text;
 use Tribe\Project\Blocks\Types\Quote\Quote;
+use Tribe\Project\Blocks\Types\Section_Nav\Section_Nav;
 use Tribe\Project\Blocks\Types\Spacer\Spacer;
 use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Blocks\Types\Tabs\Tabs;
 
 class Blocks_Definer implements Definer_Interface {
 
-	public const CONTROLLER_MAP = 'blocks.controller_map';
-	public const DENY_LIST      = 'blocks.deny_list';
-	public const STYLES         = 'blocks.style_overrides';
-	public const TYPES          = 'blocks.types';
+	public const DENY_LIST = 'blocks.deny_list';
+	public const STYLES    = 'blocks.style_overrides';
+	public const TYPES     = 'blocks.types';
 
 	public function define(): array {
 		return [
@@ -48,6 +48,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Logos::class ),
 				DI\get( Media_Text::class ),
 				DI\get( Quote::class ),
+				DI\get( Section_Nav::class ),
 				DI\get( Spacer::class ),
 				DI\get( Stats::class ),
 				DI\get( Tabs::class ),
@@ -112,7 +113,7 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Block_Deny_List::class => DI\create()->constructor( DI\get( self::DENY_LIST ) ),
+			Block_Deny_List::class => DI\autowire()->constructor( DI\get( self::DENY_LIST ) ),
 		];
 	}
 

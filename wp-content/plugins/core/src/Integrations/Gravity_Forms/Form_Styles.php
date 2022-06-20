@@ -31,7 +31,7 @@ class Form_Styles {
 
 	/**
 	 * Dequeue styles for formsmain on Gravity Forms.
-	 * This prevents GF styles from interferring with our sink form styles.
+	 * This prevents GF styles from interfering with our sink form styles.
 	 *
 	 * @action gform_enqueue_scripts
 	 */
@@ -56,9 +56,9 @@ class Form_Styles {
 	 *
 	 * @filter gform_pre_render
 	 */
-	public function deactivate_gf_animations( $form = [] ) {
+	public function deactivate_gf_animations( array $form = [] ): array {
 
-		if ( isset( $form['enableAnimation'] ) && $form['enableAnimation'] == true ) {
+		if ( isset( $form['enableAnimation'] ) && $form['enableAnimation'] === true ) {
 			$form['enableAnimation'] = false;
 		}
 

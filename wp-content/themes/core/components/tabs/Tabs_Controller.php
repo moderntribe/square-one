@@ -4,38 +4,62 @@ namespace Tribe\Project\Templates\Components\tabs;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Models\Tab as Tab_Model;
+use Tribe\Project\Templates\Models\Collections\Tab_Collection;
+use Tribe\Project\Templates\Models\Tab;
 
-/**
- * Class Controller
- *
- * @package Tribe\Project\Templates\Components\tabs
- */
 class Tabs_Controller extends Abstract_Controller {
 
-	public const TABS               = 'tabs';
-	public const CLASSES            = 'classes';
 	public const ATTRS              = 'attrs';
+	public const CLASSES            = 'classes';
 	public const LAYOUT             = 'layout';
-	public const TOGGLE_CLASSES     = 'toggle_classes';
-	public const TAB_BUTTON_CLASSES = 'tab_button_classes';
-	public const TAB_PANEL_CLASSES  = 'tab_panel_classes';
 	public const LAYOUT_HORIZONTAL  = 'horizontal';
 	public const LAYOUT_VERTICAL    = 'vertical';
+	public const TABS               = 'tabs';
+	public const TAB_BUTTON_CLASSES = 'tab_button_classes';
+	public const TAB_PANEL_CLASSES  = 'tab_panel_classes';
+	public const TOGGLE_CLASSES     = 'toggle_classes';
 
 	/**
-	 * @var \Tribe\Project\Templates\Models\Tab[] The collection of tabs to render. Each item should be a \Tribe\Project\Templates\Models\Tab object.
+	 * @var string[]
 	 */
-	private array $tabs;
-	private array $classes;
 	private array $attrs;
-	private string $layout;
-	private array $toggle_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $tab_button_classes;
-	private array $tab_panel_classes;
-	private string $tablist_id;
+
+	/**
+	 * @var mixed[]
+	 */
 	private array $tab_buttons = [];
-	private array $tab_panels  = [];
+
+	/**
+	 * @var string[]
+	 */
+	private array $tab_panel_classes;
+
+	/**
+	 * @var mixed[]
+	 */
+	private array $tab_panels = [];
+
+	/**
+	 * The collection of tabs to render.
+	 */
+	private Tab_Collection $tabs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $toggle_classes;
+	private string $layout;
+	private string $tablist_id;
 
 	/**
 	 * Controller constructor.
@@ -45,50 +69,109 @@ class Tabs_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->tabs               = (array) $args[ self::TABS ];
-		$this->classes            = (array) $args[ self::CLASSES ];
 		$this->attrs              = (array) $args[ self::ATTRS ];
+		$this->classes            = (array) $args[ self::CLASSES ];
 		$this->layout             = (string) $args[ self::LAYOUT ];
-		$this->toggle_classes     = (array) $args[ self::TOGGLE_CLASSES ];
 		$this->tab_button_classes = (array) $args[ self::TAB_BUTTON_CLASSES ];
 		$this->tab_panel_classes  = (array) $args[ self::TAB_PANEL_CLASSES ];
 		$this->tablist_id         = uniqid( 'c-tabs__tablist--' );
+		$this->tabs               = $args[ self::TABS ];
+		$this->toggle_classes     = (array) $args[ self::TOGGLE_CLASSES ];
 
 		$this->init_tabs();
 	}
 
 	/**
+	 * Return arguments for the tablist drop-down toggle for the vertical tabs layout.
+	 *
 	 * @return array
 	 */
+	public function get_dropdown_toggle_args(): array {
+		if ( $this->layout === self::LAYOUT_HORIZONTAL ) {
+			return [];
+		}
+
+		return [
+			'content' => $this->tabs[0]->label ?? __( 'Tab 1', 'tribe' ),
+			'classes' => $this->toggle_classes,
+			'attrs'   => [
+				'aria-controls' => $this->tablist_id,
+				'aria-expanded' => 'false',
+				'aria-haspopup' => 'true',
+				'aria-label'    => __( 'Toggle the tab list menu.', 'tribe' ),
+				'data-js'       => 'c-tabs__tablist-toggle',
+			],
+		];
+	}
+
+	public function get_classes(): string {
+		$this->classes[] = sprintf( 'c-tabs--layout-%s', $this->layout );
+
+		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	public function get_attrs(): string {
+		$this->attrs['data-layout'] = $this->layout;
+
+		return Markup_Utils::concat_attrs( $this->attrs );
+	}
+
+	public function get_dropdown_classes(): string {
+		return Markup_Utils::class_attribute( [ 'c-tabs__tablist-dropdown' ] );
+	}
+
+	public function get_dropdown_attrs(): string {
+		$attrs = [
+			'id'      => $this->tablist_id,
+			'data-js' => 'c-tabs__tablist-dropdown',
+		];
+
+		return Markup_Utils::concat_attrs( $attrs );
+	}
+
+	public function get_tablist_classes(): string {
+		return Markup_Utils::class_attribute( [ 'c-tabs__tablist' ] );
+	}
+
+	public function get_tablist_attrs(): string {
+		return Markup_Utils::concat_attrs( [ 'aria-orientation' => $this->layout, 'role' => 'tablist' ] );
+	}
+
+	public function get_tab_buttons(): array {
+		return $this->tab_buttons;
+	}
+
+	public function get_tab_panels(): array {
+		return $this->tab_panels;
+	}
+
 	protected function defaults(): array {
 		return [
-			self::TABS               => [],
-			self::CLASSES            => [],
 			self::ATTRS              => [],
+			self::CLASSES            => [],
 			self::LAYOUT             => self::LAYOUT_HORIZONTAL,
-			self::TOGGLE_CLASSES     => [],
+			self::TABS               => new Tab_Collection(),
 			self::TAB_BUTTON_CLASSES => [],
 			self::TAB_PANEL_CLASSES  => [ 's-sink', 't-sink' ],
+			self::TOGGLE_CLASSES     => [],
 		];
 	}
 
-	/**
-	 * @return array
-	 */
 	protected function required(): array {
 		return [
-			self::CLASSES            => [ 'c-tabs' ],
 			self::ATTRS              => [ 'data-js' => 'c-tabs' ],
-			self::TOGGLE_CLASSES     => [ 'c-tabs__tablist-toggle' ],
+			self::CLASSES            => [ 'c-tabs' ],
 			self::TAB_BUTTON_CLASSES => [ 'c-tabs__tab' ],
 			self::TAB_PANEL_CLASSES  => [ 'c-tabs__tabpanel' ],
+			self::TOGGLE_CLASSES     => [ 'c-tabs__tablist-toggle' ],
 		];
 	}
 
 	/**
-	 * Loop through the tabs provided setup the tab button and tab panel components arguments for each.
+	 * Loop through the tabs provided & set up the tab button and
+	 * tab panel components arguments for each.
 	 */
-	private function init_tabs() {
+	private function init_tabs(): void {
 		foreach ( $this->tabs as $index => $tab ) {
 			$tab_id              = uniqid();
 			$this->tab_buttons[] = $this->get_tab_button_args( $tab, $tab_id, $index );
@@ -105,9 +188,9 @@ class Tabs_Controller extends Abstract_Controller {
 	 *
 	 * @return array
 	 */
-	private function get_tab_button_args( Tab_Model $tab, string $tab_id, int $index ): array {
+	private function get_tab_button_args( Tab $tab, string $tab_id, int $index ): array {
 		$args = [
-			'content' => $tab->label ?: sprintf( __( 'Tab %d', 'tribe' ), $index + 1 ),
+			'content' => $tab->tab_label ?: sprintf( __( 'Tab %d', 'tribe' ), $index + 1 ),
 			'classes' => $this->tab_button_classes,
 			'attrs'   => [
 				'id'            => sprintf( 'c-tabs__tab--%s', $tab_id ),
@@ -134,9 +217,9 @@ class Tabs_Controller extends Abstract_Controller {
 	 *
 	 * @return array
 	 */
-	private function get_tab_panel_args( Tab_Model $tab, string $tab_id, int $index ): array {
+	private function get_tab_panel_args( Tab $tab, string $tab_id, int $index ): array {
 		$args = [
-			'content' => $tab->content ?: '&nbsp;', // If the tab content is empty, the container component won't render.
+			'content' => $tab->tab_content ?: '&nbsp;', // If the tab content is empty, the container component won't render.
 			'classes' => $this->tab_panel_classes,
 			'attrs'   => [
 				'id'              => sprintf( 'c-tabs__tabpanel--%s', $tab_id ),
@@ -152,94 +235,6 @@ class Tabs_Controller extends Abstract_Controller {
 		}
 
 		return $args;
-	}
-
-	/**
-	 * Return arguments for the tablist drop-down toggle for the vertical tabs layout.
-	 *
-	 * @return array
-	 */
-	public function get_dropdown_toggle_args(): array {
-		if ( $this->layout === self::LAYOUT_HORIZONTAL ) {
-			return [];
-		}
-
-		return [
-			'content' => $this->tabs[0]->label ?? __( 'Tab 1', 'tribe' ),
-			'classes' => $this->toggle_classes,
-			'attrs'   => [
-				'aria-controls' => $this->tablist_id,
-				'aria-expanded' => 'false',
-				'aria-haspopup' => 'true',
-				'aria-label'    => __( 'Toggle the tab list menu.', 'tribe' ),
-				'data-js'       => 'c-tabs__tablist-toggle',
-			],
-		];
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_classes(): string {
-		$this->classes[] = sprintf( 'c-tabs--layout-%s', $this->layout );
-
-		return Markup_Utils::class_attribute( $this->classes );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_attrs(): string {
-		$this->attrs['data-layout'] = $this->layout;
-
-		return Markup_Utils::concat_attrs( $this->attrs );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_dropdown_classes(): string {
-		return Markup_Utils::class_attribute( [ 'c-tabs__tablist-dropdown' ] );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_dropdown_attrs(): string {
-		$attrs = [
-			'id'      => $this->tablist_id,
-			'data-js' => 'c-tabs__tablist-dropdown',
-		];
-
-		return Markup_Utils::concat_attrs( $attrs );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_tablist_classes(): string {
-		return Markup_Utils::class_attribute( [ 'c-tabs__tablist' ] );
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_tablist_attrs(): string {
-		return Markup_Utils::concat_attrs( [ 'aria-orientation' => $this->layout, 'role' => 'tablist' ] );
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_tab_buttons(): array {
-		return $this->tab_buttons;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_tab_panels(): array {
-		return $this->tab_panels;
 	}
 
 }

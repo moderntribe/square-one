@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
 use Tribe\Project\Templates\Components\blocks\links\Links_Block_Controller;
+use Tribe\Project\Templates\Components\link\Link_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Links_Block_Controller::factory( $args );
 
 ?>
@@ -28,17 +28,26 @@ $c = Links_Block_Controller::factory( $args );
 				); ?>
 			<?php } ?>
 
-			<?php if ( ! empty( $c->get_links() ) ) { ?>
+			<?php if ( ! empty( $c->get_links()->count() ) ) : ?>
 				<ul class="b-links__list">
-					<?php foreach ( $c->get_links() as $link ) { ?>
-						<?php if ( ! empty( ( $link['url'] ?? '') ) ) : ?>
+					<?php foreach ( $c->get_links() as $link ) : ?>
+						<?php if ( ! empty( $link->cta->link->url ) ) : ?>
 						<li class="b-links__list-item">
-							<?php get_template_part( 'components/link/link', null, $link ); ?>
+							<?php get_template_part( 'components/link/link', '', [
+								Link_Controller::URL            => $link->cta->link->url,
+								Link_Controller::CONTENT        => $link->cta->link->title,
+								Link_Controller::TARGET         => $link->cta->link->target,
+								Link_Controller::ADD_ARIA_LABEL => $link->cta->add_aria_label,
+								Link_Controller::ARIA_LABEL     => $link->cta->aria_label,
+								Link_Controller::CLASSES        => [ 'b-links__list-link' ],
+								Link_Controller::HEADER         => $link->link_header,
+								Link_Controller::DESCRIPTION    => $link->link_content,
+							] ); ?>
 						</li>
 						<?php endif;
-					} ?>
+					endforeach; ?>
 				</ul>
-			<?php } ?>
+			<?php endif; ?>
 		</div>
 
 	</div>

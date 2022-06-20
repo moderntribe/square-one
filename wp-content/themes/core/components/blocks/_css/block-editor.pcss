@@ -9,6 +9,7 @@
 .wp-block[data-type^="acf/"] {
 	max-width: none;
 	width: 100%;
+	clear: both;
 
 	/* Add a max-width to the edit UI for ACF blocks */
 	.acf-block-fields {
@@ -26,9 +27,9 @@
 
 .wp-block[data-type="acf/galleryslider"] {
 	/* CASE: Fixed image ratio gallery slider */
-	.b-gallery-slider--fixed {
+	.b-gallery-slider--fixed:not(.initialized) {
 
-		.c-slider__wrapper {
+		> .c-slider__wrapper {
 			justify-content: center;
 			transform: translate3d(0, 0, 0);
 			overflow-x: hidden;

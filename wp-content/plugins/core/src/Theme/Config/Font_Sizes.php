@@ -2,12 +2,15 @@
 
 namespace Tribe\Project\Theme\Config;
 
+/**
+ * @TODO rename this to a proper class name.
+ */
 class Font_Sizes {
 
 	/**
-	 * @var array
+	 * @var mixed[]
 	 */
-	private $sizes;
+	private array $sizes;
 
 	/**
 	 * Colors constructor.
@@ -53,6 +56,7 @@ class Font_Sizes {
 	 */
 	public function format_for_blocks(): array {
 		$sizes = [];
+
 		foreach ( $this->sizes as $key => $value ) {
 			$sizes[] = [
 				'name' => $value['label'],

@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Routes\example_app\Example_App_Controller;
+use Tribe\Project\Templates\Routes\example_app\Example_App_Controller;
 
+// phpcs:ignore SlevomatCodingStandard.Variables.UnusedVariable.UnusedVariable
 $c = Example_App_Controller::factory();
 
 get_header();

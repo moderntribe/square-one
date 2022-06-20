@@ -2,16 +2,21 @@
 
 namespace Tribe\Project\Theme;
 
+use WP_Post;
+
+/**
+ * @TODO rename this to a proper class name.
+ */
 class Body_Classes {
 
 	/**
-	 * @param $classes
-	 *
-	 * @return array
+	 * @param array $classes
 	 *
 	 * @filter body_class
+	 *
+	 * @return array
 	 */
-	public function body_classes( $classes ) {
+	public function body_classes( array $classes ): array {
 
 		if ( ! $this->is_singular() ) {
 			return $classes;
@@ -34,7 +39,7 @@ class Body_Classes {
 		return $classes;
 	}
 
-	private function is_singular() {
+	private function is_singular(): bool {
 		if ( ! is_singular() ) {
 			return false;
 		}
@@ -44,11 +49,11 @@ class Body_Classes {
 		return ! empty( $post ) && ! empty( $post->ID );
 	}
 
-	private function have_panels() {
-		return  function_exists( 'have_panels' ) && have_panels();
+	private function have_panels(): bool {
+		return function_exists( 'have_panels' ) && have_panels();
 	}
 
-	private function post_name_class( $post ) {
+	private function post_name_class( WP_Post $post ): string {
 		return sanitize_html_class( $post->post_type . '-' . $post->post_name );
 	}
 

@@ -2,55 +2,13 @@
 
 namespace Tribe\Project\Templates\Models;
 
-class Content_Column {
+use Tribe\Libs\Field_Models\Field_Model;
+use Tribe\Libs\Field_Models\Models\Cta;
 
-	/**
-	 * @var string
-	 */
-	protected $title;
+class Content_Column extends Field_Model {
 
-	/**
-	 * @var string
-	 */
-	protected $content;
-
-	/**
-	 * @var array
-	 */
-	protected $cta;
-
-	/**
-	 * Content_Column constructor.
-	 *
-	 * @param string $title
-	 * @param string $content
-	 * @param array  $cta
-	 */
-	public function __construct( $title, $content, $cta ) {
-		$this->title   = $title;
-		$this->content = $content;
-		$this->cta     = $cta;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_title(): string {
-		return $this->title;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_content(): string {
-		return $this->content;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_cta(): array {
-		return $this->cta;
-	}
+	public Cta $cta;
+	public string $col_title   = '';
+	public string $col_content = '';
 
 }

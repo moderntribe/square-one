@@ -2,7 +2,111 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.06
+* Added: Text alignment mixins & classes to support Gutenberg.
+* Fixed: Filter Social items to prevent empty HTML output.
+* Fixed: Remove `SECTION_CONTENT` constant from `Stats Block`.
+* Fixed: Blocks added below floated elements in Gutenberg should now properly clear on both the frontend and backend.
+* Fixed: Gravity Forms spin.js spinner should now properly work for paginated forms.
+* Added: [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery)
+* Fixed: Tab block controller throwing type errors.
+* Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
+
+## 2022.05
+* Fixed: Use PHP to prefix commits with a jira ticket, avoiding different shell environments.
+* Fixed: Prevent PHPStan from running out of memory during CI runs.
+* Updated: Recommended extensions for VS Code to include PHP Intelephense. 
+* Added: Access to the container in integration tests via `$this->container`.
+* Updated: Recommended extentions for VS Code to include PHP Intelephense. 
+* Updated: `.phpstorm.meta.php` code completion documentation.
+* Fixed: Ensure setup-node github action can find the yarn.lock file for caching.
+* Updated: Ensure object meta definers are using autowiring for automatic dependency injection. 
+* Added: Brings in the [square1-field-models](https://github.com/moderntribe/square1-field-models) library.
+* Updated: WordPress to 5.9.3, ACF to 5.12.2 and Yoast to 18.8.
+* Fixed: Hides deprecation notices when running lefthook phpcs, which appear if you're running PHP8.1 locally.
+* Fixed: Converts all blocks/components to use Field Models, where appropriate.
+* Fixed: Prevent WP Core from adding `loading="lazy"` to our image component `<img />` tags.
+* Updated: Remove old TinyMCE image tag filtering and related unit test.
+* Fixed: Images lazy loaded via LazySizes are now loaded before printing.
+
+## 2022.04
+* Fixed: Remove autoprefixer run from cssnano task as it erroneously strips line-clamp properties.
+* Added: An ACF helper class (`tribe-counter-wrapper`) that triggers a maxlength counter on the field.
+* Added: node and composer caching for GitHub actions
+* Updated: Webpack & related configs for React HMR / Example react app dev.
+* Fixed: deploy commit messages via GitHub actions now display the branch and environment instead of the variables.
+* Changed: all block models are now instantiated with the container to support dependency injection.
+* Added: PHPStan for static analysis.
+* Added: Recommended Extensions for VS Code.
+
+## 2022.03
+* Fixed: Refactor index controller to use proper meta fetching objects and general code clean up.
+* Fixed: Show same header logic on the Post Tag archive as the git Category Archive.
+* Added: Ignore the Query Monitor plugin's automatically created db.php file.
+* Added: Pagination Helper Trait.
+* Fixed: .editorconfig incorrect tabbing for PHP files (thanks Caleb).
+* Fixed: Missing pagination on the content loop block component.
+* Fixed: Visibility of public $sidebar_id's in all controllers.
+* Updated: Misc config updates for Dokku and Docker nginx & PHP.
+* Fixed: Gravity Forms filter parameter types changed for v2.5 and above.
+* Updated WordPress: 5.9.2 / new tests dump.sql
+* Updated plugins: ACF, TEC, Gravity Forms, Yoast
+* Updated: Tribe Libs to 3.4.12
+* Fixed: Corrects parameter type for P2P cache method
+* Fixed: Adds styling for nested lists in t-sink context
+* Changed: Replaced `msawicki/acf-menu-chooser` with a forked https://github.com/moderntribe/acf-menu-chooser that includes security fixes and is also added to packagist.
+* Updated: ACF (5.12), Tribe Libs (3.4.10), Redirection (5.2.3), Yoast (18.2), TEC (5.14.0.4)
+* Updated: Aligns accordion component with WAI-ARIA standard
+* Fixed: Jetpack sync calls the `all_plugins` filter outside of a screen context, causing fatal errors in our force plugin activation MU plugin when using multisite.
+* Added: Enable/disable scrolling behavior on accordion blocks
+
+## 2022.02
+* Updated: Coding standards to v2.1.2, PHP8 sniffer fixes.
+* Updated: Added composer patches to allowed composer plugins.
+
+## 2022.01
+* Added: Custom "so project:test" command to run all automated testing suites (requires `so` 5.5.0+)
+* Added: `proxy_ssl_server_name on;` in nginx.conf to allow proxying to production domains if they are using Cloudflare.
+* Fixed: phpcs GitHub workflow using the wrong secret.
+* Added: An empty CLI_Definer to easier register commands.
+* Updated: added allowed plugins to composer.json
+* Updated: coding standards to [version 2](https://github.com/moderntribe/coding-standards/tree/2.0.x).
+* Updated: WordPress 5.7.3 > 5.8.3 (security release)
+* Updated: ACF Pro 5.10.2 > 5.11.4
+* Updated: TEC 5.10.1 > 5.12.2
+* Updated: Yoast 17.5 > 17.8
+* Removed: Service Worker (PWA) support
+* Updated: Ensures Swiper.js `imagesReady` event listener is always added during initialization of a new Swiper instance.
+* Fixed: Social share component now properly triggers popup when more than one component is present on a page.
+* Updated: Fixed several components whose JavaScript could initialize even when component isn't present on a page.
+
+## 2021.12
+* Fixed: docker compose (v2) support: `WARN[0000] network proxy: network.external.name is deprecated in favor of network.name`
+* Added: Section Nav component & block.
+* Added: generic navigation component.
+* Updated: Node & NPM to latest LTS (v16.13.1), updated node package versions where supported.
+* Fixed: A possible PHP fatal when a nav menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
+* Fixed: Several minor deprecation warnings in the webpack config.
+* Fixed: prevented preloading of current document when a dependency alias is enqueued in the footer
+* Added: support to preload dependencies of aliases
+
+## 2021.11
+* Removed: monolog. This dependency will be managed by tribe-libs.
+* Updated: tribe libs to 3.4.8.
+* Fixed: Lefthook - Don't prefix commits for sprint or release branches
+* Updated: docker image to 74-3.0, composer v2 support (requires `so` v5.3.0+)
+* Added: Entrypoint for component scripts to run in the block editor.
+* Added: Slider component JS behaviors in the block editor.
+* Added: check that `theme_location` parameter of `wp_nav_menu()` is populated before adding classes
+ 
+## 2021.10
+* Fixed: Misc small repairs to common blocks per QA on other projects.
+
 ## 2021.09
+* Fixed: Style guide typography regression caused by Core's reset.css enqueuing in the block editor with the v5.8.0 release of WordPress.
+* Updated: ci GitHub action to allow manual runs
+* Fixed: Replace deleted repo https://github.com/hautelook/phpass with https://github.com/bordoni/phpass
+* Updated: wp-browser to 3.0.9
 * Fixed: Reusable & Group block width repair.
 * Added: Generic navigation menu component.
 

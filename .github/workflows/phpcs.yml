@@ -1,4 +1,4 @@
-name: PHP Composer and Codesniffer
+name: PHP Composer, Codesniffer, and Static Analysis
 
 on: pull_request
 
@@ -9,6 +9,7 @@ jobs:
       matrix:
         operating-system: [ ubuntu-latest ]
         php-versions: [ '7.4' ]
+        composer-cache: [ 'dev' ]
     env:
       cache_version: 0 # increment to flush all caches
       php_extensions: tokenizer, xmlwriter, simplexml
@@ -31,31 +32,32 @@ jobs:
               - added|modified: 'wp-content/themes/core/**/*.php'
               - added|modified: 'wp-content/mu-plugins/**/*.php'
 
-      - name: Setup PHP extension cache
+      - name: Set up PHP extension cache
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         id: cache-php-extensions
         uses: shivammathur/cache-extensions@v1
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.php_extensions }}
-          key: ${{ matrix.operating-system }}-${{ env.cache_version }}-phpextensions-${{ matrix.php-versions }}
+          key: ${{ matrix.operating-system }}-${{ env.cache_version }}-php-extensions-${{ matrix.php-versions }}
 
       - name: Cache PHP extensions
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.cache-php-extensions.outputs.dir }}
           key: ${{ steps.cache-php-extensions.outputs.key }}
           restore-keys: ${{ steps.cache-php-extensions.outputs.key }}
 
-      - name: Setup PHP
+      - name: Set up PHP
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.php_extensions }}
           coverage: none
-          tools: composer:v1
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Validate composer.json and composer.lock
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
@@ -66,14 +68,14 @@ jobs:
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      - name: Check for Cached Composer Dependencies
+      - name: Cache composer dependencies
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         id: cache-composer-dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
+          key: ${{ runner.os }}-${{ env.cache_version }}-${{ matrix.composer-cache }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-${{ env.cache_version }}-${{ matrix.composer-cache }}-composer
 
       - name: Install composer dependencies
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
@@ -84,3 +86,7 @@ jobs:
       - name: PHPCS
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
         run: ./vendor/bin/phpcs --standard=./phpcs.xml.dist ${{ steps.filter.outputs.wpcontent_files }}
+
+      - name: Static Analysis
+        if: ${{ steps.filter.outputs.wpcontent == 'true' }}
+        run: ./vendor/bin/phpstan --memory-limit=-1

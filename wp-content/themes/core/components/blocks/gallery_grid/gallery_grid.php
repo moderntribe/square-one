@@ -1,10 +1,12 @@
 <?php declare(strict_types=1);
 
+use Tribe\Project\Templates\Components\blocks\gallery_grid\Gallery_Grid_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\blocks\gallery_grid\Gallery_Grid_Controller::factory( $args );
+
+$c = Gallery_Grid_Controller::factory( $args );
 ?>
 
 <section <?php echo $c->get_classes(); ?> <?php echo $c->get_attributes(); ?>>
@@ -19,7 +21,7 @@ $c = \Tribe\Project\Templates\Components\blocks\gallery_grid\Gallery_Grid_Contro
 				); ?>
 			<?php } ?>
 
-			<?php if ( $c->is_slideshow() ) : ?>
+			<?php if ( $c->use_slideshow() ) : ?>
 				<div class="b-gallery-grid__cta">
 					<?php get_template_part( 'components/button/button', null, $c->get_slideshow_button() ); ?>
 				</div>
@@ -31,11 +33,11 @@ $c = \Tribe\Project\Templates\Components\blocks\gallery_grid\Gallery_Grid_Contro
 				get_template_part( 'components/image/image', null, $img );
 			} ?>
 		</div>
-	
+
 	</div>
 </section>
 
-<?php if ( $c->is_slideshow() ) : ?>
+<?php if ( $c->use_slideshow() ) : ?>
 	<?php get_template_part(
 		'components/dialog/dialog',
 		null,

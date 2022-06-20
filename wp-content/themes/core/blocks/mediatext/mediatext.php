@@ -3,10 +3,9 @@
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text_Model;
 
 /**
- * @var array $args Arguments passed to the template
+ * @var array $args ACF block data.
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$model = new Media_Text_Model( $args['block'] );
+$model = tribe_project()->container()->make( Media_Text_Model::class, $args );
 
 get_template_part(
 	'components/blocks/media_text/media_text',

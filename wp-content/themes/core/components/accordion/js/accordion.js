@@ -12,11 +12,14 @@
 import _ from 'lodash';
 import delegate from 'delegate';
 
-import { setAccActiveAttributes, setAccInactiveAttributes } from 'utils/dom/accessibility';
 import scrollTo from 'utils/dom/scroll-to';
 import * as slide from 'utils/dom/slide';
 import * as tools from 'utils/tools';
 import * as events from 'utils/events';
+
+const el = {
+	container: tools.getNodes( 'c-accordion' ),
+};
 
 const siteWrap = tools.getNodes( 'site-wrap' )[ 0 ];
 const pn = document.getElementById( 'panel-navigation' );
@@ -36,7 +39,8 @@ const closeOthers = ( row ) => {
 		const header = childRow.querySelector( '.c-accordion__header' );
 		const content = childRow.querySelector( '.c-accordion__content' );
 		tools.removeClass( childRow, 'active' );
-		setAccInactiveAttributes( header, content );
+		header.setAttribute( 'aria-expanded', 'false' );
+		content.setAttribute( 'aria-hidden', 'true' );
 		_.delay( () => {
 			content.setAttribute( 'hidden', 'true' );
 		}, options.speed );
@@ -61,28 +65,39 @@ const setOffset = () => {
 };
 
 /**
+ *
+ * @function triggerAfterScroll
+ * @description - Trigger the `modern_tribe/accordion_animated` event
+ */
+const triggerAfterScroll = () => events.trigger( {
+	event: 'modern_tribe/accordion_animated',
+	native: false,
+} );
+
+/**
  * @function openAccordion
  * @description Toggle the accordion open
  */
 
 const openAccordion = ( header, content ) => {
 	const row = tools.closest( header, '.c-accordion__row' );
+	const accordion = tools.closest( header, '.c-accordion' );
 	closeOthers( row );
 	tools.addClass( row, 'active' );
-	setAccActiveAttributes( header, content );
+	header.setAttribute( 'aria-expanded', 'true' );
+	content.setAttribute( 'aria-hidden', 'false' );
 	content.removeAttribute( 'hidden' );
 	setOffset();
 
 	slide.down( content, content.id, options.speed );
-	_.delay( () => {
-		scrollTo( {
-			after_scroll: () => {
-				events.trigger( {
-					event: 'modern_tribe/accordion_animated',
-					native: false,
-				} );
-			},
 
+	_.delay( () => {
+		if ( ! accordion.dataset.scrollto ) {
+			triggerAfterScroll();
+			return;
+		}
+		scrollTo( {
+			afterScroll: triggerAfterScroll,
 			offset: options.offset,
 			duration: 300,
 			$target: $( row ),
@@ -98,14 +113,12 @@ const openAccordion = ( header, content ) => {
 const closeAccordion = ( header, content ) => {
 	const row = tools.closest( header, '.c-accordion__row' );
 	tools.removeClass( row, 'active' );
-	setAccInactiveAttributes( header, content );
+	header.setAttribute( 'aria-expanded', 'false' );
+	content.setAttribute( 'aria-hidden', 'true' );
 	slide.up( content, content.id, options.speed );
 	_.delay( () => {
 		content.setAttribute( 'hidden', 'true' );
-		events.trigger( {
-			event: 'modern_tribe/accordion_animated',
-			native: false,
-		} );
+		triggerAfterScroll();
 	}, options.speed );
 };
 
@@ -130,7 +143,6 @@ const handlePanelEvents = ( e ) => {
  * @param {object} e The js event object.
  * @description Toggle the active accordion item using class methods.
  */
-
 const toggleItem = ( e ) => {
 	const header = e.delegateTarget;
 	const row = tools.closest( header, '.c-accordion__row' );
@@ -160,6 +172,10 @@ const bindEvents = () => {
  */
 
 const init = () => {
+	if ( el.container.length === 0 ) {
+		return;
+	}
+
 	setOffset();
 	bindEvents();
 

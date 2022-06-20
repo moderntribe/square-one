@@ -9,13 +9,13 @@ use Tribe\Libs\Container\Abstract_Subscriber;
 class Blocks_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
-		add_action( 'acf/init', function () {
+		add_action( 'acf/init', function (): void {
 			foreach ( $this->container->get( Blocks_Definer::TYPES ) as $type ) {
 				$this->container->get( Block_Registrar::class )->register( $type );
 			}
 		}, 10, 1 );
 
-		add_action( 'tribe/project/block/render', function ( ...$args ) {
+		add_action( 'tribe/project/block/render', function ( ...$args ): void {
 			$this->container->get( Block_Renderer::class )->render_template( ...$args );
 		}, 10, 4 );
 
@@ -26,7 +26,7 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 			return $this->container->get( Block_Deny_List::class )->filter_block_denylist( $types );
 		}, 10, 1 );
 
-		add_action( 'after_setup_theme', function () {
+		add_action( 'after_setup_theme', function (): void {
 			$this->container->get( Theme_Support::class )->register_theme_supports();
 
 			foreach ( $this->container->get( Blocks_Definer::STYLES ) as $style_override ) {

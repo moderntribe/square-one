@@ -43,10 +43,10 @@ get_header();
 				</div>
 				<div class="r-single-footer__author">
 					<div class="r-single-footer__author-name">
-						<?php echo esc_html( get_the_author_meta( 'display_name', $post->post_author ) ); ?>
+						<?php echo esc_html( get_the_author_meta( 'display_name', $c->get_author_id() ) ); ?>
 					</div>
 					<div class="r-single-footer__author-description">
-						<?php echo wp_kses_post( get_the_author_meta( 'description', $post->post_author ) ) ?>
+						<?php echo wp_kses_post( get_the_author_meta( 'description', $c->get_author_id() ) ) ?>
 					</div>
 				</div>
 			</div>
@@ -69,6 +69,6 @@ do_action( 'get_sidebar', null );
 get_template_part(
 	'components/sidebar/sidebar',
 	'single',
-	[ Sidebar_Controller::SIDEBAR_ID => $c->sidebar_id ]
+	[ Sidebar_Controller::SIDEBAR_ID => $c->get_sidebar_id() ]
 );
 get_footer();

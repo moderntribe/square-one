@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\header\navigation\Header_Navigation_Controller;
+use Tribe\Project\Templates\Components\header\navigation\Header_Navigation_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Header_Navigation_Controller::factory( $args );
 
 if ( ! $c->has_menu() ) {

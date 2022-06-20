@@ -7,7 +7,9 @@
 import accordion from 'components/accordion';
 import card from 'components/card';
 import comments from 'components/comments';
+import image from 'components/image';
 import navigation from 'components/navigation';
+import sectionNav from 'components/section_nav';
 import share from 'components/share';
 import slider from 'components/slider';
 import tabs from 'components/tabs';
@@ -20,7 +22,9 @@ const init = () => {
 	accordion();
 	card();
 	comments();
+	image();
 	navigation();
+	sectionNav();
 	share();
 	slider();
 	tabs();

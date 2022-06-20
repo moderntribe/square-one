@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\comments\comments_section\Comments_Section_Controller;
+use Tribe\Project\Templates\Components\comments\comments_section\Comments_Section_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Comments_Section_Controller::factory();
 if ( post_password_required() ) {
 	return;

@@ -2,30 +2,11 @@
 
 namespace Tribe\Project\Templates\Models;
 
-class Accordion_Row {
+use Tribe\Libs\Field_Models\Field_Model;
 
-	/**
-	 * @var string
-	 */
-	public $header_text;
+class Accordion_Row extends Field_Model {
 
-	/**
-	 * @var string
-	 */
-	public $content;
-
-	/**
-	 * Accordion_Row constructor.
-	 *
-	 * @param string $header_text
-	 * @param string $content
-	 */
-	public function __construct(
-		string $header_text,
-		string $content
-	) {
-		$this->header_text = $header_text;
-		$this->content     = $content;
-	}
+	public string $row_header  = '';
+	public string $row_content = '';
 
 }

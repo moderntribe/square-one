@@ -7,34 +7,27 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Sidebar_Controller extends Abstract_Controller {
 
-	public const SIDEBAR_ID = 'sidebar_id';
-	public const CLASSES    = 'classes';
 	public const ATTRS      = 'attrs';
+	public const CLASSES    = 'classes';
+	public const SIDEBAR_ID = 'sidebar_id';
 
-	private string $sidebar_id;
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+	private string $sidebar_id;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->sidebar_id = (string) $args[ self::SIDEBAR_ID ];
-		$this->classes    = (array) $args[ self::CLASSES ];
 		$this->attrs      = (array) $args[ self::ATTRS ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::SIDEBAR_ID => '',
-			self::CLASSES    => [],
-			self::ATTRS      => [ 'role' => 'complementary' ],
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES => [ 'sidebar' ],
-		];
+		$this->classes    = (array) $args[ self::CLASSES ];
+		$this->sidebar_id = (string) $args[ self::SIDEBAR_ID ];
 	}
 
 	public function get_classes(): string {
@@ -51,6 +44,20 @@ class Sidebar_Controller extends Abstract_Controller {
 
 	public function get_sidebar_id(): string {
 		return $this->sidebar_id;
+	}
+
+	protected function defaults(): array {
+		return [
+			self::SIDEBAR_ID => '',
+			self::CLASSES    => [],
+			self::ATTRS      => [ 'role' => 'complementary' ],
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES => [ 'sidebar' ],
+		];
 	}
 
 }

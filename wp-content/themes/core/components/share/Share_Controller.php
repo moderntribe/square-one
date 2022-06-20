@@ -12,17 +12,20 @@ use Tribe\Project\Theme\Config\Image_Sizes;
  */
 class Share_Controller extends Abstract_Controller {
 
-	public const NETWORKS  = 'networks';
-	public const LABELED   = 'labeled';
 	public const EMAIL     = 'email';
-	public const PRINT     = 'print';
-	public const PINTEREST = 'pinterest';
-	public const TWITTER   = 'twitter';
 	public const FACEBOOK  = 'facebook';
+	public const LABELED   = 'labeled';
 	public const LINKEDIN  = 'linkedin';
+	public const NETWORKS  = 'networks';
+	public const PINTEREST = 'pinterest';
+	public const PRINT     = 'print';
+	public const TWITTER   = 'twitter';
 
-	private bool $labeled;
+	/**
+	 * @var string[]
+	 */
 	private array $networks;
+	private bool $labeled;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -31,26 +34,12 @@ class Share_Controller extends Abstract_Controller {
 		$this->networks = (array) $args[ self::NETWORKS ];
 	}
 
-	protected function defaults(): array {
-		return [
-			self::LABELED  => false,
-			self::NETWORKS => [
-				self::EMAIL,
-				self::PRINT,
-				self::PINTEREST,
-				self::TWITTER,
-				self::FACEBOOK,
-				self::LINKEDIN,
-			],
-		];
-	}
-
 	/**
 	 * Loops over enabled networks and builds an array of formatted share links
 	 *
 	 * @return array
 	 */
-	public function get_links() {
+	public function get_links(): array {
 		$data = $this->get_data();
 
 		if ( empty( $data ) ) {
@@ -68,6 +57,20 @@ class Share_Controller extends Abstract_Controller {
 		}
 
 		return $links;
+	}
+
+	protected function defaults(): array {
+		return [
+			self::LABELED  => false,
+			self::NETWORKS => [
+				self::EMAIL,
+				self::PRINT,
+				self::PINTEREST,
+				self::TWITTER,
+				self::FACEBOOK,
+				self::LINKEDIN,
+			],
+		];
 	}
 
 
@@ -126,7 +129,7 @@ class Share_Controller extends Abstract_Controller {
 	 *
 	 * @return array
 	 */
-	private function build_link( $network, $data ) {
+	private function build_link( string $network, array $data ): array {
 
 		switch ( $network ) {
 			case self::EMAIL:
@@ -155,7 +158,7 @@ class Share_Controller extends Abstract_Controller {
 
 				$label      = __( 'Share on Pinterest', 'tribe' );
 				$link       = sprintf(
-					'http://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s',
+					'https://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s',
 					urlencode( esc_url_raw( $data['link'] ) ),
 					urlencode( esc_url_raw( $data['image_src'] ) ),
 					urlencode( $data['title'] )
@@ -194,7 +197,7 @@ class Share_Controller extends Abstract_Controller {
 			case self::FACEBOOK:
 				$label      = __( 'Share on Facebook', 'tribe' );
 				$link       = sprintf(
-					'http://www.facebook.com/sharer.php?u=%1$s&t=%2$s',
+					'https://www.facebook.com/sharer.php?u=%1$s&t=%2$s',
 					urlencode( esc_url_raw( $data['link'] ) ),
 					urlencode( $data['title'] )
 				);
@@ -210,7 +213,7 @@ class Share_Controller extends Abstract_Controller {
 			case self::LINKEDIN:
 				$label      = __( 'Share on LinkedIn', 'tribe' );
 				$link       = sprintf(
-					'http://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s',
+					'https://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s',
 					urlencode( esc_url_raw( $data['link'] ) ),
 					urlencode( $data['title'] )
 				);
@@ -248,7 +251,7 @@ class Share_Controller extends Abstract_Controller {
 		];
 	}
 
-	private function link_text_component( $label ): string {
+	private function link_text_component( string $label ): string {
 		$classes = $this->labeled ? [] : [ 'u-visually-hidden' ];
 
 		return tribe_template_part( 'components/text/text', null, [
@@ -261,14 +264,14 @@ class Share_Controller extends Abstract_Controller {
 	/**
 	 * Massage a link for use in social shares.
 	 *
-	 * @param string $url The url to parse
+	 * @param mixed $url The url to parse.
 	 *
 	 * @return string
 	 */
-	private function normalize_url( $url ) {
+	private function normalize_url( $url ): string {
 
-		if ( ! is_scalar( $url ) ) {
-			$url = '';
+		if ( ! is_string( $url ) ) {
+			return '';
 		}
 
 		/*
@@ -276,6 +279,7 @@ class Share_Controller extends Abstract_Controller {
 		 * URL, return the home page of the site
 		 */
 		$scheme = parse_url( $url, PHP_URL_SCHEME );
+
 		if ( empty( $scheme ) ) {
 			$url = home_url( $url );
 		}

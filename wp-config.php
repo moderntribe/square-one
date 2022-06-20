@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 // Load configuration values from the environment
 require __DIR__ . '/wp-config-environment.php';

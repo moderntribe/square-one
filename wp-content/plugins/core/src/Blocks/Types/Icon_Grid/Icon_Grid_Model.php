@@ -2,10 +2,11 @@
 
 namespace Tribe\Project\Blocks\Types\Icon_Grid;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\icon_grid\Icon_Grid_Controller;
-use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Models\Collections\Icon_Collection;
 
 /**
  * Class Icon_Grid_Model
@@ -23,28 +24,8 @@ class Icon_Grid_Model extends Base_Model {
 			Icon_Grid_Controller::TITLE       => $this->get( Icon_Grid::TITLE, '' ),
 			Icon_Grid_Controller::LEADIN      => $this->get( Icon_Grid::LEADIN, '' ),
 			Icon_Grid_Controller::DESCRIPTION => $this->get( Icon_Grid::DESCRIPTION, '' ),
-			Icon_Grid_Controller::CTA         => $this->get_cta_args(),
-			Icon_Grid_Controller::ICONS       => $this->get( Icon_Grid::ICONS, [] ),
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_cta_args(): array {
-		$cta  = $this->get( Cta_Field::GROUP_CTA, [] );
-		$link = wp_parse_args( $cta['link'] ?? [], [
-			'title'  => '',
-			'url'    => '',
-			'target' => '',
-		] );
-
-		return [
-			Link_Controller::CONTENT        => $link['title'],
-			Link_Controller::URL            => $link['url'],
-			Link_Controller::TARGET         => $link['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'] ?? false,
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'] ?? '',
+			Icon_Grid_Controller::CTA         => new Cta( $this->get( Cta_Field::GROUP_CTA, [] ) ),
+			Icon_Grid_Controller::ICONS       => Icon_Collection::create( $this->get( Icon_Grid::ICONS, [] ) ),
 		];
 	}
 

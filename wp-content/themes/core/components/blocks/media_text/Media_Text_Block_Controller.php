@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components\blocks\media_text;
 
+use Tribe\Libs\Field_Models\Models\Cta;
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text as Media_Text_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -15,43 +17,56 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Media_Text_Block_Controller extends Abstract_Controller {
 
-	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
-	public const WIDTH             = 'width';
-	public const LAYOUT            = 'layout';
+	public const CLASSES           = 'classes';
 	public const CONTAINER_CLASSES = 'container_classes';
-	public const MEDIA_CLASSES     = 'media_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
-	public const MEDIA_TYPE        = 'media_type';
-	public const IMAGE             = 'image';
-	public const VIDEO             = 'video';
-	public const TITLE             = 'title';
-	public const LEADIN            = 'leadin';
-	public const DESCRIPTION       = 'description';
 	public const CTA               = 'cta';
+	public const DESCRIPTION       = 'description';
+	public const IMAGE             = 'image';
+	public const LAYOUT            = 'layout';
+	public const LEADIN            = 'leadin';
+	public const MEDIA_CLASSES     = 'media_classes';
+	public const MEDIA_TYPE        = 'media_type';
+	public const TITLE             = 'title';
+	public const VIDEO             = 'video';
+	public const WIDTH             = 'width';
 
 	/**
-	 * @var int|string
+	 * @var string[]
 	 */
-	private $image;
-
-	private array $classes;
 	private array $attrs;
-	private string $width;
-	private string $layout;
-	private array $container_classes;
-	private array $media_classes;
-	private array $content_classes;
-	private string $media_type;
-	private string $video;
-	private string $title;
-	private string $leadin;
-	private string $description;
-	private array $cta;
 
 	/**
-	 * @param array $args
+	 * @var string[]
 	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $content_classes;
+
+	private Cta $cta;
+
+	/**
+	 * @var string[]
+	 */
+	private array $media_classes;
+	private Image $image;
+	private string $description;
+	private string $layout;
+	private string $leadin;
+	private string $media_type;
+	private string $title;
+	private string $video;
+	private string $width;
+
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
@@ -68,35 +83,7 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		$this->title             = (string) $args[ self::TITLE ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->cta               = (array) $args[ self::CTA ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::CLASSES           => [],
-			self::ATTRS             => [],
-			self::WIDTH             => Media_Text_Block::WIDTH_GRID,
-			self::LAYOUT            => Media_Text_Block::MEDIA_LEFT,
-			self::CONTAINER_CLASSES => [],
-			self::MEDIA_CLASSES     => [],
-			self::CONTENT_CLASSES   => [],
-			self::MEDIA_TYPE        => Media_Text_Block::IMAGE,
-			self::IMAGE             => null,
-			self::VIDEO             => '',
-			self::TITLE             => '',
-			self::LEADIN            => '',
-			self::DESCRIPTION       => '',
-			self::CTA               => [],
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES           => [ 'c-block', 'b-media-text' ],
-			self::CONTAINER_CLASSES => [ 'b-media-text__container' ],
-			self::MEDIA_CLASSES     => [ 'b-media-text__media' ],
-			self::CONTENT_CLASSES   => [ 'b-media-text__content' ],
-		];
+		$this->cta               = $args[ self::CTA ];
 	}
 
 	public function get_classes(): string {
@@ -134,9 +121,6 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		return $this->media_type;
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_content_args(): array {
 		return [
 			Content_Block_Controller::LEADIN  => $this->get_leadin(),
@@ -152,82 +136,8 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_leadin(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			Text_Controller::CLASSES => [
-				'c-block__leadin',
-				'b-media-text__leadin',
-				'h6',
-			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
-		] );
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_title(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			Text_Controller::TAG     => 'h2',
-			Text_Controller::CLASSES => [
-				'c-block__title',
-				'b-media-text__title',
-				'h3',
-			],
-			Text_Controller::CONTENT => $this->title ?? '',
-		] );
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_content(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
-			Container_Controller::CLASSES => [
-				'c-block__description',
-				'b-media-text__text',
-				't-sink',
-				's-sink',
-			],
-			Container_Controller::CONTENT => $this->description ?? '',
-		] );
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
-		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
-			Link_Controller::CLASSES        => [
-				'c-block__cta-link',
-				'a-btn',
-				'a-btn--has-icon-after',
-				'icon-arrow-right',
-			],
-		] );
-	}
-
-	/**
-	 * @return array
-	 */
 	public function get_image_args(): array {
-		if ( ! $this->image ) {
+		if ( ! $this->image->id ) {
 			return [];
 		}
 
@@ -248,21 +158,97 @@ class Media_Text_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::IMG_ID       => $this->image,
+			Image_Controller::IMG_ID       => $this->image->id,
 			Image_Controller::SRC_SIZE     => $src_size,
 			Image_Controller::SRCSET_SIZES => $srcset_sizes,
 		];
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_video_embed(): string {
 		if ( ! $this->video ) {
 			return '';
 		}
 
 		return $this->video;
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::CTA               => new Cta(),
+			self::DESCRIPTION       => '',
+			self::IMAGE             => new Image(),
+			self::LAYOUT            => Media_Text_Block::MEDIA_LEFT,
+			self::LEADIN            => '',
+			self::MEDIA_CLASSES     => [],
+			self::MEDIA_TYPE        => Media_Text_Block::IMAGE,
+			self::TITLE             => '',
+			self::VIDEO             => '',
+			self::WIDTH             => Media_Text_Block::WIDTH_GRID,
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-block', 'b-media-text' ],
+			self::CONTAINER_CLASSES => [ 'b-media-text__container' ],
+			self::CONTENT_CLASSES   => [ 'b-media-text__content' ],
+			self::MEDIA_CLASSES     => [ 'b-media-text__media' ],
+		];
+	}
+
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+				'b-media-text__leadin',
+				'h6',
+			],
+			Text_Controller::CONTENT => $this->leadin ?? '',
+		] );
+	}
+
+	private function get_title(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [
+				'c-block__title',
+				'b-media-text__title',
+				'h3',
+			],
+			Text_Controller::CONTENT => $this->title ?? '',
+		] );
+	}
+
+	private function get_content(): Deferred_Component {
+		return defer_template_part( 'components/container/container', null, [
+			Container_Controller::CLASSES => [
+				'c-block__description',
+				'b-media-text__text',
+				't-sink',
+				's-sink',
+			],
+			Container_Controller::CONTENT => $this->description ?? '',
+		] );
+	}
+
+	private function get_cta(): Deferred_Component {
+		return defer_template_part( 'components/link/link', null, [
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
+			Link_Controller::CLASSES        => [
+				'c-block__cta-link',
+				'a-btn',
+				'a-btn--has-icon-after',
+				'icon-arrow-right',
+			],
+		] );
 	}
 
 }

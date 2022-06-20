@@ -27,7 +27,7 @@ class Interstitial extends Block_Config implements Cta_Field {
 	public const LAYOUT_LEFT        = 'left';
 	public const LAYOUT_CENTER      = 'center';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Interstitial', 'tribe' ),
 			'description' => __( 'Interstitial block', 'tribe' ),
@@ -58,7 +58,7 @@ class Interstitial extends Block_Config implements Cta_Field {
 		] ) );
 	}
 
-	protected function add_fields() {
+	protected function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEADIN, [
 				'label'       => __( 'Leadin', 'tribe' ),
 				'name'        => self::LEADIN,
@@ -85,7 +85,7 @@ class Interstitial extends Block_Config implements Cta_Field {
 				 'label'         => __( 'Background Image', 'tribe' ),
 				 'name'          => self::IMAGE,
 				 'type'          => 'image',
-				 'return_format' => 'id',
+				 'return_format' => 'array',
 			 ] ) );
 
 		$this->add_section( new Field_Section( self::SECTION_APPEARANCE, __( 'Appearance', 'tribe' ), 'accordion' ) )

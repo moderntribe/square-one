@@ -2,144 +2,94 @@
 
 namespace Tribe\Project\Templates\Components\blocks\quote;
 
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Quote\Quote as Quote_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\quote\Quote_Controller;
+use Tribe\Project\Templates\Models\Quote;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Quote_Block_Controller extends Abstract_Controller {
 
+	public const ATTRS             = 'attrs';
+	public const QUOTE             = 'quote';
+	public const CLASSES           = 'classes';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const CONTENT_CLASSES   = 'content_classes';
 	public const LAYOUT            = 'layout';
 	public const MEDIA             = 'media';
-	public const QUOTE_TEXT        = 'quote_text';
-	public const CITE_NAME         = 'cite_name';
-	public const CITE_TITLE        = 'cite_title';
-	public const CITE_IMAGE        = 'cite_image';
-	public const CONTAINER_CLASSES = 'container_classes';
 	public const MEDIA_CLASSES     = 'media_classes';
-	public const CONTENT_CLASSES   = 'content_classes';
-	public const CLASSES           = 'classes';
-	public const ATTRS             = 'attrs';
+
+	private Image $media;
 
 	/**
-	 * @var int|string
+	 * @var string[]
 	 */
-	private $cite_image;
-
-	/**
-	 * @var int|string
-	 */
-	private $media;
-
-	private string $layout;
-	private string $cite_name;
-	private string $cite_title;
-	private string $quote_text;
-	private array $container_classes;
-	private array $media_classes;
-	private array $content_classes;
-	private array $classes;
 	private array $attrs;
 
 	/**
-	 * @param array $args
+	 * @var string[]
 	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $content_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $media_classes;
+	private string $layout;
+	private Quote $quote;
+
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
+		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->media             = $args[ self::MEDIA ];
-		$this->cite_name         = (string) $args[ self::CITE_NAME ];
-		$this->cite_title        = (string) $args[ self::CITE_TITLE ];
-		$this->cite_image        = $args[ self::CITE_IMAGE ];
-		$this->quote_text        = (string) $args[ self::QUOTE_TEXT ];
-		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
-		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->classes           = (array) $args[ self::CLASSES ];
-		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->quote             = $args[ self::QUOTE ];
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function defaults(): array {
-		return [
-			self::LAYOUT            => Quote_Block::MEDIA_OVERLAY,
-			self::MEDIA             => 0,
-			self::QUOTE_TEXT        => '',
-			self::CITE_NAME         => '',
-			self::CITE_TITLE        => '',
-			self::CITE_IMAGE        => 0,
-			self::CONTAINER_CLASSES => [],
-			self::MEDIA_CLASSES     => [],
-			self::CONTENT_CLASSES   => [],
-			self::CLASSES           => [],
-			self::ATTRS             => [],
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [
-			self::CONTAINER_CLASSES => [ 'b-quote__container', 'l-container' ],
-			self::MEDIA_CLASSES     => [ 'b-quote__media' ],
-			self::CONTENT_CLASSES   => [ 'b-quote__content', 't-theme--light' ],
-			self::CLASSES           => [ 'c-block', 'b-quote', 'c-block--full-bleed' ],
-		];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		$this->classes[] = 'c-block--layout-' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_media_classes(): string {
 		return Markup_Utils::class_attribute( $this->media_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_content_classes(): string {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
-	/**
-	 * @return bool
-	 */
 	public function has_image(): bool {
-		return (bool) $this->media;
+		return (bool) $this->media->id;
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_media_args(): array {
 		if ( ! $this->has_image() ) {
 			return [];
@@ -164,7 +114,7 @@ class Quote_Block_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Image_Controller::IMG_ID       => $this->media,
+			Image_Controller::IMG_ID       => $this->media->id,
 			Image_Controller::AS_BG        => true,
 			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
@@ -175,15 +125,31 @@ class Quote_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_quote_args(): array {
 		return [
-			Quote_Controller::CITE_IMAGE => $this->cite_image,
-			Quote_Controller::QUOTE_TEXT => $this->quote_text,
-			Quote_Controller::CITE_NAME  => $this->cite_name,
-			Quote_Controller::CITE_TITLE => $this->cite_title,
+			Quote_Controller::QUOTE => $this->quote,
+		];
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::QUOTE             => new Quote(),
+			self::CLASSES           => [],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::LAYOUT            => Quote_Block::MEDIA_OVERLAY,
+			self::MEDIA             => new Image(),
+			self::MEDIA_CLASSES     => [],
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-block', 'b-quote', 'c-block--full-bleed' ],
+			self::CONTAINER_CLASSES => [ 'b-quote__container', 'l-container' ],
+			self::CONTENT_CLASSES   => [ 'b-quote__content', 't-theme--light' ],
+			self::MEDIA_CLASSES     => [ 'b-quote__media' ],
 		];
 	}
 

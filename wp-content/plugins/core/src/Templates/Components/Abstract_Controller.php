@@ -1,21 +1,29 @@
 <?php declare(strict_types=1);
 
-/**
- * Base class for other controllers to extend.
- *
- * @package Tribe
- */
-
 namespace Tribe\Project\Templates\Components;
 
+use UnexpectedValueException;
+
 /**
- * Class for other controllers to extend.
+ * Base class for other controllers to extend.
  */
 abstract class Abstract_Controller {
 
 	/**
+	 * @param array $args
+	 *
+	 * @throws \DI\DependencyException
+	 * @throws \DI\NotFoundException
+	 *
+	 * @return static
+	 */
+	public static function factory( array $args = [] ): Abstract_Controller {
+		return tribe_project()->container()->make( static::class, [ 'args' => $args ] );
+	}
+
+	/**
 	 * Merge the passed arguments with the default and
-	 * required arguments defined by the controller
+	 * required arguments defined by the controller.
 	 *
 	 * @param array $args
 	 *
@@ -26,7 +34,7 @@ abstract class Abstract_Controller {
 
 		foreach ( $this->required() as $key => $value ) {
 			if ( ! is_array( $value ) ) {
-				throw new \UnexpectedValueException( esc_html__( 'Required arguments should be of the type array', 'tribe' ) );
+				throw new UnexpectedValueException( esc_html__( 'Required arguments should be of the type array', 'tribe' ) );
 			}
 			$args[ $key ] = array_merge( $args[ $key ], $value );
 		}
@@ -57,15 +65,6 @@ abstract class Abstract_Controller {
 	 */
 	protected function required(): array {
 		return [];
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return static
-	 */
-	public static function factory( array $args = [] ) {
-		return tribe_project()->container()->make( static::class, [ 'args' => $args ] );
 	}
 
 }

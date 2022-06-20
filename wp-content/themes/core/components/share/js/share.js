@@ -14,7 +14,7 @@ import * as tools from 'utils/tools';
 import popup from 'utils/dom/popup';
 
 const el = {
-	container: tools.getNodes( 'social-share-networks' )[ 0 ],
+	container: tools.getNodes( 'social-share-networks' ),
 };
 
 /**
@@ -48,7 +48,7 @@ const bindEvents = () => {
  */
 
 const socialShare = () => {
-	if ( ! el.container ) {
+	if ( el.container.length === 0 ) {
 		return;
 	}
 

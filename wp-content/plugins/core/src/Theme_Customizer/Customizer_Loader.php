@@ -13,7 +13,7 @@ class Customizer_Loader {
 	 *
 	 * @action customize_register
 	 */
-	public function register_customizer_controls( \WP_Customize_Manager $wp_customize ) {
+	public function register_customizer_controls( \WP_Customize_Manager $wp_customize ): void {
 		// TODO
 	}
 

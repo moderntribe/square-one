@@ -21,6 +21,8 @@ class Accordion extends Block_Config implements Cta_Field {
 	public const LAYOUT_INLINE  = 'inline';
 	public const LAYOUT_STACKED = 'stacked';
 
+	public const SCROLL_TO = 'scroll_to';
+
 	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
@@ -30,7 +32,7 @@ class Accordion extends Block_Config implements Cta_Field {
 	public const ROW_HEADER        = 'row_header';
 	public const ROW_CONTENT       = 'row_content';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Accordion', 'tribe' ),
 			'description' => __( 'The Accordion block', 'tribe' ),
@@ -73,7 +75,7 @@ class Accordion extends Block_Config implements Cta_Field {
 		] ) );
 	}
 
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
 				'label'         => __( 'Layout', 'tribe' ),
 				'name'          => self::LAYOUT,
@@ -83,6 +85,13 @@ class Accordion extends Block_Config implements Cta_Field {
 					self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
 				],
 				'default_value' => self::LAYOUT_INLINE,
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::SCROLL_TO, [
+			'label'         => __( 'Scroll to item after opening?', 'tribe' ),
+			'name'          => self::SCROLL_TO,
+			'type'          => 'true_false',
+			'default_value' => false,
+			'ui'            => 1,
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 				'label'       => __( 'Lead in', 'tribe' ),

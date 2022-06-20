@@ -33,7 +33,7 @@ class Content_Loop extends Block_Config implements Cta_Field {
 	public const LAYOUT_FEATURE     = 'layout_feature';
 	public const LAYOUT_COLUMNS     = 'layout_columns';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => __( 'Content Loop', 'tribe' ),
 			'description' => __( 'A loop of auto or manual set posts with style options', 'tribe' ),
@@ -52,7 +52,7 @@ class Content_Loop extends Block_Config implements Cta_Field {
 	/**
 	 * Register Fields for block
 	 */
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEADIN, [
 				'label'       => __( 'Lead in', 'tribe' ),
 				'name'        => self::LEADIN,

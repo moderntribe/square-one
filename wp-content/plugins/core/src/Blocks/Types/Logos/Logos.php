@@ -26,7 +26,7 @@ class Logos extends Block_Config implements Cta_Field {
 	public const LOGO_IMAGE    = 'image';
 	public const LOGO_LINK     = 'link';
 
-	public function add_block() {
+	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'       => esc_html__( 'Logos', 'tribe' ),
 			'description' => esc_html__( 'A collection of logos.', 'tribe' ),
@@ -70,7 +70,7 @@ class Logos extends Block_Config implements Cta_Field {
 		] ) );
 	}
 
-	public function add_fields() {
+	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
 				'label'       => esc_html__( 'Lead in', 'tribe' ),
 				'name'        => self::LEAD_IN,
@@ -119,17 +119,20 @@ class Logos extends Block_Config implements Cta_Field {
 			'label'         => __( 'Logo Image', 'tribe' ),
 			'name'          => self::LOGO_IMAGE,
 			'type'          => 'image',
-			'return_format' => 'id',
+			'return_format' => 'array',
 			'preview_size'  => 'medium',
-			'instructions'  => __( 'Recommended image size: 200px tall with any aspect ratio.', 'tribe' ),
+			'instructions'  => esc_html__( 'Recommended image size: 200px tall with any aspect ratio.', 'tribe' ),
 		] );
+
 		$group->add_field( $logo_image );
 
 		$logo_link = new Field( self::LOGO_LINK, [
-			'label' => __( 'Logo Link', 'tribe' ),
-			'name'  => self::LOGO_LINK,
-			'type'  => 'link',
+			'label'       => __( 'Logo Link', 'tribe' ),
+			'name'        => self::LOGO_LINK,
+			'type'        => 'link',
+			'return_type' => 'array',
 		] );
+
 		$group->add_field( $logo_link );
 
 		return $group;

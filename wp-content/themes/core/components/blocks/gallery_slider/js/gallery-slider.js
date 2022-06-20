@@ -13,8 +13,8 @@ const gallerySliderBlocks = tools.getNodes( '.b-gallery-slider', true, document,
  * @description Set slide width on variable image ratio sliders to contain caption.
  */
 
-const setVariableSlideWidth = ( e ) => {
-	const slider = e.detail.slider.el;
+const setVariableSlideWidth = ( swiper ) => {
+	const slider = swiper.el;
 	if ( ! slider || ! slider.classList.contains( 'b-gallery-slider--variable' ) ) {
 		return;
 	}
@@ -25,7 +25,7 @@ const setVariableSlideWidth = ( e ) => {
 	} );
 
 	// Recalculate slide offsets
-	e.detail.slider.updateSlides();
+	swiper.updateSlides();
 };
 
 /**
@@ -42,7 +42,7 @@ const bindEvents = () => {
  * @description Initialize if gallery slider blocks are on the page.
  */
 const init = () => {
-	if ( ! gallerySliderBlocks ) {
+	if ( gallerySliderBlocks.length === 0 ) {
 		return;
 	}
 

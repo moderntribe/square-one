@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\slider\Slider_Controller;
+use Tribe\Project\Templates\Components\slider\Slider_Controller;
 
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Slider_Controller::factory( $args );
 
 if ( empty( $c->get_slides() ) ) {
@@ -44,7 +43,7 @@ if ( empty( $c->get_slides() ) ) {
 			<?php echo $c->get_carousel_attrs(); ?>
 		>
 			<div class="swiper-wrapper">
-				<?php foreach ( $c->get_carousel_slides() as $index => $slide  ) { ?>
+				<?php foreach ( $c->get_carousel_slides() as $index => $slide ) { ?>
 					<button
 						class="c-slider__thumbnail swiper-slide"
 						data-js="c-slider-thumb-trigger"

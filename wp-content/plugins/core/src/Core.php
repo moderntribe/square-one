@@ -2,12 +2,14 @@
 
 namespace Tribe\Project;
 
-use Psr\Container\ContainerInterface;
+use DI\ContainerBuilder;
 use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Assets\Assets_Subscriber;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
+use Tribe\Project\CLI\CLI_Definer;
+use Tribe\Project\Integrations\ACF\ACF_Subscriber;
 use Tribe\Project\Integrations\Google_Tag_Manager\Google_Tag_Manager_Subscriber;
 use Tribe\Project\Integrations\Gravity_Forms\Gravity_Forms_Subscriber;
 use Tribe\Project\Integrations\Yoast_SEO\Yoast_SEO_Subscriber;
@@ -29,20 +31,16 @@ class Core {
 	public const PLUGIN_FILE = 'plugin.file';
 
 	/**
-	 * @var self
-	 */
-	private static $instance;
-
-	/**
-	 * @var \Psr\Container\ContainerInterface
+	 * @var \Psr\Container\ContainerInterface|\Invoker\InvokerInterface|\DI\FactoryInterface
 	 */
 	private $container;
 
 	/**
-	 * @var string[] Names of classes implementing Definer_Interface
+	 * @var string[] Names of classes implementing Definer_Interface.
 	 */
-	private $definers = [
+	private array $definers = [
 		Blocks_Definer::class,
+		CLI_Definer::class,
 		Nav_Menus_Definer::class,
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
@@ -52,9 +50,10 @@ class Core {
 	];
 
 	/**
-	 * @var string[] Names of classes extending Abstract_Subscriber
+	 * @var string[] Names of classes extending Abstract_Subscriber.
 	 */
-	private $subscribers = [
+	private array $subscribers = [
+		ACF_Subscriber::class,
 		Admin_Subscriber::class,
 		Assets_Subscriber::class,
 		Blocks_Subscriber::class,
@@ -76,9 +75,9 @@ class Core {
 	];
 
 	/**
-	 * @var array Names of classes from Tribe Libs implementing Definer_Interface
+	 * @var string[] Names of classes from Tribe Libs implementing Definer_Interface.
 	 */
-	private $lib_definers = [
+	private array $lib_definers = [
 		'\Tribe\Libs\Assets\Assets_Definer',
 		'\Tribe\Libs\Blog_Copier\Blog_Copier_Definer',
 		'\Tribe\Libs\Cache\Cache_Definer',
@@ -95,9 +94,9 @@ class Core {
 	];
 
 	/**
-	 * @var array Names of classes from Tribe Libs extending Abstract_Subscriber
+	 * @var string[] Names of classes from Tribe Libs extending Abstract_Subscriber.
 	 */
-	private $lib_subscribers = [
+	private array $lib_subscribers = [
 		'\Tribe\Libs\Blog_Copier\Blog_Copier_Subscriber',
 		'\Tribe\Libs\Cache\Cache_Subscriber',
 		'\Tribe\Libs\CLI\CLI_Subscriber',
@@ -112,10 +111,36 @@ class Core {
 		'\Tribe\Libs\Whoops\Whoops_Subscriber',
 	];
 
-	public function init( string $plugin_path ) {
+	private static self $instance;
+
+	/**
+	 * @return self
+	 */
+	public static function instance(): self {
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * @throws \Exception
+	 */
+	public function init( string $plugin_path ): void {
 		$this->init_container( $plugin_path );
 	}
 
+	/**
+	 * @return \Psr\Container\ContainerInterface|\Invoker\InvokerInterface|\DI\FactoryInterface
+	 */
+	public function container() {
+		return $this->container;
+	}
+
+	/**
+	 * @throws \Exception
+	 */
 	private function init_container( string $plugin_path ): void {
 
 		// combine definers/subscribers from the project and libs
@@ -136,34 +161,17 @@ class Core {
 		 */
 		$subscribers = apply_filters( 'tribe/project/subscribers', $subscribers );
 
-		$builder = new \DI\ContainerBuilder();
+		$builder = new ContainerBuilder();
 		$builder->useAutowiring( true );
 		$builder->useAnnotations( false );
 		$builder->addDefinitions( [ self::PLUGIN_FILE => $plugin_path ] );
-		$builder->addDefinitions( ... array_map( static function ( $classname ) {
-			return ( new $classname() )->define();
-		}, $definers ) );
+		$builder->addDefinitions( ...array_map( static fn ( $classname ) => ( new $classname() )->define(), $definers ) );
 
 		$this->container = $builder->build();
 
 		foreach ( $subscribers as $subscriber_class ) {
 			( new $subscriber_class( $this->container ) )->register();
 		}
-	}
-
-	public function container(): ContainerInterface {
-		return $this->container;
-	}
-
-	/**
-	 * @return self
-	 */
-	public static function instance() {
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
 	}
 
 }

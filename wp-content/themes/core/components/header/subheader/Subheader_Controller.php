@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\header\subheader;
 
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
@@ -20,56 +21,53 @@ class Subheader_Controller extends Abstract_Controller {
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const DESCRIPTION       = 'description';
-	public const HERO_IMAGE_ID     = 'hero_image';
+	public const HERO_IMAGE        = 'hero_image';
 	public const MEDIA_CLASSES     = 'media_classes';
 	public const TITLE             = 'title';
 
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
 	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $content_classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $media_classes;
-	private int $hero_image_id;
+	private Image $hero_image;
 	private string $description;
 	private string $title;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->title             = (string) $args[ self::TITLE ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->hero_image_id     = (int) $args[ self::HERO_IMAGE_ID ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::ATTRS             => [],
-			self::CLASSES           => [ 'c-subheader--has-background' ],
-			self::CONTAINER_CLASSES => [],
-			self::CONTENT_CLASSES   => [],
-			self::DESCRIPTION       => '',
-			self::HERO_IMAGE_ID     => 0,
-			self::MEDIA_CLASSES     => [],
-			self::TITLE             => '',
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CONTAINER_CLASSES => [ 'l-container' ],
-			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
-			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
-			self::CLASSES           => [ 'c-subheader'],
-		];
+		$this->hero_image        = $args[ self::HERO_IMAGE ];
+		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
+		$this->title             = (string) $args[ self::TITLE ];
 	}
 
 	public function get_classes(): string {
-		if ( ! empty( $this->hero_image_id ) ) {
+		if ( $this->hero_image->id ) {
 			$this->classes[] = 'c-subheader--has-image';
 			$this->classes[] = 't-theme--light';
 		}
@@ -110,12 +108,12 @@ class Subheader_Controller extends Abstract_Controller {
 	}
 
 	public function get_image_args(): array {
-		if (  empty( $this->hero_image_id ) ) {
+		if ( ! $this->hero_image->id ) {
 			return [];
 		}
 
 		return [
-			Image_Controller::IMG_ID       => $this->hero_image_id,
+			Image_Controller::IMG_ID       => $this->hero_image->id,
 			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
 			Image_Controller::CLASSES      => [ 'c-image--overlay', 'c-image--object-fit' ],
@@ -125,6 +123,28 @@ class Subheader_Controller extends Abstract_Controller {
 				Image_Sizes::SIXTEEN_NINE,
 				Image_Sizes::SIXTEEN_NINE_SMALL,
 			],
+		];
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [ 'c-subheader--has-background' ],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::DESCRIPTION       => '',
+			self::HERO_IMAGE        => new Image(),
+			self::MEDIA_CLASSES     => [],
+			self::TITLE             => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-subheader'],
+			self::CONTAINER_CLASSES => [ 'l-container' ],
+			self::CONTENT_CLASSES   => [ 'c-subheader__content' ],
+			self::MEDIA_CLASSES     => [ 'c-subheader__media' ],
 		];
 	}
 

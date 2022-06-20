@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components\blocks\interstitial;
 
+use Tribe\Libs\Field_Models\Models\Cta;
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial as Interstitial_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -14,120 +16,85 @@ use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Interstitial_Block_Controller extends Abstract_Controller {
 
-	public const LAYOUT            = 'layout';
-	public const MEDIA             = 'media';
-	public const LEADIN            = 'leadin';
-	public const TITLE             = 'title';
-	public const CTA               = 'cta';
-	public const CONTAINER_CLASSES = 'container_classes';
-	public const MEDIA_CLASSES     = 'media_classes';
-	public const CONTENT_CLASSES   = 'content_classes';
-	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
+	public const CLASSES           = 'classes';
+	public const CONTAINER_CLASSES = 'container_classes';
+	public const CONTENT_CLASSES   = 'content_classes';
+	public const CTA               = 'cta';
+	public const LAYOUT            = 'layout';
+	public const LEADIN            = 'leadin';
+	public const MEDIA             = 'media';
+	public const MEDIA_CLASSES     = 'media_classes';
+	public const TITLE             = 'title';
 
 	/**
-	 * @var int|string
+	 * @var string[]
 	 */
-	private $media;
-
-	private string $layout;
-	private string $leadin;
-	private string $title;
-	private array $cta;
-	private array $container_classes;
-	private array $media_classes;
-	private array $content_classes;
-	private array $classes;
 	private array $attrs;
 
 	/**
-	 * @param array $args
+	 * @var string[]
 	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $container_classes;
+
+	/**
+	 * @var string[]
+	 */
+	private array $content_classes;
+
+	private Cta $cta;
+
+	/**
+	 * @var string[]
+	 */
+	private array $media_classes;
+	private Image $media;
+	private string $layout;
+	private string $leadin;
+	private string $title;
+
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes           = (array) $args[ self::CLASSES ];
-		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->media             = $args[ self::MEDIA ];
-		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->title             = (string) $args[ self::TITLE ];
-		$this->cta               = (array) $args[ self::CTA ];
-		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
-		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
+		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
+		$this->cta               = $args[ self::CTA ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
+		$this->media             = $args[ self::MEDIA ];
+		$this->media_classes     = (array) $args[ self::MEDIA_CLASSES ];
+		$this->title             = (string) $args[ self::TITLE ];
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function defaults(): array {
-		return [
-			self::LAYOUT            => Interstitial_Block::LAYOUT_LEFT,
-			self::MEDIA             => null,
-			self::LEADIN            => '',
-			self::TITLE             => '',
-			self::CTA               => [],
-			self::CONTAINER_CLASSES => [],
-			self::MEDIA_CLASSES     => [],
-			self::CONTENT_CLASSES   => [],
-			self::CLASSES           => [ 'c-block--full-bleed' ],
-			self::ATTRS             => [],
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [
-			self::CONTAINER_CLASSES => [ 'b-interstitial__container', 'l-container' ],
-			self::MEDIA_CLASSES     => [ 'b-interstitial__media' ],
-			self::CONTENT_CLASSES   => [ 'b-interstitial__content' ],
-			self::CLASSES           => [ 'c-block', 'b-interstitial' ],
-		];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		$this->classes[] = 'c-block--layout-' . $this->layout;
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_media_classes(): string {
 		return Markup_Utils::class_attribute( $this->media_classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_content_classes(): string {
 		return Markup_Utils::class_attribute( $this->content_classes );
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_content_args(): array {
 		if ( empty( $this->title ) && empty( $this->cta ) ) {
 			return [];
@@ -147,70 +114,13 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_leadin(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			Text_Controller::CLASSES => [
-				'c-block__leadin',
-			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
-		] );
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_title(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
-			Text_Controller::TAG     => 'h2',
-			Text_Controller::CLASSES => [
-				'c-block__title',
-				'b-interstitial__title',
-				'h3',
-			],
-			Text_Controller::CONTENT => $this->title ?? '',
-		] );
-	}
-
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
-		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
-			Link_Controller::CLASSES        => [
-				'c-block__cta-link',
-				'a-btn',
-				'a-btn--has-icon-after',
-				'icon-arrow-right',
-			],
-		] );
-	}
-
-	/**
-	 * @return array
-	 */
 	public function get_media_args(): array {
-		if ( ! $this->media ) {
+		if ( ! $this->media->id ) {
 			return [];
 		}
 
 		return [
-			Image_Controller::IMG_ID       => $this->media,
+			Image_Controller::IMG_ID       => $this->media->id,
 			Image_Controller::AS_BG        => true,
 			Image_Controller::AUTO_SHIM    => false,
 			Image_Controller::USE_LAZYLOAD => true,
@@ -223,6 +133,67 @@ class Interstitial_Block_Controller extends Abstract_Controller {
 				Image_Sizes::CORE_MOBILE,
 			],
 		];
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [ 'c-block--full-bleed' ],
+			self::CONTAINER_CLASSES => [],
+			self::CONTENT_CLASSES   => [],
+			self::CTA               => new Cta(),
+			self::LAYOUT            => Interstitial_Block::LAYOUT_LEFT,
+			self::LEADIN            => '',
+			self::MEDIA             => new Image(),
+			self::MEDIA_CLASSES     => [],
+			self::TITLE             => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-block', 'b-interstitial' ],
+			self::CONTAINER_CLASSES => [ 'b-interstitial__container', 'l-container' ],
+			self::CONTENT_CLASSES   => [ 'b-interstitial__content' ],
+			self::MEDIA_CLASSES     => [ 'b-interstitial__media' ],
+		];
+	}
+
+	private function get_leadin(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::CLASSES => [
+				'c-block__leadin',
+			],
+			Text_Controller::CONTENT => $this->leadin ?? '',
+		] );
+	}
+
+	private function get_title(): Deferred_Component {
+		return defer_template_part( 'components/text/text', null, [
+			Text_Controller::TAG     => 'h2',
+			Text_Controller::CLASSES => [
+				'c-block__title',
+				'b-interstitial__title',
+				'h3',
+			],
+			Text_Controller::CONTENT => $this->title ?? '',
+		] );
+	}
+
+	private function get_cta(): Deferred_Component {
+		return defer_template_part( 'components/link/link', null, [
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
+			Link_Controller::CLASSES        => [
+				'c-block__cta-link',
+				'a-btn',
+				'a-btn--has-icon-after',
+				'icon-arrow-right',
+			],
+		] );
 	}
 
 }

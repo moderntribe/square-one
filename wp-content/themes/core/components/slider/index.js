@@ -7,10 +7,12 @@
  *
  * ----------------------------------------------------------------------------- */
 
-import slider from './js/slider';
-
 const init = () => {
-	slider();
+	if ( document.querySelector( '[data-js="c-slider"]' ) ) {
+		import( './js/slider' /* webpackChunkName:"slider" */ ).then( ( module ) => {
+			module.default();
+		} );
+	}
 };
 
 export default init;

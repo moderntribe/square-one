@@ -19,7 +19,10 @@ class Image_Sizes {
 	public const SOCIAL_SHARE_OPENGRAPH = 'social-share-opengraph';
 	public const SOCIAL_SHARE_TWITTER   = 'social-share-twitter';
 
-	private $sizes = [
+	/**
+	 * @var array<string, array<string, int|bool>>
+	 */
+	private array $sizes = [
 		self::SQUARE_XSMALL          => [
 			'width'  => 150,
 			'height' => 150,
@@ -88,16 +91,14 @@ class Image_Sizes {
 		self::SOCIAL_SHARE_TWITTER   => [
 			'width'  => 1024,
 			'height' => 512,
-			'crop'   => true,
+			'crop'   => false,
 		],
 	];
 
 	/**
-	 * @return void
-	 *
 	 * @action after_setup_theme
 	 */
-	public function register_sizes() {
+	public function register_sizes(): void {
 		foreach ( $this->sizes as $key => $attributes ) {
 			add_image_size( $key, $attributes['width'], $attributes['height'], $attributes['crop'] );
 		}

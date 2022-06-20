@@ -21,6 +21,30 @@ const options = {
 		a11y: {
 			enabled: true,
 		},
+		/**
+		 * Register Swiper.js event handlers
+		 * https://swiperjs.com/swiper-api#param-on
+		 *
+		 * Allows event handlers to be added upon swiper initialization.
+		 *
+		 * See all available events: https://swiperjs.com/swiper-api#events
+		 */
+		on: {
+			/**
+			 * Event will be fired right after all inner images are loaded.
+			 * Note that updateOnImagesReady parameter should be also enabled on
+			 * a Swiper instance to properly fire this event.
+			 */
+			imagesReady: ( swiper ) => {
+				trigger( {
+					event: 'modern_tribe/swiper_images_ready',
+					data: { swiper }, // passes the current swiper instance
+					native: false,
+				} );
+			},
+		},
+		watchSlidesVisibility: true,
+		watchOverflow: true,
 	} ),
 	swiperThumbs: () => ( {
 		a11y: {
@@ -110,7 +134,7 @@ const focusRow = ( index, rowIndex, jumpTo ) => {
 
 /**
  * @module
- * @description Swiper init.
+ * @description Swiper init. Make sure to keep this idempotent/safe to call multiple times!
  */
 
 const initSliders = () => {
@@ -120,13 +144,6 @@ const initSliders = () => {
 		instances.swipers[ swiperMainId ] = new SwiperCore( slider, getMainOptsForSlider( slider, swiperMainId ) );
 		slider.setAttribute( 'data-id', swiperMainId );
 		slider.setAttribute( 'id', swiperMainId );
-		instances.swipers[ swiperMainId ].on( 'imagesReady', () => {
-			trigger( {
-				event: 'modern_tribe/swiper_images_ready',
-				data: { slider: instances.swipers[ swiperMainId ] },
-				native: false,
-			} );
-		} );
 	} );
 };
 
@@ -164,6 +181,9 @@ const bindEvents = () => {
 	document.addEventListener( 'modular_content/repeater_row_activated', previewChangeHandler );
 	document.addEventListener( 'modular_content/repeater_row_deactivated', previewChangeHandler );
 	document.addEventListener( 'modular_content/repeater_row_added', previewChangeHandler );
+	if ( window.acf ) {
+		window.acf.addAction( 'render_block_preview', initSliders );
+	}
 	document.addEventListener( 'modern_tribe/component_dialog_rendered', initSliders );
 };
 

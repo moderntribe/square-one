@@ -6,10 +6,7 @@ use Tribe\Project\Object_Meta\Analytics_Settings;
 
 class GTM_Scripts {
 
-	/**
-	 * @var \Tribe\Project\Object_Meta\Analytics_Settings
-	 */
-	private $settings;
+	private Analytics_Settings $settings;
 
 	public function __construct( Analytics_Settings $settings ) {
 		$this->settings = $settings;
@@ -20,7 +17,7 @@ class GTM_Scripts {
 	 *
 	 * @action wp_head
 	 */
-	public function inject_google_tag_manager_head_tag() {
+	public function inject_google_tag_manager_head_tag(): void {
 
 		$id = $this->settings->get_value( Analytics_Settings::GOOGLE_TAG_MANAGER );
 
@@ -54,7 +51,7 @@ class GTM_Scripts {
 	 *
 	 * @action wp_body_open
 	 */
-	public function inject_google_tag_manager_body_tag() {
+	public function inject_google_tag_manager_body_tag(): void {
 
 		$id = $this->settings->get_value( Analytics_Settings::GOOGLE_TAG_MANAGER );
 

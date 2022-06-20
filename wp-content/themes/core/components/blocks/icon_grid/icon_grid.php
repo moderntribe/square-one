@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
+use Tribe\Project\Templates\Components\blocks\icon_grid\Icon_Grid_Controller;
+
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$c = \Tribe\Project\Templates\Components\blocks\icon_grid\Icon_Grid_Controller::factory( $args );
+$c = Icon_Grid_Controller::factory( $args );
 ?>
 <section <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<div <?php echo $c->get_container_classes(); ?>>
@@ -18,7 +19,7 @@ $c = \Tribe\Project\Templates\Components\blocks\icon_grid\Icon_Grid_Controller::
 		<ul <?php echo $c->get_content_classes(); ?>>
 
 			<?php foreach ( $c->get_icon_card_args() as $card_args ) { ?>
-				<?php get_template_part( 'components/card/card', null, $card_args ); ?>
+				<?php get_template_part( 'components/card/card', '', $card_args ); ?>
 			<?php } ?>
 
 		</ul>

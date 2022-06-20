@@ -8,20 +8,24 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Spacer_Block_Controller extends Abstract_Controller {
 
+	public const ATTRS             = 'attrs';
+	public const CLASSES           = 'classes';
 	public const CONTAINER_CLASSES = 'container_classes';
 	public const CONTENT_CLASSES   = 'content_classes';
-	public const CLASSES           = 'classes';
-	public const ATTRS             = 'attrs';
-	public const SIZE              = 'size';
 	public const DISPLAY_OPTIONS   = 'display_options';
+	public const SIZE              = 'size';
 
 	/**
-	 * @var array|string
+	 * @var string[]
+	 */
+	private array $attrs;
+
+	/**
+	 * @var string[]
 	 */
 	private array $classes;
-	private array $attrs;
-	private string $size;
 	private string $display_options;
+	private string $size;
 
 	/**
 	 * @param array $args
@@ -29,43 +33,16 @@ class Spacer_Block_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->classes         = (array) $args[ self::CLASSES ];
 		$this->attrs           = (array) $args[ self::ATTRS ];
-		$this->size            = (string) $args[ self::SIZE ];
+		$this->classes         = (array) $args[ self::CLASSES ];
 		$this->display_options = (string) $args[ self::DISPLAY_OPTIONS ];
+		$this->size            = (string) $args[ self::SIZE ];
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function defaults(): array {
-		return [
-			self::ATTRS           => [],
-			self::CLASSES         => [],
-			self::SIZE            => Spacer_Block::DEFAULT,
-			self::DISPLAY_OPTIONS => Spacer_Block::ALL_SCREENS,
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [
-			self::CLASSES => [ 'b-spacer', 'alignfull' ],
-		];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		if ( $this->size === Spacer_Block::LARGE ) {
 			$this->classes[] = 'b-spacer--large';
@@ -76,6 +53,21 @@ class Spacer_Block_Controller extends Abstract_Controller {
 		}
 
 		return Markup_Utils::class_attribute( $this->classes );
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS           => [],
+			self::CLASSES         => [],
+			self::DISPLAY_OPTIONS => Spacer_Block::ALL_SCREENS,
+			self::SIZE            => Spacer_Block::DEFAULT,
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES => [ 'b-spacer', 'alignfull' ],
+		];
 	}
 
 }

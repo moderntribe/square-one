@@ -7,10 +7,7 @@ use Tribe\Project\Templates\Components\Abstract_Controller;
 
 class Unsupported_Browser_Controller extends Abstract_Controller {
 
-	/**
-	 * @var \Tribe\Project\Assets\Theme\Theme_Build_Parser
-	 */
-	private $build_parser;
+	private Theme_Build_Parser $build_parser;
 
 	public function __construct( Theme_Build_Parser $build_parser ) {
 		$this->build_parser = $build_parser;
@@ -24,7 +21,7 @@ class Unsupported_Browser_Controller extends Abstract_Controller {
 		return ob_get_clean();
 	}
 
-	public function get_legacy_image_url( $filename ): string {
+	public function get_legacy_image_url( string $filename ): string {
 		if ( empty( $filename ) ) {
 			return '';
 		}
@@ -32,14 +29,14 @@ class Unsupported_Browser_Controller extends Abstract_Controller {
 		return esc_url( trailingslashit( get_template_directory_uri() ) . 'assets/img/theme/legacy-browser/' . $filename );
 	}
 
-	public function get_logo_url(): array {
+	public function get_logo_url(): string {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
-		$image          = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+		$image          = wp_get_attachment_image_url( $custom_logo_id, 'full' );
 		if ( $image ) {
 			return $image;
 		}
 
-		return [];
+		return '';
 	}
 
 }

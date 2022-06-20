@@ -6,7 +6,7 @@ use Tribe\Libs\ACF\Field_Group;
 
 interface Cta_Field {
 
-	public const GROUP_CTA      = 'g-cta';
+	public const GROUP_CTA      = 'cta';
 	public const LINK           = 'link';
 	public const ADD_ARIA_LABEL = 'add_aria_label';
 	public const ARIA_LABEL     = 'aria_label';

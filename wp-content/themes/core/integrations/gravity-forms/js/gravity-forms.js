@@ -9,7 +9,7 @@ import * as tools from 'utils/tools';
 import scrollTo from 'utils/dom/scroll-to';
 
 const el = {
-	container: tools.getNodes( 'site-wrap' )[ 0 ],
+	container: tools.getNodes( '.gform_wrapper', false, document, true ),
 };
 
 let spinner;
@@ -85,6 +85,8 @@ const bindEvents = () => {
 		.on( 'gform_confirmation_loaded', gravityFormConfirmationLoaded );
 
 	delegate( el.container, '.gform_button', 'click', spinOn );
+	delegate( el.container, '.gform_next_button', 'click', spinOn );
+	delegate( el.container, '.gform_previous_button', 'click', spinOn );
 };
 
 /**
@@ -93,7 +95,7 @@ const bindEvents = () => {
  */
 
 const gravityForms = () => {
-	if ( ! el.container ) {
+	if ( el.container.length === 0 ) {
 		return;
 	}
 

@@ -5,7 +5,6 @@ use Tribe\Project\Templates\Components\blocks\hero\Hero_Block_Controller;
 /**
  * @var array $args Arguments passed to the template
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 $c = Hero_Block_Controller::factory( $args );
 ?>
 

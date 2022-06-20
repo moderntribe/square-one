@@ -56,10 +56,10 @@ class Image_Controller extends Abstract_Controller {
 	/** @var string Append an html string inside the wrapper. Useful for adding a `<figcaption>` or other markup after the image. */
 	private string $html;
 
-	/** @var array Pass classes for image tag. if lazyload is true class "lazyload" is auto added. */
+	/** @var string[] Pass classes for image tag. if lazyload is true class "lazyload" is auto added. */
 	private array $img_classes;
 
-	/** @var array Additional image attributes */
+	/** @var string[] Additional image attributes */
 	private array $img_attrs;
 
 	/** @var string Pass specific image alternate text. If not included, will default to image alt text and then title. */
@@ -68,16 +68,20 @@ class Image_Controller extends Abstract_Controller {
 	/** @var string Pass a link to wrap the image */
 	private string $link_url;
 
-	/** @var array Pass link classes */
+	/** @var string[] Pass link classes */
 	private array $link_classes;
 
 	/** @var string Pass a link target */
 	private string $link_target;
 
-	/** @var string Pass a link title */
+	/**
+	 * @TODO This isn't used anywhere.
+	 *
+	 * @var string Pass a link title
+	 */
 	private string $link_title;
 
-	/** @var array Pass additional link attributes */
+	/** @var string[] Pass additional link attributes */
 	private array $link_attrs;
 
 	/** @var string If lazyloading this combines with object fit css and the object fit polyfill */
@@ -92,7 +96,7 @@ class Image_Controller extends Abstract_Controller {
 	/** @var string This is the main src registered image size */
 	private string $src_size;
 
-	/** @var array This is registered sizes array for srcset */
+	/** @var string[] This is registered sizes array for srcset */
 	private array $srcset_sizes;
 
 	/** @var string This is the srcset sizes attribute string used if auto is false */
@@ -110,7 +114,7 @@ class Image_Controller extends Abstract_Controller {
 	/** @var string[] */
 	private array $attrs;
 
-	/** @var array Pass classes for figure wrapper. If as_bg is set true gets auto class of "lazyload". */
+	/** @var string[] Pass classes for figure wrapper. If as_bg is set true gets auto class of "lazyload". */
 	private array $classes;
 
 	/** @var string Html tag for the wrapper/background image container */
@@ -146,46 +150,6 @@ class Image_Controller extends Abstract_Controller {
 		$this->use_hw_attr       = (bool) $args[ self::USE_HW_ATTR ];
 		$this->use_lazyload      = (bool) $args[ self::USE_LAZYLOAD ];
 		$this->use_srcset        = (bool) $args[ self::USE_SRCSET ];
-	}
-
-	protected function defaults(): array {
-		return [
-			self::IMG_ID            => 0,
-			self::IMG_URL           => '',
-			self::ATTRS             => [],
-			self::CLASSES           => [],
-			self::WRAPPER_TAG       => 'figure',
-			self::AS_BG             => false,
-			self::AUTO_SHIM         => true,
-			self::AUTO_SIZES_ATTR   => false,
-			self::EXPAND            => 200,
-			self::HTML              => '',
-			self::IMG_CLASSES       => [],
-			self::IMG_ATTRS         => [],
-			self::IMG_ALT_TEXT      => '',
-			self::LINK_URL          => '',
-			self::LINK_CLASSES      => [],
-			self::LINK_TARGET       => '',
-			self::LINK_TITLE        => '',
-			self::LINK_ATTRS        => [],
-			self::PARENT_FIT        => 'width',
-			self::SHIM              => '',
-			self::SRC               => true,
-			self::SRC_SIZE          => 'large',
-			self::SRCSET_SIZES      => [],
-			self::SRCSET_SIZES_ATTR => '(min-width: 1260px) 1260px, 100vw',
-			self::USE_HW_ATTR       => false,
-			self::USE_LAZYLOAD      => true,
-			self::USE_SRCSET        => true,
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES      => [ 'c-image' ],
-			self::IMG_CLASSES  => [ 'c-image__image' ],
-			self::LINK_CLASSES => [ 'c-image__link' ],
-		];
 	}
 
 	public function should_lazy_load(): bool {
@@ -339,7 +303,7 @@ class Image_Controller extends Abstract_Controller {
 				$attrs[ $attribute_name ] = esc_attr( $srcset_urls );
 			}
 
-			// setup the shim
+			// set up the shim
 			if ( $this->as_bg && ! empty( $shim_src ) ) {
 				$attrs['style'] = sprintf( 'background-image:url(\'%s\');', esc_url( $shim_src ) );
 			} else {
@@ -418,21 +382,69 @@ class Image_Controller extends Abstract_Controller {
 				continue;
 			}
 
-			$attribute[] = $this->build_srcset_string( ... $src );
+			$attribute[] = $this->build_srcset_string( $src[0], $src[1], $src[2] );
 		}
 
 		// If there are no sizes available after all that work, fallback to the original full size image.
 		if ( empty( $attribute ) ) {
 			$src = wp_get_attachment_image_src( $this->img_id, 'full' );
 			if ( $src ) {
-				$attribute[] = $this->build_srcset_string( ... $src );
+				$attribute[] = $this->build_srcset_string( $src[0], $src[1], $src[2] );
 			}
 		}
 
 		return implode( ", \n", $attribute );
 	}
 
-	private function build_srcset_string( $url, $width, $height ): string {
+	public function get_html(): string {
+		if ( empty( $this->html ) ) {
+			return '';
+		}
+
+		return $this->html;
+	}
+
+	protected function defaults(): array {
+		return [
+			self::IMG_ID            => 0,
+			self::IMG_URL           => '',
+			self::ATTRS             => [],
+			self::CLASSES           => [],
+			self::WRAPPER_TAG       => 'figure',
+			self::AS_BG             => false,
+			self::AUTO_SHIM         => true,
+			self::AUTO_SIZES_ATTR   => false,
+			self::EXPAND            => 200,
+			self::HTML              => '',
+			self::IMG_CLASSES       => [],
+			self::IMG_ATTRS         => [],
+			self::IMG_ALT_TEXT      => '',
+			self::LINK_URL          => '',
+			self::LINK_CLASSES      => [],
+			self::LINK_TARGET       => '',
+			self::LINK_TITLE        => '',
+			self::LINK_ATTRS        => [],
+			self::PARENT_FIT        => 'width',
+			self::SHIM              => '',
+			self::SRC               => true,
+			self::SRC_SIZE          => 'large',
+			self::SRCSET_SIZES      => [],
+			self::SRCSET_SIZES_ATTR => '(min-width: 1260px) 1260px, 100vw',
+			self::USE_HW_ATTR       => false,
+			self::USE_LAZYLOAD      => true,
+			self::USE_SRCSET        => true,
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES      => [ 'c-image' ],
+			self::IMG_CLASSES  => [ 'c-image__image' ],
+			self::LINK_CLASSES => [ 'c-image__link' ],
+		];
+	}
+
+	private function build_srcset_string( string $url, int $width, int $height ): string {
 		return sprintf( '%s %dw %dh', $url, $width, $height );
 	}
 
@@ -454,14 +466,6 @@ class Image_Controller extends Abstract_Controller {
 		}
 
 		return  $image_width === $size_width || $image_height === $size_height;
-	}
-
-	public function get_html(): string {
-		if ( empty( $this->html ) ) {
-			return '';
-		}
-
-		return $this->html;
 	}
 
 }

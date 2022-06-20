@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\tabs;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Tabs\Tabs as Tabs_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -11,28 +12,42 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\tabs\Tabs_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Models\Collections\Tab_Collection;
 
 class Tabs_Block_Controller extends Abstract_Controller {
 
-	public const LAYOUT            = 'layout';
-	public const TITLE             = 'title';
-	public const LEADIN            = 'leadin';
-	public const DESCRIPTION       = 'description';
-	public const CTA               = 'cta';
-	public const TABS              = 'tabs';
-	public const CLASSES           = 'classes';
 	public const ATTRS             = 'attrs';
+	public const CLASSES           = 'classes';
 	public const CONTAINER_CLASSES = 'container_classes';
+	public const CTA               = 'cta';
+	public const DESCRIPTION       = 'description';
+	public const LAYOUT            = 'layout';
+	public const LEADIN            = 'leadin';
+	public const TABS              = 'tabs';
+	public const TITLE             = 'title';
 
-	private string $layout;
-	private string $title;
-	private string $leadin;
-	private string $description;
-	private array $cta;
-	private array $tabs;
-	private array $classes;
+	/**
+	 * @var string[]
+	 */
 	private array $attrs;
+
+	/**
+	 * @var string[]
+	 */
+	private array $classes;
+
+	/**
+	 * @var string[]
+	 */
 	private array $container_classes;
+
+	private Cta $cta;
+
+	private Tab_Collection $tabs;
+	private string $description;
+	private string $layout;
+	private string $leadin;
+	private string $title;
 
 	/**
 	 * @param array $args
@@ -40,70 +55,31 @@ class Tabs_Block_Controller extends Abstract_Controller {
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
 
-		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->title             = (string) $args[ self::TITLE ];
-		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->cta               = (array) $args[ self::CTA ];
-		$this->tabs              = (array) $args[ self::TABS ];
-		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->attrs             = (array) $args[ self::ATTRS ];
+		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
+		$this->cta               = $args[ self::CTA ];
+		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->layout            = (string) $args[ self::LAYOUT ];
+		$this->leadin            = (string) $args[ self::LEADIN ];
+		$this->tabs              = $args[ self::TABS ];
+		$this->title             = (string) $args[ self::TITLE ];
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function defaults(): array {
-		return [
-			self::LAYOUT            => Tabs_Block::LAYOUT_HORIZONTAL,
-			self::TITLE             => '',
-			self::LEADIN            => '',
-			self::DESCRIPTION       => '',
-			self::CTA               => [],
-			self::TABS              => [],
-			self::CLASSES           => [],
-			self::ATTRS             => [],
-			self::CONTAINER_CLASSES => [ 'l-container' ],
-		];
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function required(): array {
-		return [
-			self::CLASSES           => [ 'c-block', 'b-tabs' ],
-			self::CONTAINER_CLASSES => [ 'b-tabs__container' ],
-		];
-	}
-
-	/**
-	 * @return string
-	 */
 	public function get_classes(): string {
 		$this->classes[] = sprintf( 'c-block--layout-%s', $this->layout );
 
 		return Markup_Utils::class_attribute( $this->classes );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_attrs(): string {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	/**
-	 * @return string
-	 */
 	public function get_container_classes(): string {
 		return Markup_Utils::class_attribute( $this->container_classes );
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_header_args(): array {
 		if ( empty( $this->title ) && empty( $this->description ) ) {
 			return [];
@@ -123,22 +99,46 @@ class Tabs_Block_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
+	public function get_tabs_args(): array {
+		return [
+			Tabs_Controller::TABS    => $this->tabs,
+			Tabs_Controller::LAYOUT  => $this->layout,
+			Tabs_Controller::CLASSES => [ 'b-tabs__content' ],
+		];
+	}
+
+	protected function defaults(): array {
+		return [
+			self::ATTRS             => [],
+			self::CLASSES           => [],
+			self::CONTAINER_CLASSES => [ 'l-container' ],
+			self::CTA               => new Cta(),
+			self::DESCRIPTION       => '',
+			self::LAYOUT            => Tabs_Block::LAYOUT_HORIZONTAL,
+			self::LEADIN            => '',
+			self::TABS              => new Tab_Collection(),
+			self::TITLE             => '',
+		];
+	}
+
+	protected function required(): array {
+		return [
+			self::CLASSES           => [ 'c-block', 'b-tabs' ],
+			self::CONTAINER_CLASSES => [ 'b-tabs__container' ],
+		];
+	}
+
 	private function get_leadin(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
 				'b-tabs__leadin',
+				'h6',
 			],
 			Text_Controller::CONTENT => $this->leadin ?? '',
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_title(): Deferred_Component {
 		return defer_template_part( 'components/text/text', null, [
 			Text_Controller::TAG     => 'h2',
@@ -151,9 +151,6 @@ class Tabs_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_content(): Deferred_Component {
 		return defer_template_part( 'components/container/container', null, [
 			Container_Controller::CLASSES => [
@@ -166,24 +163,17 @@ class Tabs_Block_Controller extends Abstract_Controller {
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
+	private function get_cta(): ?Deferred_Component {
+		if ( ! $this->cta->link->url ) {
+			return null;
+		}
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
@@ -191,17 +181,6 @@ class Tabs_Block_Controller extends Abstract_Controller {
 				'icon-arrow-right',
 			],
 		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_tabs_args(): array {
-		return [
-			Tabs_Controller::TABS    => $this->tabs,
-			Tabs_Controller::LAYOUT  => $this->layout,
-			Tabs_Controller::CLASSES => [ 'b-tabs__content' ],
-		];
 	}
 
 }

@@ -1,8 +1,14 @@
 <?php declare(strict_types=1);
 
+use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop_Model;
+
 /**
- * @var array $args Arguments passed to the template
+ * @var array $args ACF block data.
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$model = new \Tribe\Project\Blocks\Types\Content_Loop\Content_Loop_Model( $args['block'] );
-get_template_part( 'components/blocks/content_loop/content_loop', null, $model->get_data() );
+$model = tribe_project()->container()->make( Content_Loop_Model::class, $args );
+
+get_template_part(
+	'components/blocks/content_loop/content_loop',
+	'',
+	$model->get_data()
+);

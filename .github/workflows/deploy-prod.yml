@@ -2,9 +2,6 @@ name: Deploy Production
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - server/production
 
 jobs:
   deploy:
@@ -15,7 +12,6 @@ jobs:
       DEPLOY_FOLDER: ./deploy
       ENVIRONMENT: production
       DEPLOY_REPO: ${{ secrets.PROD_DEPLOY_REPO }}
-      COMPOSER_AUTH: '{ "github-oauth": { "github.com": "${{ secrets.GITHUB_TOKEN }}" } }'
 
     steps:
 
@@ -24,7 +20,9 @@ jobs:
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
         with:
-          tools: composer:v1
+          php-version: '7.4'
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Get Build Repository
       - name: Check out build branch
@@ -33,7 +31,16 @@ jobs:
           path: ${{ env.BUILD_FOLDER }}
           ref: ${{github.ref}}
 
-      # Cache composer vendor folder TODO
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
 
       # Install composer: Add env for plugin keys, composer install, and cleanup
       - name: Install composer dependencies
@@ -45,19 +52,19 @@ jobs:
           rm -rf vendor/moderntribe/tribe-libs/.git
           rm -rf wp-content/plugins/panel-builder/.git
 
-      # Setup node version
-      - name: Setup node version
-        uses: actions/setup-node@v1
+      # Set up node version
+      - name: Set up node
+        uses: actions/setup-node@v2
         with:
-          node-version: '14.15.1'
-
-      # Cache node_modules TODO
+          node-version-file: "${{ env.BUILD_FOLDER }}/.nvmrc"
+          cache: 'yarn'
+          cache-dependency-path: "${{ env.BUILD_FOLDER }}/yarn.lock"
 
       # Yarn Install and Build
       - name: Yarn install and build
         working-directory: ${{ env.BUILD_FOLDER }}
         run: |
-          yarn install
+          yarn install --prefer-offline
           npm run validate
           npm run server_dist
 
@@ -67,7 +74,7 @@ jobs:
         run: |
           php -r "file_exists( 'local-config.php' ) || copy( 'local-config-sample.php', 'local-config.php' );"
           php -r "file_exists( 'local-config.json' ) || copy( 'local-config-sample.json', 'local-config.json' );"
-          echo "define( 'WP_ENVIRONMENT_TYPE', ${{env.ENVIROMENT}} );" >> local-config.php
+          echo "define( 'WP_ENVIRONMENT_TYPE', ${{env.ENVIRONMENT}} );" >> local-config.php
 
       ##########
       ### DEPLOY: Use the WPE git deploy hook method. TLDR; rsync our repo on their repo and push.
@@ -131,5 +138,5 @@ jobs:
         run: |
           echo 'Deploying ${{env.GITHUB_REF}} to ${{env.ENVIRONMENT}}'
           git add -Av
-          git commit --allow-empty -m 'Deploying ${env.BRANCH_NAME} to ${env.ENVIRONMENT}'
+          git commit --allow-empty -m 'Deploying ${{env.BRANCH_NAME}} to ${{env.ENVIRONMENT}}'
           git push origin master

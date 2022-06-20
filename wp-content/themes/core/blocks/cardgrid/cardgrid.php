@@ -3,13 +3,12 @@
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid_Model;
 
 /**
- * @var array $args Arguments passed to the template
+ * @var array $args ACF block data.
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$model = new Card_Grid_Model( $args['block'] );
+$model = tribe_project()->container()->make( Card_Grid_Model::class, $args );
 
 get_template_part(
 	'components/blocks/card_grid/card_grid',
-	null,
+	'',
 	$model->get_data()
 );

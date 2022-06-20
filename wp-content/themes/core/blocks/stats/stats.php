@@ -1,11 +1,14 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Blocks\Types\Stats\Stats_Model;
+use Tribe\Project\Blocks\Types\Stats\Stats_Model;
 
 /**
- * @var array $args Arguments passed to the template
+ * @var array $args ACF block data.
  */
-// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-$model = new Stats_Model( $args['block'] );
+$model = tribe_project()->container()->make( Stats_Model::class, $args );
 
-get_template_part( 'components/blocks/stats/stats', null, $model->get_data() );
+get_template_part(
+	'components/blocks/stats/stats',
+	'',
+	$model->get_data()
+);

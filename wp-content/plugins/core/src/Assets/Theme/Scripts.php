@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Assets\Theme;
 
+use _WP_Dependency;
+
 class Scripts {
 
 	private JS_Config $config;
@@ -38,13 +40,15 @@ class Scripts {
 			return;
 		}
 		?>
-		<script src="//d2wy8f7a9ursnm.cloudfront.net/v5/bugsnag.min.js"></script>
+		<script src="https://d2wy8f7a9ursnm.cloudfront.net/v5/bugsnag.min.js"></script>
 		<script>window.bugsnagClient = bugsnag(<?php echo json_encode( BUGSNAG_API_KEY ); ?>);</script>
 		<?php
 	}
 
 	/**
 	 * Output preload directives in head for scripts in footer
+	 *
+	 * Supports preloading dependencies of aliases (scripts with dependencies and no source URL).
 	 *
 	 * @action wp_head
 	 */
@@ -59,11 +63,26 @@ class Scripts {
 				continue;
 			}
 
-			//-- If version is set, append to end of source.
-			$source = $script->src . ( $script->ver ? "?ver={$script->ver}" : "" );
+			// If not an alias, print preload tag.
+			if ( ! empty( $script->src ) ) {
+				$this->print_preload_tag( $script );
 
-			//-- Spit out the tag.
-			echo "<link rel='preload' href='{$source}' as='script'/>\n";
+				continue;
+			}
+
+			// If source is empty and no dependencies, then not an alias: skip (nothing to preload).
+			if ( empty( $script->deps ) ) {
+				continue;
+			}
+
+			// If an alias, preload set dependencies.
+			foreach ( $script->deps as $dep_handle ) {
+				if ( ! isset( $wp_scripts->registered[ $dep_handle ] ) ) {
+					continue;
+				}
+
+				$this->print_preload_tag( $wp_scripts->registered[ $dep_handle ] );
+			}
 		}
 	}
 
@@ -100,7 +119,7 @@ class Scripts {
 			$this->localize_scripts( (string) reset( $handles ) );
 
 			if ( defined( 'HMR_DEV' ) && HMR_DEV === true ) {
-				wp_enqueue_script( 'tribe-scripts-hmr-bundle', 'https://localhost:3000/app.js', $handles, time(), true );
+				wp_enqueue_script( 'tribe-scripts-hmr-bundle', home_url() . ':9000/app.js', $handles, time(), true );
 			}
 		}
 
@@ -110,6 +129,14 @@ class Scripts {
 		}
 
 		wp_enqueue_script( 'comment-reply' );
+	}
+
+	protected function print_preload_tag( _WP_Dependency $script ): void {
+		//-- If version is set, append to end of source.
+		$source = $script->src . ( $script->ver ? "?ver={$script->ver}" : "" );
+
+		//-- Spit out the tag.
+		echo "<link rel='preload' href='{$source}' as='script'/>\n";
 	}
 
 	/**
