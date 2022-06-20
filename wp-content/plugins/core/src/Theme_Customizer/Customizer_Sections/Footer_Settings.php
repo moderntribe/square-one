@@ -5,7 +5,7 @@ namespace Tribe\Project\Theme_Customizer\Customizer_Sections;
 /**
  * Class Footer.
  */
-class Footer extends Abstract_Setting {
+class Footer_Settings extends Abstract_Setting {
 
 	// Keys.
 	public const FOOTER_SECTION = 'footer_section';
