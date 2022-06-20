@@ -22,7 +22,7 @@ class Customizer_Loader {
 	 */
 	public function register_customizer_controls( \WP_Customize_Manager $wp_customize ): void {
 		$this->analytics_customizer_settings( $wp_customize );
-
+		$this->footer_settings( $wp_customize );
 		$this->social_links_settings( $wp_customize );
 	}
 
