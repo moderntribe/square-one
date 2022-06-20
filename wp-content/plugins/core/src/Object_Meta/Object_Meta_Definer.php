@@ -15,24 +15,10 @@ class Object_Meta_Definer implements Definer_Interface {
 		return [
 			// add our meta groups to the global array
 			\Tribe\Libs\Object_Meta\Object_Meta_Definer::GROUPS => DI\add( [
-				DI\get( Analytics_Settings::class ),
-				DI\get( Social_Settings::class ),
 				DI\get( Post_Archive_Settings::class ),
 				DI\get( Post_Archive_Featured_Settings::class ),
 				DI\get( Taxonomy_Archive_Settings::class ),
 			] ),
-
-			// add analytics settings to the general settings screen
-			Analytics_Settings::class                           => DI\autowire()
-				->constructorParameter( 'object_types', static fn( ContainerInterface $c ) => [
-					'settings_pages' => [ $c->get( Settings\General::class )->get_slug() ],
-				] ),
-
-			// add social settings to the general settings screen
-			Social_Settings::class                              => DI\autowire()
-				->constructorParameter( 'object_types', static fn( ContainerInterface $c ) => [
-					'settings_pages' => [ $c->get( Settings\General::class )->get_slug() ],
-				] ),
 
 			Post_Archive_Featured_Settings::class               => DI\autowire()
 				->constructorParameter( 'object_types', static fn( ContainerInterface $c ) => [
