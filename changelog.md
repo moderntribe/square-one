@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 * Added: [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery)
 * Fixed: Tab block controller throwing type errors.
 * Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
+* Added: Youtube icon to core icons set.
 
 ## 2022.05
 * Fixed: Use PHP to prefix commits with a jira ticket, avoiding different shell environments.
