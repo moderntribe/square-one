@@ -34,7 +34,9 @@ class Customizer_Loader {
 
 	protected function footer_settings( \WP_Customize_Manager $wp_customize ): void {
 		$footer = new Footer_Settings( $wp_customize );
-		$footer->section_title();
+		$footer->section_title()
+			   ->footer_logo()
+			   ->footer_description();
 	}
 
 	protected function social_links_settings( \WP_Customize_Manager $wp_customize ): void {
