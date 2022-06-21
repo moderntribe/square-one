@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Theme_Customizer\Customizer_Sections;
 
-class Social_Link_Settings extends Abstract_Setting {
+class Social_Follow_Settings extends Abstract_Setting {
 
 	public const SOCIAL_SECTION = 'social_section';
 
@@ -22,7 +22,7 @@ class Social_Link_Settings extends Abstract_Setting {
 		return $this;
 	}
 
-	public function all_links(): self {
+	public function field_all_links(): self {
 		foreach ( $this->social_array() as $key => $label ) {
 			$this->wp_customize->add_setting( $key, [
 				'sanitize_callback' => 'esc_url',
