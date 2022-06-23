@@ -8,9 +8,9 @@ TODO: security docs
 When dealing with user input, nothing can be trusted. Malicious users can try a number of different techniques to attack sites from areas where user input is permitted (ex. XSS—Cross Site Scripting, CSRF—Cross Site Request Forgery, SQL Injection, etc.).
 
 ### Validation
- Before any user input is processed by the server for use within the code-base, it should first be validated to confirm that the information provided is what is expected (Emails should be properly formatted to be emails, urls should be urls, required fields should have values, etc.).
+Before any user input is processed by the server for use within the code-base, it should first be validated to confirm that the information provided is what is expected (Emails should be properly formatted to be emails, urls should be urls, required fields should have values, etc.).
 
- Often this is handled client-side with some javascript or HTML5 form validation.
+Often this is handled client-side with some javascript or HTML5 form validation.
 
 Though validation can help protect against attacks, it is not perfect. Malicious users can still alter the request before it is sent to the server.
 
