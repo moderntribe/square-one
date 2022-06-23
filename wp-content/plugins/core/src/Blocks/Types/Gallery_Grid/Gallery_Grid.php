@@ -27,10 +27,10 @@ class Gallery_Grid extends Block_Config {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Gallery Grid', 'tribe' ),
-			'description' => __( 'A custom block by Modern Tribe', 'tribe' ), // TODO: describe the block
+			'title'       => esc_html__( 'Gallery Grid', 'tribe' ),
+			'description' => esc_html__( 'A custom block by Modern Tribe', 'tribe' ), // TODO: describe the block
 			'icon'        => '<svg enable-background="new 0 0 146.3 106.3" version="1.1" viewBox="0 0 146.3 106.3" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><style type="text/css">.st0{fill:#16D690;}.st1{fill:#21A6CB;}.st2{fill:#008F8F;}</style><polygon class="st0" points="145.2 106.3 72.6 42.3 26.5 1.2 0 106.3"/><polygon class="st1" points="145.2 106.3 0 106.3 72.6 42.3 118.6 1.2"/><polygon class="st2" points="72.6 42.3 145.2 106.3 0 106.3"/></svg>', // TODO: set SVG icon
-			'keywords'    => [ __( 'gallery', 'tribe' ), __( 'grid', 'tribe' ), __( 'image', 'tribe' ) ], // TODO: select appropriate keywords
+			'keywords'    => [ esc_html__( 'gallery', 'tribe' ), esc_html__( 'grid', 'tribe' ), esc_html__( 'image', 'tribe' ) ], // TODO: select appropriate keywords
 			'category'    => 'common', // core categories: common, formatting, layout, widgets, embed
 			'supports'    => [
 				'align'  => false,
@@ -45,21 +45,21 @@ class Gallery_Grid extends Block_Config {
 	 */
 	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label'       => __( 'Lead in', 'tribe' ),
+				'label'       => esc_html__( 'Lead in', 'tribe' ),
 				'name'        => self::LEAD_IN,
 				'type'        => 'text',
-				'placeholder' => __( 'Lead in (optional)', 'tribe' ),
+				'placeholder' => esc_html__( 'Lead in (optional)', 'tribe' ),
 				'wrapper'     => [
 					'class' => 'tribe-acf-hide-label',
 				],
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
+				'label' => esc_html__( 'Title', 'tribe' ),
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
+				'label'        => esc_html__( 'Description', 'tribe' ),
 				'name'         => self::DESCRIPTION,
 				'type'         => 'wysiwyg',
 				'toolbar'      => Classic_Editor_Formats::MINIMAL,
@@ -67,7 +67,7 @@ class Gallery_Grid extends Block_Config {
 				'media_upload' => 0,
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::GALLERY_IMAGES, [
-				'label' => __( 'Gallery Images', 'tribe' ),
+				'label' => esc_html__( 'Gallery Images', 'tribe' ),
 				'name'  => self::GALLERY_IMAGES,
 				'type'  => 'gallery',
 				'max'   => 12,
@@ -78,26 +78,26 @@ class Gallery_Grid extends Block_Config {
 	}
 
 	protected function get_settings_section(): Field_Section {
-		$section = new Field_Section( self::SECTION_SETTINGS, __( 'Settings', 'tribe' ), 'accordion' );
+		$section = new Field_Section( self::SECTION_SETTINGS, esc_html__( 'Settings', 'tribe' ), 'accordion' );
 
 		$columns = new Field( self::NAME . '_' . self::COLUMNS, [
-			'label'         => __( 'Columns', 'tribe' ),
+			'label'         => esc_html__( 'Columns', 'tribe' ),
 			'name'          => self::COLUMNS,
 			'type'          => 'button_group',
 			'choices'       => [
-				self::COLUMNS_ONE   => __( '1', 'tribe' ),
-				self::COLUMNS_TWO   => __( '2', 'tribe' ),
-				self::COLUMNS_THREE => __( '3', 'tribe' ),
-				self::COLUMNS_FOUR  => __( '4', 'tribe' ),
+				self::COLUMNS_ONE   => esc_html__( '1', 'tribe' ),
+				self::COLUMNS_TWO   => esc_html__( '2', 'tribe' ),
+				self::COLUMNS_THREE => esc_html__( '3', 'tribe' ),
+				self::COLUMNS_FOUR  => esc_html__( '4', 'tribe' ),
 			],
 			'default_value' => self::COLUMNS_THREE,
 		] );
 
 		$slideshow = new Field( self::NAME . '_' . self::USE_SLIDESHOW, [
-			'label'   => __( 'Use Slideshow', 'tribe' ),
+			'label'   => esc_html__( 'Use Slideshow', 'tribe' ),
 			'name'    => self::USE_SLIDESHOW,
 			'type'    => 'true_false',
-			'message' => __( 'Use Slideshow', 'tribe' ),
+			'message' => esc_html__( 'Use Slideshow', 'tribe' ),
 			'wrapper' => [
 				'class' => 'tribe-acf-hide-label',
 			],
