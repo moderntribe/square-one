@@ -33,16 +33,17 @@ class Quote extends Block_Config {
 	 */
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Quote + Image', 'tribe' ),
-			'description' => esc_html__( 'A combined quotation and associated image with several layout options.', 'tribe' ),
-			'icon'        => 'testimonial',
-			'keywords'    => [ esc_html__( 'quotation', 'tribe' ), esc_html__( 'display', 'tribe' ), esc_html__( 'text', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'           => esc_html__( 'Quote + Image', 'tribe' ),
+			'description'     => esc_html__( 'A combined quotation and associated image with several layout options.', 'tribe' ),
+			'icon'            => 'testimonial',
+			'keywords'        => [ esc_html__( 'quotation', 'tribe' ), esc_html__( 'display', 'tribe' ), esc_html__( 'text', 'tribe' ) ],
+			'category'        => 'layout',
+			'render_template' => plugin_dir_path( __FILE__ ) . 'Quote_Route.php',
+			'supports'        => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'         => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [

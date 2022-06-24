@@ -7,8 +7,4 @@ use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid_Model;
  */
 $model = tribe_project()->container()->make( Icon_Grid_Model::class, [ 'block' => $block ] );
 
-get_template_part(
-	'components/blocks/icon_grid/icon_grid',
-	'',
-	$model->get_data()
-);
+get_template_part( 'components/blocks/icon_grid/icon_grid', '', $model->get_data() );

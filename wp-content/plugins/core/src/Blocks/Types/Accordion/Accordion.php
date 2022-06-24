@@ -34,16 +34,17 @@ class Accordion extends Block_Config implements Cta_Field {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Accordion', 'tribe' ),
-			'description' => __( 'The Accordion block', 'tribe' ),
-			'icon'        => '<svg width="24" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M0 0h23.7v2.7H0zM0 12h23.7v2.7H0zM0 15.3h23.7V18H0z"/><path fill="#fff" stroke="#000" d="M1.7 3.8h20v6.8h-20z"/></svg>',
-			'keywords'    => [ __( 'accordion', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'           => __( 'Accordion', 'tribe' ),
+			'description'     => __( 'The Accordion block', 'tribe' ),
+			'icon'            => '<svg width="24" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M0 0h23.7v2.7H0zM0 12h23.7v2.7H0zM0 15.3h23.7V18H0z"/><path fill="#fff" stroke="#000" d="M1.7 3.8h20v6.8h-20z"/></svg>',
+			'keywords'        => [ __( 'accordion', 'tribe' ) ],
+			'category'        => 'layout',
+			'render_template' => plugin_dir_path( __FILE__ ) . 'Accordion_Route.php',
+			'supports'        => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'         => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [

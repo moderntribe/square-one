@@ -35,16 +35,17 @@ class Tabs extends Block_Config implements Cta_Field {
 	 */
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Tabs', 'tribe' ),
-			'description' => __( 'Tab block', 'tribe' ),
-			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#000" d="M1 1h6v4H1z"/><path fill="#fff" stroke="#000" d="M7.5 1.5h5v3h-5zM13.5 1.5h5v3h-5zM1.5 4.5h17v14h-17z"/><path fill="#151515" d="M3 6h12v1H3zM3 8h9v1H3zM3 10h13v1H3zM3 12h6v1H3z"/></svg>',
-			'keywords'    => [ __( 'tabs', 'tribe' ), __( 'display', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'           => __( 'Tabs', 'tribe' ),
+			'description'     => __( 'Tab block', 'tribe' ),
+			'icon'            => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#000" d="M1 1h6v4H1z"/><path fill="#fff" stroke="#000" d="M7.5 1.5h5v3h-5zM13.5 1.5h5v3h-5zM1.5 4.5h17v14h-17z"/><path fill="#151515" d="M3 6h12v1H3zM3 8h9v1H3zM3 10h13v1H3zM3 12h6v1H3z"/></svg>',
+			'keywords'        => [ __( 'tabs', 'tribe' ), __( 'display', 'tribe' ) ],
+			'category'        => 'layout',
+			'render_template' => plugin_dir_path( __FILE__ ) . 'Tabs_Route.php',
+			'supports'        => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'         => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [

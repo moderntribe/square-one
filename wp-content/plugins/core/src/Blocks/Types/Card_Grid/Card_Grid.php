@@ -38,16 +38,17 @@ class Card_Grid extends Block_Config implements Cta_Field {
 	 */
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Card Grid', 'tribe' ),
-			'description' => esc_html__( 'A block of curated posts', 'tribe' ),
-			'icon'        => 'sticky',
-			'keywords'    => [ esc_html__( 'posts', 'tribe' ), esc_html__( 'display', 'tribe' ), esc_html__( 'text', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'           => esc_html__( 'Card Grid', 'tribe' ),
+			'description'     => esc_html__( 'A block of curated posts', 'tribe' ),
+			'icon'            => 'sticky',
+			'keywords'        => [ esc_html__( 'posts', 'tribe' ), esc_html__( 'display', 'tribe' ), esc_html__( 'text', 'tribe' ) ],
+			'category'        => 'layout',
+			'render_template' => plugin_dir_path( __FILE__ ) . 'Card_Grid_Route.php',
+			'supports'        => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'         => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
@@ -103,7 +104,7 @@ class Card_Grid extends Block_Config implements Cta_Field {
 			)->add_field(
 				$this->get_cta_field( self::NAME )
 			);
-			
+
 			$this->add_section( new Field_Section( self::SECTION_CARDS, esc_html__( 'Cards', 'tribe' ), 'accordion' ) )
 				->add_field( new Field( self::NAME . '_' . self::POST_LIST, [
 					'label'             => esc_html__( 'Post List', 'tribe' ),

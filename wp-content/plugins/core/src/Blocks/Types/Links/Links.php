@@ -34,16 +34,17 @@ class Links extends Block_Config implements Cta_Field {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Links', 'tribe' ),
-			'description' => esc_html__( 'A list of links', 'tribe' ),
-			'icon'        => 'list-view',
-			'keywords'    => [ esc_html__( 'list', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'           => esc_html__( 'Links', 'tribe' ),
+			'description'     => esc_html__( 'A list of links', 'tribe' ),
+			'icon'            => 'list-view',
+			'keywords'        => [ esc_html__( 'list', 'tribe' ) ],
+			'category'        => 'layout',
+			'render_template' => plugin_dir_path( __FILE__ ) . 'Links_Route.php',
+			'supports'        => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'         => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [

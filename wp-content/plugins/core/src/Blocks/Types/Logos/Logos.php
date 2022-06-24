@@ -28,16 +28,17 @@ class Logos extends Block_Config implements Cta_Field {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Logos', 'tribe' ),
-			'description' => esc_html__( 'A collection of logos.', 'tribe' ),
-			'icon'        => 'screenoptions',
-			'keywords'    => [ esc_html__( 'logos', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'           => esc_html__( 'Logos', 'tribe' ),
+			'description'     => esc_html__( 'A collection of logos.', 'tribe' ),
+			'icon'            => 'screenoptions',
+			'keywords'        => [ esc_html__( 'logos', 'tribe' ) ],
+			'category'        => 'layout',
+			'render_template' => plugin_dir_path( __FILE__ ) . 'Logos_Route.php',
+			'supports'        => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'         => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
