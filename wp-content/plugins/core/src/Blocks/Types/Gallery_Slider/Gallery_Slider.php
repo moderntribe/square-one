@@ -74,10 +74,9 @@ class Gallery_Slider extends Block_Config {
 					'name'         => self::GALLERY,
 					'type'         => 'gallery',
 					'max'          => 12,
-					'instructions' => esc_html__(
-						'Recommended image size by layout:<br>Fixed: 1920px wide with a 16:9 aspect ratio.<br>Variable: 900px height minimum with any aspect ratio.',
-						'tribe'
-					),
+					'instructions' => esc_html__( 'Recommended image size by layout:', 'tribe' ) . '<br>' .
+									  esc_html__( 'Fixed: 1920px wide with a 16:9 aspect ratio.', 'tribe' ) . '<br>' .
+									  esc_html__( 'Variable: 900px height minimum with any aspect ratio.', 'tribe' ),
 				] )
 			);
 
