@@ -31,7 +31,7 @@ class Logos extends Block_Config implements Cta_Field {
 			'title'       => esc_html__( 'Logos', 'tribe' ),
 			'description' => esc_html__( 'A collection of logos.', 'tribe' ),
 			'icon'        => 'screenoptions',
-			'keywords'    => [ esc_html__( '<p>logos</p>', 'tribe' ) ],
+			'keywords'    => [ esc_html__( 'logos', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [
 				'align'  => false,
