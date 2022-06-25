@@ -2,6 +2,9 @@
 
 namespace Tribe\Project\Blocks\Types;
 
+/**
+ * @TODO this would no longer be needed
+ */
 abstract class Base_Model {
 
 	/**

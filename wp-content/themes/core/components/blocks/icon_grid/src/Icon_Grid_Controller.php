@@ -1,10 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Templates\Components\blocks\icon_grid;
+namespace Tribe\Project\Templates\Components\blocks\icon_grid\src;
 
-use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
-use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Blocks\Contracts\Block_Controller;
 use Tribe\Project\Templates\Components\card\Card_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
@@ -12,86 +11,38 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Models\Collections\Icon_Collection;
 
-class Icon_Grid_Controller extends Abstract_Controller {
+class Icon_Grid_Controller implements Block_Controller {
 
-	public const ATTRS             = 'attrs';
-	public const CLASSES           = 'classes';
-	public const CONTAINER_CLASSES = 'container_classes';
-	public const CONTENT_CLASSES   = 'content_classes';
-	public const CTA               = 'cta';
-	public const DESCRIPTION       = 'description';
-	public const ICONS             = 'icons';
-	public const LAYOUT            = 'layout';
-	public const LEADIN            = 'leadin';
-	public const TITLE             = 'title';
+	private Icon_Grid_Model $model;
 
-	/**
-	 * @var string[]
-	 */
-	private array $attrs;
-
-	/**
-	 * @var string[]
-	 */
-	private array $classes;
-
-	/**
-	 * @var string[]
-	 */
-	private array $container_classes;
-
-	/**
-	 * @var string[]
-	 */
-	private array $content_classes;
-
-	private Cta $cta;
-	private Icon_Collection $icons;
-	private string $description;
-	private string $layout;
-	private string $leadin;
-	private string $title;
-
-	public function __construct( array $args = [] ) {
-		$args = $this->parse_args( $args );
-
-		$this->attrs             = (array) $args[ self::ATTRS ];
-		$this->classes           = (array) $args[ self::CLASSES ];
-		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->cta               = $args[ self::CTA ];
-		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->icons             = $args[ self::ICONS ];
-		$this->layout            = (string) $args[ self::LAYOUT ];
-		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->title             = (string) $args[ self::TITLE ];
+	public function __construct( Icon_Grid_Model $model ) {
+		$this->model = $model;
 	}
 
 	public function get_classes(): string {
-		return Markup_Utils::class_attribute( $this->classes );
+		return Markup_Utils::class_attribute( $this->model->get_classes() );
 	}
 
 	public function get_attrs(): string {
-		return Markup_Utils::concat_attrs( $this->attrs );
+		return Markup_Utils::concat_attrs( $this->model->attrs );
 	}
 
 	public function get_container_classes(): string {
-		$this->container_classes[] = 'layout-' . $this->layout;
-
-		return Markup_Utils::class_attribute( $this->container_classes );
+		return Markup_Utils::class_attribute( [
+			'layout-' . $this->model->layout,
+		] );
 	}
 
 	public function get_content_classes(): string {
-		$this->content_classes[] = 'g-3-up';
-		$this->content_classes[] = 'g-centered';
-
-		return Markup_Utils::class_attribute( $this->content_classes );
+		return Markup_Utils::class_attribute( [
+			'g-3-up',
+			'g-centered',
+		] );
 	}
 
 	public function get_header_args(): array {
-		if ( empty( $this->title ) && empty( $this->description ) ) {
+		if ( empty( $this->model->title ) && empty( $this->model->description ) ) {
 			return [];
 		}
 
@@ -112,11 +63,11 @@ class Icon_Grid_Controller extends Abstract_Controller {
 
 	public function get_cta(): Deferred_Component {
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $this->cta->link->url,
-			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
-			Link_Controller::TARGET         => $this->cta->link->target,
-			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
-			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
+			Link_Controller::URL            => $this->model->cta->link->url,
+			Link_Controller::CONTENT        => $this->model->cta->link->title ?: $this->model->cta->link->url,
+			Link_Controller::TARGET         => $this->model->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->model->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->model->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
@@ -129,11 +80,11 @@ class Icon_Grid_Controller extends Abstract_Controller {
 	public function get_icon_card_args(): array {
 		$cards = [];
 
-		if ( ! $this->icons->count() ) {
+		if ( ! $this->model->icons->count() ) {
 			return $cards;
 		}
 
-		foreach ( $this->icons as $card ) {
+		foreach ( $this->model->icons as $card ) {
 			$cards[] = [
 				Card_Controller::STYLE           => Card_Controller::STYLE_PLAIN,
 				Card_Controller::TAG             => 'li',
@@ -187,62 +138,37 @@ class Icon_Grid_Controller extends Abstract_Controller {
 		return $cards;
 	}
 
-	protected function defaults(): array {
-		return [
-			self::ATTRS             => [],
-			self::CLASSES           => [],
-			self::CONTAINER_CLASSES => [],
-			self::CONTENT_CLASSES   => [],
-			self::CTA               => new Cta(),
-			self::DESCRIPTION       => '',
-			self::ICONS             => new Icon_Collection(),
-			self::LAYOUT            => '',
-			self::LEADIN            => '',
-			self::TITLE             => '',
-		];
-	}
-
-	protected function required(): array {
-		return [
-			self::CLASSES           => [
-				'c-block',
-				'b-icon-grid',
-			],
-			self::CONTAINER_CLASSES => [ 'l-container' ],
-		];
-	}
-
 	private function get_leadin(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
+		return defer_template_part( 'components/text/text', '', [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
 				'b-icon-grid__leadin',
 				'h6',
 			],
-			Text_Controller::CONTENT => $this->leadin,
+			Text_Controller::CONTENT => $this->model->leadin,
 		] );
 	}
 
 	private function get_title(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
+		return defer_template_part( 'components/text/text', '', [
 			Text_Controller::TAG     => 'h2',
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title,
+			Text_Controller::CONTENT => $this->model->title,
 		] );
 	}
 
 	private function get_content(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
+		return defer_template_part( 'components/container/container', '', [
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-icon-grid__description',
 				't-sink',
 				's-sink',
 			],
-			Container_Controller::CONTENT => $this->description,
+			Container_Controller::CONTENT => $this->model->description,
 		] );
 	}
 
