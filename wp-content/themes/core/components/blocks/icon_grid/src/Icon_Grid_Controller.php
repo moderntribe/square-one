@@ -25,7 +25,7 @@ class Icon_Grid_Controller implements Block_Controller {
 	}
 
 	public function get_attrs(): string {
-		return Markup_Utils::concat_attrs( $this->model->attrs );
+		return Markup_Utils::concat_attrs( $this->model->get_attrs() );
 	}
 
 	public function get_container_classes(): string {
