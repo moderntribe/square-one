@@ -12,7 +12,6 @@ use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Blocks\Types\Gallery_Grid\Gallery_Grid;
 use Tribe\Project\Blocks\Types\Gallery_Slider\Gallery_Slider;
 use Tribe\Project\Blocks\Types\Hero\Hero;
-use Tribe\Project\Blocks\Types\Icon_Grid\Icon_Grid;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Lead_Form\Lead_Form;
 use Tribe\Project\Blocks\Types\Links\Links;
@@ -23,6 +22,7 @@ use Tribe\Project\Blocks\Types\Section_Nav\Section_Nav;
 use Tribe\Project\Blocks\Types\Spacer\Spacer;
 use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Blocks\Types\Tabs\Tabs;
+use Tribe\Project\Templates\Components\blocks\icon_grid\src\Icon_Grid;
 
 class Blocks_Definer implements Definer_Interface {
 
@@ -32,7 +32,8 @@ class Blocks_Definer implements Definer_Interface {
 
 	public function define(): array {
 		return [
-			self::TYPES            => DI\add( [
+			// TODO: probably move this part of the definition to the theme.
+			self::TYPES               => DI\add( [
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
@@ -60,7 +61,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * @see: https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#using-a-deny-list
 			 */
-			self::DENY_LIST        => [
+			self::DENY_LIST           => [
 				'core/archives',
 				'core/button',
 				'core/buttons',
@@ -90,7 +91,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * TODO: Create a proper thumbnail of the style for the block editor: http://p.tri.be/dmsAwK
 			 */
-			self::STYLES           => DI\add( [
+			self::STYLES              => DI\add( [
 				DI\factory( static function () {
 					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
@@ -113,7 +114,10 @@ class Blocks_Definer implements Definer_Interface {
 				} ),
 			] ),
 
-			Block_Deny_List::class => DI\autowire()->constructor( DI\get( self::DENY_LIST ) ),
+			Block_Deny_List::class    => DI\autowire()->constructor( DI\get( self::DENY_LIST ) ),
+
+			// TODO: likely to update this path out of components, since a block isn't technically a component
+			Block_View_Factory::class => DI\autowire()->constructorParameter( 'block_path', 'components/blocks/%1$s/%1$s' ),
 		];
 	}
 

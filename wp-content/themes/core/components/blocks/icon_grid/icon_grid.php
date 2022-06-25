@@ -1,11 +1,8 @@
 <?php declare(strict_types=1);
 
-use Tribe\Project\Templates\Components\blocks\icon_grid\Icon_Grid_Controller;
-
 /**
- * @var array $args Arguments passed to the template
+ * @var \Tribe\Project\Templates\Components\blocks\icon_grid\src\Icon_Grid_Controller $c The block controller.
  */
-$c = Icon_Grid_Controller::factory( $args );
 ?>
 <section <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 	<div <?php echo $c->get_container_classes(); ?>>

@@ -3,7 +3,6 @@
 namespace Tribe\Project\Blocks;
 
 use Tribe\Libs\ACF\Block_Registrar;
-use Tribe\Libs\ACF\Block_Renderer;
 use Tribe\Libs\Container\Abstract_Subscriber;
 
 class Blocks_Subscriber extends Abstract_Subscriber {
@@ -16,8 +15,8 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 		}, 10, 1 );
 
 		add_action( 'tribe/project/block/render', function ( ...$args ): void {
-			$this->container->get( Block_Renderer::class )->render_template( ...$args );
-		}, 10, 4 );
+			$this->container->get( Block_View_Factory::class )->render_template( ...$args );
+		}, 10, 6 );
 
 		/**
 		 * Adds the deny list to the JS_Config class.
