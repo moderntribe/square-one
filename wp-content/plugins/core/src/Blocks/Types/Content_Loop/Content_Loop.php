@@ -35,11 +35,11 @@ class Content_Loop extends Block_Config implements Cta_Field {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Content Loop', 'tribe' ),
-			'description' => __( 'A loop of auto or manual set posts with style options', 'tribe' ),
+			'title'       => esc_html__( 'Content Loop', 'tribe' ),
+			'description' => esc_html__( 'A loop of auto or manual set posts with style options', 'tribe' ),
 			'icon'        => '<svg enable-background="new 0 0 146.3 106.3" version="1.1" viewBox="0 0 146.3 106.3" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><style type="text/css">.st0{fill:#16D690;}.st1{fill:#21A6CB;}.st2{fill:#008F8F;}</style><polygon class="st0" points="145.2 106.3 72.6 42.3 26.5 1.2 0 106.3"/><polygon class="st1" points="145.2 106.3 0 106.3 72.6 42.3 118.6 1.2"/><polygon class="st2" points="72.6 42.3 145.2 106.3 0 106.3"/></svg>',
 			// TODO: set SVG icon
-			'keywords'    => [ __( 'content', 'tribe' ), __( 'loop', 'tribe' ) ],
+			'keywords'    => [ esc_html__( 'content', 'tribe' ), esc_html__( 'loop', 'tribe' ) ],
 			'category'    => 'common',
 			'supports'    => [
 				'align'  => false,
@@ -54,21 +54,21 @@ class Content_Loop extends Block_Config implements Cta_Field {
 	 */
 	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEADIN, [
-				'label'       => __( 'Lead in', 'tribe' ),
+				'label'       => esc_html__( 'Lead in', 'tribe' ),
 				'name'        => self::LEADIN,
 				'type'        => 'text',
-				'placeholder' => __( 'Lead in (optional', 'tribe' ),
+				'placeholder' => esc_html__( 'Lead in (optional', 'tribe' ),
 				'wrapper'     => [
 					'class' => 'tribe-acf-hide-label',
 				],
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
+				'label' => esc_html__( 'Title', 'tribe' ),
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
+				'label'        => esc_html__( 'Description', 'tribe' ),
 				'name'         => self::DESCRIPTION,
 				'type'         => 'wysiwyg',
 				'toolbar'      => Classic_Editor_Formats::MINIMAL,
@@ -80,9 +80,9 @@ class Content_Loop extends Block_Config implements Cta_Field {
 		);
 
 
-		$this->add_section( new Field_Section( self::SECTION_LOOP_ITEMS, __( 'Loop Items', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_LOOP_ITEMS, esc_html__( 'Loop Items', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::POST_LIST, [
-					 'label'             => __( 'Post List', 'tribe' ),
+					 'label'             => esc_html__( 'Post List', 'tribe' ),
 					 'name'              => self::POST_LIST,
 					 'type'              => 'tribe_post_list',
 					 'available_types'   => 'both',
@@ -107,15 +107,15 @@ class Content_Loop extends Block_Config implements Cta_Field {
 			 );
 
 
-		$this->add_section( new Field_Section( self::SECTION_APPEARANCE, __( 'Appearance', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_APPEARANCE, esc_html__( 'Appearance', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-					 'label'         => __( 'Layout', 'tribe' ),
+					 'label'         => esc_html__( 'Layout', 'tribe' ),
 					 'type'          => 'button_group',
 					 'name'          => self::LAYOUT,
 					 'choices'       => [
-						 self::LAYOUT_ROW     => __( 'Row', 'tribe' ),
-						 self::LAYOUT_FEATURE => __( 'Feature', 'tribe' ),
-						 self::LAYOUT_COLUMNS => __( 'Columns', 'tribe' ),
+						 self::LAYOUT_ROW     => esc_html__( 'Row', 'tribe' ),
+						 self::LAYOUT_FEATURE => esc_html__( 'Feature', 'tribe' ),
+						 self::LAYOUT_COLUMNS => esc_html__( 'Columns', 'tribe' ),
 					 ],
 					 'default_value' => self::LAYOUT_ROW,
 				 ] )

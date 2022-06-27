@@ -95,11 +95,11 @@ class Blocks_Definer implements Definer_Interface {
 					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
 							'name'  => 't-overline',
-							'label' => __( 'Overline', 'tribe' ),
+							'label' => esc_html__( 'Overline', 'tribe' ),
 						],
 						[
 							'name'  => 't-leadin',
-							'label' => __( 'Lead-In', 'tribe' ),
+							'label' => esc_html__( 'Lead-In', 'tribe' ),
 						],
 					] );
 				} ),
@@ -107,7 +107,7 @@ class Blocks_Definer implements Definer_Interface {
 					return new Block_Style_Override( [ 'core/list' ], [
 						[
 							'name'  => 't-list-stylized',
-							'label' => __( 'Stylized', 'tribe' ),
+							'label' => esc_html__( 'Stylized', 'tribe' ),
 						],
 					] );
 				} ),

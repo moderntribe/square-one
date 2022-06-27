@@ -35,10 +35,10 @@ class Tabs extends Block_Config implements Cta_Field {
 	 */
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Tabs', 'tribe' ),
-			'description' => __( 'Tab block', 'tribe' ),
+			'title'       => esc_html__( 'Tabs', 'tribe' ),
+			'description' => esc_html__( 'Tab block', 'tribe' ),
 			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#000" d="M1 1h6v4H1z"/><path fill="#fff" stroke="#000" d="M7.5 1.5h5v3h-5zM13.5 1.5h5v3h-5zM1.5 4.5h17v14h-17z"/><path fill="#151515" d="M3 6h12v1H3zM3 8h9v1H3zM3 10h13v1H3zM3 12h6v1H3z"/></svg>',
-			'keywords'    => [ __( 'tabs', 'tribe' ), __( 'display', 'tribe' ) ],
+			'keywords'    => [ esc_html__( 'tabs', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [
 				'align'  => false,
@@ -94,31 +94,31 @@ class Tabs extends Block_Config implements Cta_Field {
 	 */
 	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-				'label'         => __( 'Layout', 'tribe' ),
+				'label'         => esc_html__( 'Layout', 'tribe' ),
 				'type'          => 'button_group',
 				'name'          => self::LAYOUT,
 				'choices'       => [
-					self::LAYOUT_HORIZONTAL => __( 'Horizontal', 'tribe' ),
-					self::LAYOUT_VERTICAL   => __( 'Vertical', 'tribe' ),
+					self::LAYOUT_HORIZONTAL => esc_html__( 'Horizontal', 'tribe' ),
+					self::LAYOUT_VERTICAL   => esc_html__( 'Vertical', 'tribe' ),
 				],
 				'default_value' => self::LAYOUT_HORIZONTAL,
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label'       => __( 'Lead in', 'tribe' ),
+				'label'       => esc_html__( 'Lead in', 'tribe' ),
 				'name'        => self::LEAD_IN,
 				'type'        => 'text',
-				'placeholder' => __( 'Leadin (optional)', 'tribe' ),
+				'placeholder' => esc_html__( 'Leadin (optional)', 'tribe' ),
 				'wrapper'     => [
 					'class' => 'tribe-acf-hide-label',
 				],
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
+				'label' => esc_html__( 'Title', 'tribe' ),
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
+				'label'        => esc_html__( 'Description', 'tribe' ),
 				'name'         => self::DESCRIPTION,
 				'type'         => 'wysiwyg',
 				'toolbar'      => Classic_Editor_Formats::MINIMAL,
@@ -134,28 +134,28 @@ class Tabs extends Block_Config implements Cta_Field {
 	 * @return \Tribe\Libs\ACF\Field_Section
 	 */
 	protected function get_tab_section(): Field_Section {
-		$section = new Field_Section( self::SECTION_TABS, __( 'Tabs', 'tribe' ), 'accordion' );
+		$section = new Field_Section( self::SECTION_TABS, esc_html__( 'Tabs', 'tribe' ), 'accordion' );
 		$group   = new Repeater( self::NAME . '_' . self::TABS );
 		$group->set_attributes( [
-			'label'        => __( 'Tab Section', 'tribe' ),
+			'label'        => esc_html__( 'Tab Section', 'tribe' ),
 			'name'         => self::TABS,
 			'layout'       => 'block',
 			'min'          => 0,
 			'max'          => 10,
-			'button_label' => __( 'Add Tab', 'tribe' ),
+			'button_label' => esc_html__( 'Add Tab', 'tribe' ),
 			'collapsed'    => 'field_' . self::TAB_LABEL,
 			'wrapper'      => [
 				'class' => 'tribe-acf-hide-label',
 			],
 		] );
 		$header = new Field( self::TAB_LABEL, [
-			'label' => __( 'Tab Label', 'tribe' ),
+			'label' => esc_html__( 'Tab Label', 'tribe' ),
 			'name'  => self::TAB_LABEL,
 			'type'  => 'text',
 		] );
 		$group->add_field( $header );
 		$content = new Field( self::TAB_CONTENT, [
-			'label'        => __( 'Tab Content', 'tribe' ),
+			'label'        => esc_html__( 'Tab Content', 'tribe' ),
 			'name'         => self::TAB_CONTENT,
 			'type'         => 'wysiwyg',
 			'toolbar'      => Classic_Editor_Formats::MINIMAL,
