@@ -21,14 +21,19 @@ components :)
 
 ### Removing Block Styles
 
-To remove specific core block styles from editor add the records to the `\Tribe\Project\Blocks\Blocks_Definer::DENY_BLOCK_STYLES` like this:
+To remove specific core block styles from the editor, add the styles to the `\Tribe\Project\Blocks\Blocks_Definer::DENY_BLOCK_STYLES` like this:
 ```php
 self::DENY_BLOCK_STYLES => [
-    'core/separator' => [ 'default', 'wide', 'line', 'dots' ],
+    'core/separator' => [ 
+        'default', 
+        'wide', 
+        'line', 
+        'dots', 
+    ],
 ]
 ```
 
-You can also filter the list of blocks and styles to unregister with the help of `tribe/project/blocks/style_denylist` filter.
+You can also filter the list of blocks and styles to unregister with the help of the `tribe/project/blocks/style_denylist` filter.
 
 ### Configuring Block Options
 
