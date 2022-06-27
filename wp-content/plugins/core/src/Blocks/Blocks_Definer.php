@@ -92,9 +92,10 @@ class Blocks_Definer implements Definer_Interface {
 			 * @see https://github.com/moderntribe/square-one/blob/main/docs/basics/blocks.md#configuring-block-options
 			 */
 			self::DENY_BLOCK_STYLES      => [
-				'core/image'     => [ 'rounded', 'default' ],
-				'core/quote'     => [ 'plain', 'large', 'default' ],
-				'core/separator' => [ 'default', 'wide', 'line', 'dots' ],
+				'core/image' => [
+					'rounded',
+					'default',
+				],
 			],
 
 			/**
