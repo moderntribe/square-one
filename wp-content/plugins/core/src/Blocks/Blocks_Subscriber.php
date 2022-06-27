@@ -26,6 +26,13 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 			return $this->container->get( Block_Deny_List::class )->filter_block_denylist( $types );
 		}, 10, 1 );
 
+		/**
+		 * Adds the deny list of block styles to the JS_Config class.
+		 */
+		add_filter( 'tribe/project/blocks/style_denylist', function ( array $types ): array {
+			return $this->container->get( Block_Style_Deny_List::class )->filter_block_style_denylist( $types );
+		}, 10, 1 );
+
 		add_action( 'after_setup_theme', function (): void {
 			$this->container->get( Theme_Support::class )->register_theme_supports();
 

@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.06
+* Added: PHP side functionality and filter for unregistering block styles.
 * Fixed: Replaces `__()` with `esc_html__()` in `wp-content/plugins/core/src/Blocks` folder
 * Added: Text alignment mixins & classes to support Gutenberg.
 * Fixed: Filter Social items to prevent empty HTML output.

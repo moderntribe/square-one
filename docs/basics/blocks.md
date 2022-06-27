@@ -5,7 +5,7 @@
 WordPress core (and some other plugins) provide a large collection of blocks to get us started.
 We'll often want to configure these block to match the nuances of a particular project.
 
-### Adding Block Types
+### Removing Block Types
 
 There are some block types that should be removed from the editor. Some reasons include:
 
@@ -13,10 +13,27 @@ There are some block types that should be removed from the editor. Some reasons 
 * Blocks that we have replaced with custom block types
 
 You can remove blocks by adding the block name to the `\Tribe\Project\Blocks\Blocks_Definer::DENY_LIST`
-array. Some care should be taken to avoid errors when WordPress uses nested block types. For example,
+array or by filtering it with `tribe/project/blocks/denylist` filter.
+Some care should be taken to avoid errors when WordPress uses nested block types. For example,
 removing the `core/button` block will trigger an error in the editor, because the `core/buttons`
 block expects it to be available. They must be removed together. Welcome to the world of nested
 components :)
+
+### Removing Block Styles
+
+To remove specific core block styles from the editor, add the styles to the `\Tribe\Project\Blocks\Blocks_Definer::DENY_BLOCK_STYLES` like this:
+```php
+self::DENY_BLOCK_STYLES => [
+    'core/separator' => [ 
+        'default', 
+        'wide', 
+        'line', 
+        'dots', 
+    ],
+]
+```
+
+You can also filter the list of blocks and styles to unregister with the help of the `tribe/project/blocks/style_denylist` filter.
 
 ### Configuring Block Options
 
