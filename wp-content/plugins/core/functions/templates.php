@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use Tribe\Project\Blocks\Block_Component;
+use Tribe\Project\Blocks\Contracts\Block_Model;
 use Tribe\Project\Templates\Components\Deferred_Component;
 
 if ( ! function_exists( 'tribe_template_part' ) ) {
@@ -29,5 +31,20 @@ if ( ! function_exists( 'defer_template_part' ) ) {
 	 */
 	function defer_template_part( string $slug, ?string $name = null, array $args = [] ): Deferred_Component {
 		return new Deferred_Component( $slug, $name, $args );
+	}
+}
+
+if ( ! function_exists( 'tribe_render_block' ) ) {
+	/**
+	 * Render a block manually by passing in your custom populated model.
+	 *
+	 * @param string                                      $block_class The FQCN to the block's Block_Config class.
+	 * @param \Tribe\Project\Blocks\Contracts\Block_Model $model       The populated model for which you wish to render.
+	 *
+	 * @throws \Psr\Container\ContainerExceptionInterface
+	 * @throws \Psr\Container\NotFoundExceptionInterface
+	 */
+	function tribe_render_block( string $block_class, Block_Model $model ): void {
+		tribe_project()->container()->get( Block_Component::class )->render( $block_class, $model );
 	}
 }
