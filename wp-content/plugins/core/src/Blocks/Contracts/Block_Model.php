@@ -38,6 +38,8 @@ class Block_Model extends Field_Model {
 	public array $attrs = [];
 
 	/**
+	 * @TODO Add a required fields system.
+	 *
 	 * @param mixed[] $fields The collection of ACF block fields.
 	 */
 	public function __construct( array $fields = [] ) {
