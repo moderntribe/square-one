@@ -1,11 +1,8 @@
 <?php declare(strict_types=1);
 
-use Tribe\Project\Templates\Components\blocks\hero\Hero_Block_Controller;
-
 /**
- * @var array $args Arguments passed to the template
+ * @var \Tribe\Project\Templates\Components\blocks\hero\src\Hero_Block_Controller $c The block controller.
  */
-$c = Hero_Block_Controller::factory( $args );
 ?>
 
 <section <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
