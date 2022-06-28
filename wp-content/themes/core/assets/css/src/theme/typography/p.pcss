@@ -4,7 +4,8 @@
  *
  * ----------------------------------------------------------------------------- */
 
-:is(.t-sink) p {
+:where(.t-sink) p,
+:is(.editor-styles-wrapper) p {
 	@mixin t-body;
 
 	/* CASE: Overline style applied via the editor. */

@@ -32,7 +32,8 @@ a {
  * ------------------------------------------------------------------------- */
 
 .anchor,
-.t-sink a {
+:where(.t-sink) a,
+:is(.editor-styles-wrapper) a {
 	color: var(--color-link);
 	text-decoration: underline;
 
