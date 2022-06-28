@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use Tribe\Project\Templates\Components\blocks\hero\src\Hero;
 use Tribe\Project\Templates\Components\pagination\single\Single_Pagination_Controller;
 use Tribe\Project\Templates\Components\sidebar\Sidebar_Controller;
 use Tribe\Project\Templates\Routes\single\Single_Controller;
@@ -12,6 +13,10 @@ get_header();
 	<main id="main-content">
 
 		<article class="item-single">
+			<?php
+				// TODO: remove this example.
+				tribe_render_block( Hero::class, $c->get_hero_model() );
+			?>
 			<?php get_template_part( 'components/header/subheader/subheader', 'single', $c->get_subheader_args() ); ?>
 
 			<?php if ( has_post_thumbnail() ) : ?>

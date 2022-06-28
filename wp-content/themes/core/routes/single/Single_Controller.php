@@ -2,8 +2,10 @@
 
 namespace Tribe\Project\Templates\Routes\single;
 
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Components\blocks\hero\src\Hero_Model;
 use Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
 use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
@@ -11,6 +13,7 @@ use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
 use Tribe\Project\Templates\Components\Traits\Primary_Term;
 use Tribe\Project\Theme\Config\Image_Sizes;
+use WP_Query;
 use WP_Term;
 
 class Single_Controller extends Abstract_Controller {
@@ -26,6 +29,30 @@ class Single_Controller extends Abstract_Controller {
 		$args = $this->parse_args( $args );
 
 		$this->sidebar_id = (string) $args[ self::SIDEBAR_ID ];
+	}
+
+	/**
+	 * @TODO remove this example.
+	 */
+	public function get_hero_model(): Hero_Model {
+		$model                  = new Hero_Model();
+		$model->title           = 'A Hero Block title';
+		$model->description     = 'A Hero Block description';
+		$model->content_classes = [
+			'some-class',
+		];
+		$model->media           = new Image( (array) acf_get_attachment( ( new WP_Query( [
+				'post_type'              => 'attachment',
+				'post_status'            => 'inherit',
+				'post_mime_type'         => 'image/jpeg,image/gif,image/jpg,image/png',
+				'posts_per_page'         => 1,
+				'no_found_rows'          => true,
+				'fields'                 => 'ids',
+				'update_post_meta_cache' => false,
+				'update_post_term_cache' => false,
+			] ) )->posts[0] ?? 0 ) );
+
+		return $model;
 	}
 
 	public function get_subheader_args(): array {
