@@ -1,3 +1,10 @@
+/**
+ + TODO:
+ + [ ] Setup alignments for FE and admin
+ + [ ] Test all column settings
+ + [ ] Refactor to improve?
+ */
+
 .wp-block-columns {
 	display: flex;
 	box-sizing: border-box;
@@ -102,7 +109,11 @@
 	}
 
 	> *:first-child {
-		margin-top: 0 !important;
+		margin-top: 0;
+	}
+
+	> *:last-child {
+		margin-bottom: 0;
 	}
 
 	/* Child Blocks */
