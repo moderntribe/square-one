@@ -74,7 +74,7 @@
 		width: 100%;
 	}
 
-	:not(.is-not-stacked-on-mobile) & {
+	.wp-block-columns:not(.is-not-stacked-on-mobile) & {
 		@media (--viewport-medium-max) {
 			flex-basis: 100% !important;
 		}
@@ -100,13 +100,13 @@
 				flex-grow: 0;
 			}
 		}
-	}
 
-	~ .wp-block-column {
-		margin-top: var(--spacer-40);
+		~ .wp-block-column {
+			margin-top: var(--spacer-40);
 
-		@media (--viewport-medium) {
-			margin-top: 0;
+			@media (--viewport-medium) {
+				margin-top: 0;
+			}
 		}
 	}
 
