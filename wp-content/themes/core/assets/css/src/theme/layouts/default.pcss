@@ -81,6 +81,16 @@ main {
 			width: calc(100% - 2 * var(--grid-gutter));
 		}
 	}
+
+	& > .wp-block-columns {
+		width: calc(100% - 2 * var(--grid-gutter-small));
+		margin-left: auto;
+		margin-right: auto;
+
+		@media (--viewport-medium) {
+			width: calc(100% - 2 * var(--grid-gutter));
+		}
+	}
 }
 
 /* -----------------------------------------------------------------------------
