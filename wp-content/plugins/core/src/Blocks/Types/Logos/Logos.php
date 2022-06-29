@@ -116,7 +116,7 @@ class Logos extends Block_Config implements Cta_Field {
 		] );
 
 		$logo_image = new Field( self::LOGO_IMAGE, [
-			'label'         => __( 'Logo Image', 'tribe' ),
+			'label'         => esc_html__( 'Logo Image', 'tribe' ),
 			'name'          => self::LOGO_IMAGE,
 			'type'          => 'image',
 			'return_format' => 'array',
@@ -127,7 +127,7 @@ class Logos extends Block_Config implements Cta_Field {
 		$group->add_field( $logo_image );
 
 		$logo_link = new Field( self::LOGO_LINK, [
-			'label'       => __( 'Logo Link', 'tribe' ),
+			'label'       => esc_html__( 'Logo Link', 'tribe' ),
 			'name'        => self::LOGO_LINK,
 			'type'        => 'link',
 			'return_type' => 'array',

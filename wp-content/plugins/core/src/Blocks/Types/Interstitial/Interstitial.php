@@ -29,10 +29,10 @@ class Interstitial extends Block_Config implements Cta_Field {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Interstitial', 'tribe' ),
-			'description' => __( 'Interstitial block', 'tribe' ),
+			'title'       => esc_html__( 'Interstitial', 'tribe' ),
+			'description' => esc_html__( 'Interstitial block', 'tribe' ),
 			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path d="M13.6 12.7H6.4v3.6h7.2v-3.6zM3.7 4.6h12.6v1.8H3.7zM6.4 7.3h7.2v1.8H6.4z" fill="#000"/><path d="M10.517 14.305H8.732v.17h1.785v-.17zM10.517 14.393v-.567l.298.284.299.283-.299.283-.298.283v-.566z" fill="#fff"/></svg>',
-			'keywords'    => [ __( 'interstitial', 'tribe' ), __( 'display', 'tribe' ) ],
+			'keywords'    => [ esc_html__( 'interstitial', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [
 				'align'  => false,
@@ -60,16 +60,16 @@ class Interstitial extends Block_Config implements Cta_Field {
 
 	protected function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEADIN, [
-				'label'       => __( 'Leadin', 'tribe' ),
+				'label'       => esc_html__( 'Leadin', 'tribe' ),
 				'name'        => self::LEADIN,
 				'type'        => 'text',
-				'placeholder' => __( 'Leadin (optional)', 'tribe' ),
+				'placeholder' => esc_html__( 'Leadin (optional)', 'tribe' ),
 				'wrapper'     => [
 					'class' => 'tribe-acf-hide-label',
 				],
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label'        => __( 'Content', 'tribe' ),
+				'label'        => esc_html__( 'Content', 'tribe' ),
 				'name'         => self::TITLE,
 				'type'         => 'wysiwyg',
 				'toolbar'      => Classic_Editor_Formats::MINIMAL,
@@ -80,22 +80,22 @@ class Interstitial extends Block_Config implements Cta_Field {
 			$this->get_cta_field( self::NAME )
 		);
 
-		$this->add_section( new Field_Section( self::SECTION_MEDIA, __( 'Media', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_MEDIA, esc_html__( 'Media', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::IMAGE, [
-				 'label'         => __( 'Background Image', 'tribe' ),
+				 'label'         => esc_html__( 'Background Image', 'tribe' ),
 				 'name'          => self::IMAGE,
 				 'type'          => 'image',
 				 'return_format' => 'array',
 			 ] ) );
 
-		$this->add_section( new Field_Section( self::SECTION_APPEARANCE, __( 'Appearance', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_APPEARANCE, esc_html__( 'Appearance', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-				 'label'         => __( 'Text Alignment', 'tribe' ),
+				 'label'         => esc_html__( 'Text Alignment', 'tribe' ),
 				 'type'          => 'button_group',
 				 'name'          => self::LAYOUT,
 				 'choices'       => [
-					 self::LAYOUT_LEFT   => __( 'Left', 'tribe' ),
-					 self::LAYOUT_CENTER => __( 'Center', 'tribe' ),
+					 self::LAYOUT_LEFT   => esc_html__( 'Left', 'tribe' ),
+					 self::LAYOUT_CENTER => esc_html__( 'Center', 'tribe' ),
 				 ],
 				 'default_value' => self::LAYOUT_LEFT,
 			 ] ) );

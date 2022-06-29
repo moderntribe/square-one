@@ -26,13 +26,14 @@ use Tribe\Project\Blocks\Types\Tabs\Tabs;
 
 class Blocks_Definer implements Definer_Interface {
 
-	public const DENY_LIST = 'blocks.deny_list';
-	public const STYLES    = 'blocks.style_overrides';
-	public const TYPES     = 'blocks.types';
+	public const DENY_LIST         = 'blocks.deny_list';
+	public const DENY_BLOCK_STYLES = 'blocks.deny_block_styles';
+	public const STYLES            = 'blocks.style_overrides';
+	public const TYPES             = 'blocks.types';
 
 	public function define(): array {
 		return [
-			self::TYPES            => DI\add( [
+			self::TYPES                  => DI\add( [
 				DI\get( Accordion::class ),
 				DI\get( Buttons::class ),
 				DI\get( Card_Grid::class ),
@@ -60,7 +61,7 @@ class Blocks_Definer implements Definer_Interface {
 			 *
 			 * @see: https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/#using-a-deny-list
 			 */
-			self::DENY_LIST        => [
+			self::DENY_LIST              => [
 				'core/archives',
 				'core/button',
 				'core/buttons',
@@ -84,22 +85,36 @@ class Blocks_Definer implements Definer_Interface {
 			],
 
 			/**
+			 * An array of default block type as key and an array of it styles to unregister.
+			 *
+			 * @var array<string, string[]>
+			 *
+			 * @see https://github.com/moderntribe/square-one/blob/main/docs/basics/blocks.md#configuring-block-options
+			 */
+			self::DENY_BLOCK_STYLES      => [
+				'core/image' => [
+					'rounded',
+					'default',
+				],
+			],
+
+			/**
 			 * An array of block type style overrides
 			 *
 			 * Each item in the array should be a factory that returns a Block_Style_Override
 			 *
 			 * TODO: Create a proper thumbnail of the style for the block editor: http://p.tri.be/dmsAwK
 			 */
-			self::STYLES           => DI\add( [
+			self::STYLES                 => DI\add( [
 				DI\factory( static function () {
 					return new Block_Style_Override( [ 'core/paragraph' ], [
 						[
 							'name'  => 't-overline',
-							'label' => __( 'Overline', 'tribe' ),
+							'label' => esc_html__( 'Overline', 'tribe' ),
 						],
 						[
 							'name'  => 't-leadin',
-							'label' => __( 'Lead-In', 'tribe' ),
+							'label' => esc_html__( 'Lead-In', 'tribe' ),
 						],
 					] );
 				} ),
@@ -107,13 +122,14 @@ class Blocks_Definer implements Definer_Interface {
 					return new Block_Style_Override( [ 'core/list' ], [
 						[
 							'name'  => 't-list-stylized',
-							'label' => __( 'Stylized', 'tribe' ),
+							'label' => esc_html__( 'Stylized', 'tribe' ),
 						],
 					] );
 				} ),
 			] ),
 
-			Block_Deny_List::class => DI\autowire()->constructor( DI\get( self::DENY_LIST ) ),
+			Block_Deny_List::class       => DI\autowire()->constructor( DI\get( self::DENY_LIST ) ),
+			Block_Style_Deny_List::class => DI\autowire()->constructor( DI\get( self::DENY_BLOCK_STYLES ) ),
 		];
 	}
 
