@@ -29,7 +29,8 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--bullets,
-:where(.t-sink) ul {
+:where(.t-sink) ul,
+:is(.editor-styles-wrapper) ul {
 	list-style: disc outside;
 	padding-left: 1.5em;
 
@@ -65,6 +66,7 @@ li {}
 			left: 0;
 			font-size: var(--font-size-body-large);
 			line-height: 2rem; /* list item line-height */
+			color: var(--color-primary);
 		}
 	}
 }
@@ -74,7 +76,8 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--numbered,
-:where(.t-sink) ol {
+:where(.t-sink) ol,
+:is(.editor-styles-wrapper) ol {
 	padding-left: 1.5em;
 	list-style: decimal outside;
 
@@ -123,14 +126,16 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .dl,
-:where(.t-sink) dl {}
+:where(.t-sink) dl,
+:is(.editor-styles-wrapper) dl {}
 
 /* -------------------------------------------------------------------------
  * Definition List: Term
  * ------------------------------------------------------------------------- */
 
 .dt,
-:where(.t-sink) dt {
+:where(.t-sink) dt,
+:is(.editor-styles-wrapper) dt {
 	font-weight: 700;
 }
 
@@ -139,4 +144,5 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .dd,
-:where(.t-sink) dd {}
+:where(.t-sink) dd,
+:is(.editor-styles-wrapper) dd {}
