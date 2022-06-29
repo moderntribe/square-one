@@ -163,7 +163,6 @@ class Card_Grid_Controller extends Abstract_Controller {
 					null,
 					[
 						Container_Controller::CONTENT => wpautop( $post['excerpt'] ),
-						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
 					],
 				),
 				Card_Controller::IMAGE           => defer_template_part(
@@ -256,8 +255,6 @@ class Card_Grid_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-card-grid__description',
-				't-sink',
-				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
