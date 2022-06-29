@@ -75,6 +75,7 @@
 	}
 
 	.wp-block-columns:not(.is-not-stacked-on-mobile) & {
+		/* Required to overcome inline styles set by WordPress for custom width columns */
 		@media (--viewport-medium-max) {
 			flex-basis: 100% !important;
 		}
