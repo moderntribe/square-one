@@ -31,7 +31,7 @@ class Site_Footer_Controller extends Abstract_Controller {
 
 		return [
 			Container_Controller::CLASSES => [ 'c-site-footer__description' ],
-			Container_Controller::CONTENT => wp_kses( $description, Footer_Settings::FOOTER_ALLOWED_HTML ),
+			Container_Controller::CONTENT => wpautop( wp_kses( $description, Footer_Settings::FOOTER_ALLOWED_HTML ) ),
 		];
 	}
 
@@ -65,7 +65,7 @@ class Site_Footer_Controller extends Abstract_Controller {
 
 	public function get_copyright_args(): array {
 		return [
-			Container_Controller::CLASSES => [ 'c-site-footer__copyright' ],
+			Container_Controller::CLASSES => [ 'c-site-footer__copyright', 't-input' ],
 			Container_Controller::CONTENT => $this->get_copyright(),
 		];
 	}
@@ -74,7 +74,7 @@ class Site_Footer_Controller extends Abstract_Controller {
 		$content = ! empty( $this->get_logo_image() ) ? $this->get_logo_image() : get_bloginfo( 'name' );
 
 		return tribe_template_part( 'components/link/link', '', [
-			Link_Controller::CLASSES => [ 'c-site-footer__logo-link' ],
+			Link_Controller::CLASSES => [ 'c-site-footer__logo-link', 't-display-x-small' ],
 			Link_Controller::URL     => home_url( '/' ),
 			Link_Controller::CONTENT => $content,
 		] );

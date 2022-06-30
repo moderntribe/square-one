@@ -1,8 +1,85 @@
 /* -----------------------------------------------------------------------------
  *
  * Component: Site Footer
+ *
  * ----------------------------------------------------------------------------- */
 
-.site-footer {
+.c-site-footer {
+	padding: var(--spacer-70) 0;
+	background-color: var(--color-black);
+}
 
+/* -----------------------------------------------------------------------------
+ * Site Footer: Content Wrapper
+ * ----------------------------------------------------------------------------- */
+
+.c-site-footer__wrap {
+	@media (--viewport-large) {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		grid-column-gap: var(--grid-gutter);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Footer: Content
+ * ----------------------------------------------------------------------------- */
+
+.c-site-footer__content {
+	flex-basis: 50%;
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Footer: Logo
+ * ----------------------------------------------------------------------------- */
+
+.c-site-footer__logo {
+	max-width: var(--grid-4-col);
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Footer: Description
+ * ----------------------------------------------------------------------------- */
+
+.c-site-footer__description {
+	margin-top: var(--spacer-20);
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Footer: Nav Container
+ * ----------------------------------------------------------------------------- */
+
+.c-site-footer__nav {
+	margin-top: var(--spacer-60)
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Footer: Legal
+ * ----------------------------------------------------------------------------- */
+
+.c-site-footer__legal {
+	margin-top: var(--spacer-60);
+	padding-top: var(--spacer-30);
+	border-top: 1px solid var(--color-grey-light);
+
+	@media (--viewport-full) {
+		margin-top: var(--spacer-70);
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		grid-column-gap: var(--grid-gutter);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Footer: Copyright
+ * ----------------------------------------------------------------------------- */
+
+.c-site-footer__copyright {
+	margin-top: var(--spacer-30);
+
+	@media (--viewport-full) {
+		margin-top: 0;
+	}
 }
