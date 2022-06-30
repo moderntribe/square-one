@@ -9,10 +9,11 @@ $c = Site_Footer_Controller::factory();
 
 	<div class="l-container">
 
+		<?php get_template_part( 'components/container/container', '', $c->get_logo_args() ); ?>
+
 		<div class="c-site-footer__wrap">
 
 			<div class="c-site-footer__content">
-				<?php get_template_part( 'components/container/container', '', $c->get_logo_args() ); ?>
 				<?php get_template_part( 'components/container/container', '', $c->get_description_args() ); ?>
 			</div>
 
