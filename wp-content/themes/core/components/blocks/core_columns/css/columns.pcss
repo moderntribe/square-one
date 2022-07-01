@@ -1,13 +1,8 @@
-/**
- + TODO:
- + [x] Setup alignments for FE and admin
- + [x] Test all column settings
- + [x] Reset anchor links we don't want sink styles on
- + [x] Check ACF fields for correctness
- + [x] Remove sink classes where no longer needed
- + [ ] Refactor to improve?
- */
-
+/* -----------------------------------------------------------------------------
+ *
+ * Core Block: Columns
+ *
+ * ----------------------------------------------------------------------------- */
 .wp-block-columns {
 	display: flex;
 	box-sizing: border-box;
@@ -49,7 +44,7 @@
 }
 
 /* -------------------------------------------------------------------------
- * Column
+ * Individual Column
  * ------------------------------------------------------------------------- */
 .wp-block-column {
 	flex-grow: 1;
@@ -108,31 +103,6 @@
 
 			@media (--viewport-medium) {
 				margin-top: 0;
-			}
-		}
-	}
-
-	> *:first-child {
-		margin-top: 0;
-	}
-
-	> *:last-child {
-		margin-bottom: 0;
-	}
-
-	/* Child Blocks */
-
-	/* Question - Do we want/need this? */
-	.wp-block-image {
-		max-width: 100%;
-
-		.block-editor-block-list__layout & {
-			margin-top: var(--spacer-30);
-			margin-bottom: var(--spacer-30);
-
-			@media (--viewport-full) {
-				margin-top: var(--spacer-40);
-				margin-bottom: var(--spacer-40);
 			}
 		}
 	}
