@@ -45,22 +45,22 @@ class Follow_Controller extends Abstract_Controller {
 	protected function get_label( string $site ): string {
 		switch ( $site ) {
 			case Social_Follow_Settings::SOCIAL_FACEBOOK:
-				return __( 'Like us on Facebook', 'tribe' );
+				return esc_html__( 'Like us on Facebook', 'tribe' );
 
 			case Social_Follow_Settings::SOCIAL_TWITTER:
-				return __( 'Follow us on Twitter', 'tribe' );
+				return esc_html__( 'Follow us on Twitter', 'tribe' );
 
 			case Social_Follow_Settings::SOCIAL_YOUTUBE:
-				return __( 'Follow us on YouTube', 'tribe' );
+				return esc_html__( 'Follow us on YouTube', 'tribe' );
 
 			case Social_Follow_Settings::SOCIAL_LINKEDIN:
-				return __( 'Add us on LinkedIn', 'tribe' );
+				return esc_html__( 'Add us on LinkedIn', 'tribe' );
 
 			case Social_Follow_Settings::SOCIAL_PINTEREST:
-				return __( 'Follow us on Pinterest', 'tribe' );
+				return esc_html__( 'Follow us on Pinterest', 'tribe' );
 
 			case Social_Follow_Settings::SOCIAL_INSTAGRAM:
-				return __( 'Follow us on Instagram', 'tribe' );
+				return esc_html__( 'Follow us on Instagram', 'tribe' );
 
 			default:
 				return '';
