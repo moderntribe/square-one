@@ -24,19 +24,15 @@ class Spacer extends Block_Config {
 	 */
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Spacer', 'tribe' ),
-			'description' => esc_html__( 'Add space between blocks.', 'tribe' ),
-			'icon'        => '<svg fill="none" height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="m8.53857 6.30769v-4.30769h2.00003v4.30769zm-2.23088 4.23081h-4.30769v-2.00004h4.30769zm2.23088-1.00004c0-.55228.44772-1 1-1h12.92313c.5522 0 1 .44772 1 1v12.92304c0 .5523-.4478 1-1 1h-12.92313c-.55228 0-1-.4477-1-1zm2.00003 1.00004v10.923h10.9231v-10.923zm-8.5386 12.923h4.30769v-2h-4.30769zm28.0001-12.923h-4.3077v-2.00004h4.3077zm-4.3077 12.923h4.3077v-2h-4.3077zm-4.231-21.4615v4.30769h2v-4.30769zm-12.92283 28v-4.3077h2.00003v4.3077zm12.92283-4.3077v4.3077h2v-4.3077z" fill="#000" fill-rule="evenodd"/></svg>',
-			'keywords'    => [
-				esc_html__( 'spacer', 'tribe' ),
-				esc_html__( 'display', 'tribe' ),
-			],
-			'category'    => 'design',
-			'supports'    => [
+			'title'    => esc_html__( 'Spacer', 'tribe' ),
+			'icon'     => '<svg fill="none" height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="m8.53857 6.30769v-4.30769h2.00003v4.30769zm-2.23088 4.23081h-4.30769v-2.00004h4.30769zm2.23088-1.00004c0-.55228.44772-1 1-1h12.92313c.5522 0 1 .44772 1 1v12.92304c0 .5523-.4478 1-1 1h-12.92313c-.55228 0-1-.4477-1-1zm2.00003 1.00004v10.923h10.9231v-10.923zm-8.5386 12.923h4.30769v-2h-4.30769zm28.0001-12.923h-4.3077v-2.00004h4.3077zm-4.3077 12.923h4.3077v-2h-4.3077zm-4.231-21.4615v4.30769h2v-4.30769zm-12.92283 28v-4.3077h2.00003v4.3077zm12.92283-4.3077v4.3077h2v-4.3077z" fill="#000" fill-rule="evenodd"/></svg>',
+			'keywords' => [ esc_html__( 'spacer', 'tribe' ), esc_html__( 'display', 'tribe' ), ],
+			'category' => 'tribe-custom',
+			'supports' => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'  => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [],

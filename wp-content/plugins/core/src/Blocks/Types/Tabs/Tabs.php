@@ -35,16 +35,15 @@ class Tabs extends Block_Config implements Cta_Field {
 	 */
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Tabs', 'tribe' ),
-			'description' => esc_html__( 'Tab block', 'tribe' ),
-			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#000" d="M1 1h6v4H1z"/><path fill="#fff" stroke="#000" d="M7.5 1.5h5v3h-5zM13.5 1.5h5v3h-5zM1.5 4.5h17v14h-17z"/><path fill="#151515" d="M3 6h12v1H3zM3 8h9v1H3zM3 10h13v1H3zM3 12h6v1H3z"/></svg>',
-			'keywords'    => [ esc_html__( 'tabs', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'    => esc_html__( 'Tabs', 'tribe' ),
+			'icon'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 2.25H7.62488H9.125H13.3749H14.5024H20.2524V6.5H22.25V18.75C22.25 19.413 21.9866 20.0489 21.5178 20.5178C21.0489 20.9866 20.413 21.25 19.75 21.25H4C3.33696 21.25 2.70107 20.9866 2.23223 20.5178C1.76339 20.0489 1.5 19.413 1.5 18.75V2.25ZM18.7524 6.5V3.75H14.8749V6.5H18.7524ZM3 3.75H7.62488V7.25H7.625V8H20.75V18.75C20.75 19.0152 20.6446 19.2696 20.4571 19.4571C20.2696 19.6446 20.0152 19.75 19.75 19.75H4C3.73478 19.75 3.48043 19.6446 3.29289 19.4571C3.10536 19.2696 3 19.0152 3 18.75V3.75ZM9.125 6.5V3.75H13.0024V6.5H9.125Z" fill="black"/></svg>',
+			'keywords' => [ esc_html__( 'tabs', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
+			'category' => 'tribe-custom',
+			'supports' => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'  => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
@@ -93,24 +92,10 @@ class Tabs extends Block_Config implements Cta_Field {
 	 * Register Fields for block
 	 */
 	public function add_fields(): void {
-		$this->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-				'label'         => esc_html__( 'Layout', 'tribe' ),
-				'type'          => 'button_group',
-				'name'          => self::LAYOUT,
-				'choices'       => [
-					self::LAYOUT_HORIZONTAL => esc_html__( 'Horizontal', 'tribe' ),
-					self::LAYOUT_VERTICAL   => esc_html__( 'Vertical', 'tribe' ),
-				],
-				'default_value' => self::LAYOUT_HORIZONTAL,
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label'       => esc_html__( 'Lead in', 'tribe' ),
-				'name'        => self::LEAD_IN,
-				'type'        => 'text',
-				'placeholder' => esc_html__( 'Leadin (optional)', 'tribe' ),
-				'wrapper'     => [
-					'class' => 'tribe-acf-hide-label',
-				],
+		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				'label' => esc_html__( 'Overline', 'tribe' ),
+				'name'  => self::LEAD_IN,
+				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
 				'label' => esc_html__( 'Title', 'tribe' ),
@@ -127,6 +112,16 @@ class Tabs extends Block_Config implements Cta_Field {
 			] )
 		)->add_field(
 			$this->get_cta_field( self::NAME )
+		)->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
+			'label'         => esc_html__( 'Layout', 'tribe' ),
+			'type'          => 'button_group',
+			'name'          => self::LAYOUT,
+			'choices'       => [
+				self::LAYOUT_HORIZONTAL => esc_html__( 'Horizontal', 'tribe' ),
+				self::LAYOUT_VERTICAL   => esc_html__( 'Vertical', 'tribe' ),
+			],
+			'default_value' => self::LAYOUT_HORIZONTAL,
+		] )
 		)->add_section( $this->get_tab_section() );
 	}
 

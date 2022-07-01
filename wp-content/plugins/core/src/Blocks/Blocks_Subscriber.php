@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Blocks;
 
+use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Block_Registrar;
 use Tribe\Libs\ACF\Block_Renderer;
 use Tribe\Libs\Container\Abstract_Subscriber;
@@ -41,6 +42,10 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 				$style_override->register();
 			}
 		}, 10, 0 );
+
+		add_filter( 'block_categories', function ( array $categories ): array {
+			return $this->container->get( Block_Category::class )->custom_block_category( $categories );
+		}, 10, 2 );
 	}
 
 }

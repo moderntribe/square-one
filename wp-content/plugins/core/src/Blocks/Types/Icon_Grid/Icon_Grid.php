@@ -34,12 +34,11 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Icon Grid', 'tribe' ),
-			'description' => esc_html__( 'A grid layout block with icon selections', 'tribe' ),
-			'icon'        => '<svg enable-background="new 0 0 146.3 106.3" version="1.1" viewBox="0 0 146.3 106.3" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><style type="text/css">.st0{fill:#16D690;}.st1{fill:#21A6CB;}.st2{fill:#008F8F;}</style><polygon class="st0" points="145.2 106.3 72.6 42.3 26.5 1.2 0 106.3"/><polygon class="st1" points="145.2 106.3 0 106.3 72.6 42.3 118.6 1.2"/><polygon class="st2" points="72.6 42.3 145.2 106.3 0 106.3"/></svg>',
-			'keywords'    => [ esc_html__( 'icon', 'tribe' ), esc_html__( 'grid', 'tribe' ) ],
-			'category'    => 'common', // core categories: common, formatting, layout, widgets, embed
-			'supports'    => [
+			'title'    => esc_html__( 'Icon Grid', 'tribe' ),
+			'icon'     => '<svg enable-background="new 0 0 146.3 106.3" version="1.1" viewBox="0 0 146.3 106.3" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><style type="text/css">.st0{fill:#16D690;}.st1{fill:#21A6CB;}.st2{fill:#008F8F;}</style><polygon class="st0" points="145.2 106.3 72.6 42.3 26.5 1.2 0 106.3"/><polygon class="st1" points="145.2 106.3 0 106.3 72.6 42.3 118.6 1.2"/><polygon class="st2" points="72.6 42.3 145.2 106.3 0 106.3"/></svg>',
+			'keywords' => [ esc_html__( 'icon', 'tribe' ), esc_html__( 'grid', 'tribe' ) ],
+			'category' => 'tribe-custom',
+			'supports' => [
 				'align'  => false,
 				'anchor' => true,
 				'html'   => false,
@@ -52,30 +51,16 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 	 */
 	public function add_fields(): void {
 		$this->add_field(
-			new Field( self::NAME . '_' . self::LAYOUT, [
-				'label'         => esc_html__( 'Layout', 'tribe' ),
-				'name'          => self::LAYOUT,
-				'type'          => 'button_group',
-				'choices'       => [
-					self::LAYOUT_INLINE => esc_html__( 'Inline', 'tribe' ),
-					self::LAYOUT_LIST   => esc_html__( 'List', 'tribe' ),
-				],
-				'default_value' => self::LAYOUT_INLINE,
-				] )
+			new Field( self::NAME . '_' . self::LEADIN, [
+					'label' => esc_html__( 'Overline', 'tribe' ),
+					'name'  => self::LEADIN,
+					'type'  => 'text',
+				 ] )
 		)->add_field(
 			new Field( self::NAME . '_' . self::TITLE, [
 					 'label' => esc_html__( 'Title', 'tribe' ),
 					 'name'  => self::TITLE,
 					 'type'  => 'text',
-				 ] )
-		)->add_field(
-			new Field( self::NAME . '_' . self::LEADIN, [
-					'label'   => esc_html__( 'Lead in', 'tribe' ),
-					'name'    => self::LEADIN,
-					'type'    => 'text',
-					'wrapper' => [
-						'class' => 'tribe-acf-hide-label',
-					],
 				 ] )
 		)->add_field(
 			new Field( self::NAME . '_' . self::DESCRIPTION, [
@@ -88,6 +73,17 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 				 ] )
 		)->add_field(
 			$this->get_cta_field( self::NAME )
+		)->add_field(
+			new Field( self::NAME . '_' . self::LAYOUT, [
+				'label'         => esc_html__( 'Layout', 'tribe' ),
+				'name'          => self::LAYOUT,
+				'type'          => 'button_group',
+				'choices'       => [
+					self::LAYOUT_INLINE => esc_html__( 'Inline', 'tribe' ),
+					self::LAYOUT_LIST   => esc_html__( 'List', 'tribe' ),
+				],
+				'default_value' => self::LAYOUT_INLINE,
+				] )
 		);
 
 		$this->add_section( new Field_Section( self::SECTION_ICONS, esc_html__( 'Icon Items', 'tribe' ), 'accordion' )
@@ -101,12 +97,12 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 	 */
 	protected function get_icon_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::ICONS, [
-			'label'        => esc_html__( 'Icon Section', 'tribe' ),
+			'label'        => esc_html__( 'Section', 'tribe' ),
 			'name'         => self::ICONS,
 			'layout'       => 'block',
 			'min'          => 0,
 			'max'          => 12,
-			'button_label' => esc_html__( 'Add Icon Section', 'tribe' ),
+			'button_label' => esc_html__( 'Add Item', 'tribe' ),
 			'wrapper'      => [
 				'class' => 'tribe-acf-hide-label',
 			],
@@ -114,7 +110,7 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 
 		$group->add_field(
 			new Field( self::ICON_IMAGE, [
-				'label'         => esc_html__( 'Icon Image', 'tribe' ),
+				'label'         => esc_html__( 'Icon', 'tribe' ),
 				'name'          => self::ICON_IMAGE,
 				'type'          => 'image',
 				'return_format' => 'array',
@@ -123,13 +119,13 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 			] )
 		)->add_field(
 			new Field( self::ICON_TITLE, [
-				'label' => esc_html__( 'Icon Title', 'tribe' ),
+				'label' => esc_html__( 'Title', 'tribe' ),
 				'name'  => self::ICON_TITLE,
 				'type'  => 'text',
 			] )
 		)->add_field(
 			new Field( self::ICON_DESCRIPTION, [
-				'label'        => esc_html__( 'Icon Description', 'tribe' ),
+				'label'        => esc_html__( 'Description', 'tribe' ),
 				'name'         => self::ICON_DESCRIPTION,
 				'type'         => 'wysiwyg',
 				'toolbar'      => Classic_Editor_Formats::MINIMAL,

@@ -33,16 +33,15 @@ class Hero extends Block_Config implements Cta_Field {
 	 */
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Hero', 'tribe' ),
-			'description' => esc_html__( 'Hero block', 'tribe' ),
-			'icon'        => '<svg width="28" height="19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.254 5.968H19.85v1.054H8.254V5.968zm1.462 1.57h8.568v1.053H9.716V7.538z" fill="#000"/><path d="M2.82 2.437v14.126H25.2V2.437H2.82zm21.482 13.176H3.866V3.366h20.436v12.247z" fill="#000"/><path d="M10.092 16.15H2.884l10.614-3.242 1.693 1.012 5.433-3.243 4.409 2.623v2.85h-14.94z" fill="#000"/></svg>',
-			'keywords'    => [ esc_html__( 'hero', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'    => esc_html__( 'Hero', 'tribe' ),
+			'icon'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M22.5 4.5H1.5V19.5H6.48851L13.8414 13.6626C14.0141 13.5255 14.2385 13.4713 14.4548 13.5146C14.6711 13.5578 14.8573 13.6941 14.9641 13.8871L18.0674 19.5H22.5V4.5ZM6.75711 21H6.74393H1.5C0.671573 21 0 20.3284 0 19.5V4.5C0 3.67157 0.671573 3 1.5 3H22.5C23.3284 3 24 3.67157 24 4.5V19.5C24 20.3284 23.3284 21 22.5 21H17.64C17.6305 21.0002 17.6209 21.0002 17.6114 21H6.75711ZM8.90096 19.5H16.3534L14.0801 15.3883L8.90096 19.5ZM6 6.75H18V8.25H6V6.75ZM20.25 9.75H3.75V11.25H20.25V9.75ZM9.75 14.25C9.75 15.0784 9.07843 15.75 8.25 15.75C7.42157 15.75 6.75 15.0784 6.75 14.25C6.75 13.4216 7.42157 12.75 8.25 12.75C9.07843 12.75 9.75 13.4216 9.75 14.25Z" fill="black"/></svg>',
+			'keywords' => [ esc_html__( 'hero', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
+			'category' => 'tribe-custom',
+			'supports' => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'  => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
@@ -72,13 +71,9 @@ class Hero extends Block_Config implements Cta_Field {
 	 */
 	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label'       => esc_html__( 'Lead in', 'tribe' ),
-				'name'        => self::LEAD_IN,
-				'type'        => 'text',
-				'placeholder' => esc_html__( 'Lead in (optional)', 'tribe' ),
-				'wrapper'     => [
-					'class' => 'tribe-acf-hide-label',
-				],
+				'label' => esc_html__( 'Overline', 'tribe' ),
+				'name'  => self::LEAD_IN,
+				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
 				'label' => esc_html__( 'Title', 'tribe' ),

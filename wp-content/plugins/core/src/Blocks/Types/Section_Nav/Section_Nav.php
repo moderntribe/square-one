@@ -27,12 +27,11 @@ class Section_Nav extends Block_Config {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Section Nav', 'tribe' ),
-			'description' => esc_html__( 'A block to insert a nav menu within a page with several layout options.', 'tribe' ),
-			'icon'        => '<svg width="28" height="19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.254 5.968H19.85v1.054H8.254V5.968zm1.462 1.57h8.568v1.053H9.716V7.538z" fill="#000"/><path d="M2.82 2.437v14.126H25.2V2.437H2.82zm21.482 13.176H3.866V3.366h20.436v12.247z" fill="#000"/><path d="M10.092 16.15H2.884l10.614-3.242 1.693 1.012 5.433-3.243 4.409 2.623v2.85h-14.94z" fill="#000"/></svg>',
-			'keywords'    => [ esc_html__( 'navigation', 'tribe' ), esc_html__( 'menu', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'    => esc_html__( 'Section Nav', 'tribe' ),
+			'icon'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="7.25" stroke="#1E1E1E" stroke-width="1.5"/><path d="M10.5018 11.3502L14.9523 8.36505L13.5036 13.0933L9.04783 16.0466L10.5018 11.3502Z" fill="#1E1E1E"/></svg>',
+			'keywords' => [ esc_html__( 'navigation', 'tribe' ), esc_html__( 'menu', 'tribe' ) ],
+			'category' => 'tribe-custom',
+			'supports' => [
 				'align'  => false,
 				'anchor' => true,
 				'html'   => false,
