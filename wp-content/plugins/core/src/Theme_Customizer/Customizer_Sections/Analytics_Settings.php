@@ -18,7 +18,7 @@ class Analytics_Settings extends Abstract_Setting {
 	 */
 	public function section_title(): self {
 		$this->wp_customize->add_section( self::ANALYTICS_SECTION, [
-			'title'    => __( 'Analytics', 'tribe' ),
+			'title'    => esc_html__( 'Analytics', 'tribe' ),
 			'priority' => 185,
 		] );
 
@@ -33,11 +33,11 @@ class Analytics_Settings extends Abstract_Setting {
 			$this->wp_customize,
 			self::ANALYTICS_GTM_ID,
 			[
-				'label'       => __( 'Google Tag Manager ID', 'tribe' ),
+				'label'       => esc_html__( 'Google Tag Manager ID', 'tribe' ),
 				'section'     => self::ANALYTICS_SECTION,
 				'settings'    => self::ANALYTICS_GTM_ID,
 				'type'        => 'text',
-				'description' => __( 'Google Tag Manager ID (GTM-XXXX)', 'tribe' ),
+				'description' => esc_html__( 'Google Tag Manager ID (GTM-XXXX)', 'tribe' ),
 			]
 		) );
 

@@ -15,7 +15,7 @@ class Social_Follow_Settings extends Abstract_Setting {
 
 	public function section_title(): self {
 		$this->wp_customize->add_section( self::SOCIAL_SECTION, [
-			'title'    => __( 'Social Links', 'tribe' ),
+			'title'    => esc_html__( 'Social Links', 'tribe' ),
 			'priority' => 180,
 		] );
 
@@ -47,12 +47,12 @@ class Social_Follow_Settings extends Abstract_Setting {
 	 */
 	private function social_array(): array {
 		return [
-			self::SOCIAL_FACEBOOK  => __( 'Facebook Link', 'tribe' ),
-			self::SOCIAL_INSTAGRAM => __( 'Instagram Link', 'tribe' ),
-			self::SOCIAL_LINKEDIN  => __( 'Linkedin Link', 'tribe' ),
-			self::SOCIAL_PINTEREST => __( 'Pinterest Link', 'tribe' ),
-			self::SOCIAL_TWITTER   => __( 'Twitter Link', 'tribe' ),
-			self::SOCIAL_YOUTUBE   => __( 'Youtube Link', 'tribe' ),
+			self::SOCIAL_FACEBOOK  => esc_html__( 'Facebook Link', 'tribe' ),
+			self::SOCIAL_INSTAGRAM => esc_html__( 'Instagram Link', 'tribe' ),
+			self::SOCIAL_LINKEDIN  => esc_html__( 'Linkedin Link', 'tribe' ),
+			self::SOCIAL_PINTEREST => esc_html__( 'Pinterest Link', 'tribe' ),
+			self::SOCIAL_TWITTER   => esc_html__( 'Twitter Link', 'tribe' ),
+			self::SOCIAL_YOUTUBE   => esc_html__( 'Youtube Link', 'tribe' ),
 		];
 	}
 
