@@ -17,10 +17,9 @@ class Stats extends Block_Config implements Cta_Field {
 
 	public const NAME = 'stats';
 
-	public const SECTION_CONTENT = 's-content';
-	public const LEAD_IN         = 'leadin';
-	public const TITLE           = 'title';
-	public const DESCRIPTION     = 'description';
+	public const LEAD_IN     = 'leadin';
+	public const TITLE       = 'title';
+	public const DESCRIPTION = 'description';
 
 	public const LAYOUT         = 'layout';
 	public const LAYOUT_INLINE  = 'inline';
@@ -171,21 +170,21 @@ class Stats extends Block_Config implements Cta_Field {
 	protected function get_stats_section(): Repeater {
 		$group = new Repeater( self::NAME . '_' . self::STATS );
 		$group->set_attributes( [
-			'label'  => __( 'Stats List', 'tribe' ),
+			'label'  => esc_html__( 'Stats List', 'tribe' ),
 			'name'   => self::STATS,
 			'layout' => 'block',
 			'min'    => 0,
 			'max'    => 10,
 		] );
 		$header = new Field( self::ROW_VALUE, [
-			'label' => __( 'Value', 'tribe' ),
+			'label' => esc_html__( 'Value', 'tribe' ),
 			'name'  => self::ROW_VALUE,
 			'type'  => 'text',
 		] );
 
 		$group->add_field( $header );
 		$content = new Field( self::ROW_LABEL, [
-			'label' => __( 'Label', 'tribe' ),
+			'label' => esc_html__( 'Label', 'tribe' ),
 			'name'  => self::ROW_LABEL,
 			'type'  => 'text',
 		] );

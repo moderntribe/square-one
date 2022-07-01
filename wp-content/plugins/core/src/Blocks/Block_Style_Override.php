@@ -17,21 +17,14 @@ class Block_Style_Override {
 	protected array $register = [];
 
 	/**
-	 * @var string[][] The styles to unregister.
-	 */
-	protected array $unregister = [];
-
-	/**
 	 * Block_Style_Override constructor.
 	 *
 	 * @param string[]   $block_types
 	 * @param string[][] $register
-	 * @param string[][] $unregister
 	 */
-	public function __construct( array $block_types, array $register = [], array $unregister = [] ) {
+	public function __construct( array $block_types, array $register = [] ) {
 		$this->block_types = $block_types;
 		$this->register    = $register;
-		$this->unregister  = $unregister;
 	}
 
 	/**
@@ -41,10 +34,6 @@ class Block_Style_Override {
 		foreach ( $this->block_types as $type ) {
 			foreach ( $this->register as $style ) {
 				register_block_style( $type, $style );
-			}
-
-			foreach ( $this->unregister as $handle ) {
-				unregister_block_style( $type, $handle );
 			}
 		}
 	}

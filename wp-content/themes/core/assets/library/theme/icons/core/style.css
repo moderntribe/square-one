@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'core-icons';
   src:
-    url('fonts/core-icons.woff2?k9lxjz') format('woff2'),
-    url('fonts/core-icons.ttf?k9lxjz') format('truetype'),
-    url('fonts/core-icons.woff?k9lxjz') format('woff'),
-    url('fonts/core-icons.svg?k9lxjz#core-icons') format('svg');
+    url('fonts/core-icons.woff2?1grn6') format('woff2'),
+    url('fonts/core-icons.ttf?1grn6') format('truetype'),
+    url('fonts/core-icons.woff?1grn6') format('woff'),
+    url('fonts/core-icons.svg?1grn6#core-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -13,7 +13,7 @@
 .icon {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'core-icons' !important;
-  speak: none;
+  speak: never;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -117,4 +117,7 @@
 }
 .icon-twitter:before {
   content: "\e91e";
+}
+.icon-youtube:before {
+  content: "\e91f";
 }
