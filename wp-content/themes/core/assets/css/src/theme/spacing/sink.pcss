@@ -15,7 +15,9 @@
  * Applicable to the front-end theme only.
  * ----------------------------------------------------------------------------- */
 
-:where(.s-sink, .wp-block-column) > {
+:where(.s-sink, .wp-block-column) >,
+:is(.editor-styles-wrapper) .s-sink >,
+:is(.editor-styles-wrapper) .wp-block-column > {
 	/* -----------------------------------------------------------------------------
 	 * First & Last Element Overrides
 	 * ----------------------------------------------------------------------------- */
