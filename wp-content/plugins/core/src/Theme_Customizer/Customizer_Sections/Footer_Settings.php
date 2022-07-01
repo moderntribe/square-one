@@ -27,7 +27,7 @@ class Footer_Settings extends Abstract_Setting {
 	 */
 	public function section_title(): self {
 		$this->wp_customize->add_section( self::FOOTER_SECTION, [
-			'title'    => __( 'Footer', 'tribe' ),
+			'title'    => esc_html__( 'Footer', 'tribe' ),
 			'priority' => 170,
 		] );
 
@@ -40,8 +40,8 @@ class Footer_Settings extends Abstract_Setting {
 			$this->wp_customize,
 			self::FOOTER_LOGO,
 			[
-				'label'       => __( 'Logo', 'tribe' ),
-				'description' => __( 'Appears at the top of the site footer. Recommended minimum width: 700px. Recommended file type: .svg.', 'tribe' ),
+				'label'       => esc_html__( 'Logo', 'tribe' ),
+				'description' => esc_html__( 'Appears at the top of the site footer. Recommended minimum width: 700px. Recommended file type: .svg.', 'tribe' ),
 				'section'     => self::FOOTER_SECTION,
 				'settings'    => self::FOOTER_LOGO,
 				'mime_type'   => 'image',
@@ -60,11 +60,11 @@ class Footer_Settings extends Abstract_Setting {
 			$this->wp_customize,
 			self::FOOTER_DESCRIPTION,
 			[
-				'label'       => __( 'Description', 'tribe' ),
+				'label'       => esc_html__( 'Description', 'tribe' ),
 				'section'     => self::FOOTER_SECTION,
 				'settings'    => self::FOOTER_DESCRIPTION,
 				'type'        => 'textarea',
-				'description' => __( 'Appears below the logo in the site footer. HTML allowed: Links <code>&lt;a href=&quot;&quot;&gt;</code>, bold <code>&lt;strong&gt;</code>, and italics <code>&lt;em&gt;</code>', 'tribe' ),
+				'description' => esc_html__( 'Appears below the logo in the site footer. HTML allowed: Links <code>&lt;a href=&quot;&quot;&gt;</code>, bold <code>&lt;strong&gt;</code>, and italics <code>&lt;em&gt;</code>', 'tribe' ),
 			]
 		) );
 

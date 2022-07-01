@@ -21,13 +21,13 @@ class Nav_Menus_Definer implements Definer_Interface {
 				DI\get( 'menu.legal' ),
 			],
 			'menu.primary'  => static function () {
-				return new Menu_Location( Nav_Menus_Definer::PRIMARY, __( 'Masthead: Main', 'tribe' ) );
+				return new Menu_Location( Nav_Menus_Definer::PRIMARY, esc_html__( 'Masthead: Main', 'tribe' ) );
 			},
 			'menu.footer'   => static function () {
-				return new Menu_Location( Nav_Menus_Definer::FOOTER, __( 'Footer: Primary', 'tribe' ) );
+				return new Menu_Location( Nav_Menus_Definer::FOOTER, esc_html__( 'Footer: Primary', 'tribe' ) );
 			},
 			'menu.legal'    => static function () {
-				return new Menu_Location( Nav_Menus_Definer::LEGAL, __( 'Footer: Legal', 'tribe' ) );
+				return new Menu_Location( Nav_Menus_Definer::LEGAL, esc_html__( 'Footer: Legal', 'tribe' ) );
 			},
 		];
 	}
