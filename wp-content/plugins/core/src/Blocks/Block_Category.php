@@ -13,6 +13,7 @@ class Block_Category {
 	 * Adds the Custom Category to the front of the block list categories.
 	 *
 	 * @param array $categories
+	 *
 	 * @return array
 	 */
 	public function custom_block_category( array $categories ): array {

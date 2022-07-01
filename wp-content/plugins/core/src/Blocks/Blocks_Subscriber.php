@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\Blocks;
 
-use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Block_Registrar;
 use Tribe\Libs\ACF\Block_Renderer;
 use Tribe\Libs\Container\Abstract_Subscriber;
