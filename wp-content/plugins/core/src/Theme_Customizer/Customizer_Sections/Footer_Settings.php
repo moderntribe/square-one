@@ -11,7 +11,6 @@ class Footer_Settings extends Abstract_Setting {
 	public const FOOTER_SECTION     = 'footer_section';
 	public const FOOTER_LOGO        = 'footer_logo';
 	public const FOOTER_DESCRIPTION = 'footer_description';
-	public const FOOTER_COPYRIGHT   = 'footer_copyright';
 
 	public const FOOTER_ALLOWED_HTML = [
 		'a'      => [
