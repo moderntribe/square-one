@@ -131,20 +131,13 @@ class Card_Grid extends Block_Config implements Cta_Field {
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, esc_html__( 'Settings', 'tribe' ), 'accordion' ) )
 			 ->add_field(
 				 new Field( self::NAME . '_' . self::LAYOUT, [
-					 'type'            => 'image_select',
-					 'name'            => self::LAYOUT,
-					 'choices'         => [
+					 'type'          => 'button_group',
+					 'name'          => self::LAYOUT,
+					 'choices'       => [
 						 self::LAYOUT_STACKED => esc_html__( 'Stacked', 'tribe' ),
 						 self::LAYOUT_INLINE  => esc_html__( 'Inline', 'tribe' ),
 					 ],
-					 'default_value'   => self::LAYOUT_STACKED,
-					 'multiple'        => 0,
-					 'image_path'      => sprintf(
-						 '%sassets/img/admin/blocks/%s/',
-						 trailingslashit( get_template_directory_uri() ),
-						 self::NAME
-					 ),
-					 'image_extension' => 'svg',
+					 'default_value' => self::LAYOUT_STACKED,
 				 ] )
 			 );
 	}

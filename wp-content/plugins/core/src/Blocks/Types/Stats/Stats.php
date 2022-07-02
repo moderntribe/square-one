@@ -113,35 +113,21 @@ class Stats extends Block_Config implements Cta_Field {
 			)->add_field(
 				$this->get_cta_field( self::NAME )
 			)->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-					'type'            => 'image_select',
-					'name'            => self::LAYOUT,
-					'choices'         => [
+					'type'          => 'button_group',
+					'name'          => self::LAYOUT,
+					'choices'       => [
 						self::LAYOUT_INLINE  => esc_html__( 'Inline', 'tribe' ),
 						self::LAYOUT_STACKED => esc_html__( 'Stacked', 'tribe' ),
 					],
-					'default_value'   => self::LAYOUT_STACKED,
-					'multiple'        => 0,
-					'image_path'      => sprintf(
-						'%sassets/img/admin/blocks/%s/',
-						trailingslashit( get_template_directory_uri() ),
-						self::NAME
-					),
-					'image_extension' => 'svg',
+					'default_value' => self::LAYOUT_STACKED,
 				] ) )->add_field( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
-				   'type'            => 'image_select',
-				   'name'            => self::CONTENT_ALIGN,
-				   'choices'         => [
+				   'type'          => 'button_group',
+				   'name'          => self::CONTENT_ALIGN,
+				   'choices'       => [
 					   self::CONTENT_ALIGN_CENTER => esc_html__( 'Content Center', 'tribe' ),
 					   self::CONTENT_ALIGN_LEFT   => esc_html__( 'Content Left', 'tribe' ),
 				   ],
-				   'default_value'   => self::CONTENT_ALIGN_CENTER,
-				   'multiple'        => 0,
-				   'image_path'      => sprintf(
-					   '%sassets/img/admin/blocks/%s/',
-					   trailingslashit( get_template_directory_uri() ),
-					   self::NAME
-				   ),
-				   'image_extension' => 'svg',
+				   'default_value' => self::CONTENT_ALIGN_CENTER,
 			   ] ) )->add_field( new Field( self::NAME . '_' . self::DIVIDERS, [
 				   'label'         => esc_html__( 'Stat Dividers', 'tribe' ),
 				   'name'          => self::DIVIDERS,

@@ -110,21 +110,14 @@ class Content_Columns extends Block_Config implements Cta_Field {
 		//==========================================
 		$this->add_section( new Field_Section( self::SECTION_SETTINGS, esc_html__( 'Settings', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
-				 'label'           => esc_html__( 'Content Alignment', 'tribe' ),
-				 'type'            => 'image_select',
-				 'name'            => self::CONTENT_ALIGN,
-				 'choices'         => [
+				 'label'         => esc_html__( 'Text Alignment', 'tribe' ),
+				 'type'          => 'button_group',
+				 'name'          => self::CONTENT_ALIGN,
+				 'choices'       => [
 					 self::CONTENT_ALIGN_CENTER => esc_html__( 'Center', 'tribe' ),
 					 self::CONTENT_ALIGN_LEFT   => esc_html__( 'Left', 'tribe' ),
 				 ],
-				 'default_value'   => self::CONTENT_ALIGN_CENTER,
-				 'multiple'        => 0,
-				 'image_path'      => sprintf(
-					 '%sassets/img/admin/blocks/%s/',
-					 trailingslashit( get_template_directory_uri() ),
-					 self::NAME
-				 ),
-				 'image_extension' => 'svg',
+				 'default_value' => self::CONTENT_ALIGN_CENTER,
 			 ] ) );
 	}
 
