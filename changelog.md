@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.07
+* Added: Block Category (Custom) for all custom blocks.
+* Updated: Block fields layout and language for consistency.
+
 ## 2022.06
 * Added: PHP side functionality and filter for unregistering block styles.
 * Fixed: Replaces `__()` with `esc_html__()` in `wp-content/plugins/core/src/Blocks` folder
