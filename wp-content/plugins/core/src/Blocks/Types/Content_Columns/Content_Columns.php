@@ -8,6 +8,7 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Block_Category;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
@@ -40,7 +41,7 @@ class Content_Columns extends Block_Config implements Cta_Field {
 			'title'    => esc_html__( 'Content Columns', 'tribe' ),
 			'icon'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.30597 4.5H1.5V19.5H5.30597V4.5ZM1.5 3C0.671573 3 0 3.67157 0 4.5V19.5C0 20.3284 0.671574 21 1.5 21H6.80597V3H1.5ZM13.903 4.5H10.097V19.5H13.903V4.5ZM8.59698 3V21H15.403V3H8.59698ZM18.694 4.5H22.4999V19.5H18.694V4.5ZM17.194 21V3H22.4999C23.3284 3 23.9999 3.67157 23.9999 4.5V19.5C23.9999 20.3284 23.3284 21 22.4999 21H17.194Z" fill="black"/></svg>',
 			'keywords' => [ esc_html__( 'content', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
-			'category' => 'tribe-custom',
+			'category' => Block_Category::CUSTOM_BLOCK_CATEGORY_SLUG,
 			'supports' => [
 				'align'  => false,
 				'anchor' => true,

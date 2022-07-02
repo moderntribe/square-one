@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Block_Category;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
@@ -45,7 +46,7 @@ class Media_Text extends Block_Config implements Cta_Field {
 				esc_html__( 'display', 'tribe' ),
 				esc_html__( 'text', 'tribe' ),
 			],
-			'category' => 'tribe-custom',
+			'category' => Block_Category::CUSTOM_BLOCK_CATEGORY_SLUG,
 			'supports' => [
 				'align'  => false,
 				'anchor' => true,

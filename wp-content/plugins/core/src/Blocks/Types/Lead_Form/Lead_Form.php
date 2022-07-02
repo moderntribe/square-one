@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Block_Category;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
@@ -43,7 +44,7 @@ class Lead_Form extends Block_Config implements Cta_Field {
 			'title'    => esc_html__( 'Lead Form', 'tribe' ),
 			'icon'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 7H22V17H2V7ZM0 7C0 5.89543 0.895431 5 2 5H22C23.1046 5 24 5.89543 24 7V17C24 18.1046 23.1046 19 22 19H2C0.895431 19 0 18.1046 0 17V7ZM6.5 8.25H3.25V9.5H4.25L4.25 14.75H3.25V16H6.5V14.75H5.5V9.5H6.5V8.25Z" fill="black"/></svg>',
 			'keywords' => [ esc_html__( 'form', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
-			'category' => 'tribe-custom',
+			'category' => Block_Category::CUSTOM_BLOCK_CATEGORY_SLUG,
 			'supports' => [
 				'align'  => false,
 				'anchor' => true,

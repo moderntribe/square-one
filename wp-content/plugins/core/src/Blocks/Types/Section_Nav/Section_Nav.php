@@ -6,6 +6,7 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Project\Blocks\Block_Category;
 
 class Section_Nav extends Block_Config {
 
@@ -30,7 +31,7 @@ class Section_Nav extends Block_Config {
 			'title'    => esc_html__( 'Section Nav', 'tribe' ),
 			'icon'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="7.25" stroke="#1E1E1E" stroke-width="1.5"/><path d="M10.5018 11.3502L14.9523 8.36505L13.5036 13.0933L9.04783 16.0466L10.5018 11.3502Z" fill="#1E1E1E"/></svg>',
 			'keywords' => [ esc_html__( 'navigation', 'tribe' ), esc_html__( 'menu', 'tribe' ) ],
-			'category' => 'tribe-custom',
+			'category' => Block_Category::CUSTOM_BLOCK_CATEGORY_SLUG,
 			'supports' => [
 				'align'  => false,
 				'anchor' => true,
