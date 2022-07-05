@@ -1466,12 +1466,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "498ce47cedd100d19970923b933c1f31c7af95d5"
+                "reference": "64bf5bd25dece27137cef7a50c0b0d6889ebc1fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/498ce47cedd100d19970923b933c1f31c7af95d5",
-                "reference": "498ce47cedd100d19970923b933c1f31c7af95d5",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/64bf5bd25dece27137cef7a50c0b0d6889ebc1fa",
+                "reference": "64bf5bd25dece27137cef7a50c0b0d6889ebc1fa",
                 "shasum": ""
             },
             "require": {
@@ -1582,7 +1582,7 @@
                 "issues": "https://github.com/moderntribe/tribe-libs/issues",
                 "source": "https://github.com/moderntribe/tribe-libs/tree/feature/block-middleware"
             },
-            "time": "2022-07-05T19:19:21+00:00"
+            "time": "2022-07-05T21:50:00+00:00"
         },
         {
             "name": "monolog/monolog",
