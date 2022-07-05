@@ -5,6 +5,7 @@ namespace Tribe\Project;
 use DI\ContainerBuilder;
 use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Assets\Assets_Subscriber;
+use Tribe\Project\Block_Middleware\Block_Middleware_Definer;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
@@ -39,6 +40,7 @@ class Core {
 	 * @var string[] Names of classes implementing Definer_Interface.
 	 */
 	private array $definers = [
+		Block_Middleware_Definer::class,
 		Blocks_Definer::class,
 		CLI_Definer::class,
 		Nav_Menus_Definer::class,
@@ -80,12 +82,13 @@ class Core {
 	private array $lib_definers = [
 		'\Tribe\Libs\Assets\Assets_Definer',
 		'\Tribe\Libs\Blog_Copier\Blog_Copier_Definer',
-		'\Tribe\Libs\Cache\Cache_Definer',
 		'\Tribe\Libs\CLI\CLI_Definer',
+		'\Tribe\Libs\Cache\Cache_Definer',
 		'\Tribe\Libs\Generators\Generator_Definer',
 		'\Tribe\Libs\Media\Media_Definer',
 		'\Tribe\Libs\Object_Meta\Object_Meta_Definer',
 		'\Tribe\Libs\P2P\P2P_Definer',
+		'\Tribe\Libs\Pipeline\Pipeline_Definer',
 		'\Tribe\Libs\Queues\Queues_Definer',
 		'\Tribe\Libs\Queues_Mysql\Mysql_Backend_Definer',
 		'\Tribe\Libs\Required_Page\Required_Page_Definer',
