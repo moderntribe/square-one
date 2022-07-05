@@ -100,7 +100,7 @@
     "moderntribe/acf-menu-chooser": "^1.1",
     "moderntribe/square1-field-models": "^1.0",
     "moderntribe/tribe-acf-post-list-field": "^2.0",
-    "moderntribe/tribe-libs": "^3.4",
+    "moderntribe/tribe-libs": "dev-feature/block-middleware as 3.4.18",
     "nickford/acf-swatch": "1.0.7",
     "php-di/php-di": "^6.0",
     "php-ds/php-ds": "^1.4",
