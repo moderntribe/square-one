@@ -10,7 +10,7 @@ use Tribe\Project\Templates\Components\blocks\hero\Hero_Block_Controller;
 
 class Hero_Model extends Base_Model {
 
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Hero_Block_Controller::ATTRS       => $this->get_attrs(),
 			Hero_Block_Controller::CLASSES     => $this->get_classes(),

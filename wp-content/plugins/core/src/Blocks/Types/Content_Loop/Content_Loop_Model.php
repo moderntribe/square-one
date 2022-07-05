@@ -15,7 +15,7 @@ use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controll
  */
 class Content_Loop_Model extends Base_Model {
 
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Content_Loop_Controller::ATTRS       => $this->get_attrs(),
 			Content_Loop_Controller::CLASSES     => $this->get_classes(),

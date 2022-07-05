@@ -2,19 +2,40 @@
 
 namespace Tribe\Project\Blocks\Types;
 
-abstract class Base_Model {
+use Tribe\Libs\ACF\Traits\With_Get_Field;
+use Tribe\Project\Blocks\Contracts\Model;
+
+abstract class Base_Model implements Model {
+
+	use With_Get_Field;
 
 	/**
+	 * The data passed to the controller.
+	 *
 	 * @var mixed[]
 	 */
 	protected array $data;
 
+	/**
+	 * The ACF block field data.
+	 *
+	 * @var mixed[]
+	 */
+	protected array $field_data;
+
+	protected string $anchor;
+	protected string $classes;
+	protected string $id;
 	protected string $mode;
 	protected string $name;
-	protected string $classes;
-	protected string $anchor;
 
-	abstract public function get_data(): array;
+	/**
+	 * Set the state of the model data that will be passed to the
+	 * block's controller.
+	 *
+	 * @return array<string, mixed>
+	 */
+	abstract protected function init_data(): array;
 
 	/**
 	 * Base_Controller constructor.
@@ -22,28 +43,55 @@ abstract class Base_Model {
 	 * @param mixed[] $block
 	 */
 	public function __construct( array $block ) {
-		$this->mode    = $block['mode'] ?? 'preview';
-		$this->data    = $block['data'] ?? [];
-		$this->name    = $block['name'] ? str_replace( 'acf/', '', $block['name'] ) : '';
-		$this->classes = $block['className'] ?? '';
-		$this->anchor  = $block['anchor'] ?? '';
+		$this->anchor     = $block['anchor'] ?? '';
+		$this->classes    = $block['className'] ?? '';
+		$this->field_data = $block['data'] ?? [];
+		$this->id         = $block['id'] ?? '';
+		$this->mode       = $block['mode'] ?? 'preview';
+		$this->name       = ( $block['name'] ?? '' ) ? str_replace( 'acf/', '', $block['name'] ) : '';
+
+		// This must always run last
+		$this->data = $this->init_data();
 	}
 
 	/**
-	 * @param int|string $key
-	 * @param mixed $default
+	 * Set the model's controller data.
 	 *
-	 * @return false|mixed
+	 * @param mixed[] $data
+	 *
+	 * @return static
 	 */
-	public function get( $key, $default = false ) {
-		$value = get_field( $key );
+	public function set_data( array $data ): self {
+		$this->data = $data;
 
-		//check to support nullable type properties in components.
-		// ACF will in some cases return and empty string when we may want it to be null.
-		// This allows us to always determine the default.
-		return ! empty( $value )
-			? $value
-			: $default;
+		return $this;
+	}
+
+	/**
+	 * A multidimensional array of model data passed to the controller.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function get_data(): array {
+		return $this->data;
+	}
+
+	/**
+	 * Get the assigned ACF block ID.
+	 *
+	 * @return string
+	 */
+	public function get_id(): string {
+		return $this->id;
+	}
+
+	/**
+	 * Get the block name.
+	 *
+	 * @return string
+	 */
+	public function get_name(): string {
+		return $this->name;
 	}
 
 	/**
