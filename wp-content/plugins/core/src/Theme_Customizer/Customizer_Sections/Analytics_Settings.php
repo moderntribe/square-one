@@ -35,7 +35,7 @@ class Analytics_Settings extends Abstract_Setting {
 			[
 				'label'       => esc_html__( 'Google Tag Manager ID', 'tribe' ),
 				'section'     => self::ANALYTICS_SECTION,
-				'settings'    => self::ANALYTICS_GTM_ID,
+				'setting'     => self::ANALYTICS_GTM_ID,
 				'type'        => 'text',
 				'description' => esc_html__( 'Google Tag Manager ID (GTM-XXXX)', 'tribe' ),
 			]
