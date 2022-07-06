@@ -29,7 +29,7 @@ class Section_Nav extends Block_Config {
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
 			'title'    => esc_html__( 'Section Nav', 'tribe' ),
-			'icon'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="7.25" stroke="#1E1E1E" stroke-width="1.5"/><path d="M10.5018 11.3502L14.9523 8.36505L13.5036 13.0933L9.04783 16.0466L10.5018 11.3502Z" fill="#1E1E1E"/></svg>',
+			'icon'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 12C5.5 8.41015 8.41015 5.5 12 5.5C15.5899 5.5 18.5 8.41015 18.5 12C18.5 15.5899 15.5899 18.5 12 18.5C8.41015 18.5 5.5 15.5899 5.5 12ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM14.9523 8.36499L10.5018 11.3501L9.04782 16.0465L13.5036 13.0932L14.9523 8.36499Z" fill="black"/></svg>',
 			'keywords' => [ esc_html__( 'navigation', 'tribe' ), esc_html__( 'menu', 'tribe' ) ],
 			'category' => Block_Category::CUSTOM_BLOCK_CATEGORY_SLUG,
 			'supports' => [
