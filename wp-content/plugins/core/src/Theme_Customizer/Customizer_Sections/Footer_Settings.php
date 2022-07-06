@@ -62,7 +62,7 @@ class Footer_Settings extends Abstract_Setting {
 			[
 				'label'       => esc_html__( 'Description', 'tribe' ),
 				'section'     => self::FOOTER_SECTION,
-				'settings'    => self::FOOTER_DESCRIPTION,
+				'setting'     => self::FOOTER_DESCRIPTION,
 				'type'        => 'textarea',
 				'description' => esc_html__( 'Appears below the logo in the site footer. HTML allowed: Links <code>&lt;a href=&quot;&quot;&gt;</code>, bold <code>&lt;strong&gt;</code>, and italics <code>&lt;em&gt;</code>', 'tribe' ),
 			]

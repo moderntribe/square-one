@@ -2,7 +2,10 @@
 
 use \Tribe\Project\Templates\Components\site_footer\Site_Footer_Controller;
 
-$c = Site_Footer_Controller::factory();
+/**
+ * @var array $args Arguments passed to the template
+ */
+$c = Site_Footer_Controller::factory( $args );
 ?>
 
 <footer class="c-site-footer t-theme--light">
