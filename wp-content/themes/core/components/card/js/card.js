@@ -49,7 +49,7 @@ const handleCardClick = ( e ) => {
  * @param e
  */
 const handleCardMouseDown = ( e ) => {
-	if ( EXCLUDED_TARGETS.includes( e.target.nodeName ) ) {
+	if ( EXCLUDED_TARGETS.includes( e.target.nodeName ) || e.button !== 0 ) {
 		return;
 	}
 
@@ -65,7 +65,7 @@ const handleCardMouseDown = ( e ) => {
  * @param e
  */
 const handleCardMouseUp = ( e ) => {
-	if ( EXCLUDED_TARGETS.includes( e.target.nodeName ) ) {
+	if ( EXCLUDED_TARGETS.includes( e.target.nodeName ) || e.button !== 0 ) {
 		return;
 	}
 
