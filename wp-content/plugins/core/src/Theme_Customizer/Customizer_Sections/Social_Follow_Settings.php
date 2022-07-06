@@ -31,10 +31,10 @@ class Social_Follow_Settings extends Abstract_Setting {
 				$this->wp_customize,
 				$key,
 				[
-					'label'    => $label,
-					'section'  => self::SOCIAL_SECTION,
-					'settings' => $key,
-					'type'     => 'url',
+					'label'   => $label,
+					'section' => self::SOCIAL_SECTION,
+					'setting' => $key,
+					'type'    => 'url',
 				]
 			) );
 		}
