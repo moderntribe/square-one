@@ -14,7 +14,7 @@ class Block_Category {
 	/**
 	 * Adds the Custom Category to the front of the block list categories.
 	 *
-	 * @filter block_categories
+	 * @filter block_categories_all
 	 *
 	 * @param array $categories
 	 *

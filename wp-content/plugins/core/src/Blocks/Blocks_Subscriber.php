@@ -42,9 +42,9 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 			}
 		}, 10, 0 );
 
-		add_filter( 'block_categories', function ( array $categories ): array {
+		add_filter( 'block_categories_all', function ( array $categories ): array {
 			return $this->container->get( Block_Category::class )->custom_block_category( $categories );
-		}, 10, 2 );
+		}, 10, 1 );
 	}
 
 }
