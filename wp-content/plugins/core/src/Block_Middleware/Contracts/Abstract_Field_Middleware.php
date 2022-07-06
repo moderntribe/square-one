@@ -19,7 +19,7 @@ abstract class Abstract_Field_Middleware implements Field_Middleware {
 	 * Set additional fields on an existing block.
 	 *
 	 * @param \Tribe\Libs\ACF\Block_Config $block
-	 * @param array                       $params Optional parameters to customize the middleware logic.
+	 * @param array                        $params Optional parameters to customize the middleware logic.
 	 *
 	 * @return \Tribe\Libs\ACF\Block_Config
 	 */

@@ -13,10 +13,10 @@ use Tribe\Project\Block_Middleware\Pipelines\Add_Fields_Pipeline;
 use Tribe\Project\Block_Middleware\Pipelines\Add_Model_Data_Pipeline;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Contracts\Model;
+use Tribe\Project\Blocks\Middleware\Color_Theme\Fields\Color_Theme_Field_Middleware;
+use Tribe\Project\Blocks\Middleware\Color_Theme\Models\Color_Theme_Field_Model_Middleware;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Accordion\Accordion_Model;
-use Tribe\Project\Blocks\Types\Buttons\Buttons;
-use Tribe\Project\Blocks\Types\Buttons\Buttons_Model;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid_Model;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
@@ -25,8 +25,6 @@ use Tribe\Project\Blocks\Types\Hero\Hero;
 use Tribe\Project\Blocks\Types\Hero\Hero_Model;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial_Model;
-use Tribe\Project\Blocks\Types\Logos\Logos;
-use Tribe\Project\Blocks\Types\Logos\Logos_Model;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text;
 use Tribe\Project\Blocks\Types\Media_Text\Media_Text_Model;
 use Tribe\Project\Blocks\Types\Stats\Stats;
@@ -61,12 +59,10 @@ class Block_Middleware_Definer implements Definer_Interface {
 	 */
 	public const MODEL_MIDDLEWARE = [
 		Accordion_Model::class    => true,
-		Buttons_Model::class      => true,
 		Card_Grid_Model::class    => true,
 		Content_Loop_Model::class => true,
 		Hero_Model::class         => true,
 		Interstitial_Model::class => true,
-		Logos_Model::class        => true,
 		Media_Text_Model::class   => true,
 		Stats_Model::class        => true,
 		Tabs_Model::class         => true,
@@ -99,12 +95,10 @@ class Block_Middleware_Definer implements Definer_Interface {
 			 */
 			self::BLOCK_MIDDLEWARE            => DI\add( [
 				Accordion::class    => true,
-				Buttons::class      => true,
 				Card_Grid::class    => true,
 				Content_Loop::class => true,
 				Hero::class         => true,
 				Interstitial::class => true,
-				Logos::class        => false,
 				Media_Text::class   => true,
 				Stats::class        => true,
 				Tabs::class         => true,
@@ -117,7 +111,7 @@ class Block_Middleware_Definer implements Definer_Interface {
 			 * @var \Tribe\Project\Block_Middleware\Contracts\Field_Middleware[]
 			 */
 			self::FIELD_MIDDLEWARE_COLLECTION => DI\add( [
-				// DI\get( Your_Field_Middleware::class ),
+				DI\get( Color_Theme_Field_Middleware::class ),
 			] ),
 
 			/**
@@ -127,7 +121,7 @@ class Block_Middleware_Definer implements Definer_Interface {
 			 * @var \Tribe\Project\Block_Middleware\Contracts\Model_Middleware[]
 			 */
 			self::MODEL_MIDDLEWARE_COLLECTION => DI\add( [
-				// DI\get( Your_Model_Middleware::class ),
+				DI\get( Color_Theme_Field_Model_Middleware::class ),
 			] ),
 		];
 	}

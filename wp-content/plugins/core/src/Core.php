@@ -8,6 +8,7 @@ use Tribe\Project\Assets\Assets_Subscriber;
 use Tribe\Project\Block_Middleware\Block_Middleware_Definer;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Blocks_Subscriber;
+use Tribe\Project\Blocks\Middleware\Color_Theme\Color_Theme_Definer;
 use Tribe\Project\Cache\Cache_Subscriber;
 use Tribe\Project\CLI\CLI_Definer;
 use Tribe\Project\Integrations\ACF\ACF_Subscriber;
@@ -43,6 +44,7 @@ class Core {
 		Block_Middleware_Definer::class,
 		Blocks_Definer::class,
 		CLI_Definer::class,
+		Color_Theme_Definer::class,
 		Nav_Menus_Definer::class,
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
