@@ -21,7 +21,7 @@ class Content_Columns extends Block_Config implements Cta_Field {
 	public const LEADIN          = 'leadin';
 	public const TITLE           = 'title';
 	public const DESCRIPTION     = 'description';
-	
+
 	public const SECTION_COLUMNS = 's-columns';
 	public const COLUMNS         = 'columns';
 	public const COLUMN_TITLE    = 'col_title';
@@ -37,10 +37,10 @@ class Content_Columns extends Block_Config implements Cta_Field {
 	 */
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Content Columns', 'tribe' ),
-			'description' => __( 'Blocks of content arranged in a grid', 'tribe' ),
+			'title'       => esc_html__( 'Content Columns', 'tribe' ),
+			'description' => esc_html__( 'Blocks of content arranged in a grid', 'tribe' ),
 			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#151515" d="M2.44 3.52H8.2v.72H2.44zM10.72 3.52h5.76v.72h-5.76zM10.72 11.08h5.76v.72h-5.76zM2.08 11.08h5.76v.72H2.08zM2.44 4.96h4.32v.72H2.44zM10.72 4.96h4.32v.72h-4.32zM10.72 12.52h4.32v.72h-4.32zM2.08 12.52H6.4v.72H2.08zM2.44 6.4h6.48v.72H2.44zM10.72 6.4h6.48v.72h-6.48zM10.72 13.96h6.48v.72h-6.48zM2.08 13.96h6.48v.72H2.08zM2.44 7.84h2.88v.72H2.44zM10.72 7.84h2.88v.72h-2.88zM10.72 15.4h2.88v.72h-2.88zM2.08 15.4h2.88v.72H2.08z"/></svg>',
-			'keywords'    => [ __( 'content', 'tribe' ), __( 'display', 'tribe' ) ],
+			'keywords'    => [ esc_html__( 'content', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [
 				'align'  => false,
@@ -143,13 +143,13 @@ class Content_Columns extends Block_Config implements Cta_Field {
 		] );
 
 		$text = new Field( self::COLUMN_TITLE, [
-			'label' => __( 'Title', 'tribe' ),
+			'label' => esc_html__( 'Title', 'tribe' ),
 			'name'  => self::COLUMN_TITLE,
 			'type'  => 'text',
 		] );
 
 		$content = new Field( self::COLUMN_CONTENT, [
-			'label'        => __( 'Content', 'tribe' ),
+			'label'        => esc_html__( 'Content', 'tribe' ),
 			'name'         => self::COLUMN_CONTENT,
 			'type'         => 'wysiwyg',
 			'toolbar'      => Classic_Editor_Formats::MINIMAL,

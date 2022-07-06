@@ -3,12 +3,18 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.06
+* Bumped: Tribe Libs to 3.4.18 to update block generators to escape labels.
+* Added: PHP side functionality and filter for unregistering block styles.
+* Fixed: Replaces `__()` with `esc_html__()` in `wp-content/plugins/core/src/Blocks` folder
+* Added: Text alignment mixins & classes to support Gutenberg.
+* Fixed: Filter Social items to prevent empty HTML output.
 * Fixed: Remove `SECTION_CONTENT` constant from `Stats Block`.
 * Fixed: Blocks added below floated elements in Gutenberg should now properly clear on both the frontend and backend.
 * Fixed: Gravity Forms spin.js spinner should now properly work for paginated forms.
 * Added: [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery)
 * Fixed: Tab block controller throwing type errors.
 * Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
+* Added: Youtube icon to core icons set.
 
 ## 2022.05
 * Fixed: Use PHP to prefix commits with a jira ticket, avoiding different shell environments.

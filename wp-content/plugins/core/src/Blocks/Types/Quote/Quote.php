@@ -68,7 +68,7 @@ class Quote extends Block_Config {
 	public function add_fields(): void {
 		$this->add_field( $this->get_citation_field_group() );
 
-		$this->add_section( new Field_Section( self::SECTION_MEDIA, __( 'Media', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_MEDIA, esc_html__( 'Media', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
 					 'label'         => esc_html__( 'Layout', 'tribe' ),
 					 'name'          => self::LAYOUT,
