@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 * Updated: Removed `image_select` fields in favor of `button_group` fields on blocks.
 
 ## 2022.06
+* Bumped: Tribe Libs to 3.4.18 to update block generators to escape labels.
 * Added: PHP side functionality and filter for unregistering block styles.
 * Fixed: Replaces `__()` with `esc_html__()` in `wp-content/plugins/core/src/Blocks` folder
 * Added: Text alignment mixins & classes to support Gutenberg.
