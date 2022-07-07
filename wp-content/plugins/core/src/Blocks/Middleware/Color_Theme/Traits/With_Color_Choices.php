@@ -10,7 +10,7 @@ trait With_Color_Choices {
 	/**
 	 * The default choices for the color theme's acf-swatch field.
 	 *
-	 * @return array{hex: string, friendly_name: string}
+	 * @return array<string, string>
 	 */
 	protected function get_color_theme_choices(): array {
 		return [
