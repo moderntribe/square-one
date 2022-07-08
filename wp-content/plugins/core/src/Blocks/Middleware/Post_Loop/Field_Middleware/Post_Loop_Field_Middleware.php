@@ -396,6 +396,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	 */
 	protected function add_fields_to_parent( Has_Sub_Fields $parent, array $fields ): Has_Sub_Fields {
 		foreach ( $fields as $field ) {
+			// Skip fields the developer has said to hide for this block.
 			if ( $this->is_hidden_field( $field ) ) {
 				continue;
 			}
