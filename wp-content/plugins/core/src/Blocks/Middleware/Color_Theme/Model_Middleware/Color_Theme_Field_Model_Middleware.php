@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Blocks\Middleware\Color_Theme\Models;
+namespace Tribe\Project\Blocks\Middleware\Color_Theme\Model_Middleware;
 
 use Tribe\Libs\ACF\Traits\With_Get_Field;
 use Tribe\Project\Block_Middleware\Contracts\Abstract_Model_Middleware;

@@ -6,7 +6,7 @@ use Mockery;
 use Tribe\Project\Block_Middleware\Guards\Block_Model_Middleware_Guard;
 use Tribe\Project\Blocks\Contracts\Model;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Appearance;
-use Tribe\Project\Blocks\Middleware\Color_Theme\Models\Color_Theme_Field_Model_Middleware;
+use Tribe\Project\Blocks\Middleware\Color_Theme\Model_Middleware\Color_Theme_Field_Model_Middleware;
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Tests\Test_Case;
 
@@ -17,7 +17,7 @@ use Tribe\Tests\Test_Case;
  *
  * @see Appearance
  */
-final class ColorThemeModelTest extends Test_Case {
+final class ColorThemeModelMiddlewareTest extends Test_Case {
 
 	/**
 	 * @var Block_Model_Middleware_Guard|\Mockery\MockInterface
