@@ -17,7 +17,7 @@ use Tribe\Tests\Test_Case;
  *
  * @see Appearance
  */
-final class ColorThemeModelTest extends Test_Case {
+final class ColorThemeModelMiddlewareTest extends Test_Case {
 
 	/**
 	 * @var Block_Model_Middleware_Guard|\Mockery\MockInterface
