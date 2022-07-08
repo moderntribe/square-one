@@ -15,6 +15,8 @@ use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Contracts\Model;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Fields\Color_Theme_Field_Middleware;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Models\Color_Theme_Field_Model_Middleware;
+use Tribe\Project\Blocks\Middleware\Post_Loop\Field_Middleware\Post_Loop_Field_Middleware;
+use Tribe\Project\Blocks\Middleware\Post_Loop\Model_Middleware\Post_Loop_Field_Model_Middleware;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Accordion\Accordion_Model;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
@@ -59,8 +61,12 @@ class Block_Middleware_Definer implements Definer_Interface {
 	 */
 	public const MODEL_MIDDLEWARE = [
 		Accordion_Model::class    => true,
-		Card_Grid_Model::class    => true,
-		Content_Loop_Model::class => true,
+		Card_Grid_Model::class    => [
+			Post_Loop_Field_Model_Middleware::class,
+		],
+		Content_Loop_Model::class => [
+			Post_Loop_Field_Model_Middleware::class,
+		],
 		Hero_Model::class         => true,
 		Interstitial_Model::class => true,
 		Media_Text_Model::class   => true,
@@ -95,8 +101,12 @@ class Block_Middleware_Definer implements Definer_Interface {
 			 */
 			self::BLOCK_MIDDLEWARE            => DI\add( [
 				Accordion::class    => true,
-				Card_Grid::class    => true,
-				Content_Loop::class => true,
+				Card_Grid::class    => [
+					Post_Loop_Field_Middleware::class,
+				],
+				Content_Loop::class => [
+					Post_Loop_Field_Middleware::class,
+				],
 				Hero::class         => true,
 				Interstitial::class => true,
 				Media_Text::class   => true,
@@ -112,6 +122,7 @@ class Block_Middleware_Definer implements Definer_Interface {
 			 */
 			self::FIELD_MIDDLEWARE_COLLECTION => DI\add( [
 				DI\get( Color_Theme_Field_Middleware::class ),
+				DI\get( Post_Loop_Field_Middleware::class ),
 			] ),
 
 			/**
@@ -122,6 +133,7 @@ class Block_Middleware_Definer implements Definer_Interface {
 			 */
 			self::MODEL_MIDDLEWARE_COLLECTION => DI\add( [
 				DI\get( Color_Theme_Field_Model_Middleware::class ),
+				DI\get( Post_Loop_Field_Model_Middleware::class ),
 			] ),
 		];
 	}
