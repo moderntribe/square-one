@@ -70,16 +70,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.231.1",
+            "version": "3.231.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "8dba16a1141be30f2a8090f5716454eccb4b6fd1"
+                "reference": "9a7c2a8c4b7f95074749e1a7b575e6b4486bdcab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8dba16a1141be30f2a8090f5716454eccb4b6fd1",
-                "reference": "8dba16a1141be30f2a8090f5716454eccb4b6fd1",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9a7c2a8c4b7f95074749e1a7b575e6b4486bdcab",
+                "reference": "9a7c2a8c4b7f95074749e1a7b575e6b4486bdcab",
                 "shasum": ""
             },
             "require": {
@@ -156,9 +156,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.2"
             },
-            "time": "2022-07-07T18:16:39+00:00"
+            "time": "2022-07-08T18:16:11+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -1430,12 +1430,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "64bf5bd25dece27137cef7a50c0b0d6889ebc1fa"
+                "reference": "baa908949be5441c9246ba3b9a5b9f2e0a8e5f9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/64bf5bd25dece27137cef7a50c0b0d6889ebc1fa",
-                "reference": "64bf5bd25dece27137cef7a50c0b0d6889ebc1fa",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/baa908949be5441c9246ba3b9a5b9f2e0a8e5f9e",
+                "reference": "baa908949be5441c9246ba3b9a5b9f2e0a8e5f9e",
                 "shasum": ""
             },
             "require": {
@@ -1546,7 +1546,7 @@
                 "issues": "https://github.com/moderntribe/tribe-libs/issues",
                 "source": "https://github.com/moderntribe/tribe-libs/tree/feature/block-middleware"
             },
-            "time": "2022-07-05T21:50:00+00:00"
+            "time": "2022-07-09T21:25:52+00:00"
         },
         {
             "name": "monolog/monolog",
