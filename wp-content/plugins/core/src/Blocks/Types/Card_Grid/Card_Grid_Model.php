@@ -7,6 +7,9 @@ use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\card_grid\Card_Grid_Controller;
 
+/**
+ * @see \Tribe\Project\Blocks\Middleware\Post_Loop\Model_Middleware\Post_Loop_Field_Model_Middleware
+ */
 class Card_Grid_Model extends Base_Model {
 
 	public function init_data(): array {

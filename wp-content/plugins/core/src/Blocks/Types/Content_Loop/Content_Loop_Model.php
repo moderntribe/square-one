@@ -8,10 +8,7 @@ use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controller;
 
 /**
- * Class Content_Loop_Model
- *
- * Responsible for mapping values from the block to arguments
- * for the component
+ * @see \Tribe\Project\Blocks\Middleware\Post_Loop\Model_Middleware\Post_Loop_Field_Model_Middleware
  */
 class Content_Loop_Model extends Base_Model {
 
