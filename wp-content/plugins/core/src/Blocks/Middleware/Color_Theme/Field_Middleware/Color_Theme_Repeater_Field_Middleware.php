@@ -3,10 +3,11 @@
 namespace Tribe\Project\Blocks\Middleware\Color_Theme\Field_Middleware;
 
 use Tribe\Libs\ACF\Block_Config;
-use Tribe\Libs\ACF\Field;
 use Tribe\Project\Block_Middleware\Contracts\Abstract_Field_Middleware;
+use Tribe\Project\Block_Middleware\Guards\Block_Field_Middleware_Guard;
 use Tribe\Project\Block_Middleware\Traits\With_Field_Finder;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Appearance;
+use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Color_Theme_Field;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Traits\With_Color_Choices;
 
 /**
@@ -18,6 +19,14 @@ class Color_Theme_Repeater_Field_Middleware extends Abstract_Field_Middleware im
 	use With_Color_Choices;
 
 	public const MIDDLEWARE_KEY = 'color_theme_parent_key';
+
+	protected Color_Theme_Field $color_theme;
+
+	public function __construct( Block_Field_Middleware_Guard $guard, Color_Theme_Field $color_theme ) {
+		parent::__construct( $guard );
+
+		$this->color_theme = $color_theme;
+	}
 
 	/**
 	 * @param \Tribe\Libs\ACF\Block_Config      $block
@@ -40,15 +49,10 @@ class Color_Theme_Repeater_Field_Middleware extends Abstract_Field_Middleware im
 			return $block;
 		}
 
-		$parent_field->add_field( new Field( $block_name . '_' . self::COLOR_THEME, [
-			'label'         => esc_html__( 'Color Theme', 'tribe' ),
-			'type'          => 'swatch',
-			'name'          => self::COLOR_THEME,
-			'default_value' => self::THEME_DEFAULT,
-			'allow_null'    => false,
-			'allow_other'   => false,
-			'choices'       => $this->get_color_theme_choices(),
-		] ) );
+		$parent_field->add_field( $this->color_theme->get_field(
+			$block_name,
+			esc_html__( 'Color Theme', 'tribe' )
+		) );
 
 		return $block->set_fields( $fields );
 	}
