@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Blocks\Middleware\Color_Theme\Fields;
+namespace Tribe\Project\Blocks\Middleware\Color_Theme\Field_Middleware;
 
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;

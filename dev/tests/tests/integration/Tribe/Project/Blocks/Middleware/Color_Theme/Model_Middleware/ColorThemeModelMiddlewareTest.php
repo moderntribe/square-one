@@ -1,12 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Blocks\Middleware\Color_Theme;
+namespace Tribe\Project\Blocks\Middleware\Color_Theme\Model_Middleware;
 
 use Mockery;
 use Tribe\Project\Block_Middleware\Guards\Block_Model_Middleware_Guard;
 use Tribe\Project\Blocks\Contracts\Model;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Appearance;
-use Tribe\Project\Blocks\Middleware\Color_Theme\Models\Color_Theme_Field_Model_Middleware;
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Tests\Test_Case;
 

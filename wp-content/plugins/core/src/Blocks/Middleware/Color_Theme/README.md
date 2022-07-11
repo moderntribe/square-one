@@ -4,11 +4,11 @@ This block middleware adds a centrally configured ACF swatch field with a single
 
 ## Color Theme Field Middleware
 
-[This middleware](Fields/Color_Theme_Field_Middleware.php) injects an accordion field with an ACF swatch for the entire block. Paired with the [Color_Theme_Field_Model_Middleware](Models/Color_Theme_Field_Model_Middleware.php), this will automatically merge a configurable color theme CSS class into the model's array of CSS classes (The default is `t-theme-$color-name`) which should automatically be passed to the block's controller `$classes` property.
+[This middleware](Field_Middleware/Color_Theme_Field_Middleware.php) injects an accordion field with an ACF swatch for the entire block. Paired with the [Color_Theme_Field_Model_Middleware](Model_Middleware/Color_Theme_Field_Model_Middleware.php), this will automatically merge a configurable color theme CSS class into the model's array of CSS classes (The default is `t-theme-$color-name`) which should automatically be passed to the block's controller `$classes` property.
 
 ## Color Theme Repeater Field Middleware
 
-[This middleware](Fields/Color_Theme_Repeater_Field_Middleware.php) is much more advanced and allows you to configure a block to inject the ACF swatch field into a parent ACF field, such as a repeater, group or section.
+[This middleware](Field_Middleware/Color_Theme_Repeater_Field_Middleware.php) is much more advanced and allows you to configure a block to inject the ACF swatch field into a parent ACF field, such as a repeater, group or section.
 
 It will search the existing fields for that parent, and if found, it will insert the color theme field at then of that repeater.
 
@@ -30,7 +30,7 @@ use Tribe\Libs\ACF\Repeater;
 use Tribe\Project\Block_Middleware\Contracts\Has_Middleware_Params;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
-use Tribe\Project\Blocks\Middleware\Color_Theme\Fields\Color_Theme_Repeater_Field_Middleware;
+use Tribe\Project\Blocks\Middleware\Color_Theme\Field_Middleware\Color_Theme_Repeater_Field_Middleware;
 
 class Buttons extends Block_Config implements Cta_Field, Has_Middleware_Params {
 

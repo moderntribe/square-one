@@ -7,6 +7,8 @@ use Ds\Map;
 use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Definer_Interface;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Appearance;
+use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Color_Theme_Field;
+use Tribe\Project\Blocks\Middleware\Color_Theme\Field_Middleware\Color_Theme_Field_Middleware;
 
 class Color_Theme_Definer implements Definer_Interface {
 
@@ -38,6 +40,8 @@ class Color_Theme_Definer implements Definer_Interface {
 					'class_blueprint',
 					static fn ( ContainerInterface $c ) => $c->get( self::CSS_CLASS_BLUEPRINT )
 				),
+
+			Color_Theme_Field::class  => static fn ( ContainerInterface $c ) => $c->get( Color_Theme_Field_Middleware::class ),
 		];
 	}
 
