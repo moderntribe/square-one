@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.07
+* Fixed: Misnamed Buttons Block classes and attached button styles
+
 ## 2022.06
 * Fixed: Erroneous link clicks in card.js for mouse right-clicks on Windows. 
 * Bumped: Tribe Libs to 3.4.18 to update block generators to escape labels.
