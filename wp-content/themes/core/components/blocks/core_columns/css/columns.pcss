@@ -2,6 +2,10 @@
  *
  * Core Block: Columns
  *
+ * The majority of these styles are copied from WP Core styles for the columns
+ * block. Those styles can be referenced in the file listed below.
+ *
+ * WP Core source styles: wp/wp-includes/blocks/columns/style.css
  * ----------------------------------------------------------------------------- */
 .wp-block-columns {
 	display: flex;
@@ -72,7 +76,7 @@
 
 	.wp-block-columns:not(.is-not-stacked-on-mobile) & {
 		/* Required to overcome inline styles set by WordPress for custom width columns */
-		@media (--viewport-medium-max) {
+		@media (--viewport-small-max) {
 			flex-basis: 100% !important;
 		}
 
