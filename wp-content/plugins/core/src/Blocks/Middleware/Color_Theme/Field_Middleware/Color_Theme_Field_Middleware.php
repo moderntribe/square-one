@@ -8,11 +8,8 @@ use Tribe\Project\Block_Middleware\Contracts\Abstract_Field_Middleware;
 use Tribe\Project\Block_Middleware\Guards\Block_Field_Middleware_Guard;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Appearance;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Color_Theme_Field;
-use Tribe\Project\Blocks\Middleware\Color_Theme\Traits\With_Color_Choices;
 
 class Color_Theme_Field_Middleware extends Abstract_Field_Middleware implements Appearance {
-
-	use With_Color_Choices;
 
 	public const NAME = 'global_color';
 
