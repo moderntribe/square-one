@@ -3,9 +3,9 @@
 namespace Tribe\Project\Blocks\Middleware\Color_Theme\Field_Middleware;
 
 use Tribe\Libs\ACF\Block_Config;
+use Tribe\Libs\ACF\Traits\With_Field_Finder;
 use Tribe\Project\Block_Middleware\Contracts\Abstract_Field_Middleware;
 use Tribe\Project\Block_Middleware\Guards\Block_Field_Middleware_Guard;
-use Tribe\Project\Block_Middleware\Traits\With_Field_Finder;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Appearance;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Color_Theme_Field;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Traits\With_Color_Choices;
