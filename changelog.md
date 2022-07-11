@@ -5,8 +5,11 @@ All notable changes to this project will be documented in this file.
 ## 2022.07
 * Added: Core Columns block with support for headings, paragraphs, lists, and images.
 * Updated: Base kitchen sink styles for improves specificity and admin support.
+* Fixed: Misnamed Buttons Block classes and attached button styles
 
 ## 2022.06
+* Fixed: Erroneous link clicks in card.js for mouse right-clicks on Windows. 
+* Bumped: Tribe Libs to 3.4.18 to update block generators to escape labels.
 * Added: PHP side functionality and filter for unregistering block styles.
 * Fixed: Replaces `__()` with `esc_html__()` in `wp-content/plugins/core/src/Blocks` folder
 * Added: Text alignment mixins & classes to support Gutenberg.
