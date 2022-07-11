@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.07
+* Added: Core Columns block with support for headings, paragraphs, lists, and images.
+* Updated: Base kitchen sink styles for improves specificity and admin support.
+
 ## 2022.06
 * Added: PHP side functionality and filter for unregistering block styles.
 * Fixed: Replaces `__()` with `esc_html__()` in `wp-content/plugins/core/src/Blocks` folder
