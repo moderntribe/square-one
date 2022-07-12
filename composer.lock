@@ -70,16 +70,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.231.2",
+            "version": "3.231.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "9a7c2a8c4b7f95074749e1a7b575e6b4486bdcab"
+                "reference": "2dc6f917e3ce656e4fb5b9b591d7d84cd0d1f665"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9a7c2a8c4b7f95074749e1a7b575e6b4486bdcab",
-                "reference": "9a7c2a8c4b7f95074749e1a7b575e6b4486bdcab",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2dc6f917e3ce656e4fb5b9b591d7d84cd0d1f665",
+                "reference": "2dc6f917e3ce656e4fb5b9b591d7d84cd0d1f665",
                 "shasum": ""
             },
             "require": {
@@ -156,9 +156,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.4"
             },
-            "time": "2022-07-08T18:16:11+00:00"
+            "time": "2022-07-12T18:46:48+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -1430,12 +1430,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "baa908949be5441c9246ba3b9a5b9f2e0a8e5f9e"
+                "reference": "dcae0f0348222910ab9ddd30e625af2bec80524e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/baa908949be5441c9246ba3b9a5b9f2e0a8e5f9e",
-                "reference": "baa908949be5441c9246ba3b9a5b9f2e0a8e5f9e",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/dcae0f0348222910ab9ddd30e625af2bec80524e",
+                "reference": "dcae0f0348222910ab9ddd30e625af2bec80524e",
                 "shasum": ""
             },
             "require": {
@@ -1546,7 +1546,7 @@
                 "issues": "https://github.com/moderntribe/tribe-libs/issues",
                 "source": "https://github.com/moderntribe/tribe-libs/tree/feature/block-middleware"
             },
-            "time": "2022-07-09T21:25:52+00:00"
+            "time": "2022-07-12T21:54:09+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2099,16 +2099,16 @@
         },
         {
             "name": "php-http/discovery",
-            "version": "1.14.2",
+            "version": "1.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "c8d48852fbc052454af42f6de27635ddd916b959"
+                "reference": "31d8ee46d0215108df16a8527c7438e96a4d7735"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/c8d48852fbc052454af42f6de27635ddd916b959",
-                "reference": "c8d48852fbc052454af42f6de27635ddd916b959",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/31d8ee46d0215108df16a8527c7438e96a4d7735",
+                "reference": "31d8ee46d0215108df16a8527c7438e96a4d7735",
                 "shasum": ""
             },
             "require": {
@@ -2160,9 +2160,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/discovery/issues",
-                "source": "https://github.com/php-http/discovery/tree/1.14.2"
+                "source": "https://github.com/php-http/discovery/tree/1.14.3"
             },
-            "time": "2022-05-25T07:26:05+00:00"
+            "time": "2022-07-11T14:04:40+00:00"
         },
         {
             "name": "php-http/httplug",
@@ -6930,16 +6930,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.8.0",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "b7648d4ee9321665acaf112e49da9fd93df8fbd5"
+                "reference": "8dbba631fa32f4b289404469c2afd6122fd61d67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b7648d4ee9321665acaf112e49da9fd93df8fbd5",
-                "reference": "b7648d4ee9321665acaf112e49da9fd93df8fbd5",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8dbba631fa32f4b289404469c2afd6122fd61d67",
+                "reference": "8dbba631fa32f4b289404469c2afd6122fd61d67",
                 "shasum": ""
             },
             "require": {
@@ -6965,7 +6965,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.8.0"
+                "source": "https://github.com/phpstan/phpstan/tree/1.8.1"
             },
             "funding": [
                 {
@@ -6985,7 +6985,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-29T08:53:31+00:00"
+            "time": "2022-07-12T16:08:06+00:00"
         },
         {
             "name": "phpstan/phpstan-mockery",
