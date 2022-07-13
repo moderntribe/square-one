@@ -18,8 +18,7 @@ $c = Unsupported_Browser_Controller::factory();
 
 	<?php echo $c->get_styles(); ?>
 
-	<?php if( $c->get_favicon_url() ) { ?>
-
+	<?php if ( $c->get_favicon_url() ) { ?>
 		<link rel="shortcut icon" href="<?php echo $c->get_favicon_url(); ?>">
 
 	<?php } ?>
