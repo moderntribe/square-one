@@ -18,7 +18,11 @@ $c = Unsupported_Browser_Controller::factory();
 
 	<?php echo $c->get_styles(); ?>
 
-	<link rel="shortcut icon" href="<?php echo esc_url( trailingslashit( get_template_directory_uri() ) . 'assets/img/theme/branding-assets/favicon.ico' ); ?>">
+	<?php if( $c->get_favicon_url() ) { ?>
+
+		<link rel="shortcut icon" href="<?php echo $c->get_favicon_url(); ?>">
+
+	<?php } ?>
 
 	<?php do_action( 'tribe/unsupported_browser/head' ); ?>
 

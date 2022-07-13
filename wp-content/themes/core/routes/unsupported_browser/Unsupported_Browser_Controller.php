@@ -29,6 +29,14 @@ class Unsupported_Browser_Controller extends Abstract_Controller {
 		return esc_url( trailingslashit( get_template_directory_uri() ) . 'assets/img/theme/legacy-browser/' . $filename );
 	}
 
+	public function get_favicon_url(): string {
+		if ( get_site_icon_url() ) {
+			return esc_url( get_site_icon_url() );
+		}
+
+		return '';
+	}
+
 	public function get_logo_url(): string {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
 		$image          = wp_get_attachment_image_url( $custom_logo_id, 'full' );
