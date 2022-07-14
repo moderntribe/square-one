@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.07
+* Added: Core Columns block with support for headings, paragraphs, lists, and images.
+* Updated: Base kitchen sink styles for improves specificity and admin support.
 * Fixed: Misnamed Buttons Block classes and attached button styles
 
 ## 2022.06

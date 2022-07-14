@@ -9,7 +9,8 @@
  * ------------------------------------------------------------------------- */
 
 .h1,
-.t-sink > h1 {
+:where(.t-sink) h1,
+:is(.editor-styles-wrapper) h1 {
 	@mixin t-display;
 
 	@media (--viewport-full) {
@@ -22,7 +23,8 @@
  * ------------------------------------------------------------------------- */
 
 .h2,
-.t-sink > h2 {
+:where(.t-sink) h2,
+:is(.editor-styles-wrapper) h2 {
 	@mixin t-display;
 
 	@media (--viewport-full) {
@@ -35,7 +37,8 @@
  * ------------------------------------------------------------------------- */
 
 .h3,
-.t-sink > h3 {
+:where(.t-sink) h3,
+:is(.editor-styles-wrapper) h3 {
 	@mixin t-display-small;
 
 	@media (--viewport-full) {
@@ -48,7 +51,8 @@
  * ------------------------------------------------------------------------- */
 
 .h4,
-.t-sink > h4 {
+:where(.t-sink) h4,
+:is(.editor-styles-wrapper) h4 {
 	@mixin t-display-x-small;
 
 	@media (--viewport-full) {
@@ -61,7 +65,8 @@
  * ------------------------------------------------------------------------- */
 
 .h5,
-.t-sink > h5 {
+:where(.t-sink) h5,
+:is(.editor-styles-wrapper) h5 {
 	@mixin t-display-xx-small;
 
 	@media (--viewport-full) {
@@ -74,6 +79,7 @@
  * ------------------------------------------------------------------------- */
 
 .h6,
-.t-sink > h6 {
+:where(.t-sink) h6,
+:is(.editor-styles-wrapper) h6 {
 	@mixin t-overline;
 }
