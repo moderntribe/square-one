@@ -162,6 +162,11 @@ class Post_Loop_Controller {
 				'cta'   => $cta,
 			] );
 
+			// Don't show blank repeater posts until they have at least a title
+			if ( empty( $post['post_title'] ) && $post['ID'] < 0 ) {
+				continue;
+			}
+
 			// Post date could have been modified, set the proper GMT date.
 			$post['post_date_gmt'] = get_gmt_from_date( $post['post_date'] );
 
