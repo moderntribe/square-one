@@ -140,10 +140,6 @@ class Post_Loop_Controller {
 
 			$repeater = array_filter( $repeater );
 
-			if ( empty( $repeater[ Post_Loop_Field_Middleware::MANUAL_TOGGLE ] ) ) {
-				continue;
-			}
-
 			$post  = $repeater[ Post_Loop_Field_Middleware::MANUAL_POST ] ??= new WP_Post( new stdClass() );
 			$image = $repeater[ Post_Loop_Field_Middleware::MANUAL_IMAGE ] ??= null;
 			$cta   = $repeater[ Cta_Field::GROUP_CTA ] ??= null;
