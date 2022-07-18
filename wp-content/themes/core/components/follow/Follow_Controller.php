@@ -3,14 +3,14 @@
 namespace Tribe\Project\Templates\Components\follow;
 
 use Tribe\Project\Object_Meta\Social_Settings;
-use Tribe\Project\Settings\General;
+use Tribe\Project\Settings\Theme_Options;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Collections\Social_Link_Collection;
 use Tribe\Project\Templates\Models\Social_Link;
 
 class Follow_Controller extends Abstract_Controller {
 
-	protected General $settings;
+	protected Theme_Options $settings;
 
 	/**
 	 * Change the order of this array to change the display order.
@@ -26,7 +26,7 @@ class Follow_Controller extends Abstract_Controller {
 		Social_Settings::INSTAGRAM,
 	];
 
-	public function __construct( General $settings ) {
+	public function __construct( Theme_Options $settings ) {
 		$this->settings = $settings;
 	}
 

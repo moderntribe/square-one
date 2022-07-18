@@ -4,7 +4,9 @@ namespace Tribe\Project\Settings;
 
 use Tribe\Libs\ACF\ACF_Settings;
 
-class General extends ACF_Settings {
+class Theme_Options extends ACF_Settings {
+
+	public const SLUG = 'theme-options';
 
 	public function get_title(): string {
 		$current_theme = wp_get_theme();
@@ -19,6 +21,10 @@ class General extends ACF_Settings {
 
 	public function get_parent_slug(): string {
 		return 'themes.php';
+	}
+
+	protected function set_slug(): void {
+		$this->slug = sanitize_title( self::SLUG );
 	}
 
 }

@@ -25,13 +25,13 @@ class Object_Meta_Definer implements Definer_Interface {
 			// add analytics settings to the general settings screen
 			Analytics_Settings::class                           => DI\autowire()
 				->constructorParameter( 'object_types', static fn( ContainerInterface $c ) => [
-					'settings_pages' => [ $c->get( Settings\General::class )->get_slug() ],
+					'settings_pages' => [ $c->get( Settings\Theme_Options::class )->get_slug() ],
 				] ),
 
 			// add social settings to the general settings screen
 			Social_Settings::class                              => DI\autowire()
 				->constructorParameter( 'object_types', static fn( ContainerInterface $c ) => [
-					'settings_pages' => [ $c->get( Settings\General::class )->get_slug() ],
+					'settings_pages' => [ $c->get( Settings\Theme_Options::class )->get_slug() ],
 				] ),
 
 			Post_Archive_Featured_Settings::class               => DI\autowire()
