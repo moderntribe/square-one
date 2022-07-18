@@ -7,15 +7,18 @@ use Tribe\Libs\ACF\ACF_Settings;
 class General extends ACF_Settings {
 
 	public function get_title(): string {
-		return __( 'General Settings', 'tribe' );
+		$current_theme = wp_get_theme();
+		$theme_name    = $current_theme->exists() ? $current_theme->get( 'Name' ) : 'Theme';
+
+		return sprintf( esc_html__( '%s Options', 'tribe' ), $theme_name );
 	}
 
 	public function get_capability(): string {
-		return 'activate_plugins';
+		return 'manage_options';
 	}
 
 	public function get_parent_slug(): string {
-		return 'options-general.php';
+		return 'themes.php';
 	}
 
 }
