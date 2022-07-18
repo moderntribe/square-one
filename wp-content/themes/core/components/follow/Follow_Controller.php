@@ -2,15 +2,15 @@
 
 namespace Tribe\Project\Templates\Components\follow;
 
-use Tribe\Project\Object_Meta\Social_Settings;
-use Tribe\Project\Settings\Theme_Options;
+use Tribe\Project\Object_Meta\Theme_Options;
+use Tribe\Project\Settings\Theme_Options as Theme_Options_Settings;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Collections\Social_Link_Collection;
 use Tribe\Project\Templates\Models\Social_Link;
 
 class Follow_Controller extends Abstract_Controller {
 
-	protected Theme_Options $settings;
+	private Theme_Options_Settings $settings;
 
 	/**
 	 * Change the order of this array to change the display order.
@@ -18,15 +18,15 @@ class Follow_Controller extends Abstract_Controller {
 	 * @var string[]
 	 */
 	private array $social_keys = [
-		Social_Settings::FACEBOOK,
-		Social_Settings::TWITTER,
-		Social_Settings::YOUTUBE,
-		Social_Settings::LINKEDIN,
-		Social_Settings::PINTEREST,
-		Social_Settings::INSTAGRAM,
+		Theme_Options::SOCIAL_FACEBOOK,
+		Theme_Options::SOCIAL_TWITTER,
+		Theme_Options::SOCIAL_YOUTUBE,
+		Theme_Options::SOCIAL_LINKEDIN,
+		Theme_Options::SOCIAL_PINTEREST,
+		Theme_Options::SOCIAL_INSTAGRAM,
 	];
 
-	public function __construct( Theme_Options $settings ) {
+	public function __construct( Theme_Options_Settings $settings ) {
 		$this->settings = $settings;
 	}
 
@@ -51,22 +51,22 @@ class Follow_Controller extends Abstract_Controller {
 
 	protected function get_label( string $site ): string {
 		switch ( $site ) {
-			case Social_Settings::FACEBOOK:
+			case Theme_Options::SOCIAL_FACEBOOK:
 				return __( 'Like us on Facebook', 'tribe' );
 
-			case Social_Settings::TWITTER:
+			case Theme_Options::SOCIAL_TWITTER:
 				return __( 'Follow us on Twitter', 'tribe' );
 
-			case Social_Settings::YOUTUBE:
+			case Theme_Options::SOCIAL_YOUTUBE:
 				return __( 'Follow us on YouTube', 'tribe' );
 
-			case Social_Settings::LINKEDIN:
+			case Theme_Options::SOCIAL_LINKEDIN:
 				return __( 'Add us on LinkedIn', 'tribe' );
 
-			case Social_Settings::PINTEREST:
+			case Theme_Options::SOCIAL_PINTEREST:
 				return __( 'Follow us on Pinterest', 'tribe' );
 
-			case Social_Settings::INSTAGRAM:
+			case Theme_Options::SOCIAL_INSTAGRAM:
 				return __( 'Follow us on Instagram', 'tribe' );
 
 			default:
