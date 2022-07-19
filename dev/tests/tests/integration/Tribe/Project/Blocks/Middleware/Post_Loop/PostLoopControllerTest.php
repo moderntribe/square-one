@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Blocks\Middleware\Post_Loop;
 
+use Psr\SimpleCache\CacheInterface;
 use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Project\Blocks\Middleware\Post_Loop\Models\Post_Loop_Model;
 use Tribe\Project\Blocks\Middleware\Post_Loop\Models\Query_Model;
@@ -10,6 +11,22 @@ use Tribe\Project\Post_Types\Post\Post;
 use Tribe\Tests\Test_Case;
 
 final class PostLoopControllerTest extends Test_Case {
+
+	private CacheInterface $store;
+
+	public function _setUp() {
+		parent::_setUp();
+
+		$this->store = $this->container->make( CacheInterface::class );
+	}
+
+	public function _tearDown() {
+		parent::_tearDown();
+
+		$this->store->clear();
+
+		$GLOBALS['post'] = null;
+	}
 
 	public function test_it_fetches_dynamic_posts(): void {
 		$query_model             = new Query_Model();
@@ -27,7 +44,7 @@ final class PostLoopControllerTest extends Test_Case {
 		$posts = $this->factory()->post->create_many( 5 );
 		$posts = array_map( static fn( int $id ) => get_post( $id ), $posts );
 
-		$controller    = new Post_Loop_Controller( $post_loop_model );
+		$controller    = new Post_Loop_Controller( $post_loop_model, $this->store );
 		$proxied_posts = $controller->get_posts();
 
 		$this->assertSame( count( $posts ), count( $proxied_posts ) );
@@ -53,7 +70,7 @@ final class PostLoopControllerTest extends Test_Case {
 		$posts = $this->factory()->post->create_many( 5 );
 		$posts = array_map( static fn( int $id ) => get_post( $id ), $posts );
 
-		$controller    = new Post_Loop_Controller( $post_loop_model );
+		$controller    = new Post_Loop_Controller( $post_loop_model, $this->store );
 		$proxied_posts = $controller->proxy_posts( $posts );
 
 		$this->assertSame( count( $posts ), count( $proxied_posts ) );
@@ -70,6 +87,8 @@ final class PostLoopControllerTest extends Test_Case {
 	public function test_it_fetches_proxied_faux_manual_posts(): void {
 		$post_loop_model             = new Post_Loop_Model();
 		$post_loop_model->query_type = Post_Loop_Field_Middleware::QUERY_TYPE_MANUAL;
+		$cat_id_2                    = $this->factory()->category->create();
+		$cat_id_3                    = $this->factory()->category->create();
 
 		// Build the repeater data as ACF would provide it.
 		$posts = [
@@ -82,26 +101,28 @@ final class PostLoopControllerTest extends Test_Case {
 				Post_Loop_Field_Middleware::MANUAL_POST_DATE   => current_time( 'mysql' ),
 			],
 			[
-				Post_Loop_Field_Middleware::MANUAL_POST_AUTHOR => 1,
-				Post_Loop_Field_Middleware::MANUAL_TOGGLE      => true,
-				Post_Loop_Field_Middleware::MANUAL_POST        => false,
-				Post_Loop_Field_Middleware::MANUAL_TITLE       => 'Test post 2',
-				Post_Loop_Field_Middleware::MANUAL_EXCERPT     => 'Test post 2 excerpt',
-				Post_Loop_Field_Middleware::MANUAL_POST_DATE   => current_time( 'mysql' ),
+				Post_Loop_Field_Middleware::MANUAL_POST_AUTHOR   => 1,
+				Post_Loop_Field_Middleware::MANUAL_TOGGLE        => true,
+				Post_Loop_Field_Middleware::MANUAL_POST          => false,
+				Post_Loop_Field_Middleware::MANUAL_TITLE         => 'Test post 2',
+				Post_Loop_Field_Middleware::MANUAL_EXCERPT       => 'Test post 2 excerpt',
+				Post_Loop_Field_Middleware::MANUAL_POST_DATE     => current_time( 'mysql' ),
+				Post_Loop_Field_Middleware::MANUAL_POST_CATEGORY => $cat_id_2,
 			],
 			[
-				Post_Loop_Field_Middleware::MANUAL_POST_AUTHOR => 1,
-				Post_Loop_Field_Middleware::MANUAL_TOGGLE      => true,
-				Post_Loop_Field_Middleware::MANUAL_POST        => false,
-				Post_Loop_Field_Middleware::MANUAL_TITLE       => 'Test post 3',
-				Post_Loop_Field_Middleware::MANUAL_EXCERPT     => 'Test post 3 excerpt',
-				Post_Loop_Field_Middleware::MANUAL_POST_DATE   => current_time( 'mysql' ),
+				Post_Loop_Field_Middleware::MANUAL_POST_AUTHOR   => 1,
+				Post_Loop_Field_Middleware::MANUAL_TOGGLE        => true,
+				Post_Loop_Field_Middleware::MANUAL_POST          => false,
+				Post_Loop_Field_Middleware::MANUAL_TITLE         => 'Test post 3',
+				Post_Loop_Field_Middleware::MANUAL_EXCERPT       => 'Test post 3 excerpt',
+				Post_Loop_Field_Middleware::MANUAL_POST_DATE     => current_time( 'mysql' ),
+				Post_Loop_Field_Middleware::MANUAL_POST_CATEGORY => $cat_id_3,
 			],
 		];
 
 		$post_loop_model->manual_posts = $posts;
 
-		$controller    = new Post_Loop_Controller( $post_loop_model );
+		$controller    = new Post_Loop_Controller( $post_loop_model, $this->store );
 		$proxied_posts = $controller->get_posts();
 
 		$this->assertSame( count( $posts ), count( $proxied_posts ) );
@@ -133,6 +154,19 @@ final class PostLoopControllerTest extends Test_Case {
 			// We build post slugs as `p-$ID`, faux post IDs are negative, so convert them to a positive int like the controller does.
 			$this->assertSame( sprintf( 'p-%d', abs( $proxied_posts[$i]->ID ) ), $proxied_posts[$i]->post_name );
 		}
+
+		// Test raw category assignments
+		$this->assertSame( 1, $proxied_posts[0]->post_category[0] );
+		$this->assertSame( $cat_id_2, $proxied_posts[1]->post_category[0] );
+		$this->assertSame( $cat_id_3, $proxied_posts[2]->post_category[0] );
+
+		// Set the current post global and then call get_the_category() without a post ID to fetch the correct category.
+		$GLOBALS['post'] = $proxied_posts[1]->post();
+		$this->assertSame( $cat_id_2, get_the_category()[0]->term_id );
+
+		$GLOBALS['post'] = $proxied_posts[2]->post();
+		$this->assertSame( $cat_id_3, get_the_category()[0]->term_id );
+
 	}
 
 }
