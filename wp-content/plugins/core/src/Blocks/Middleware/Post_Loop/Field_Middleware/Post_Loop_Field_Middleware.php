@@ -12,6 +12,7 @@ use Tribe\Project\Block_Middleware\Contracts\Abstract_Field_Middleware;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 use Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config;
+use Tribe\Project\Taxonomies\Category\Category;
 
 /**
  * Inject a field section that allows users to query for different posts or manually
@@ -43,10 +44,11 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	public const MANUAL_IMAGE  = 'manual_image';
 
 	// Override exist post fields, their value should match the property in WP_Post
-	public const MANUAL_TITLE       = 'post_title';
-	public const MANUAL_EXCERPT     = 'post_excerpt';
-	public const MANUAL_POST_DATE   = 'post_date';
-	public const MANUAL_POST_AUTHOR = 'post_author';
+	public const MANUAL_TITLE         = 'post_title';
+	public const MANUAL_EXCERPT       = 'post_excerpt';
+	public const MANUAL_POST_DATE     = 'post_date';
+	public const MANUAL_POST_AUTHOR   = 'post_author';
+	public const MANUAL_POST_CATEGORY = 'post_category';
 
 	public const OPTION_ASC  = 'asc';
 	public const OPTION_DESC = 'desc';
@@ -334,6 +336,28 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'allow_null'        => true,
 			'multiple'          => false,
 			'return_format'     => 'id', // array, object, id
+			'conditional_logic' => [
+				[
+					'field'    => $this->get_key_with_prefix( self::MANUAL_TOGGLE ),
+					'operator' => '==',
+					'value'    => '1',
+				],
+			],
+		] );
+
+		$fields[] = new Field( $this->config->block_name . '_' . self::MANUAL_POST_CATEGORY, [
+			'label'             => esc_html__( 'Post Category', 'tribe' ),
+			'name'              => self::MANUAL_POST_CATEGORY,
+			'type'              => 'taxonomy',
+			'instructions'      => esc_html__( 'Set or override the primary post category', 'tribe' ),
+			'taxonomy'          => Category::NAME,
+			'field_type'        => 'select',
+			'add_term'          => false,
+			'save_terms'        => false,
+			'load_terms'        => false,
+			'multiple'          => false,
+			'allow_null'        => true,
+			'return_format'     => 'id',
 			'conditional_logic' => [
 				[
 					'field'    => $this->get_key_with_prefix( self::MANUAL_TOGGLE ),
