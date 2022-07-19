@@ -102,9 +102,12 @@ class Content_Loop_Controller extends Abstract_Controller {
 	public function get_posts_card_args( string $layout = Card_Controller::STYLE_PLAIN ): array {
 		$cards = [];
 
+		$_post = $GLOBALS['post'];
+
 		foreach ( $this->posts as $post ) {
+			$GLOBALS['post']  = $post->post();
 			$uuid             = uniqid( 'p-' );
-			$cat              = get_the_category( $post->ID );
+			$cat              = get_the_category();
 			$card_description = [];
 
 			$image_array = [
@@ -205,6 +208,8 @@ class Content_Loop_Controller extends Abstract_Controller {
 				Card_Controller::CTA             => defer_template_part( 'components/link/link', null, $card_cta ),
 			];
 		}
+
+		$GLOBALS['post'] = $_post;
 
 		return $cards;
 	}
