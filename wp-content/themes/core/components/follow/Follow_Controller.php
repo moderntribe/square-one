@@ -3,14 +3,13 @@
 namespace Tribe\Project\Templates\Components\follow;
 
 use Tribe\Project\Object_Meta\Theme_Options;
-use Tribe\Project\Settings\Theme_Options as Theme_Options_Settings;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Collections\Social_Link_Collection;
 use Tribe\Project\Templates\Models\Social_Link;
 
 class Follow_Controller extends Abstract_Controller {
 
-	private Theme_Options_Settings $settings;
+	private Theme_Options $settings;
 
 	/**
 	 * Change the order of this array to change the display order.
@@ -26,13 +25,13 @@ class Follow_Controller extends Abstract_Controller {
 		Theme_Options::SOCIAL_INSTAGRAM,
 	];
 
-	public function __construct( Theme_Options_Settings $settings ) {
+	public function __construct( Theme_Options $settings ) {
 		$this->settings = $settings;
 	}
 
 	public function get_social_links(): Social_Link_Collection {
 		$links = array_filter( array_map( function ( $social_site ) {
-			$url = $this->settings->get_setting( $social_site );
+			$url = $this->settings->get_value( $social_site );
 
 			if ( ! $url ) {
 				return [];

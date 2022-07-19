@@ -33,6 +33,16 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 		];
 	}
 
+	/**
+	 * @param string|int $key
+	 * @param string|int $post_id
+	 *
+	 * @return mixed|null
+	 */
+	public function get_value( $key, $post_id = 'option' ) {
+		return in_array( $key, $this->get_keys(), true ) ? get_field( $key, $post_id ) : null;
+	}
+
 	public function get_group_config(): array {
 		$group = new ACF\Group( self::NAME, $this->object_types );
 		$group->set( 'title', __( 'Theme Options', 'tribe' ) );
