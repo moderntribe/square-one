@@ -3,10 +3,16 @@
 namespace Tribe\Project\Object_Meta;
 
 use Tribe\Libs\ACF;
+use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 
 class Theme_Options extends ACF\ACF_Meta_Group {
 
 	public const NAME = 'theme_options';
+
+	// Footer
+	public const FOOTER_TAB         = 'tab_footer';
+	public const FOOTER_LOGO        = 'footer_logo';
+	public const FOOTER_DESCRIPTION = 'footer_description';
 
 	 // Analytics
 	public const ANALYTICS_TAB    = 'tab_analytics';
@@ -23,13 +29,15 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 
 	public function get_keys(): array {
 		return [
-		   static::ANALYTICS_GTM_ID,
-		   static::SOCIAL_FACEBOOK,
-		   static::SOCIAL_TWITTER,
-		   static::SOCIAL_YOUTUBE,
-		   static::SOCIAL_LINKEDIN,
-		   static::SOCIAL_PINTEREST,
-		   static::SOCIAL_INSTAGRAM,
+			static::FOOTER_LOGO,
+			static::FOOTER_DESCRIPTION,
+			static::ANALYTICS_GTM_ID,
+			static::SOCIAL_FACEBOOK,
+			static::SOCIAL_TWITTER,
+			static::SOCIAL_YOUTUBE,
+			static::SOCIAL_LINKEDIN,
+			static::SOCIAL_PINTEREST,
+			static::SOCIAL_INSTAGRAM,
 		];
 	}
 
@@ -46,6 +54,11 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 	public function get_group_config(): array {
 		$group = new ACF\Group( self::NAME, $this->object_types );
 		$group->set( 'title', esc_html__( 'Theme Options', 'tribe' ) );
+
+		// Footer Tab
+		$group->add_field( $this->get_options_tab_field( esc_html__( 'Site Footer', 'tribe' ), self::FOOTER_TAB ) );
+		$group->add_field( $this->get_footer_logo_field() );
+		$group->add_field( $this->get_footer_description_field() );
 
 		// Analytics Tab
 		$group->add_field( $this->get_options_tab_field( esc_html__( 'Analytics', 'tribe' ), self::ANALYTICS_TAB ) );
@@ -72,6 +85,34 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 		] );
 
 		return $tab_field;
+	}
+
+	private function get_footer_logo_field(): ACF\Field {
+		$field = new ACF\Field( self::NAME . '_' . self::FOOTER_LOGO );
+		$field->set_attributes( [
+			'label'         => esc_html__( 'Logo', 'tribe' ),
+			'name'          => self::FOOTER_LOGO,
+			'type'          => 'image',
+			'return_format' => 'id',
+			'instructions'  => esc_html__( 'Appears at the top of the site footer. Recommended minimum width: 700px. Recommended file type: .svg.', 'tribe' ),
+		] );
+
+		return $field;
+	}
+
+	private function get_footer_description_field(): ACF\Field {
+		$field = new ACF\Field( self::NAME . '_' . self::FOOTER_DESCRIPTION );
+		$field->set_attributes( [
+			'label'        => esc_html__( 'Description', 'tribe' ),
+			'name'         => self::FOOTER_DESCRIPTION,
+			'type'         => 'wysiwyg',
+			'toolbar'      => Classic_Editor_Formats::MINIMAL,
+			'tabs'         => 'visual',
+			'media_upload' => 0,
+			'instructions' => __( 'Appears below the logo in the site footer.', 'tribe' ),
+		] );
+
+		return $field;
 	}
 
 	private function get_analytics_gtm_id_field(): ACF\Field {

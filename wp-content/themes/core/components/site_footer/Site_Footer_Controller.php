@@ -3,17 +3,23 @@
 namespace Tribe\Project\Templates\Components\site_footer;
 
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
+use Tribe\Project\Object_Meta\Theme_Options;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\navigation\Navigation_Controller;
 use Tribe\Project\Templates\Components\Traits\Copyright;
-use Tribe\Project\Theme_Customizer\Customizer_Sections\Footer_Settings;
 
 class Site_Footer_Controller extends Abstract_Controller {
 
 	use Copyright;
+
+	private Theme_Options $settings;
+
+	public function __construct( Theme_Options $settings ) {
+		$this->settings = $settings;
+	}
 
 	public function get_logo_args(): array {
 		return [
@@ -23,15 +29,15 @@ class Site_Footer_Controller extends Abstract_Controller {
 	}
 
 	public function get_description_args(): array {
-		$description = get_theme_mod( Footer_Settings::FOOTER_DESCRIPTION );
+		$description = $this->settings->get_value( Theme_Options::FOOTER_DESCRIPTION );
 
 		if ( empty( $description ) ) {
 			return [];
 		}
 
 		return [
-			Container_Controller::CLASSES => [ 'c-site-footer__description' ],
-			Container_Controller::CONTENT => wpautop( wp_kses( $description, Footer_Settings::FOOTER_ALLOWED_HTML ) ),
+			Container_Controller::CLASSES => [ 'c-site-footer__description', 't-sink', 's-sink' ],
+			Container_Controller::CONTENT => wpautop( wp_kses_post( $description ) ),
 		];
 	}
 
@@ -81,7 +87,7 @@ class Site_Footer_Controller extends Abstract_Controller {
 	}
 
 	private function get_logo_image(): string {
-		$image_id = get_theme_mod( Footer_Settings::FOOTER_LOGO );
+		$image_id = $this->settings->get_value( Theme_Options::FOOTER_LOGO );
 
 		if ( empty( $image_id ) ) {
 			return '';
