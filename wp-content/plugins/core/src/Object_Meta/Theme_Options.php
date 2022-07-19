@@ -80,7 +80,7 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 			'label'       => esc_html__( 'Google Tag Manager ID', 'tribe' ),
 			'name'        => self::ANALYTICS_GTM_ID,
 			'type'        => 'text',
-			'placeholder' => esc_html__( 'Enter Google Tag Manager ID (GTM-XXXX)', 'tribe' ),
+			'placeholder' => esc_attr__( 'Enter Google Tag Manager ID (GTM-XXXX)', 'tribe' ),
 		] );
 
 		return $field;
