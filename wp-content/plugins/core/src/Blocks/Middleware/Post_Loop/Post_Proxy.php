@@ -11,6 +11,8 @@ use WP_Post;
  * Proxy object to add additional data on top of WP_Post and proxy
  * property requests to the underlying WP_Post object.
  *
+ * @property-read int[]    $post_category
+ *
  * @mixin \WP_Post
  */
 class Post_Proxy extends Field_Model {
