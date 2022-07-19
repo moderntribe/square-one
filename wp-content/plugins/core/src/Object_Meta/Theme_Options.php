@@ -45,20 +45,20 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 
 	public function get_group_config(): array {
 		$group = new ACF\Group( self::NAME, $this->object_types );
-		$group->set( 'title', __( 'Theme Options', 'tribe' ) );
+		$group->set( 'title', esc_html__( 'Theme Options', 'tribe' ) );
 
 		// Analytics Tab
-		$group->add_field( $this->get_options_tab_field( __( 'Analytics', 'tribe' ), self::ANALYTICS_TAB ) );
+		$group->add_field( $this->get_options_tab_field( esc_html__( 'Analytics', 'tribe' ), self::ANALYTICS_TAB ) );
 		$group->add_field( $this->get_analytics_gtm_id_field() );
 
 		// Social Media Tab
-		$group->add_field( $this->get_options_tab_field( __( 'Social Media', 'tribe' ), self::SOCIAL_TAB ) );
-		$group->add_field( $this->get_social_field( __( 'Facebook', 'tribe' ), self::SOCIAL_FACEBOOK ) );
-		$group->add_field( $this->get_social_field( __( 'Twitter', 'tribe' ), self::SOCIAL_TWITTER ) );
-		$group->add_field( $this->get_social_field( __( 'LinkedIn', 'tribe' ), self::SOCIAL_LINKEDIN ) );
-		$group->add_field( $this->get_social_field( __( 'Pinterest', 'tribe' ), self::SOCIAL_PINTEREST ) );
-		$group->add_field( $this->get_social_field( __( 'YouTube', 'tribe' ), self::SOCIAL_YOUTUBE ) );
-		$group->add_field( $this->get_social_field( __( 'Instagram', 'tribe' ), self::SOCIAL_INSTAGRAM ) );
+		$group->add_field( $this->get_options_tab_field( esc_html__( 'Social Media', 'tribe' ), self::SOCIAL_TAB ) );
+		$group->add_field( $this->get_social_field( esc_html__( 'Facebook', 'tribe' ), self::SOCIAL_FACEBOOK ) );
+		$group->add_field( $this->get_social_field( esc_html__( 'Twitter', 'tribe' ), self::SOCIAL_TWITTER ) );
+		$group->add_field( $this->get_social_field( esc_html__( 'LinkedIn', 'tribe' ), self::SOCIAL_LINKEDIN ) );
+		$group->add_field( $this->get_social_field( esc_html__( 'Pinterest', 'tribe' ), self::SOCIAL_PINTEREST ) );
+		$group->add_field( $this->get_social_field( esc_html__( 'YouTube', 'tribe' ), self::SOCIAL_YOUTUBE ) );
+		$group->add_field( $this->get_social_field( esc_html__( 'Instagram', 'tribe' ), self::SOCIAL_INSTAGRAM ) );
 
 		return $group->get_attributes();
 	}
@@ -77,10 +77,10 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 	private function get_analytics_gtm_id_field(): ACF\Field {
 		$field = new ACF\Field( self::NAME . '_' . self::ANALYTICS_GTM_ID );
 		$field->set_attributes( [
-			'label'       => __( 'Google Tag Manager ID', 'tribe' ),
+			'label'       => esc_html__( 'Google Tag Manager ID', 'tribe' ),
 			'name'        => self::ANALYTICS_GTM_ID,
 			'type'        => 'text',
-			'placeholder' => __( 'Enter Google Tag Manager ID (GTM-XXXX)', 'tribe' ),
+			'placeholder' => esc_html__( 'Enter Google Tag Manager ID (GTM-XXXX)', 'tribe' ),
 		] );
 
 		return $field;
