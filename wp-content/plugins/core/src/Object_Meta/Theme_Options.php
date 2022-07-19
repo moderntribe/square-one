@@ -109,7 +109,7 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 			'toolbar'      => Classic_Editor_Formats::MINIMAL,
 			'tabs'         => 'visual',
 			'media_upload' => 0,
-			'instructions' => __( 'Appears below the logo in the site footer.', 'tribe' ),
+			'instructions' => esc_html__( 'Appears below the logo in the site footer.', 'tribe' ),
 		] );
 
 		return $field;
