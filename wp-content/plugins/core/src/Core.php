@@ -9,6 +9,8 @@ use Tribe\Project\Block_Middleware\Block_Middleware_Definer;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Blocks_Subscriber;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Color_Theme_Definer;
+use Tribe\Project\Blocks\Middleware\Post_Loop\Post_Loop_Definer;
+use Tribe\Project\Blocks\Middleware\Post_Loop\Post_Loop_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
 use Tribe\Project\CLI\CLI_Definer;
 use Tribe\Project\Integrations\ACF\ACF_Subscriber;
@@ -48,6 +50,7 @@ class Core {
 		Nav_Menus_Definer::class,
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
+		Post_Loop_Definer::class,
 		Routes_Definer::class,
 		Settings_Definer::class,
 		Theme_Definer::class,
@@ -65,6 +68,7 @@ class Core {
 		Google_Tag_Manager_Subscriber::class,
 		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
+		Post_Loop_Subscriber::class,
 		Query_Subscriber::class,
 		Routes_Subscriber::class,
 		Theme_Subscriber::class,
