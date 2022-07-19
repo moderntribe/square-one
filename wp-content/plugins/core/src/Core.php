@@ -25,7 +25,6 @@ use Tribe\Project\Settings\Settings_Definer;
 use Tribe\Project\Taxonomies;
 use Tribe\Project\Theme\Theme_Definer;
 use Tribe\Project\Theme\Theme_Subscriber;
-use Tribe\Project\Theme_Customizer\Theme_Customizer_Subscriber;
 
 class Core {
 
@@ -64,7 +63,6 @@ class Core {
 		Nav_Menus_Subscriber::class,
 		Query_Subscriber::class,
 		Routes_Subscriber::class,
-		Theme_Customizer_Subscriber::class,
 		Theme_Subscriber::class,
 		Yoast_SEO_Subscriber::class,
 
