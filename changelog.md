@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.07
+* Added: MVP Site Footer.
 * Fixed: A typo in the default theme name.
 * Updated: Move General Settings to Appearance > ["Theme Name" Options and adjust Analytics & Social Media usages appropriately. 
 * Fixed: Embeds in reusable blocks not displaying on the frontend. https://core.trac.wordpress.org/ticket/46457
