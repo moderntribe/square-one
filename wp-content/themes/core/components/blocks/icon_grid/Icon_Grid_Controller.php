@@ -151,10 +151,7 @@ class Icon_Grid_Controller extends Abstract_Controller {
 				Card_Controller::DESCRIPTION     => defer_template_part(
 					'components/container/container',
 					null,
-					[
-						Container_Controller::CONTENT => wpautop( $card->icon_description ),
-						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
-					],
+					[ Container_Controller::CONTENT => wpautop( $card->icon_description ) ],
 				),
 				Card_Controller::IMAGE           => defer_template_part(
 					'components/image/image',
@@ -239,8 +236,6 @@ class Icon_Grid_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-icon-grid__description',
-				't-sink',
-				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description,
 		] );

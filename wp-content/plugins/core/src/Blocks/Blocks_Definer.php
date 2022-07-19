@@ -67,7 +67,6 @@ class Blocks_Definer implements Definer_Interface {
 				'core/buttons',
 				'core/calendar',
 				'core/categories',
-				'core/columns',
 				'core/cover',
 				'core/gallery',
 				'core/html',

@@ -15,19 +15,20 @@
 .block-editor-block-list__layout {
 	/* Unset WP Core's vertical spacing on some headings, paragraphs, etc. */
 	* {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
-
-	/* CASE: Alignment: Full */
-	.wp-block[data-align="full"] {
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	/* Reset/remove the browser's default margin n figure inside the block editor. */
-	figure {
 		margin: 0;
+	}
+}
+
+/**
+ * Reset left and right margin for full aligned blocks
+ * to overcome aggressive WordPress core styles.
+ */
+html :where(.editor-styles-wrapper) {
+	.block-editor-block-list__layout.is-root-container > {
+		.wp-block[data-align=full] {
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
 }
 
