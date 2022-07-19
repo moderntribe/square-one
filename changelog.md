@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.07
+* Fixed: Embeds in reusable blocks not displaying on the frontend. https://core.trac.wordpress.org/ticket/46457
 * Added: Core Columns block with support for headings, paragraphs, lists, and images.
 * Updated: Base kitchen sink styles for improves specificity and admin support.
 * Fixed: Misnamed Buttons Block classes and attached button styles
