@@ -28,7 +28,7 @@ if ( empty( $c->get_buttons()->count() ) ) {
 			Link_Controller::ADD_ARIA_LABEL => $button->cta->add_aria_label,
 			Link_Controller::ARIA_LABEL     => $button->cta->aria_label,
 			Link_Controller::CLASSES        => array_filter( [
-				'b-links__list-link',
+				'b-buttons__button',
 				$style,
 			] ),
 		] );

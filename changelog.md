@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.07
+* Fixed: A typo in the default theme name.
+* Updated: Move General Settings to Appearance > ["Theme Name" Options and adjust Analytics & Social Media usages appropriately. 
+* Fixed: Embeds in reusable blocks not displaying on the frontend. https://core.trac.wordpress.org/ticket/46457
+* Added: Core Columns block with support for headings, paragraphs, lists, and images.
+* Updated: Base kitchen sink styles for improves specificity and admin support.
+* Fixed: Misnamed Buttons Block classes and attached button styles
+
 ## 2022.06
 * Fixed: Erroneous link clicks in card.js for mouse right-clicks on Windows. 
 * Bumped: Tribe Libs to 3.4.18 to update block generators to escape labels.

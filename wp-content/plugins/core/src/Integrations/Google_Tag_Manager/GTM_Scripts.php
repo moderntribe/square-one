@@ -2,9 +2,15 @@
 
 namespace Tribe\Project\Integrations\Google_Tag_Manager;
 
-use Tribe\Project\Theme_Customizer\Customizer_Sections\Analytics_Settings;
+use Tribe\Project\Object_Meta\Theme_Options;
 
 class GTM_Scripts {
+
+	private Theme_Options $settings;
+
+	public function __construct( Theme_Options $settings ) {
+		$this->settings = $settings;
+	}
 
 	/**
 	 *  Google Tag Manager (head tag)
@@ -13,7 +19,7 @@ class GTM_Scripts {
 	 */
 	public function inject_google_tag_manager_head_tag(): void {
 
-		$id = get_theme_mod( Analytics_Settings::ANALYTICS_GTM_ID );
+		$id = $this->settings->get_value( Theme_Options::ANALYTICS_GTM_ID );
 
 		if ( empty( $id ) ) {
 			return;
@@ -34,7 +40,7 @@ class GTM_Scripts {
 				j.src =
 					'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
 				f.parentNode.insertBefore(j, f);
-			})(window, document, 'script', 'dataLayer', '<?php esc_attr_e( $id ); ?>');</script>
+			})(window, document, 'script', 'dataLayer', '<?php echo $id; ?>');</script>
 		<!-- End Google Tag Manager -->
 
 		<?php
@@ -47,7 +53,7 @@ class GTM_Scripts {
 	 */
 	public function inject_google_tag_manager_body_tag(): void {
 
-		$id = get_theme_mod( Analytics_Settings::ANALYTICS_GTM_ID );
+		$id = $this->settings->get_value( Theme_Options::ANALYTICS_GTM_ID );
 
 		if ( empty( $id ) ) {
 			return;
@@ -57,7 +63,7 @@ class GTM_Scripts {
 
 		<!-- Google Tag Manager (noscript) -->
 		<noscript>
-			<iframe src="https://www.googletagmanager.com/ns.html?id=<?php esc_attr_e( $id ); ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+			<iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $id; ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe>
 		</noscript>
 		<!-- End Google Tag Manager (noscript) -->
 

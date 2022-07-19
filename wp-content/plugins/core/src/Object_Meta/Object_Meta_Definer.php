@@ -15,10 +15,16 @@ class Object_Meta_Definer implements Definer_Interface {
 		return [
 			// add our meta groups to the global array
 			\Tribe\Libs\Object_Meta\Object_Meta_Definer::GROUPS => DI\add( [
+				DI\get( Theme_Options::class ),
 				DI\get( Post_Archive_Settings::class ),
 				DI\get( Post_Archive_Featured_Settings::class ),
 				DI\get( Taxonomy_Archive_Settings::class ),
 			] ),
+
+			Theme_Options::class                                => DI\autowire()
+				->constructorParameter( 'object_types', static fn( ContainerInterface $c ) => [
+					'settings_pages' => [ $c->get( Settings\Theme_Options::class )->get_slug() ],
+				] ),
 
 			Post_Archive_Featured_Settings::class               => DI\autowire()
 				->constructorParameter( 'object_types', static fn( ContainerInterface $c ) => [
