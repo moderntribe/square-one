@@ -186,7 +186,7 @@ class Accordion_Controller extends Abstract_Controller {
 
 	/**
 	 * @TODO This isn't called anywhere.
-	 *       
+	 *
 	 * @return string
 	 */
 	public function get_row_header_name(): string {
@@ -221,7 +221,7 @@ class Accordion_Controller extends Abstract_Controller {
 			self::ROW_HEADER_CLASSES            => [ 'c-accordion__header', 'h5' ],
 			self::ROW_HEADER_CONTAINER_CLASSES  => [ 'c-accordion__header-container' ],
 			self::ROW_CONTENT_CLASSES           => [ 'c-accordion__content' ],
-			self::ROW_CONTENT_CONTAINER_CLASSES => [ 'c-accordion__content-container', 't-sink', 's-sink' ],
+			self::ROW_CONTENT_CONTAINER_CLASSES => [ 'c-accordion__content-container' ],
 			self::CONTAINER_ATTRS               => [
 				'data-js' => 'c-accordion',
 			],

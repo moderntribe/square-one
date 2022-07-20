@@ -11,7 +11,7 @@ class Settings_Definer implements Definer_Interface {
 		return [
 			// add the settings screens to the global array
 			\Tribe\Libs\Settings\Settings_Definer::PAGES => DI\add( [
-				DI\get( General::class ),
+				DI\get( Theme_Options::class ),
 				DI\get( Post_Settings::class ),
 			] ),
 		];

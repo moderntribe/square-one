@@ -385,8 +385,6 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-gallery-grid__description',
-				't-sink',
-				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
