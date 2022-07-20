@@ -50,7 +50,7 @@ class Index_Controller extends Abstract_Controller {
 		return [
 			Content_Loop_Controller::CLASSES => [ 'item-index__loop' ],
 			Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_COLUMNS,
-			Content_Loop_Controller::POSTS   => $this->post_loop->proxy_posts( $wp_query->posts ),
+			Content_Loop_Controller::POSTS   => $this->post_loop->get_posts( $wp_query->posts ),
 		];
 	}
 
@@ -73,7 +73,7 @@ class Index_Controller extends Abstract_Controller {
 
 		return [
 			Content_Loop_Controller::LAYOUT            => Content_Loop::LAYOUT_FEATURE,
-			Content_Loop_Controller::POSTS             => $this->post_loop->proxy_posts( array_slice( $featured_post_query, 0, $max_posts ) ),
+			Content_Loop_Controller::POSTS             => $this->post_loop->get_posts( array_slice( $featured_post_query, 0, $max_posts ) ),
 			Content_Loop_Controller::ENABLE_PAGINATION => false,
 		];
 	}

@@ -3,11 +3,8 @@
 namespace Tribe\Project\Blocks\Middleware\Post_Loop;
 
 use Psr\SimpleCache\CacheInterface;
-use stdClass;
-use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Middleware\Post_Loop\Field_Middleware\Post_Loop_Field_Middleware;
 use Tribe\Project\Blocks\Middleware\Post_Loop\Models\Post_Loop_Model;
-use Tribe\Project\Taxonomies\Category\Category;
 use WP_Post;
 use WP_Query;
 
@@ -22,22 +19,41 @@ class Post_Loop_Controller {
 
 	protected Post_Loop_Model $model;
 	protected CacheInterface $store;
+	protected Post_Cache_Manager $cache_manager;
+	protected Manual_Post_Manager $manual_post_manager;
 
-	public function __construct( Post_Loop_Model $model, CacheInterface $store ) {
-		$this->model = $model;
-		$this->store = $store;
+	public function __construct(
+		Post_Loop_Model $model,
+		Post_Cache_Manager $cache_manager,
+		Manual_Post_Manager $manual_post_manager
+	) {
+		$this->model               = $model;
+		$this->cache_manager       = $cache_manager;
+		$this->manual_post_manager = $manual_post_manager;
 	}
 
 	/**
-	 * Returns a list of proxy posts.
+	 * Returns a list of Post Proxy objects.
+	 *
+	 * @param \WP_Post[]|array<int, array>                                           $posts
+	 * @param bool                                                                   $manual_posts Whether this is a manual/faux post request.
+	 * @param \Tribe\Project\Blocks\Middleware\Post_Loop\Models\Post_Loop_Model|null $model
 	 *
 	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 *
 	 * @return \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Proxy[]
 	 */
-	public function get_posts(): array {
+	public function get_posts( array $posts = [], bool $manual_posts = false, ?Post_Loop_Model $model = null ): array {
+		if ( $model ) {
+			$this->model = $model;
+		}
+
+		if ( $posts ) {
+			return $this->proxy_posts( $posts, $manual_posts );
+		}
+
 		if ( $this->model->query_type !== Post_Loop_Field_Middleware::QUERY_TYPE_AUTO ) {
-			return $this->get_manual_posts();
+			return $this->proxy_posts( $this->manual_post_manager->get_post_data( $this->model ), true );
 		}
 
 		// @phpstan-ignore-next-line WordPress once again lies about it types.
@@ -48,17 +64,20 @@ class Post_Loop_Controller {
 	 * Wrap WP_Post objects in our proxy object.
 	 *
 	 * @param \WP_Post[]|array<int, array> $posts
-	 *
-	 * @see WP_Post::get_instance()
+	 * @param bool                         $manual_posts Whether this is a manual/faux post request.
 	 *
 	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 *
+	 * @see WP_Post::get_instance()
+	 *
 	 * @return \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Proxy[]
 	 */
-	public function proxy_posts( array $posts, bool $manual_posts = false ): array {
+	protected function proxy_posts( array $posts, bool $manual_posts = false ): array {
 		return array_map( function ( $post ) use ( $manual_posts ) {
+			$this->cache_manager->flush_term_relationship( $post->ID ?? $post['ID'] );
+
 			if ( $post instanceof WP_Post ) {
-				$post = $this->post_to_array( $post );
+				$post = $post->to_array();
 			}
 
 			$id = $post['ID'];
@@ -69,20 +88,15 @@ class Post_Loop_Controller {
 
 			if ( empty( $post['cta']['link'] ) ) {
 				$post['cta']['link'] = [
-					'url'   => get_the_permalink( $id ) ?: '',
-					'title' => get_the_title( $id ) ?: '',
+					'url'   => (string) get_the_permalink( $id ),
+					'title' => get_the_title( $id ),
 				];
 			}
 
 			$post_proxy = new Post_Proxy( $post );
 
 			if ( $manual_posts ) {
-				$this->store->set( (string) $post_proxy->ID, $post_proxy );
-
-				// Allow core WordPress functions that take a post ID to still function.
-				if ( $post_proxy->is_faux_post() ) {
-					wp_cache_add( $post_proxy->ID, $post_proxy->post(), 'posts' );
-				}
+				$this->cache_manager->add_post( $post_proxy );
 			}
 
 			return $post_proxy;
@@ -143,106 +157,6 @@ class Post_Loop_Controller {
 		}
 
 		return array_values( $tax_args );
-	}
-
-	/**
-	 * Collect the manually selected posts and the fake posts.
-	 *
-	 * @throws \Psr\SimpleCache\InvalidArgumentException
-	 *
-	 * @return \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Proxy[]
-	 */
-	protected function get_manual_posts(): array {
-		$posts = [];
-		$count = PHP_INT_MIN;
-
-		foreach ( $this->model->manual_posts as $repeater ) {
-			if ( ! is_array( $repeater ) ) {
-				continue;
-			}
-
-			$repeater = array_filter( $repeater );
-
-			$post  = $repeater[ Post_Loop_Field_Middleware::MANUAL_POST ] ??= new WP_Post( new stdClass() );
-			$image = $repeater[ Post_Loop_Field_Middleware::MANUAL_IMAGE ] ??= null;
-			$cta   = $repeater[ Cta_Field::GROUP_CTA ] ??= null;
-			$post  = $this->post_to_array( $post );
-
-			// Set faux post defaults if we aren't overriding an existing post and creating one from nothing.
-			if ( ! $post['ID'] ) {
-				$post = array_merge( $post, [
-					'ID'             => $count,
-					'filter'         => 'raw',
-					'comment_status' => 'closed',
-					'ping_status'    => 'closed',
-					'post_name'      => sprintf( 'p-%d', abs( $count ) ),
-				] );
-			}
-
-			// Apply overrides and add custom data.
-			$post = array_merge( $post, array_intersect_key( $repeater, $post ), [
-				'image' => $image,
-				'cta'   => $cta,
-			] );
-
-			// Don't show blank repeater posts until they have at least a title
-			if ( empty( $post['post_title'] ) && $post['ID'] < 0 ) {
-				continue;
-			}
-
-			$post['post_category'] ??= [];
-			$post['post_category']   = array_unique( (array) $post['post_category'] );
-
-			$category = get_taxonomy( Category::NAME );
-
-			// Assign the default category if this post supports it
-			if ( $category ) {
-				if ( in_array( $post['post_type'], (array) $category->object_type, true ) ) {
-					if ( empty( $post['post_category'] ) ) {
-						$post['post_category'] = [ (int) get_option( 'default_category' ) ];
-					}
-				} else {
-					unset( $post['post_category'] );
-				}
-			}
-
-			// Post date could have been modified, set the proper GMT date.
-			$post['post_date_gmt'] = get_gmt_from_date( $post['post_date'] );
-
-			$this->clear_term_cache( $post['ID'] );
-
-			$posts[] = $post;
-			$count ++;
-		}
-
-		return $this->proxy_posts( $posts, true );
-	}
-
-	/**
-	 * Ensure live block updates and page loads show the correct category by clearing the
-	 * term relationship cache.
-	 *
-	 * @param int $post_id
-	 *
-	 * @return void
-	 */
-	protected function clear_term_cache( int $post_id ): void {
-		wp_cache_delete( $post_id, sprintf( '%s_relationships', Category::NAME ) );
-	}
-
-	/**
-	 * Convert a WP_Post object into an array, ensuring term relationship caches are cleared first.
-	 *
-	 * @param \WP_Post $post
-	 *
-	 * @return array
-	 */
-	protected function post_to_array( WP_Post $post ): array {
-		if ( $post->ID !== null ) {
-			$this->clear_term_cache( $post->ID );
-		}
-
-		return $post->to_array();
 	}
 
 }

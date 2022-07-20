@@ -19,7 +19,11 @@ class Post_Loop_Field_Model_Middleware extends Abstract_Model_Middleware {
 	protected Acf_Field_Fetcher $field_fetcher;
 	protected FactoryInterface $container;
 
-	public function __construct( Block_Model_Middleware_Guard $guard, Acf_Field_Fetcher $field_fetcher, FactoryInterface $container ) {
+	public function __construct(
+		Block_Model_Middleware_Guard $guard,
+		Acf_Field_Fetcher $field_fetcher,
+		FactoryInterface $container
+	) {
 		parent::__construct( $guard );
 
 		$this->field_fetcher = $field_fetcher;
@@ -36,6 +40,7 @@ class Post_Loop_Field_Model_Middleware extends Abstract_Model_Middleware {
 	 *
 	 * @throws \DI\DependencyException
 	 * @throws \DI\NotFoundException
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 *
 	 * @return \Tribe\Project\Blocks\Contracts\Model
 	 */

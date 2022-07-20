@@ -18,6 +18,8 @@ final class PostLoopControllerTest extends Test_Case {
 		parent::_setUp();
 
 		$this->store = $this->container->make( CacheInterface::class );
+
+		$this->container->make( Post_Cache_Manager::class );
 	}
 
 	public function _tearDown() {
@@ -44,7 +46,9 @@ final class PostLoopControllerTest extends Test_Case {
 		$posts = $this->factory()->post->create_many( 5 );
 		$posts = array_map( static fn( int $id ) => get_post( $id ), $posts );
 
-		$controller    = new Post_Loop_Controller( $post_loop_model, $this->store );
+		$controller    = $this->container->make( Post_Loop_Controller::class, [
+			'model' => $post_loop_model,
+		] );
 		$proxied_posts = $controller->get_posts();
 
 		$this->assertSame( count( $posts ), count( $proxied_posts ) );
@@ -70,8 +74,10 @@ final class PostLoopControllerTest extends Test_Case {
 		$posts = $this->factory()->post->create_many( 5 );
 		$posts = array_map( static fn( int $id ) => get_post( $id ), $posts );
 
-		$controller    = new Post_Loop_Controller( $post_loop_model, $this->store );
-		$proxied_posts = $controller->proxy_posts( $posts );
+		$controller    = $this->container->make( Post_Loop_Controller::class, [
+			'model' => $post_loop_model,
+		] );
+		$proxied_posts = $controller->get_posts( $posts );
 
 		$this->assertSame( count( $posts ), count( $proxied_posts ) );
 
@@ -122,7 +128,9 @@ final class PostLoopControllerTest extends Test_Case {
 
 		$post_loop_model->manual_posts = $posts;
 
-		$controller    = new Post_Loop_Controller( $post_loop_model, $this->store );
+		$controller    = $this->container->make( Post_Loop_Controller::class, [
+			'model' => $post_loop_model,
+		] );
 		$proxied_posts = $controller->get_posts();
 
 		$this->assertSame( count( $posts ), count( $proxied_posts ) );
