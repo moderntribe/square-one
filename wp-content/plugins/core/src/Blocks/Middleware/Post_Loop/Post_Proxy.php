@@ -37,6 +37,16 @@ class Post_Proxy extends Field_Model {
 	}
 
 	/**
+	 * Whether this post exists in the database or not. Faux
+	 * posts have negative ID's.
+	 *
+	 * @return bool
+	 */
+	public function is_faux_post(): bool {
+		return $this->post->ID < 0;
+	}
+
+	/**
 	 * Proxy properties to the WP_Post delegate.
 	 *
 	 * @param string $property

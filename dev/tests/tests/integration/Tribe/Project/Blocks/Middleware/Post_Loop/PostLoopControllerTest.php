@@ -138,17 +138,17 @@ final class PostLoopControllerTest extends Test_Case {
 			$this->assertLessThan( 0, $proxied_posts[$i]->ID );
 			$this->assertSame( $posts[$i][ Post_Loop_Field_Middleware::MANUAL_POST_DATE ], get_the_date( 'Y-m-d H:i:s', $proxied_posts[$i]->post() )  );
 
-			// We can't get a title from a post that doesn't actually exist in the data
-			$this->assertEmpty( get_the_title( $proxied_posts[$i]->ID ) );
+			// Due to how WordPress checks the cache, we can even pass our negative ID's to core functions
+			$this->assertSame( sprintf( 'Test post %d', $i+1 ), get_the_title( $proxied_posts[$i]->ID ) );
 
 			// But, we can get it from the actual post object due to `filter => 'raw'`
 			$this->assertSame( sprintf( 'Test post %d', $i+1 ), get_the_title( $proxied_posts[$i]->post() ) );
 
 			// Same goes for any template/post function...always use the proxied WP_Post object for these.
-			$this->assertEmpty( get_the_excerpt( $proxied_posts[$i]->ID ) );
+			$this->assertSame( sprintf( 'Test post %d excerpt', $i+1 ), get_the_excerpt( $proxied_posts[$i]->ID ) );
 			$this->assertSame( sprintf( 'Test post %d excerpt', $i+1 ), get_the_excerpt( $proxied_posts[$i]->post() ) );
 
-			$this->assertEmpty( get_post_field( 'post_author', $proxied_posts[$i]->ID ) );
+			$this->assertSame( 1, get_post_field( 'post_author', $proxied_posts[$i]->ID ) );
 			$this->assertSame( 1, get_post_field( 'post_author', $proxied_posts[$i]->post() ) );
 
 			// We build post slugs as `p-$ID`, faux post IDs are negative, so convert them to a positive int like the controller does.

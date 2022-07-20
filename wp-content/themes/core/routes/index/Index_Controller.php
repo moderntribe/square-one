@@ -40,6 +40,9 @@ class Index_Controller extends Abstract_Controller {
 		return $this->sidebar_id;
 	}
 
+	/**
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
 	public function get_content_loop_args(): array {
 		global $wp_query;
 
@@ -55,6 +58,8 @@ class Index_Controller extends Abstract_Controller {
 	 * Get posts in the featured posts from the Post Archive Settings page.
 	 *
 	 * @param int $max_posts The maximum number of featured posts to display.
+	 *
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 *
 	 * @return array
 	 */

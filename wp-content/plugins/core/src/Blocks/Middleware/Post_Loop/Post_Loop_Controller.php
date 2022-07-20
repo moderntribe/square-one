@@ -49,6 +49,8 @@ class Post_Loop_Controller {
 	 *
 	 * @param \WP_Post[]|array<int, array> $posts
 	 *
+	 * @see WP_Post::get_instance()
+	 *
 	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 *
 	 * @return \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Proxy[]
@@ -76,6 +78,11 @@ class Post_Loop_Controller {
 
 			if ( $manual_posts ) {
 				$this->store->set( (string) $post_proxy->ID, $post_proxy );
+
+				// Allow core WordPress functions that take a post ID to still function.
+				if ( $post_proxy->is_faux_post() ) {
+					wp_cache_add( $post_proxy->ID, $post_proxy->post(), 'posts' );
+				}
 			}
 
 			return $post_proxy;

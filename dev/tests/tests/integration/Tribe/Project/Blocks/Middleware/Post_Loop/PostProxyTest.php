@@ -49,6 +49,7 @@ final class PostProxyTest extends Test_Case {
 		$this->assertSame( 'Test Link', $post_proxy->cta->link->title );
 		$this->assertInstanceOf( Image::class, $post_proxy->image );
 		$this->assertSame( 0, $post_proxy->image->id );
+		$this->assertFalse( $post_proxy->is_faux_post() );
 
 		// Test some template functions
 		$original_date = get_the_date( '', $post );
@@ -56,6 +57,14 @@ final class PostProxyTest extends Test_Case {
 		$this->assertSame( $original_date, get_the_date( '', $post_proxy->post() ) );
 		$this->assertSame( get_the_title( $post ), get_the_title( $post_proxy->post() ) );
 		$this->assertSame( get_the_permalink( $post ), get_the_permalink( $post_proxy->post() ) );
+	}
+
+	public function test_it_detects_faux_posts(): void {
+		$post_proxy = new Post_Proxy( [
+			'ID' => -9998,
+		] );
+
+		$this->assertTrue( $post_proxy->is_faux_post() );
 	}
 
 }
