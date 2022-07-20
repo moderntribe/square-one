@@ -40,6 +40,7 @@ const isElementHidden = ( el ) => {
 const android = /(android)/i.test( navigator.userAgent );
 const chrome = !! window.chrome;
 const firefox = typeof InstallTrigger !== 'undefined';
+const ie = /* @cc_on!@ */ false || document.documentMode || false;
 const edge = ! ie && !! window.StyleMedia;
 const ios = !! navigator.userAgent.match( /(iPod|iPhone|iPad)/i );
 const iosMobile = !! navigator.userAgent.match( /(iPod|iPhone)/i );
@@ -57,6 +58,7 @@ function browserTests() {
 		chrome,
 		edge,
 		firefox,
+		ie,
 		ios,
 		iosMobile,
 		opera,
