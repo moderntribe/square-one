@@ -22,7 +22,7 @@ class Term_Manager {
 	}
 
 	/**
-	 * Add terms to "faux manual posts" or, override existing manual posts' terms based on
+	 * Add terms to faux/manual posts or, override existing manual posts' terms based on
 	 * what the user selected in the Manual Query ACF UI.
 	 *
 	 * @filter get_terms
