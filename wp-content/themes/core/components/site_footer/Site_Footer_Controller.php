@@ -102,7 +102,7 @@ class Site_Footer_Controller extends Abstract_Controller {
 	private function get_logo_image_svg_src( int $image_id ): string {
 		$image_path = get_attached_file( $image_id );
 
-		return file_exists( $image_path ) ? file_get_contents( $image_path ) : '';
+		return is_readable( $image_path ) ? file_get_contents( $image_path ) : '';
 	}
 
 	private function get_logo_image_default_src( int $image_id ): string {
