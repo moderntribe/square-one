@@ -29,15 +29,6 @@ class Post_Loop_Controller {
 	}
 
 	/**
-	 * Get the post store containing faux Post_Proxy objects.
-	 *
-	 * @return \Psr\SimpleCache\CacheInterface
-	 */
-	public function get_store(): CacheInterface {
-		return $this->store;
-	}
-
-	/**
 	 * Returns a list of proxy posts.
 	 *
 	 * @throws \Psr\SimpleCache\InvalidArgumentException
