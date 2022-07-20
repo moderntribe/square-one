@@ -43,7 +43,7 @@ class Post_Proxy extends Field_Model {
 	 * @return bool
 	 */
 	public function is_faux_post(): bool {
-		return $this->post->ID < 0;
+		return $this->post()->ID < 0;
 	}
 
 	/**
