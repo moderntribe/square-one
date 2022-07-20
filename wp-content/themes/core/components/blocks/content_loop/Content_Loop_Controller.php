@@ -195,7 +195,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT => get_the_date( 'F Y', $post->post() ),
+						Container_Controller::CONTENT => get_the_date( 'F Y', $post->ID ),
 						Container_Controller::CLASSES => [ 'c-card__date' ],
 					],
 				),
