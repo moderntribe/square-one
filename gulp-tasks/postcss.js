@@ -50,18 +50,6 @@ const compileGutenbergPlugins = sharedPlugins.concat( [
 	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
 ] );
 
-const legacyPlugins = [
-	require( 'postcss-partial-import' )( {
-		extension: '.pcss',
-		prefix: '_',
-	} ),
-	require( 'postcss-mixins' ),
-	require( 'postcss-simple-vars' ),
-	require( 'postcss-nested' ),
-	require( 'postcss-preset-env' )( { browsers: [ 'last 20 versions' ], preserve: false } ),
-	require( 'postcss-assets' )( { loadPaths: [ `${ pkg.square1.paths.core_theme }/` ] } ),
-];
-
 /**
  *
  *
@@ -105,15 +93,6 @@ module.exports = {
 				`${ pkg.square1.paths.core_theme_pcss }print.pcss`,
 			],
 			dest: pkg.square1.paths.core_theme_css,
-		} );
-	},
-	themeLegacy() {
-		return cssProcess( {
-			src: [
-				`${ pkg.square1.paths.core_theme_pcss }legacy.pcss`,
-			],
-			dest: pkg.square1.paths.core_theme_css,
-			plugins: legacyPlugins,
 		} );
 	},
 	admin() {

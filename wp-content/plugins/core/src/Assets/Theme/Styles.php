@@ -31,8 +31,8 @@ class Styles {
 	 * @action wp_enqueue_scripts
 	 */
 	public function enqueue_styles(): void {
-		// enqueue all non-legacy handles
-		foreach ( $this->build_parser->get_non_legacy_style_handles() as $handle ) {
+		// enqueue all handles
+		foreach ( $this->build_parser->get_build_parser_style_handles() as $handle ) {
 			wp_enqueue_style( $handle );
 		}
 	}
