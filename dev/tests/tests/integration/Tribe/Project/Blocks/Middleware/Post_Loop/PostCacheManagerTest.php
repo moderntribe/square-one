@@ -41,7 +41,7 @@ final class PostCacheManagerTest extends Test_Case {
 		$this->assertInstanceOf( WP_Post::class, $cached_post );
 		$this->assertSame( - 99, $cached_post->ID );
 		$this->assertTrue( $this->store->has( (string) $post_proxy->ID ) );
-		$this->assertSame( - 99, $this->store->get( (string) $post_proxy->ID )->ID );
+		$this->assertEquals( $cached_post, $post_proxy->post() );
 	}
 
 	public function test_it_flushes_faux_post_term_cache(): void {
