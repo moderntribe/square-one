@@ -42,7 +42,6 @@ module.exports = {
 
 		gulp.watch( [
 			`${ pkg.square1.paths.core_theme_pcss }legacy.pcss`,
-			`${ pkg.square1.paths.core_theme_routes }unsupported_browser/css/unsupported-browser.pcss`,
 		], gulp.parallel( 'postcss:themeLegacy' ) );
 
 		// watch the login postcss

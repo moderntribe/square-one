@@ -35,17 +35,6 @@ class Web_Fonts {
 	}
 
 	/**
-	 * Unsupported Browser Page Fonts.
-	 *
-	 * @action tribe/unsupported_browser/head
-	 */
-	public function inject_unsupported_browser_fonts(): void {
-		foreach ( $this->get_font_urls() as $url ) {
-			printf( "<link rel='stylesheet' href='%s' type='text/css' media='all'>\n\t", esc_url( $url ) );
-		}
-	}
-
-	/**
 	 * TinyMCE Editor Fonts
 	 *
 	 * @action after_setup_theme

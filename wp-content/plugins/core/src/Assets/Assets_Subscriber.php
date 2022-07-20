@@ -25,7 +25,6 @@ class Assets_Subscriber extends Abstract_Subscriber {
 		}
 
 		$this->theme_resources();
-		$this->legacy_resources();
 		$this->admin_resources();
 		$this->login_resources();
 	}
@@ -52,20 +51,6 @@ class Assets_Subscriber extends Abstract_Subscriber {
 		add_action( 'wp_footer', function (): void {
 			$this->container->get( Theme\Scripts::class )->add_early_polyfills();
 		}, 10, 0 );
-	}
-
-	private function legacy_resources(): void {
-		add_action( 'wp_head', function (): void {
-			$this->container->get( Theme\Legacy_Check::class )->print_redirect_script();
-		}, 0, 0 );
-
-		add_action( 'init', function (): void {
-			$this->container->get( Theme\Legacy_Check::class )->add_unsupported_rewrite();
-		} );
-
-		add_filter( 'template_include', function ( $template ) {
-			return $this->container->get( Theme\Legacy_Check::class )->load_unsupported_template( (string) $template );
-		} );
 	}
 
 	private function admin_resources(): void {
