@@ -9,7 +9,8 @@ class Term_Manager {
 	protected CacheInterface $store;
 
 	/**
-	 * A list of taxonomy names that can have their terms replaced.
+	 * The taxonomies that will allow term replacement when fetching terms
+	 * for manual/faux posts.
 	 *
 	 * @var string[]
 	 */
