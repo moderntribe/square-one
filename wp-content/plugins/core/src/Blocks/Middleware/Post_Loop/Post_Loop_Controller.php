@@ -95,6 +95,7 @@ class Post_Loop_Controller {
 
 			$post_proxy = new Post_Proxy( $post );
 
+			// Manual/faux posts need to be added to the cache/store, so WordPress can find them later.
 			if ( $manual_posts ) {
 				$this->cache_manager->add_post( $post_proxy );
 			}
