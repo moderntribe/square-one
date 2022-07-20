@@ -22,6 +22,8 @@ class Manual_Post_Manager {
 	/**
 	 * Build faux or overridden manual post data to be converted into a Post_Proxy object.
 	 *
+	 * Faux posts have a negative post ID.
+	 *
 	 * @param \Tribe\Project\Blocks\Middleware\Post_Loop\Models\Post_Loop_Model $model
 	 *
 	 * @see \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Loop_Controller::get_posts()
