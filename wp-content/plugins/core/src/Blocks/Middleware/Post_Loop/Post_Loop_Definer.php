@@ -16,7 +16,10 @@ class Post_Loop_Definer implements Definer_Interface {
 		return [
 			CacheInterface::class    => DI\get( Memory::class ),
 
-			// When using manual posts, taxonomies that can have their terms replaced.
+			/**
+			 * The taxonomies that will allow term replacement when fetching terms
+			 * for manual/faux posts.
+			 */
 			self::ALLOWED_TAXONOMIES => DI\add( [
 				Category::NAME,
 			] ),
