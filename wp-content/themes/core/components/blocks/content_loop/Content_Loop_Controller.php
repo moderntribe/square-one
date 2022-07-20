@@ -13,9 +13,12 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Components\Traits\Primary_Term;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Content_Loop_Controller extends Abstract_Controller {
+
+	use Primary_Term;
 
 	public const ATTRS             = 'attrs';
 	public const CLASSES           = 'classes';
@@ -104,7 +107,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 		foreach ( $this->posts as $post ) {
 			$uuid             = uniqid( 'p-' );
-			$cat              = get_the_category( $post->ID );
+			$cat              = $this->get_primary_term( $post->ID );
 			$card_description = [];
 
 			$image_array = [
@@ -173,7 +176,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT => $cat[0]->name ?? '',
+						Container_Controller::CONTENT => $cat->name ?? '',
 						Container_Controller::CLASSES => [ 't-tag' ],
 					],
 				),
