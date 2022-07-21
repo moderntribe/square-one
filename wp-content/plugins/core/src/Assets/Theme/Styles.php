@@ -32,7 +32,7 @@ class Styles {
 	 */
 	public function enqueue_styles(): void {
 		// enqueue all handles
-		foreach ( $this->build_parser->get_build_parser_style_handles() as $handle ) {
+		foreach ( $this->build_parser->get_style_handles() as $handle ) {
 			wp_enqueue_style( $handle );
 		}
 	}
