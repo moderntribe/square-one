@@ -36,6 +36,11 @@
 
 .c-site-footer__logo {
 	max-width: var(--grid-4-col);
+	margin: 0 auto;
+
+	@media (--viewport-large) {
+		margin: 0;
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -61,7 +66,7 @@
 .c-site-footer__nav {
 	margin-top: var(--spacer-60);
 
-	@media (--viewport-full) {
+	@media (--viewport-large) {
 		margin-top: var(--spacer-20);
 	}
 }
