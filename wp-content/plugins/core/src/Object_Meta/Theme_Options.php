@@ -13,6 +13,8 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 	public const FOOTER_TAB         = 'tab_footer';
 	public const FOOTER_LOGO        = 'footer_logo';
 	public const FOOTER_DESCRIPTION = 'footer_description';
+	public const FOOTER_CTA_1       = 'footer_cta_1';
+	public const FOOTER_CTA_2       = 'footer_cta_2';
 
 	 // Analytics
 	public const ANALYTICS_TAB    = 'tab_analytics';
@@ -59,6 +61,8 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 		$group->add_field( $this->get_options_tab_field( esc_html__( 'Site Footer', 'tribe' ), self::FOOTER_TAB ) );
 		$group->add_field( $this->get_footer_logo_field() );
 		$group->add_field( $this->get_footer_description_field() );
+		$group->add_field( $this->get_footer_cta_field( esc_html__( 'Call To Action 1', 'tribe' ), self::FOOTER_CTA_1 ) );
+		$group->add_field( $this->get_footer_cta_field( esc_html__( 'Call To Action 2', 'tribe' ), self::FOOTER_CTA_2 ) );
 
 		// Analytics Tab
 		$group->add_field( $this->get_options_tab_field( esc_html__( 'Analytics', 'tribe' ), self::ANALYTICS_TAB ) );
@@ -110,6 +114,17 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 			'tabs'         => 'visual',
 			'media_upload' => 0,
 			'instructions' => esc_html__( 'Appears below the logo in the site footer.', 'tribe' ),
+		] );
+
+		return $field;
+	}
+
+	private function get_footer_cta_field( string $field_label, string $field_id ): ACF\Field {
+		$field = new ACF\Field( self::NAME . '_' . $field_id );
+		$field->set_attributes( [
+			'label' => $field_label,
+			'name'  => $field_id,
+			'type'  => 'link',
 		] );
 
 		return $field;
