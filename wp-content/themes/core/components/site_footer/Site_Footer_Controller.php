@@ -50,7 +50,7 @@ class Site_Footer_Controller extends Abstract_Controller {
 		}
 
 		return [
-			Container_Controller::CLASSES => [ 'c-cite-footer__ctas' ],
+			Container_Controller::CLASSES => [ 'c-site-footer__ctas' ],
 			Container_Controller::CONTENT => $ctas,
 		];
 	}
