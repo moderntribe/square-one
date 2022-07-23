@@ -18,6 +18,7 @@ $c = Site_Footer_Controller::factory( $args );
 
 			<div class="c-site-footer__content">
 				<?php get_template_part( 'components/container/container', '', $c->get_description_args() ); ?>
+				<?php get_template_part( 'components/container/container', '', $c->get_ctas_args() ); ?>
 			</div>
 
 			<div class="c-site-footer__nav">

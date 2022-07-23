@@ -41,6 +41,20 @@ class Site_Footer_Controller extends Abstract_Controller {
 		];
 	}
 
+	public function get_ctas_args(): array {
+		$ctas  = $this->get_cta( Theme_Options::FOOTER_CTA_1 );
+		$ctas .= $this->get_cta( Theme_Options::FOOTER_CTA_2 );
+
+		if ( empty( $ctas ) ) {
+			return [];
+		}
+
+		return [
+			Container_Controller::CLASSES => [ 'c-cite-footer__ctas' ],
+			Container_Controller::CONTENT => $ctas,
+		];
+	}
+
 	public function get_footer_nav_args(): array {
 		return [
 			Navigation_Controller::MENU_LOCATION    => Nav_Menus_Definer::FOOTER,
@@ -119,6 +133,23 @@ class Site_Footer_Controller extends Abstract_Controller {
 		];
 
 		return tribe_template_part( 'components/image/image', '', $args );
+	}
+
+	private function get_cta( string $key ): string {
+		$link = $this->settings->get_value( $key );
+
+		if ( empty( $link['url'] ) ) {
+			return '';
+		}
+
+		$args = [
+			Link_Controller::URL     => $link['url'],
+			Link_Controller::CONTENT => $link['title'],
+			Link_Controller::TARGET  => $link['target'],
+			Link_Controller::CLASSES => [ 'c-site-footer_cta', 'a-btn-secondary' ],
+		];
+
+		return tribe_template_part( 'components/link/link', '', $args );
 	}
 
 }

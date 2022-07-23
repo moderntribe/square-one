@@ -33,6 +33,8 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 		return [
 			static::FOOTER_LOGO,
 			static::FOOTER_DESCRIPTION,
+			static::FOOTER_CTA_1,
+			static::FOOTER_CTA_2,
 			static::ANALYTICS_GTM_ID,
 			static::SOCIAL_FACEBOOK,
 			static::SOCIAL_TWITTER,
