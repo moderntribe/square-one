@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 * Added: Core Columns block with support for headings, paragraphs, lists, and images.
 * Updated: Base kitchen sink styles for improves specificity and admin support.
 * Fixed: Misnamed Buttons Block classes and attached button styles
+* Removed: Legacy "unsupported browser" feature and all related build system features.
 
 ## 2022.06
 * Fixed: Erroneous link clicks in card.js for mouse right-clicks on Windows. 

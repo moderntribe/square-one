@@ -45,7 +45,6 @@ const gulpTasks = [
 	/* Cssnano tasks */
 
 	'cssnano:themeMin', // minify the theme css
-	'cssnano:themeLegacyMin', // minify the legacy css for old browsers
 	'cssnano:adminMin', // minify the main admin css bundle
 	'cssnano:adminBlockEditorMin', // minify the theme css for Gutenberg
 	'cssnano:adminMCEEditorMin', // minify the mce editor css
@@ -75,7 +74,6 @@ const gulpTasks = [
 	'header:coreIconsVariables', // sets the header for the core icons style file in vars during the icons import transform tasks
 	'header:theme', // sets a small header for minified files to make them traceable when checking fe src
 	'header:themePrint', // sets a small header for minified files to make them traceable when checking fe src
-	'header:themeLegacy', // sets a small header for minified files to make them traceable when checking fe src
 	'header:themeWPEditor', // sets a small header for minified files to make them traceable when checking fe src
 	'header:themeWPLogin', // sets a small header for minified files to make them traceable when checking fe src
 
@@ -86,7 +84,6 @@ const gulpTasks = [
 	/* Postcss tasks */
 
 	'postcss:theme', // the big ol postcss task that transforms theme pcss to css
-	'postcss:themeLegacy', // the postcss task that transforms legacy pcss to css
 	'postcss:admin', // the postcss task that transforms admin pcss to css
 	'postcss:adminBlockEditor', // the postcss task that transforms theme css for Gutenberg and the admin
 	'postcss:adminMCEEditor', // the postcss task that transforms editor pcss to css
@@ -231,7 +228,6 @@ gulp.task( 'server_dist', gulp.series(
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
 	gulp.parallel(
 		'postcss:theme',
-		'postcss:themeLegacy',
 		'postcss:admin',
 		'postcss:adminBlockEditor',
 		'postcss:adminMCEEditor',
@@ -239,7 +235,6 @@ gulp.task( 'server_dist', gulp.series(
 	),
 	gulp.parallel(
 		'cssnano:themeMin',
-		'cssnano:themeLegacyMin',
 		'cssnano:adminMin',
 		'cssnano:adminBlockEditorMin',
 		'cssnano:adminMCEEditorMin',
@@ -259,7 +254,6 @@ gulp.task( 'dist', gulp.series(
 	gulp.parallel( 'clean:themeMinCSS', 'clean:themeMinJS', 'copy:themeJS' ),
 	gulp.parallel(
 		'postcss:theme',
-		'postcss:themeLegacy',
 		'postcss:admin',
 		'postcss:adminBlockEditor',
 		'postcss:adminMCEEditor',
@@ -267,7 +261,6 @@ gulp.task( 'dist', gulp.series(
 	),
 	gulp.parallel(
 		'cssnano:themeMin',
-		'cssnano:themeLegacyMin',
 		'cssnano:adminMin',
 		'cssnano:adminBlockEditorMin',
 		'cssnano:adminMCEEditorMin',
