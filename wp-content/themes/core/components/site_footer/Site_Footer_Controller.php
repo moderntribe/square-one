@@ -107,19 +107,6 @@ class Site_Footer_Controller extends Abstract_Controller {
 			return '';
 		}
 
-		return strpos( get_post_mime_type( $image_id ), 'image/svg' )
-			? $this->get_logo_image_svg_src( $image_id )
-			: $this->get_logo_image_default_src( $image_id );
-	}
-
-
-	private function get_logo_image_svg_src( int $image_id ): string {
-		$image_path = get_attached_file( $image_id );
-
-		return is_readable( $image_path ) ? file_get_contents( $image_path ) : '';
-	}
-
-	private function get_logo_image_default_src( int $image_id ): string {
 		$args = [
 			Image_Controller::IMG_ID       => $image_id,
 			Image_Controller::CLASSES      => [ 'c-site-footer__logo-image' ],
