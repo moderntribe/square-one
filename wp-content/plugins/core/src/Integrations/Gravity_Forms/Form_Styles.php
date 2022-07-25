@@ -31,7 +31,7 @@ class Form_Styles {
 
 	/**
 	 * Dequeue styles for formsmain on Gravity Forms.
-	 * This prevents GF styles from interferring with our sink form styles.
+	 * This prevents GF styles from interfering with our sink form styles.
 	 *
 	 * @action gform_enqueue_scripts
 	 */

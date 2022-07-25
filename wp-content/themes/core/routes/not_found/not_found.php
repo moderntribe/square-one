@@ -38,7 +38,7 @@ do_action( 'get_sidebar', null );
 get_template_part(
 	'components/sidebar/sidebar',
 	'index',
-	[ Sidebar_Controller::SIDEBAR_ID => $c->sidebar_id ]
+	[ Sidebar_Controller::SIDEBAR_ID => $c->get_sidebar_id() ]
 );
 get_footer();
 

@@ -6,8 +6,9 @@ const { resolve } = require( 'path' );
 /**
  * Internal Dependencies
  */
-const appBase = require( './configs/app-base.js' );
 const pkg = require( '../package.json' );
+const appBase = require( './configs/app-base.js' );
+const localConfig = require( './configs/local' );
 
 module.exports = {
 	mode: 'development',
@@ -17,7 +18,7 @@ module.exports = {
 	output: {
 		filename: 'app.js',
 		path: resolve( `${ __dirname }/../`, 'public/js/' ),
-		publicPath: 'http://localhost:3000/',
+		publicPath: `${ localConfig.protocol }://${ localConfig.proxy }:9000/`,
 	},
 	...appBase,
 };

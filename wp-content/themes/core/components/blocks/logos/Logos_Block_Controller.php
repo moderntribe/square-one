@@ -2,8 +2,8 @@
 
 namespace Tribe\Project\Templates\Components\blocks\logos;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
-use Tribe\Project\Blocks\Types\Logos\Logos;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
@@ -11,6 +11,7 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Models\Collections\Logo_Collection;
 
 class Logos_Block_Controller extends Abstract_Controller {
 
@@ -44,17 +45,9 @@ class Logos_Block_Controller extends Abstract_Controller {
 	 */
 	private array $content_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
+	private Cta $cta;
 
-	/**
-	 * @see Logos::get_logos_section()
-	 *
-	 * @var mixed[]
-	 */
-	private array $logos;
+	private Logo_Collection $logos;
 	private string $description;
 	private string $leadin;
 	private string $title;
@@ -66,10 +59,10 @@ class Logos_Block_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->logos             = (array) $args[ self::LOGOS ];
+		$this->logos             = $args[ self::LOGOS ];
 		$this->title             = (string) $args[ self::TITLE ];
 	}
 
@@ -113,16 +106,19 @@ class Logos_Block_Controller extends Abstract_Controller {
 
 	public function get_logos(): array {
 		$component_args = [];
-		if ( empty( $this->logos ) ) {
-			return [];
+
+		if ( ! $this->logos->count() ) {
+			return $component_args;
 		}
+
 		foreach ( $this->logos as $logo ) {
 			// Don't add a logo if there's no image set in the block.
-			if ( empty( $logo[ Logos::LOGO_IMAGE ] ) ) {
+			if ( ! $logo->image->id ) {
 				continue;
 			}
+
 			$image_args = [
-				Image_Controller::IMG_ID       => (int) $logo[ Logos::LOGO_IMAGE ],
+				Image_Controller::IMG_ID       => $logo->image->id,
 				Image_Controller::USE_LAZYLOAD => true,
 				Image_Controller::CLASSES      => [ 'b-logo__figure' ],
 				Image_Controller::IMG_CLASSES  => [ 'b-logo__img' ],
@@ -130,18 +126,13 @@ class Logos_Block_Controller extends Abstract_Controller {
 				Image_Controller::SRCSET_SIZES => [ 'medium', 'large' ],
 			];
 
-			$link = wp_parse_args( $logo[ Logos::LOGO_LINK ], [
-				'title'  => '',
-				'url'    => '',
-				'target' => '',
-			] );
-
-			if ( ! empty( $logo[ Logos::LOGO_LINK ] ) ) {
-				$image_args[ Image_Controller::LINK_URL ]     = $link['url'];
-				$image_args[ Image_Controller::LINK_TARGET ]  = $link['target'];
-				$image_args[ Image_Controller::LINK_TITLE ]   = $link['title'];
+			if ( ! empty( $logo->link->url ) ) {
+				$image_args[ Image_Controller::LINK_URL ]     = $logo->link->url;
+				$image_args[ Image_Controller::LINK_TARGET ]  = $logo->link->target;
+				$image_args[ Image_Controller::LINK_TITLE ]   = $logo->link->title;
 				$image_args[ Image_Controller::LINK_CLASSES ] = [ 'b-logo__link' ];
 			}
+
 			$component_args[] = $image_args;
 		}
 
@@ -154,10 +145,10 @@ class Logos_Block_Controller extends Abstract_Controller {
 			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
 			self::LEADIN            => '',
-			self::LOGOS             => [],
+			self::LOGOS             => new Logo_Collection(),
 			self::TITLE             => '',
 		];
 	}
@@ -198,28 +189,18 @@ class Logos_Block_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-logos__description',
-				't-sink',
-				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
 	}
 
 	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',

@@ -19,7 +19,7 @@ $c = Icon_Grid_Controller::factory( $args );
 		<ul <?php echo $c->get_content_classes(); ?>>
 
 			<?php foreach ( $c->get_icon_card_args() as $card_args ) { ?>
-				<?php get_template_part( 'components/card/card', null, $card_args ); ?>
+				<?php get_template_part( 'components/card/card', '', $card_args ); ?>
 			<?php } ?>
 
 		</ul>

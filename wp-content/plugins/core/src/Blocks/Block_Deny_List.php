@@ -21,7 +21,7 @@ class Block_Deny_List {
 	/**
 	 * Add block types to the deny list to disable in the block editor
 	 *
-	 * @param string[]
+	 * @param string[] $types
 	 *
 	 * @return array
 	 *

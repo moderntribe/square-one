@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Components\accordion;
 
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
+use Tribe\Project\Templates\Models\Collections\Accordion_Row_Collection;
 
 /**
  * Class Accordion
@@ -33,6 +34,7 @@ class Accordion_Controller extends Abstract_Controller {
 	public const ROW_HEADER_NAME               = 'row_header_name';
 	public const ROW_CONTENT_NAME              = 'row_content_name';
 	public const ROW_IDS                       = 'row_ids';
+	public const SCROLL_TO                     = 'scroll_to';
 
 	/**
 	 * @var string[]
@@ -85,14 +87,11 @@ class Accordion_Controller extends Abstract_Controller {
 	private array $row_header_container_classes;
 
 	/**
-	 * @var array<int, string[][]>
+	 * @var array<array<string, string>>
 	 */
 	private array $row_ids;
 
-	/**
-	 * @var \Tribe\Project\Templates\Models\Accordion_Row[]
-	 */
-	private array $rows;
+	private Accordion_Row_Collection $rows;
 	private string $row_content_name;
 	private string $row_header_name;
 	private string $row_header_tag;
@@ -112,12 +111,14 @@ class Accordion_Controller extends Abstract_Controller {
 		$this->row_header_container_classes  = (array) $args[ self::ROW_HEADER_CONTAINER_CLASSES ];
 		$this->row_header_name               = (string) $args[ self::ROW_HEADER_NAME ];
 		$this->row_header_tag                = (string) $args[ self::ROW_HEADER_TAG ];
-		$this->rows                          = (array) $args[ self::ROWS ];
+		$this->rows                          = $args[ self::ROWS ];
+
+		$this->container_attrs['data-scrollto'] = (bool) $args[ self::SCROLL_TO ];
 
 		$this->row_ids = array_map( static fn() => [
 			'content_id' => uniqid( 'accordion-content-' ),
 			'header_id'  => uniqid( 'accordion-header-' ),
-		], $this->rows );
+		], $this->rows->toArray() );
 	}
 
 	public function get_row_content_attrs( int $row_key ): string {
@@ -127,10 +128,7 @@ class Accordion_Controller extends Abstract_Controller {
 		], $this->row_content_attrs ) );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Models\Accordion_Row[]
-	 */
-	public function get_rows(): array {
+	public function get_rows(): Accordion_Row_Collection {
 		return $this->rows;
 	}
 
@@ -177,10 +175,20 @@ class Accordion_Controller extends Abstract_Controller {
 		return $this->row_header_tag;
 	}
 
+	/**
+	 * @TODO This isn't called anywhere.
+	 *
+	 * @return string
+	 */
 	public function get_row_content_name(): string {
 		return $this->row_content_name;
 	}
 
+	/**
+	 * @TODO This isn't called anywhere.
+	 *
+	 * @return string
+	 */
 	public function get_row_header_name(): string {
 		return $this->row_header_name;
 	}
@@ -189,7 +197,7 @@ class Accordion_Controller extends Abstract_Controller {
 		return [
 			self::CONTAINER_ATTRS               => [],
 			self::CONTAINER_CLASSES             => [],
-			self::ROWS                          => [],
+			self::ROWS                          => new Accordion_Row_Collection(),
 			self::ROW_CLASSES                   => [],
 			self::ROW_CONTENT_ATTRS             => [],
 			self::ROW_CONTENT_CLASSES           => [],
@@ -202,6 +210,7 @@ class Accordion_Controller extends Abstract_Controller {
 			self::ROW_HEADER_NAME               => 'title',
 			self::ROW_HEADER_TAG                => 'h3',
 			self::ROW_IDS                       => [],
+			self::SCROLL_TO                     => false,
 		];
 	}
 
@@ -212,21 +221,16 @@ class Accordion_Controller extends Abstract_Controller {
 			self::ROW_HEADER_CLASSES            => [ 'c-accordion__header', 'h5' ],
 			self::ROW_HEADER_CONTAINER_CLASSES  => [ 'c-accordion__header-container' ],
 			self::ROW_CONTENT_CLASSES           => [ 'c-accordion__content' ],
-			self::ROW_CONTENT_CONTAINER_CLASSES => [ 'c-accordion__content-container', 't-sink', 's-sink' ],
+			self::ROW_CONTENT_CONTAINER_CLASSES => [ 'c-accordion__content-container' ],
 			self::CONTAINER_ATTRS               => [
-				'role'                 => 'tablist',
-				'aria-multiselectable' => 'true',
-				'data-js'              => 'c-accordion',
+				'data-js' => 'c-accordion',
 			],
 			self::ROW_HEADER_ATTRS              => [
 				'aria-expanded' => 'false',
-				'aria-selected' => 'false',
-				'role'          => 'tab',
 			],
 			self::ROW_CONTENT_ATTRS             => [
 				'hidden'      => 'true',
 				'aria-hidden' => 'true',
-				'role'        => 'tabpanel',
 			],
 			self::ROW_CONTENT_CONTAINER_ATTRS   => [
 				'data-depth' => '0',

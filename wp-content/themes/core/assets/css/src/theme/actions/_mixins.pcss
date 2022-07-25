@@ -32,10 +32,6 @@
 	padding: 12px var(--spacer-50);
 	transition: var(--transition);
 
-	&:focus {
-		text-decoration: underline;
-	}
-
 	/* CASE: Disabled */
 	&[disabled],
 	&.is-disabled {
@@ -117,6 +113,14 @@
 	&.is-style-light,
 	.t-theme--light & {
 		color: var(--color-white);
+
+		&:focus,
+		&:active,
+		&:hover,
+		.has-target-link:hover & {
+			color: var(--color-black);
+			background-color: var(--color-white);
+		}
 
 		/* CASE: Disabled */
 		&[disabled],

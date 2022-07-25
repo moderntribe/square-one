@@ -1,3 +1,12 @@
 <?php declare(strict_types=1);
 
-get_template_part( 'components/document/footer/footer' );
+?>
+
+		<?php get_template_part( 'components/site_footer/site_footer' ); ?>
+
+	</div><!-- .l-wrapper -->
+
+	<?php do_action( 'wp_footer' ); ?>
+
+</body>
+</html>

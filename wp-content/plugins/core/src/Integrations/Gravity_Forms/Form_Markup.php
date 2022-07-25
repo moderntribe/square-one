@@ -16,14 +16,15 @@ class Form_Markup {
 	 *
 	 * @filter gform_field_choice_markup_pre_render
 	 *
-	 * @param string $choice_markup
-	 * @param array  $choice
-	 * @param array  $field
-	 * @param string $value
+	 * @param string       $choice_markup
+	 * @param array        $choice
+	 * @param array|object $field
+	 * @param array|string $value // GF docs says this should be a string, but both strings and arrays may be returned as of v2.5
 	 *
 	 * @return string
 	 */
-	public function customize_gf_choice_other( string $choice_markup, array $choice, array $field, string $value ): string {
+	public function customize_gf_choice_other( string $choice_markup, array $choice, $field, $value ): string {
+		$field = (array) $field;
 
 		if ( ! empty( $choice['isOtherChoice'] ) ) {
 			$indices = array_keys( $field['choices'] );
@@ -50,49 +51,50 @@ class Form_Markup {
 	 *
 	 * @filter gform_field_css_class
 	 *
-	 * @param string $classes
-	 * @param array  $field
-	 * @param array  $form
+	 * @param string       $classes
+	 * @param array|object $field
+	 * @param array        $form
 	 *
 	 * @return string
 	 */
-	public function add_gf_select_field_class( string $classes, array $field, array $form ): string {
+	public function add_gf_select_field_class( string $classes, $field, array $form ): string {
+		$field = (array) $field;
 
 		$class_icon_simple  = $this->activate_icons ? ' form-control-icon' : '';
 		$class_icon_complex = $this->activate_icons ? ' form-control-icon-complex' : '';
 
-		if ( $field['type'] === 'multiselect' || $field['inputType'] === 'multiselect' ) {
+		if ( $field['type'] === 'multiselect' ) {
 			$classes .= ' gf-multi-select';
-		} elseif ( $field['type'] === 'select' || $field['inputType'] === 'select' ) {
+		} elseif ( $field['type'] === 'select' ) {
 			$classes .= ' gf-select';
 			// Not Chosen, regular select
-			if ( ! $field['enableEnhancedUI'] ) {
+			if ( empty( $field['enableEnhancedUI'] ) ) {
 				$classes .= ' gf-select-no-chosen';
 			}
-		} elseif ( $field['type'] === 'checkbox' || $field['inputType'] === 'checkbox' ) {
+		} elseif ( $field['type'] === 'checkbox' ) {
 			$classes .= ' gf-checkbox';
-		} elseif ( $field['type'] === 'radio' || $field['inputType'] === 'radio' ) {
+		} elseif ( $field['type'] === 'radio' ) {
 			$classes .= ' gf-radio';
-		} elseif ( $field['type'] === 'textarea' || $field['type'] === 'post_content' || $field['type'] === 'post_excerpt' || $field['inputType'] === 'textarea' ) {
+		} elseif ( $field['type'] === 'textarea' || $field['type'] === 'post_content' || $field['type'] === 'post_excerpt' ) {
 			$classes .= ' gf-textarea';
-		} elseif ( $field['type'] === 'date' || $field['inputType'] === 'date' ) {
+		} elseif ( $field['type'] === 'date' ) {
 			$class_date_icon = ( $field['dateType'] === 'datepicker' ) ? $class_icon_simple : '';
 			$classes        .= ' gf-date gf-date-layout-' . $field['dateType'] . $class_date_icon;
-		} elseif ( $field['type'] === 'time' || $field['inputType'] === 'time' ) {
+		} elseif ( $field['type'] === 'time' ) {
 			$classes .= ' gf-time';
-		} elseif ( $field['type'] === 'phone' || $field['inputType'] === 'phone' ) {
+		} elseif ( $field['type'] === 'phone' ) {
 			$classes .= ' gf-phone' . $class_icon_simple;
 		} elseif ( $field['type'] === 'name' ) {
 			$classes .= ' gf-name' . $class_icon_complex;
 		} elseif ( $field['type'] === 'address' ) {
 			$classes .= ' gf-address' . $class_icon_complex;
-		} elseif ( $field['type'] === 'email' || $field['inputType'] === 'email' ) {
+		} elseif ( $field['type'] === 'email' ) {
 			$classes .= ' gf-email' . $class_icon_simple;
-		} elseif ( $field['type'] === 'website' || $field['inputType'] === 'website' ) {
+		} elseif ( $field['type'] === 'website' ) {
 			$classes .= ' gf-url' . $class_icon_simple;
-		} elseif ( $field['type'] === 'fileupload' || $field['inputType'] === 'fileupload' ) {
+		} elseif ( $field['type'] === 'fileupload' ) {
 			$classes .= ' gf-file';
-		} elseif ( $field['enablePasswordInput'] === true ) {
+		} elseif ( $field['type'] === 'text' && array_key_exists( 'enablePasswordInput', $field ) && $field['enablePasswordInput'] === true ) {
 			$classes .= ' gf-password' . $class_icon_simple;
 		}
 

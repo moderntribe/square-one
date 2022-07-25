@@ -1,14 +1,25 @@
+import { BLOCK_STYLE_DENYLIST } from '../config/wp-settings';
+import { unregisterBlockStyle } from '@wordpress/blocks';
+
 /**
  * @function unregisterStyles
- * @description Unregisters core block styles added client-side. Styles added
- * 				server-side using register_block_style should be unregistered
- * 				using the server-side unregister_block_styles function.
+ * @description Unregisters core block styles.
  */
 
-/* global wp */
-
 const unregisterStyles = () => {
-	wp.blocks.unregisterBlockStyle( 'core/image', [ 'rounded', 'default' ] );
+	const blockStyles = [];
+
+	for ( const [ block, styles ] of Object.entries( BLOCK_STYLE_DENYLIST ) ) {
+		unregisterBlockStyle( block, styles );
+		blockStyles.push( `${ block }:${ styles.toString() }` );
+	}
+
+	if ( ! blockStyles.length ) {
+		console.info( 'SquareOne Admin: No block styles to unregister from Gutenberg.' );
+		return;
+	}
+
+	console.info( 'SquareOne Admin: Unregistered these styles from Gutenberg: ', blockStyles );
 };
 
 export default unregisterStyles;

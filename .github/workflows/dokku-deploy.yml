@@ -15,6 +15,10 @@ on:
         required: false
         type: boolean
         description: Flag if this is a review app or not
+      pr_number:
+        required: false
+        type: string
+        description: Pull Request Number
     secrets:
       github_pat_token:
         required: true
@@ -40,6 +44,7 @@ jobs:
         with:
           app_name: ${{ inputs.app_name }}
           base_branch: ${{ inputs.branch }}
+          pr_number: ${{ inputs.pr_number }}
 
       - name: Setup SSH
         uses: moderntribe/actions/utils/ssh-agent@v1

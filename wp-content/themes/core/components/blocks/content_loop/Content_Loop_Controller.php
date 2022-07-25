@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\content_loop;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop as Content_Loop_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -22,6 +23,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	public const CONTENT_CLASSES   = 'content_classes';
 	public const CTA               = 'cta';
 	public const DESCRIPTION       = 'description';
+	public const ENABLE_PAGINATION = 'enable_pagination';
 	public const LAYOUT            = 'layout';
 	public const LEADIN            = 'leadin';
 	public const POSTS             = 'posts';
@@ -47,10 +49,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	 */
 	private array $content_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
+	private Cta $cta;
 
 	/**
 	 * @var array<string, mixed>
@@ -62,6 +61,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	private string $layout;
 	private string $leadin;
 	private string $title;
+	private bool $enable_pagination;
 
 	public function __construct( array $args = [] ) {
 		$args = $this->parse_args( $args );
@@ -70,8 +70,9 @@ class Content_Loop_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
+		$this->enable_pagination = (bool) $args[ self::ENABLE_PAGINATION ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
 		$this->posts             = (array) $args[ self::POSTS ];
@@ -94,6 +95,10 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 	public function get_layout(): string {
 		return $this->layout;
+	}
+
+	public function is_pagination_enabled(): bool {
+		return $this->enable_pagination;
 	}
 
 	public function get_posts_card_args( string $layout = Card_Controller::STYLE_PLAIN ): array {
@@ -155,12 +160,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 						],
 					];
 
-
-				$card_description =
-					[
-						Container_Controller::CONTENT => wpautop( $post['excerpt'] ),
-						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
-					];
+				$card_description = [ Container_Controller::CONTENT => wpautop( $post['excerpt'] ) ];
 			}
 
 			$cards[] = [
@@ -189,7 +189,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT => get_the_date( 'F Y', $post['post_id'] ) ?? '',
+						Container_Controller::CONTENT => get_the_date( 'F Y', $post['post_id'] ?? 0 ),
 						Container_Controller::CLASSES => [ 'c-card__date' ],
 					],
 				),
@@ -225,24 +225,13 @@ class Content_Loop_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	public function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
@@ -272,8 +261,9 @@ class Content_Loop_Controller extends Abstract_Controller {
 			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
+			self::ENABLE_PAGINATION => true,
 			self::LAYOUT            => Content_Loop_Block::LAYOUT_ROW,
 			self::LEADIN            => '',
 			self::POSTS             => [],
@@ -298,7 +288,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 				'b-content-loop__leadin',
 				'h6',
 			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
+			Text_Controller::CONTENT => $this->leadin,
 		] );
 	}
 
@@ -312,7 +302,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 				'c-block__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title ?? '',
+			Text_Controller::CONTENT => $this->title,
 		] );
 	}
 
@@ -324,10 +314,8 @@ class Content_Loop_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-content-loop__description',
-				't-sink',
-				's-sink',
 			],
-			Container_Controller::CONTENT => $this->description ?? '',
+			Container_Controller::CONTENT => $this->description,
 		] );
 	}
 

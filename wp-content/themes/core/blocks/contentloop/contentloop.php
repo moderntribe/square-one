@@ -5,5 +5,10 @@ use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop_Model;
 /**
  * @var array $args ACF block data.
  */
-$model = new Content_Loop_Model( $args['block'] );
-get_template_part( 'components/blocks/content_loop/content_loop', null, $model->get_data() );
+$model = tribe_project()->container()->make( Content_Loop_Model::class, $args );
+
+get_template_part(
+	'components/blocks/content_loop/content_loop',
+	'',
+	$model->get_data()
+);

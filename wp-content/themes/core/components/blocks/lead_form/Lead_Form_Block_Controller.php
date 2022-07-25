@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\lead_form;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
 use \Tribe\Project\Blocks\Types\Lead_Form\Lead_Form as Lead_Form_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -41,10 +42,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 	 */
 	private array $container_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
+	private Cta $cta;
 
 	/**
 	 * @var string[]
@@ -65,7 +63,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 		$this->background        = (string) $args[ self::BACKGROUND ];
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->form_classes      = (array) $args[ self::FORM_CLASSES ];
 		$this->form_fields       = (string) $args[ self::FORM_FIELDS ];
@@ -160,7 +158,7 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 			self::BACKGROUND        => Lead_Form_Block::BACKGROUND_LIGHT,
 			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
 			self::FORM_CLASSES      => [],
 			self::FORM_FIELDS       => Lead_Form_Block::FORM_STACKED,
@@ -206,28 +204,18 @@ class Lead_Form_Block_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-lead-form__description',
-				't-sink',
-				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
 	}
 
 	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',

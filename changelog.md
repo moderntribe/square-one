@@ -2,7 +2,86 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.07
+* Added: MVP Site Footer.
+* Updated: ACF (5.12.3), Gravity Forms (2.6.4), Disable Emojis (1.7.4), Limit Login Attempts Reloaded (2.25.3), Post 2 Posts (1.7), User Switching (1.6.0), Yoast SEO (19.3)
+* Fixed: A typo in the default theme name.
+* Updated: Move General Settings to Appearance > ["Theme Name" Options and adjust Analytics & Social Media usages appropriately. 
+* Fixed: Embeds in reusable blocks not displaying on the frontend. https://core.trac.wordpress.org/ticket/46457
+* Added: Core Columns block with support for headings, paragraphs, lists, and images.
+* Updated: Base kitchen sink styles for improves specificity and admin support.
+* Fixed: Misnamed Buttons Block classes and attached button styles
+* Removed: Legacy "unsupported browser" feature and all related build system features.
+
+## 2022.06
+* Fixed: Erroneous link clicks in card.js for mouse right-clicks on Windows. 
+* Bumped: Tribe Libs to 3.4.18 to update block generators to escape labels.
+* Added: PHP side functionality and filter for unregistering block styles.
+* Fixed: Replaces `__()` with `esc_html__()` in `wp-content/plugins/core/src/Blocks` folder
+* Added: Text alignment mixins & classes to support Gutenberg.
+* Fixed: Filter Social items to prevent empty HTML output.
+* Fixed: Remove `SECTION_CONTENT` constant from `Stats Block`.
+* Fixed: Blocks added below floated elements in Gutenberg should now properly clear on both the frontend and backend.
+* Fixed: Gravity Forms spin.js spinner should now properly work for paginated forms.
+* Added: [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery)
+* Fixed: Tab block controller throwing type errors.
+* Fixed: `update-query-var.js` can now properly remove keys with `undefined` values.
+* Added: Youtube icon to core icons set.
+
+## 2022.05
+* Fixed: Use PHP to prefix commits with a jira ticket, avoiding different shell environments.
+* Fixed: Prevent PHPStan from running out of memory during CI runs.
+* Updated: Recommended extensions for VS Code to include PHP Intelephense. 
+* Added: Access to the container in integration tests via `$this->container`.
+* Updated: Recommended extentions for VS Code to include PHP Intelephense. 
+* Updated: `.phpstorm.meta.php` code completion documentation.
+* Fixed: Ensure setup-node github action can find the yarn.lock file for caching.
+* Updated: Ensure object meta definers are using autowiring for automatic dependency injection. 
+* Added: Brings in the [square1-field-models](https://github.com/moderntribe/square1-field-models) library.
+* Updated: WordPress to 5.9.3, ACF to 5.12.2 and Yoast to 18.8.
+* Fixed: Hides deprecation notices when running lefthook phpcs, which appear if you're running PHP8.1 locally.
+* Fixed: Converts all blocks/components to use Field Models, where appropriate.
+* Fixed: Prevent WP Core from adding `loading="lazy"` to our image component `<img />` tags.
+* Updated: Remove old TinyMCE image tag filtering and related unit test.
+* Fixed: Images lazy loaded via LazySizes are now loaded before printing.
+
+## 2022.04
+* Fixed: Remove autoprefixer run from cssnano task as it erroneously strips line-clamp properties.
+* Added: An ACF helper class (`tribe-counter-wrapper`) that triggers a maxlength counter on the field.
+* Added: node and composer caching for GitHub actions
+* Updated: Webpack & related configs for React HMR / Example react app dev.
+* Fixed: deploy commit messages via GitHub actions now display the branch and environment instead of the variables.
+* Changed: all block models are now instantiated with the container to support dependency injection.
+* Added: PHPStan for static analysis.
+* Added: Recommended Extensions for VS Code.
+
+## 2022.03
+* Fixed: Refactor index controller to use proper meta fetching objects and general code clean up.
+* Fixed: Show same header logic on the Post Tag archive as the git Category Archive.
+* Added: Ignore the Query Monitor plugin's automatically created db.php file.
+* Added: Pagination Helper Trait.
+* Fixed: .editorconfig incorrect tabbing for PHP files (thanks Caleb).
+* Fixed: Missing pagination on the content loop block component.
+* Fixed: Visibility of public $sidebar_id's in all controllers.
+* Updated: Misc config updates for Dokku and Docker nginx & PHP.
+* Fixed: Gravity Forms filter parameter types changed for v2.5 and above.
+* Updated WordPress: 5.9.2 / new tests dump.sql
+* Updated plugins: ACF, TEC, Gravity Forms, Yoast
+* Updated: Tribe Libs to 3.4.12
+* Fixed: Corrects parameter type for P2P cache method
+* Fixed: Adds styling for nested lists in t-sink context
+* Changed: Replaced `msawicki/acf-menu-chooser` with a forked https://github.com/moderntribe/acf-menu-chooser that includes security fixes and is also added to packagist.
+* Updated: ACF (5.12), Tribe Libs (3.4.10), Redirection (5.2.3), Yoast (18.2), TEC (5.14.0.4)
+* Updated: Aligns accordion component with WAI-ARIA standard
+* Fixed: Jetpack sync calls the `all_plugins` filter outside of a screen context, causing fatal errors in our force plugin activation MU plugin when using multisite.
+* Added: Enable/disable scrolling behavior on accordion blocks
+
+## 2022.02
+* Updated: Coding standards to v2.1.2, PHP8 sniffer fixes.
+* Updated: Added composer patches to allowed composer plugins.
+
 ## 2022.01
+* Added: Custom "so project:test" command to run all automated testing suites (requires `so` 5.5.0+)
 * Added: `proxy_ssl_server_name on;` in nginx.conf to allow proxying to production domains if they are using Cloudflare.
 * Fixed: phpcs GitHub workflow using the wrong secret.
 * Added: An empty CLI_Definer to easier register commands.
@@ -22,7 +101,7 @@ All notable changes to this project will be documented in this file.
 * Added: Section Nav component & block.
 * Added: generic navigation component.
 * Updated: Node & NPM to latest LTS (v16.13.1), updated node package versions where supported.
-* Fixed: A posible PHP fatal when a anv menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
+* Fixed: A possible PHP fatal when a nav menu is cached, but empty and the cache layer returns an unexpected boolean instead of an empty string.
 * Fixed: Several minor deprecation warnings in the webpack config.
 * Fixed: prevented preloading of current document when a dependency alias is enqueued in the footer
 * Added: support to preload dependencies of aliases

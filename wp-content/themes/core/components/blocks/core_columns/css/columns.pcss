@@ -1,0 +1,113 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Core Block: Columns
+ *
+ * The majority of these styles are copied from WP Core styles for the columns
+ * block. Those styles can be referenced in the file listed below.
+ *
+ * WP Core source styles: wp/wp-includes/blocks/columns/style.css
+ * ----------------------------------------------------------------------------- */
+.wp-block-columns {
+	display: flex;
+	box-sizing: border-box;
+	flex-wrap: wrap;
+	margin: var(--spacer-40) auto;
+
+	&.are-vertically-aligned-top {
+		align-items: flex-start;
+	}
+
+	&.are-vertically-aligned-center {
+		align-items: center;
+	}
+
+	&.are-vertically-aligned-bottom {
+		align-items: flex-end;
+	}
+
+	&.is-not-stacked-on-mobile {
+		flex-wrap: nowrap;
+	}
+
+	&.is-not-stacked-on-mobile > .wp-block-column {
+		flex-basis: 0;
+		flex-grow: 1;
+	}
+
+	&.is-not-stacked-on-mobile > .wp-block-column[style*=flex-basis] {
+		flex-grow: 0;
+	}
+
+	&.is-not-stacked-on-mobile > .wp-block-column:not(:first-child) {
+		margin-left: var(--spacer-50);
+	}
+
+	@media (--viewport-medium) {
+		flex-wrap: nowrap;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Individual Column
+ * ------------------------------------------------------------------------- */
+.wp-block-column {
+	flex-grow: 1;
+	min-width: 0;
+	word-break: break-word;
+	overflow-wrap: break-word;
+
+	&.is-vertically-aligned-top {
+		align-self: flex-start;
+	}
+
+	&.is-vertically-aligned-center {
+		align-self: center;
+	}
+
+	&.is-vertically-aligned-bottom {
+		align-self: flex-end;
+	}
+
+	&.is-vertically-aligned-top,
+	&.is-vertically-aligned-center,
+	&.is-vertically-aligned-bottom {
+		width: 100%;
+	}
+
+	.wp-block-columns:not(.is-not-stacked-on-mobile) & {
+		/* Required to overcome inline styles set by WordPress for custom width columns */
+		@media (--viewport-small-max) {
+			flex-basis: 100% !important;
+		}
+
+		@media (--viewport-medium) {
+			flex-basis: 0;
+			flex-grow: 1;
+
+			&:not(:only-child) {
+				flex-basis: calc(50% - calc(var(--spacer-50) / 2));
+				flex-grow: 0;
+			}
+
+			&:nth-child(even) {
+				margin-left: var(--spacer-50);
+			}
+
+			&:not(:first-child) {
+				margin-left: var(--spacer-50);
+			}
+
+			&[style*=flex-basis] {
+				flex-grow: 0;
+			}
+		}
+
+		~ .wp-block-column {
+			margin-top: var(--spacer-40);
+
+			@media (--viewport-medium) {
+				margin-top: 0;
+			}
+		}
+	}
+}

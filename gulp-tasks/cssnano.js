@@ -7,7 +7,7 @@ const pkg = require( '../package.json' );
 function minify( src = [], dest = pkg.square1.paths.core_admin_css_dist ) {
 	return gulp.src( src )
 		.pipe( sourcemaps.init() )
-		.pipe( cssnano( { zindex: false, discardUnused: { keyframes: false } } ) )
+		.pipe( cssnano( { autoprefixer: false, zindex: false, discardUnused: { keyframes: false } } ) )
 		.pipe( rename( {
 			suffix: '.min',
 			extname: '.css',
@@ -21,11 +21,6 @@ module.exports = {
 		return minify( [
 			`${ pkg.square1.paths.core_theme_css }master.css`,
 			`${ pkg.square1.paths.core_theme_css }print.css`,
-		], pkg.square1.paths.core_theme_css_dist );
-	},
-	themeLegacyMin() {
-		return minify( [
-			`${ pkg.square1.paths.core_theme_css }legacy.css`,
 		], pkg.square1.paths.core_theme_css_dist );
 	},
 	adminMin() {

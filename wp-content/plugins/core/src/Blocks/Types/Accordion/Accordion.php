@@ -21,6 +21,8 @@ class Accordion extends Block_Config implements Cta_Field {
 	public const LAYOUT_INLINE  = 'inline';
 	public const LAYOUT_STACKED = 'stacked';
 
+	public const SCROLL_TO = 'scroll_to';
+
 	public const LEAD_IN     = 'leadin';
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
@@ -32,10 +34,10 @@ class Accordion extends Block_Config implements Cta_Field {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Accordion', 'tribe' ),
-			'description' => __( 'The Accordion block', 'tribe' ),
+			'title'       => esc_html__( 'Accordion', 'tribe' ),
+			'description' => esc_html__( 'The Accordion block', 'tribe' ),
 			'icon'        => '<svg width="24" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M0 0h23.7v2.7H0zM0 12h23.7v2.7H0zM0 15.3h23.7V18H0z"/><path fill="#fff" stroke="#000" d="M1.7 3.8h20v6.8h-20z"/></svg>',
-			'keywords'    => [ __( 'accordion', 'tribe' ) ],
+			'keywords'    => [ esc_html__( 'accordion', 'tribe' ) ],
 			'category'    => 'layout',
 			'supports'    => [
 				'align'  => false,
@@ -75,31 +77,38 @@ class Accordion extends Block_Config implements Cta_Field {
 
 	public function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LAYOUT, [
-				'label'         => __( 'Layout', 'tribe' ),
+				'label'         => esc_html__( 'Layout', 'tribe' ),
 				'name'          => self::LAYOUT,
 				'type'          => 'button_group',
 				'choices'       => [
-					self::LAYOUT_INLINE  => __( 'Inline', 'tribe' ),
-					self::LAYOUT_STACKED => __( 'Stacked', 'tribe' ),
+					self::LAYOUT_INLINE  => esc_html__( 'Inline', 'tribe' ),
+					self::LAYOUT_STACKED => esc_html__( 'Stacked', 'tribe' ),
 				],
 				'default_value' => self::LAYOUT_INLINE,
 			] )
+		)->add_field( new Field( self::NAME . '_' . self::SCROLL_TO, [
+			'label'         => esc_html__( 'Scroll to item after opening?', 'tribe' ),
+			'name'          => self::SCROLL_TO,
+			'type'          => 'true_false',
+			'default_value' => false,
+			'ui'            => 1,
+			] )
 		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label'       => __( 'Lead in', 'tribe' ),
+				'label'       => esc_html__( 'Lead in', 'tribe' ),
 				'name'        => self::LEAD_IN,
 				'type'        => 'text',
-				'placeholder' => __( 'Leadin (optional)', 'tribe' ),
+				'placeholder' => esc_html__( 'Leadin (optional)', 'tribe' ),
 				'wrapper'     => [
 					'class' => 'tribe-acf-hide-label',
 				],
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label' => __( 'Title', 'tribe' ),
+				'label' => esc_html__( 'Title', 'tribe' ),
 				'name'  => self::TITLE,
 				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-				'label'        => __( 'Description', 'tribe' ),
+				'label'        => esc_html__( 'Description', 'tribe' ),
 				'name'         => self::DESCRIPTION,
 				'type'         => 'wysiwyg',
 				'toolbar'      => Classic_Editor_Formats::MINIMAL,
@@ -117,10 +126,10 @@ class Accordion extends Block_Config implements Cta_Field {
 	 * @return \Tribe\Libs\ACF\Field_Section
 	 */
 	protected function get_accordion_section(): Field_Section {
-		$section = new Field_Section( self::SECTION_ACCORDION, __( 'Accordion Items', 'tribe' ), 'accordion' );
+		$section = new Field_Section( self::SECTION_ACCORDION, esc_html__( 'Accordion Items', 'tribe' ), 'accordion' );
 		$group   = new Repeater( self::NAME . '_' . self::ACCORDION );
 		$group->set_attributes( [
-			'label'     => __( 'Accordion Section', 'tribe' ),
+			'label'     => esc_html__( 'Accordion Section', 'tribe' ),
 			'name'      => self::ACCORDION,
 			'layout'    => 'block',
 			'min'       => 0,
@@ -131,13 +140,13 @@ class Accordion extends Block_Config implements Cta_Field {
 			],
 		] );
 		$header = new Field( self::ROW_HEADER, [
-			'label' => __( 'Header', 'tribe' ),
+			'label' => esc_html__( 'Header', 'tribe' ),
 			'name'  => self::ROW_HEADER,
 			'type'  => 'text',
 		] );
 		$group->add_field( $header );
 		$content = new Field( self::ROW_CONTENT, [
-			'label'        => __( 'Content', 'tribe' ),
+			'label'        => esc_html__( 'Content', 'tribe' ),
 			'name'         => self::ROW_CONTENT,
 			'type'         => 'wysiwyg',
 			'toolbar'      => Classic_Editor_Formats::MINIMAL,

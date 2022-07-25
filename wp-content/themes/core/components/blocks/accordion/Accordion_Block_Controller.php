@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\accordion;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\accordion\Accordion_Controller;
@@ -10,6 +11,7 @@ use Tribe\Project\Templates\Components\content_block\Content_Block_Controller;
 use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Models\Collections\Accordion_Row_Collection;
 
 class Accordion_Block_Controller extends Abstract_Controller {
 
@@ -25,6 +27,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	public const LEADIN            = 'leadin';
 	public const ROWS              = 'rows';
 	public const TITLE             = 'title';
+	public const SCROLL_TO         = 'scroll_to';
 
 	/**
 	 * @var string[]
@@ -46,15 +49,14 @@ class Accordion_Block_Controller extends Abstract_Controller {
 	 */
 	private array $content_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
+	private Cta $cta;
 
 	/**
-	 * @var \Tribe\Project\Templates\Models\Accordion_Row[]
+	 * @var bool Whether scrolling is enabled
 	 */
-	private array $rows;
+	private bool $scroll_to;
+
+	private Accordion_Row_Collection $rows;
 	private string $description;
 	private string $layout;
 	private string $leadin;
@@ -67,12 +69,13 @@ class Accordion_Block_Controller extends Abstract_Controller {
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->rows              = (array) $args[ self::ROWS ];
+		$this->rows              = $args[ self::ROWS ];
 		$this->title             = (string) $args[ self::TITLE ];
+		$this->scroll_to         = (bool) $args[ self::SCROLL_TO ];
 	}
 
 	public function get_classes(): string {
@@ -114,7 +117,8 @@ class Accordion_Block_Controller extends Abstract_Controller {
 
 	public function get_content_args(): array {
 		return [
-			Accordion_Controller::ROWS => $this->rows,
+			Accordion_Controller::ROWS      => $this->rows,
+			Accordion_Controller::SCROLL_TO => $this->scroll_to,
 		];
 	}
 
@@ -124,11 +128,11 @@ class Accordion_Block_Controller extends Abstract_Controller {
 			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
 			self::LAYOUT            => self::LAYOUT_STACKED,
 			self::LEADIN            => '',
-			self::ROWS              => [],
+			self::ROWS              => new Accordion_Row_Collection(),
 			self::TITLE             => '',
 		];
 	}
@@ -149,7 +153,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 				'b-accordion__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title ?? '',
+			Text_Controller::CONTENT => $this->title,
 		] );
 	}
 
@@ -160,7 +164,7 @@ class Accordion_Block_Controller extends Abstract_Controller {
 				'b-accordion__leadin',
 				'h6',
 			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
+			Text_Controller::CONTENT => $this->leadin,
 		] );
 	}
 
@@ -169,28 +173,18 @@ class Accordion_Block_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-accordion__description',
-				't-sink',
-				's-sink',
 			],
-			Container_Controller::CONTENT => $this->description ?? '',
+			Container_Controller::CONTENT => $this->description,
 		] );
 	}
 
 	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',

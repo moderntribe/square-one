@@ -13,7 +13,7 @@ ul,
 ol,
 dl {
 
-	.t-sink > & {
+	:where(.t-sink) & {
 		@mixin t-body;
 	}
 }
@@ -29,9 +29,15 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--bullets,
-.t-sink > ul {
+:where(.t-sink) ul,
+:is(.editor-styles-wrapper) ul {
 	list-style: disc outside;
 	padding-left: 1.5em;
+
+	ul {
+		list-style: disc outside;
+		padding-left: 1.5em;
+	}
 }
 
 /* -------------------------------------------------------------------------
@@ -39,9 +45,14 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--bullets-stylized,
-.t-sink > ul.is-style-t-list-stylized {
+:where(.t-sink) ul.is-style-t-list-stylized {
 	list-style: none;
 	padding-left: 0;
+
+	ul {
+		list-style: none;
+		padding-left: 0;
+	}
 
 	li {
 		position: relative;
@@ -64,9 +75,15 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--numbered,
-.t-sink > ol {
-	list-style: decimal outside;
+:where(.t-sink) ol,
+:is(.editor-styles-wrapper) ol {
 	padding-left: 1.5em;
+	list-style: decimal outside;
+
+	ol {
+		padding-left: 1.5em;
+		list-style: decimal outside;
+	}
 }
 
 /* -------------------------------------------------------------------------
@@ -74,10 +91,16 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .t-list--numbered-stylized,
-.t-sink > ol.is-style-t-list-stylized {
+:where(.t-sink) ol.is-style-t-list-stylized {
 	list-style: none;
 	padding-left: 0;
 	counter-reset: list-number;
+
+	ol {
+		list-style: none;
+		padding-left: 0;
+		counter-reset: list-number;
+	}
 
 	li {
 		position: relative;
@@ -102,14 +125,16 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .dl,
-.t-sink > dl {}
+:where(.t-sink) dl,
+:is(.editor-styles-wrapper) dl {}
 
 /* -------------------------------------------------------------------------
  * Definition List: Term
  * ------------------------------------------------------------------------- */
 
 .dt,
-.t-sink > dt {
+:where(.t-sink) dt,
+:is(.editor-styles-wrapper) dt {
 	font-weight: 700;
 }
 
@@ -118,4 +143,5 @@ li {}
  * ------------------------------------------------------------------------- */
 
 .dd,
-.t-sink > dd {}
+:where(.t-sink) dd,
+:is(.editor-styles-wrapper) dd {}

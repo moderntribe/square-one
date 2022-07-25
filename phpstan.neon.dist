@@ -1,0 +1,34 @@
+includes:
+	- phpstan-baseline.neon
+
+parameters:
+	level: 5
+	paths:
+		- wp-content/themes/core/
+		- wp-content/plugins/core/
+		- wp-content/mu-plugins/
+	excludePaths:
+		- vendor
+	bootstrapFiles:
+		- vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+		- vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
+	tmpDir: .phpstan-cache/
+	reportUnmatchedIgnoredErrors: false
+	ignoreErrors:
+		- '#^Function yoast_get_primary_term_id not found.$#'
+		# Uses func_get_args()
+		- '#^Function apply_filters invoked with [34567] parameters, 2 required\.$#'
+		- '#^Function do_action invoked with [3456] parameters, 1-2 required\.$#'
+		- '#^Function current_user_can invoked with 2 parameters, 1 required\.$#'
+		- '#^Function add_query_arg invoked with [123] parameters?, 0 required\.$#'
+		- '#^Function add_theme_support invoked with [2345] parameters, 1 required\.$#'
+		- '#^Function wp_sprintf invoked with [23456] parameters, 1 required\.$#'
+		# https://core.trac.wordpress.org/ticket/43304
+		- '/^Parameter #2 \$deprecated of function load_plugin_textdomain expects string, false given\.$/'
+		# WP-CLI accepts a class as callable
+		- '/^Parameter #2 \$callable of static method WP_CLI::add_command\(\) expects callable\(\): mixed, \S+ given\.$/'
+
+	checkAlwaysTrueStrictComparison: true
+
+	# Unfortunately, DocBlocks can't be relied upon in WordPress.
+	treatPhpDocTypesAsCertain: false

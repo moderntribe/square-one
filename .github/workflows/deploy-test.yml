@@ -1,9 +1,7 @@
 name: Deploy Test
 
 on:
-  push:
-    branches:
-      - server/test
+  workflow_dispatch:
 
 jobs:
   deploy_app:

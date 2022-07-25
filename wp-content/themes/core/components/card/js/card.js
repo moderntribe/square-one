@@ -9,7 +9,6 @@
 import delegate from 'delegate';
 import * as tools from 'utils/tools';
 
-
 /* Maximum amount of time between mousedown & mouseup to be considered a true click */
 const MOUSEUP_THRESHOLD = 200;
 
@@ -50,7 +49,7 @@ const handleCardClick = ( e ) => {
  * @param e
  */
 const handleCardMouseDown = ( e ) => {
-	if ( EXCLUDED_TARGETS.includes( e.target.nodeName ) ) {
+	if ( EXCLUDED_TARGETS.includes( e.target.nodeName ) || e.button !== 0 ) {
 		return;
 	}
 
@@ -66,7 +65,7 @@ const handleCardMouseDown = ( e ) => {
  * @param e
  */
 const handleCardMouseUp = ( e ) => {
-	if ( EXCLUDED_TARGETS.includes( e.target.nodeName ) ) {
+	if ( EXCLUDED_TARGETS.includes( e.target.nodeName ) || e.button !== 0 ) {
 		return;
 	}
 

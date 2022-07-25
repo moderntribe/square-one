@@ -18,7 +18,8 @@ pimple.json
 
 # IDE generated files #
 ######################
-.vscode
+.vscode/*
+!.vscode/extensions.json
 
 # Vim generated files #
 #######################
@@ -34,6 +35,7 @@ local-config.php
 cache-config.php
 tests-config.php
 build-process.php
+wp-content/db.php
 wp-content/uploads/
 wp-content/blogs.dir/
 wp-content/upgrade/
@@ -139,8 +141,9 @@ dev/tests/tests/_support/_generated/
 ###############
 phpcs.xml
 .phpcs-cache
+phpstan.neon
+.phpstan-cache
 
 
-
-# Added by so cli 
+# Added by so cli
 *.local.php

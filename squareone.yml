@@ -15,3 +15,14 @@
 # Automated Testing
 tests:
   php-container: 'php-tests'
+
+# Custom project commands
+commands:
+  # so project:test
+  test:
+    signature: test
+    description: Run all automated test suites at once
+    cmd:
+      - so test -- run unit
+      - so test -- run integration
+      - so test -- run acceptance

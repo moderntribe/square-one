@@ -1,0 +1,29 @@
+--- /vendor/php-stubs/wordpress-stubs/wordpress-stubs.php.old	2022-04-05 21:38:44.000000000 -0400
++++ /vendor/php-stubs/wordpress-stubs/wordpress-stubs.php	2022-04-05 21:39:32.000000000 -0400
+@@ -114962,7 +114962,7 @@
+      * @param string $password Plain text user password to hash
+      * @return string The hash string of the password
+      */
+-    function wp_hash_password($password)
++    function __wp_hash_password($password)
+     {
+     }
+     /**
+@@ -114987,7 +114987,7 @@
+      * @param string|int $user_id  Optional. User ID.
+      * @return bool False, if the $password does not match the hashed password
+      */
+-    function wp_check_password($password, $hash, $user_id = '')
++    function __wp_check_password($password, $hash, $user_id = '')
+     {
+     }
+     /**
+@@ -115040,7 +115040,7 @@
+      * @param string $password The plaintext new user password
+      * @param int    $user_id  User ID
+      */
+-    function wp_set_password($password, $user_id)
++    function __wp_set_password($password, $user_id)
+     {
+     }
+     /**

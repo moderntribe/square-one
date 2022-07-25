@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\tabs;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Tabs\Tabs as Tabs_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -11,6 +12,7 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\tabs\Tabs_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Models\Collections\Tab_Collection;
 
 class Tabs_Block_Controller extends Abstract_Controller {
 
@@ -39,15 +41,9 @@ class Tabs_Block_Controller extends Abstract_Controller {
 	 */
 	private array $container_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
+	private Cta $cta;
 
-	/**
-	 * @var string[]
-	 */
-	private array $tabs;
+	private Tab_Collection $tabs;
 	private string $description;
 	private string $layout;
 	private string $leadin;
@@ -62,11 +58,11 @@ class Tabs_Block_Controller extends Abstract_Controller {
 		$this->attrs             = (array) $args[ self::ATTRS ];
 		$this->classes           = (array) $args[ self::CLASSES ];
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->tabs              = (array) $args[ self::TABS ];
+		$this->tabs              = $args[ self::TABS ];
 		$this->title             = (string) $args[ self::TITLE ];
 	}
 
@@ -116,11 +112,11 @@ class Tabs_Block_Controller extends Abstract_Controller {
 			self::ATTRS             => [],
 			self::CLASSES           => [],
 			self::CONTAINER_CLASSES => [ 'l-container' ],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
 			self::LAYOUT            => Tabs_Block::LAYOUT_HORIZONTAL,
 			self::LEADIN            => '',
-			self::TABS              => [],
+			self::TABS              => new Tab_Collection(),
 			self::TITLE             => '',
 		];
 	}
@@ -160,28 +156,22 @@ class Tabs_Block_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-tabs__description',
-				't-sink',
-				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description ?? '',
 		] );
 	}
 
-	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
+	private function get_cta(): ?Deferred_Component {
+		if ( ! $this->cta->link->url ) {
+			return null;
+		}
 
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',

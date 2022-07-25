@@ -9,7 +9,7 @@ use Tribe\Project\Theme\Branding\Login_Screen;
 use Tribe\Project\Theme\Config\Image_Sizes;
 use Tribe\Project\Theme\Config\Supports;
 use Tribe\Project\Theme\Config\Web_Fonts;
-use Tribe\Project\Theme\Media\Image_Wrap;
+use Tribe\Project\Theme\Media\Image_Attributes;
 use Tribe\Project\Theme\Media\Oembed_Filter;
 
 class Theme_Subscriber extends Abstract_Subscriber {
@@ -34,7 +34,7 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function media(): void {
-		$this->image_wrap();
+		$this->image_attrs();
 		$this->image_links();
 		$this->oembed();
 	}
@@ -77,13 +77,10 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		}, 10, 0 );
 	}
 
-	private function image_wrap(): void {
-		add_filter( 'the_content', function ( $html ) {
-			return $this->container->get( Image_Wrap::class )->customize_wp_image_non_captioned_output( (string) $html );
-		}, 12, 1 );
-		add_filter( 'the_content', function ( $html ) {
-			return $this->container->get( Image_Wrap::class )->customize_wp_image_captioned_output( (string) $html );
-		}, 12, 1 );
+	private function image_attrs(): void {
+		add_filter( 'wp_img_tag_add_loading_attr', function ( $value, string $image, string $context ) {
+			return $this->container->get( Image_Attributes::class )->customize_wp_image_loading_attr( $value, $image, $context );
+		}, 10, 3 );
 	}
 
 	private function image_links(): void {
@@ -93,6 +90,15 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function oembed(): void {
+		// Fix reusable blocks from not rendering embeds on the frontend by re-running autoembed at a higher priority than do_blocks()
+		add_filter( 'the_content', static function ( $content ) {
+			if ( is_admin() ) {
+				return $content;
+			}
+
+			return $GLOBALS['wp_embed']->autoembed( $content );
+		}, 10, 1 );
+
 		add_filter( 'oembed_dataparse', function ( $html, $data, $url ) {
 			return $this->container->get( Oembed_Filter::class )->get_video_component( (string) $html, (object) $data, (string) $url );
 		}, 999, 3 );
@@ -118,9 +124,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		}, 0, 0 );
 		add_action( 'enqueue_block_editor_assets', function (): void {
 			$this->container->get( Web_Fonts::class )->enqueue_fonts();
-		}, 0, 0 );
-		add_action( 'tribe/unsupported_browser/head', function (): void {
-			$this->container->get( Web_Fonts::class )->inject_unsupported_browser_fonts();
 		}, 0, 0 );
 		add_action( 'after_setup_theme', function (): void {
 			$this->container->get( Web_Fonts::class )->add_tinymce_editor_fonts();

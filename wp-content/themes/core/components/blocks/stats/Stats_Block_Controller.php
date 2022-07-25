@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Templates\Components\blocks\stats;
 
+use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -11,7 +12,8 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\statistic\Statistic_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
-use Tribe\Project\Templates\Models\Statistic as Statistic_Model;
+use Tribe\Project\Templates\Models\Collections\Statistic_Collection;
+use Tribe\Project\Templates\Models\Statistic;
 
 class Stats_Block_Controller extends Abstract_Controller {
 
@@ -48,17 +50,12 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 */
 	private array $content_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $cta;
+	private Cta $cta;
 
 	/**
 	 * The collection of stats to render.
-	 *
-	 * @var \Tribe\Project\Templates\Models\Statistic[]
 	 */
-	private array $stats;
+	private Statistic_Collection $stats;
 	private string $content_align;
 	private string $description;
 	private string $dividers;
@@ -74,12 +71,12 @@ class Stats_Block_Controller extends Abstract_Controller {
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_align     = (string) $args[ self::CONTENT_ALIGN ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
-		$this->cta               = (array) $args[ self::CTA ];
+		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
 		$this->dividers          = (string) $args[ self::DIVIDERS ];
 		$this->layout            = (string) $args[ self::LAYOUT ];
 		$this->leadin            = (string) $args[ self::LEADIN ];
-		$this->stats             = (array) $args[ self::STATS ];
+		$this->stats             = $args[ self::STATS ];
 		$this->title             = (string) $args[ self::TITLE ];
 
 		$this->get_stats();
@@ -129,19 +126,25 @@ class Stats_Block_Controller extends Abstract_Controller {
 	 * Loop through the stats provided & set up the statistic
 	 * components arguments for each.
 	 *
-	 * @return array
+	 * @return array<string, \Tribe\Project\Templates\Components\Deferred_Component[]>
 	 */
 	public function get_stats(): array {
-		$statistic_args = [];
-
-		foreach ( $this->stats as $item ) {
-			$statistic_args[] = [
-				Statistic_Controller::VALUE => defer_template_part( 'components/text/text', null, $this->get_value_args( $item ) ),
-				Statistic_Controller::LABEL => defer_template_part( 'components/text/text', null, $this->get_label_args( $item ) ),
-			];
-		}
-
-		return $statistic_args;
+		return array_map( static fn( Statistic $stat ) => [
+			Statistic_Controller::VALUE => defer_template_part(
+				'components/text/text',
+				'',
+				[
+					Text_Controller::CONTENT => esc_html( $stat->row_value ),
+				]
+			),
+			Statistic_Controller::LABEL => defer_template_part(
+				'components/text/text',
+				'',
+				[
+					Text_Controller::CONTENT => esc_html( $stat->row_label ),
+				]
+			),
+		], $this->stats->items() );
 	}
 
 	protected function defaults(): array {
@@ -151,12 +154,12 @@ class Stats_Block_Controller extends Abstract_Controller {
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_ALIGN     => Stats::CONTENT_ALIGN_CENTER,
 			self::CONTENT_CLASSES   => [],
-			self::CTA               => [],
+			self::CTA               => new Cta(),
 			self::DESCRIPTION       => '',
 			self::DIVIDERS          => Stats::DIVIDERS_SHOW,
 			self::LAYOUT            => Stats::LAYOUT_STACKED,
 			self::LEADIN            => '',
-			self::STATS             => [],
+			self::STATS             => new Statistic_Collection(),
 			self::TITLE             => '',
 		];
 	}
@@ -176,7 +179,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 				'b-stats__leadin',
 				'h6',
 			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
+			Text_Controller::CONTENT => $this->leadin,
 		] );
 	}
 
@@ -188,7 +191,7 @@ class Stats_Block_Controller extends Abstract_Controller {
 				'b-stats__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title ?? '',
+			Text_Controller::CONTENT => $this->title,
 		] );
 	}
 
@@ -197,28 +200,18 @@ class Stats_Block_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-stats__description',
-				't-sink',
-				's-sink',
 			],
-			Container_Controller::CONTENT => $this->description ?? '',
+			Container_Controller::CONTENT => $this->description,
 		] );
 	}
 
 	private function get_cta(): Deferred_Component {
-		$cta = wp_parse_args( $this->cta, [
-			'content'        => '',
-			'url'            => '',
-			'target'         => '',
-			'add_aria_label' => false,
-			'aria_label'     => '',
-		] );
-
 		return defer_template_part( 'components/link/link', null, [
-			Link_Controller::URL            => $cta['url'],
-			Link_Controller::CONTENT        => $cta['content'] ?: $cta['url'],
-			Link_Controller::TARGET         => $cta['target'],
-			Link_Controller::ADD_ARIA_LABEL => $cta['add_aria_label'],
-			Link_Controller::ARIA_LABEL     => $cta['aria_label'],
+			Link_Controller::URL            => $this->cta->link->url,
+			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
+			Link_Controller::TARGET         => $this->cta->link->target,
+			Link_Controller::ADD_ARIA_LABEL => $this->cta->add_aria_label,
+			Link_Controller::ARIA_LABEL     => $this->cta->aria_label,
 			Link_Controller::CLASSES        => [
 				'c-block__cta-link',
 				'a-btn',
@@ -226,18 +219,6 @@ class Stats_Block_Controller extends Abstract_Controller {
 				'icon-arrow-right',
 			],
 		] );
-	}
-
-	private function get_value_args( Statistic_Model $item ): array {
-		return [
-			Text_Controller::CONTENT => esc_html( $item->value ),
-		];
-	}
-
-	private function get_label_args( Statistic_Model $item ): array {
-		return [
-			Text_Controller::CONTENT => esc_html( $item->label ),
-		];
 	}
 
 }

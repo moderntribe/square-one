@@ -21,8 +21,7 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 	public const LAYOUT_INLINE = 'inline';
 	public const LAYOUT_LIST   = 'list';
 
-	public const SECTION_ICONS    = 's-icons';
-	public const SECTION_SETTINGS = 's-settings';
+	public const SECTION_ICONS = 's-icons';
 
 	public const TITLE       = 'title';
 	public const DESCRIPTION = 'description';
@@ -35,10 +34,10 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => __( 'Icon Grid', 'tribe' ),
-			'description' => __( 'A grid layout block with icon selections', 'tribe' ),
+			'title'       => esc_html__( 'Icon Grid', 'tribe' ),
+			'description' => esc_html__( 'A grid layout block with icon selections', 'tribe' ),
 			'icon'        => '<svg enable-background="new 0 0 146.3 106.3" version="1.1" viewBox="0 0 146.3 106.3" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><style type="text/css">.st0{fill:#16D690;}.st1{fill:#21A6CB;}.st2{fill:#008F8F;}</style><polygon class="st0" points="145.2 106.3 72.6 42.3 26.5 1.2 0 106.3"/><polygon class="st1" points="145.2 106.3 0 106.3 72.6 42.3 118.6 1.2"/><polygon class="st2" points="72.6 42.3 145.2 106.3 0 106.3"/></svg>',
-			'keywords'    => [ __( 'icon', 'grid', 'tribe' ) ],
+			'keywords'    => [ esc_html__( 'icon', 'tribe' ), esc_html__( 'grid', 'tribe' ) ],
 			'category'    => 'common', // core categories: common, formatting, layout, widgets, embed
 			'supports'    => [
 				'align'  => false,
@@ -118,7 +117,7 @@ class Icon_Grid extends Block_Config implements Cta_Field {
 				'label'         => esc_html__( 'Icon Image', 'tribe' ),
 				'name'          => self::ICON_IMAGE,
 				'type'          => 'image',
-				'return_format' => 'id',
+				'return_format' => 'array',
 				'preview_size'  => 'medium',
 				'instructions'  => esc_html__( 'Recommended image size: 100px wide with any aspect ratio.', 'tribe' ),
 			] )

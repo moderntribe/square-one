@@ -114,14 +114,12 @@ class Content_Block_Controller extends Abstract_Controller {
 
 		$this->content[ Text_Controller::TAG ]       = 'div';
 		$this->content[ Text_Controller::CLASSES ][] = 'c-content-block__content';
-		$this->content[ Text_Controller::CLASSES ][] = 't-sink';
-		$this->content[ Text_Controller::CLASSES ][] = 's-sink';
 
 		return $this->content;
 	}
 
 	public function get_cta_args(): array {
-		if ( empty( $this->cta['url'] ) ) {
+		if ( empty( $this->cta[ Link_Controller::URL ] ) ) {
 			return [];
 		}
 

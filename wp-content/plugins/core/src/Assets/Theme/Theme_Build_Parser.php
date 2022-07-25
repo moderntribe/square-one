@@ -9,16 +9,4 @@ class Theme_Build_Parser extends Build_Parser {
 	protected string $css = 'assets/css/dist/theme/assets.php';
 	protected string $js  = 'assets/js/dist/theme/assets.php';
 
-	public function get_legacy_style_handles(): array {
-		return array_filter( $this->get_style_handles(), static function ( $handle ) {
-			return strpos( $handle, 'legacy' ) !== false;
-		} );
-	}
-
-	public function get_non_legacy_style_handles(): array {
-		return array_filter( $this->get_style_handles(), static function ( $handle ) {
-			return strpos( $handle, 'legacy' ) === false;
-		} );
-	}
-
 }
