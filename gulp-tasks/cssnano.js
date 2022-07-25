@@ -23,11 +23,6 @@ module.exports = {
 			`${ pkg.square1.paths.core_theme_css }print.css`,
 		], pkg.square1.paths.core_theme_css_dist );
 	},
-	themeLegacyMin() {
-		return minify( [
-			`${ pkg.square1.paths.core_theme_css }legacy.css`,
-		], pkg.square1.paths.core_theme_css_dist );
-	},
 	adminMin() {
 		return minify( [
 			`${ pkg.square1.paths.core_admin_css }master.css`,
