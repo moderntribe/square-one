@@ -8,6 +8,7 @@ use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Libs\ACF\Repeater;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Block_Category;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
@@ -37,16 +38,15 @@ class Content_Columns extends Block_Config implements Cta_Field {
 	 */
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Content Columns', 'tribe' ),
-			'description' => esc_html__( 'Blocks of content arranged in a grid', 'tribe' ),
-			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path fill="#151515" d="M2.44 3.52H8.2v.72H2.44zM10.72 3.52h5.76v.72h-5.76zM10.72 11.08h5.76v.72h-5.76zM2.08 11.08h5.76v.72H2.08zM2.44 4.96h4.32v.72H2.44zM10.72 4.96h4.32v.72h-4.32zM10.72 12.52h4.32v.72h-4.32zM2.08 12.52H6.4v.72H2.08zM2.44 6.4h6.48v.72H2.44zM10.72 6.4h6.48v.72h-6.48zM10.72 13.96h6.48v.72h-6.48zM2.08 13.96h6.48v.72H2.08zM2.44 7.84h2.88v.72H2.44zM10.72 7.84h2.88v.72h-2.88zM10.72 15.4h2.88v.72h-2.88zM2.08 15.4h2.88v.72H2.08z"/></svg>',
-			'keywords'    => [ esc_html__( 'content', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'    => esc_html__( 'Content Columns', 'tribe' ),
+			'icon'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.30597 4.5H1.5V19.5H5.30597V4.5ZM1.5 3C0.671573 3 0 3.67157 0 4.5V19.5C0 20.3284 0.671574 21 1.5 21H6.80597V3H1.5ZM13.903 4.5H10.097V19.5H13.903V4.5ZM8.59698 3V21H15.403V3H8.59698ZM18.694 4.5H22.4999V19.5H18.694V4.5ZM17.194 21V3H22.4999C23.3284 3 23.9999 3.67157 23.9999 4.5V19.5C23.9999 20.3284 23.3284 21 22.4999 21H17.194Z" fill="black"/></svg>',
+			'keywords' => [ esc_html__( 'content', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
+			'category' => Block_Category::CUSTOM_BLOCK_CATEGORY_SLUG,
+			'supports' => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'  => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
@@ -80,17 +80,17 @@ class Content_Columns extends Block_Config implements Cta_Field {
 		//==========================================
 		// Content Fields
 		//==========================================
-		$this->add_field( new Field( self::NAME . '_' . self::TITLE, [
-					 'label' => esc_html__( 'Title', 'tribe' ),
-					 'name'  => self::TITLE,
-					 'type'  => 'text',
-				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::LEADIN, [
-					'label' => esc_html__( 'Lead in', 'tribe' ),
+		$this->add_field( new Field( self::NAME . '_' . self::LEADIN, [
+					'label' => esc_html__( 'Overline', 'tribe' ),
 					'name'  => self::LEADIN,
 					'type'  => 'text',
 				] )
-			)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+			)->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => esc_html__( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
 					'label'        => esc_html__( 'Description', 'tribe' ),
 					'name'         => self::DESCRIPTION,
 					'type'         => 'wysiwyg',
@@ -108,23 +108,16 @@ class Content_Columns extends Block_Config implements Cta_Field {
 		//==========================================
 		// Setting Fields
 		//==========================================
-		$this->add_section( new Field_Section( self::SECTION_SETTINGS, esc_html__( 'Appearance', 'tribe' ), 'accordion' ) )
+		$this->add_section( new Field_Section( self::SECTION_SETTINGS, esc_html__( 'Settings', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::CONTENT_ALIGN, [
-				 'label'           => esc_html__( 'Content Alignment', 'tribe' ),
-				 'type'            => 'image_select',
-				 'name'            => self::CONTENT_ALIGN,
-				 'choices'         => [
+				 'label'         => esc_html__( 'Text Alignment', 'tribe' ),
+				 'type'          => 'button_group',
+				 'name'          => self::CONTENT_ALIGN,
+				 'choices'       => [
 					 self::CONTENT_ALIGN_CENTER => esc_html__( 'Center', 'tribe' ),
 					 self::CONTENT_ALIGN_LEFT   => esc_html__( 'Left', 'tribe' ),
 				 ],
-				 'default_value'   => self::CONTENT_ALIGN_CENTER,
-				 'multiple'        => 0,
-				 'image_path'      => sprintf(
-					 '%sassets/img/admin/blocks/%s/',
-					 trailingslashit( get_template_directory_uri() ),
-					 self::NAME
-				 ),
-				 'image_extension' => 'svg',
+				 'default_value' => self::CONTENT_ALIGN_CENTER,
 			 ] ) );
 	}
 
@@ -149,7 +142,7 @@ class Content_Columns extends Block_Config implements Cta_Field {
 		] );
 
 		$content = new Field( self::COLUMN_CONTENT, [
-			'label'        => esc_html__( 'Content', 'tribe' ),
+			'label'        => esc_html__( 'Description', 'tribe' ),
 			'name'         => self::COLUMN_CONTENT,
 			'type'         => 'wysiwyg',
 			'toolbar'      => Classic_Editor_Formats::MINIMAL,
