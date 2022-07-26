@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2022.07
 * Fixed: Set Static Analysis format for GitHub in Actions.
+* Added: MVP Site Footer.
 * Updated: ACF (5.12.3), Gravity Forms (2.6.4), Disable Emojis (1.7.4), Limit Login Attempts Reloaded (2.25.3), Post 2 Posts (1.7), User Switching (1.6.0), Yoast SEO (19.3)
 * Fixed: A typo in the default theme name.
 * Updated: Move General Settings to Appearance > ["Theme Name" Options and adjust Analytics & Social Media usages appropriately. 
