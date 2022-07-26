@@ -48,24 +48,24 @@ class Nav_Attribute_Filters {
 
 		$theme_location = $args->theme_location;
 
-		$classes[] = $theme_location . '__list-item';
+		$classes[] = 'c-nav-' . $theme_location . '__list-item';
 
 		// Depth
-		$classes[] = $theme_location . '__list-item--depth-' . $depth;
+		$classes[] = 'c-nav-' . $theme_location . '__list-item--depth-' . $depth;
 
 		// Has children items
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-			$classes[] = $theme_location . '__list-item--has-children';
+			$classes[] = 'c-nav-' . $theme_location . '__list-item--has-children';
 		}
 
 		// Is Parent Item
 		if ( in_array( 'current-menu-parent', $item->classes ) ) {
-			$classes[] = $theme_location . '__list-item--is-current-parent';
+			$classes[] = 'c-nav-' . $theme_location . '__list-item--is-current-parent';
 		}
 
 		// Is Current Item
 		if ( in_array( 'current-menu-item', $item->classes ) ) {
-			$classes[] = $theme_location . '__list-item--is-current';
+			$classes[] = 'c-nav-' . $theme_location . '__list-item--is-current';
 		}
 
 		/**
@@ -116,13 +116,13 @@ class Nav_Attribute_Filters {
 		$theme_location = $args->theme_location;
 
 		$classes = [
-			$theme_location . '__action',
-			$theme_location . '__action--depth-' . $depth,
+			'c-nav-' . $theme_location . '__action',
+			'c-nav-' . $theme_location . '__action--depth-' . $depth,
 		];
 
 		// Has children items
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
-			$classes[] = $theme_location . '__action--has-children';
+			$classes[] = 'c-nav-' . $theme_location . '__action--has-children';
 		}
 
 		$atts['class'] = implode( ' ', array_unique( $classes ) );

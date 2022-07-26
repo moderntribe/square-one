@@ -1,0 +1,54 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Site Footer Navigation
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-footer {}
+
+/* -----------------------------------------------------------------------------
+ * Site Footer Nav: List
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-footer__list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: var(--grid-gutter-small);
+	row-gap: var(--spacer-60);
+
+	@media (--viewport-medium) {
+		grid-template-columns: 1fr 1fr 1fr;
+		column-gap: var(--grid-gutter-medium);
+	}
+
+	@media (--viewport-full) {
+		column-gap: var(--grid-gutter);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Footer Nav: List Item
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-footer__list-item {
+	@mixin t-input;
+
+	font-size: 18px;
+	line-height: 1.75;
+
+	/* CASE: Top-Level Items are Bold */
+	&.c-nav-footer__list-item--depth-0 {
+		font-weight: 700;
+	}
+
+	/* CASE: Child items have spacing */
+	&.c-nav-footer__list-item--depth-1 {
+		margin-top: var(--spacer-20);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Footer Nav: Link
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-footer__action {}
