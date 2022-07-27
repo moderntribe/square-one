@@ -5,7 +5,7 @@ use \Tribe\Project\Templates\Components\site_header\Site_Header_Controller;
 $c = Site_Header_Controller::factory();
 ?>
 
-<header class="c-site-header">
+<header  <?php echo $c->get_classes(); ?> <?php echo $c->get_attrs(); ?>>
 
 	<div class="l-container">
 
