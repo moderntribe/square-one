@@ -9,6 +9,10 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 
 	public const NAME = 'theme_options';
 
+	// Masthead
+	public const MASTHEAD_TAB  = 'tab_masthead';
+	public const MASTHEAD_LOGO = 'masthead_logo';
+
 	// Footer
 	public const FOOTER_TAB         = 'tab_footer';
 	public const FOOTER_LOGO        = 'footer_logo';
@@ -31,6 +35,7 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 
 	public function get_keys(): array {
 		return [
+			static::MASTHEAD_LOGO,
 			static::FOOTER_LOGO,
 			static::FOOTER_DESCRIPTION,
 			static::FOOTER_CTA_1,
@@ -59,6 +64,10 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 		$group = new ACF\Group( self::NAME, $this->object_types );
 		$group->set( 'title', esc_html__( 'Theme Options', 'tribe' ) );
 
+		// Masthead Tab
+		$group->add_field( $this->get_options_tab_field( esc_html__( 'Site Masthead', 'tribe' ), self::MASTHEAD_TAB ) );
+		$group->add_field( $this->get_masthead_logo_field() );
+
 		// Footer Tab
 		$group->add_field( $this->get_options_tab_field( esc_html__( 'Site Footer', 'tribe' ), self::FOOTER_TAB ) );
 		$group->add_field( $this->get_footer_logo_field() );
@@ -80,6 +89,19 @@ class Theme_Options extends ACF\ACF_Meta_Group {
 		$group->add_field( $this->get_social_field( esc_html__( 'Instagram', 'tribe' ), self::SOCIAL_INSTAGRAM ) );
 
 		return $group->get_attributes();
+	}
+
+	private function get_masthead_logo_field(): ACF\Field {
+		$field = new ACF\Field( self::NAME . '_' . self::MASTHEAD_LOGO );
+		$field->set_attributes( [
+			'label'         => esc_html__( 'Logo', 'tribe' ),
+			'name'          => self::MASTHEAD_LOGO,
+			'type'          => 'image',
+			'return_format' => 'id',
+			'instructions'  => esc_html__( 'Appears in the site masthead. Recommended minimum width: 700px. Recommended file type: .svg.', 'tribe' ),
+		] );
+
+		return $field;
 	}
 
 	private function get_options_tab_field( string $tab_label, string $tab_id ): ACF\Field {
