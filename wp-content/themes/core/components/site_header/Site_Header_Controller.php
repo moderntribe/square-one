@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Templates\Components\header\masthead;
+namespace Tribe\Project\Templates\Components\site_header;
 
 use Tribe\Project\Templates\Components\Abstract_Controller;
 
-class Masthead_Controller extends Abstract_Controller {
+class Site_Header_Controller extends Abstract_Controller {
 
 	public function get_logo(): string {
 		return sprintf(

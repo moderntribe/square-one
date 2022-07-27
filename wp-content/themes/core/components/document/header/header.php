@@ -38,4 +38,4 @@ $c = Header_Controller::factory();
 			<?php esc_html_e( 'Skip to main content', 'tribe' ); ?>
 		</a>
 
-		<?php get_template_part( 'components/header/masthead/masthead' ); ?>
+		<?php get_template_part( 'components/site_header' ); ?>

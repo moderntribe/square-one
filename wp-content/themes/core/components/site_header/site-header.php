@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\header\masthead\Masthead_Controller;
+use \Tribe\Project\Templates\Components\site_header\Site_Header_Controller;
 
-$c = Masthead_Controller::factory();
+$c = Site_Header_Controller::factory();
 ?>
 
-<header class="site-header">
+<header class="c-site-header">
 
 	<div class="l-container">
 
