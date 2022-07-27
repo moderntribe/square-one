@@ -11,7 +11,7 @@ $c = Masthead_Controller::factory();
 
 		<?php echo $c->get_logo(); ?>
 
-		<?php get_template_part( 'components/header/navigation/navigation' ); ?>
+		<?php // get_template_part( 'components/header/navigation/navigation' ); ?>
 
 	</div>
 
