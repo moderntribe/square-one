@@ -23,7 +23,13 @@ $c = Site_Header_Controller::factory();
 			<?php /* Main Nav */
 			get_template_part( 'components/navigation/navigation', null, $c->get_main_nav_args() ); ?>
 
-		<?php // get_template_part( 'components/header/navigation/navigation' ); ?>
+			<?php /* Search toggle */
+			get_template_part( 'components/button/button', null, $c->get_search_toggle_args() ); ?>
+
+			<?php /* Search Form */
+			get_template_part( 'components/search_form/search_form', null, $c->get_search_form_args() ); ?>
+
+		</div>
 
 	</div>
 
