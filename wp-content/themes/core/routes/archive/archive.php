@@ -8,7 +8,7 @@ $c = Archive_Controller::factory();
 get_header();
 ?>
 	<main id="main-content">
-		<?php get_template_part( 'components/header/subheader/subheader', 'index', $c->get_subheader_args() ); ?>
+		<?php get_template_part( 'components/subheader/subheader', 'index', $c->get_subheader_args() ); ?>
 
 		<?php if ( have_posts() ) : ?>
 			<div class="l-container">

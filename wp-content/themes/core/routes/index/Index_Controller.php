@@ -11,7 +11,7 @@ use Tribe\Project\Object_Meta\Taxonomy_Archive_Settings;
 use Tribe\Project\Settings\Post_Settings;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controller;
-use Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
+use Tribe\Project\Templates\Components\subheader\Subheader_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
 use Tribe\Project\Templates\Components\Traits\Post_List_Field_Formatter;
 use Tribe\Project\Templates\Components\Traits\With_Pagination_Helper;
@@ -88,7 +88,7 @@ class Index_Controller extends Abstract_Controller {
 	/**
 	 * Prepare data for the Subheader Component.
 	 *
-	 * @see \Tribe\Project\Templates\Components\header\subheader\Subheader_Controller
+	 * @see \Tribe\Project\Templates\Components\subheader\Subheader_Controller
 	 *
 	 * @return array
 	 */

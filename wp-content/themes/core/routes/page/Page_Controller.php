@@ -3,7 +3,7 @@
 namespace Tribe\Project\Templates\Routes\page;
 
 use Tribe\Libs\Field_Models\Models\Image;
-use Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
+use Tribe\Project\Templates\Components\subheader\Subheader_Controller;
 use Tribe\Project\Templates\Routes\index\Index_Controller;
 
 class Page_Controller extends Index_Controller {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Controller;
+use Tribe\Project\Templates\Components\subheader\Subheader_Single_Controller;
 
 /**
  * @var array $args Arguments passed to the template
