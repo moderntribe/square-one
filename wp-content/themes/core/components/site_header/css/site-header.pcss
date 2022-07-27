@@ -4,6 +4,241 @@
  *
  * ----------------------------------------------------------------------------- */
 
-.site-header {
+.c-site-header {
+	background: transparent;
+	height: 75px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	transition: var(--transition-mobile-nav);
+	width: 100%;
+	z-index: 5;
+	overflow-y: hidden;
 
+	&.mobile-nav--active {
+		@media (--viewport-medium-max) {
+			background: var(--color-black);
+			color: var(--color-white);
+		}
+	}
+
+	&.mobile-nav--animating {
+		@media (--viewport-medium-max) {
+			-webkit-overflow-scrolling: touch;
+			height: 100%;
+			overflow-y: scroll;
+			position: fixed;
+		}
+
+		.admin-bar & {
+			height: calc(100% - var(--spacer-wpadmin-mobile));
+			top: var(--spacer-wpadmin-mobile);
+
+			@media (--viewport-wpadmin) {
+				height: calc(100% - var(--spacer-wpadmin-desktop));
+				top: var(--spacer-wpadmin-desktop);
+			}
+
+			@media (--viewport-full) {
+				height: 115px;
+				top: 0;
+			}
+		}
+	}
+}
+
+/* Inner container */
+
+.c-site-header__container {
+	align-items: center;
+	display: flex;
+	height: 100%;
+	width: 100%;
+
+	.mobile-nav--active &,
+	.mobile-nav--animating & {
+		@media (--viewport-medium-max) {
+			display: block;
+		}
+	}
+}
+
+/* Wrapper for the nav portion itself */
+
+.c-site-header__nav-container {
+	@media (--viewport-full) {
+		display: flex;
+		margin-left: auto;
+		padding-right: 60px;
+		position: relative;
+	}
+}
+
+.c-site-header__logo {
+	@media (--viewport-medium-max) {
+		align-items: center;
+		display: flex;
+		height: 75px;
+	}
+}
+
+/* Site logo icon */
+
+.c-site-header__logo-icon {
+	font-size: 1.8em;
+
+	@media (--viewport-full) {
+		font-size: 2.573em;
+	}
+
+	@media (--viewport-medium-max) {
+		position: absolute;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+/* Toggle for the desktop search */
+
+.c-site-header__search-toggle {
+	display: none;
+
+	@media (--viewport-full) {
+		align-items: center;
+		background: none;
+		border: 0;
+		display: flex;
+		font-size: 36px;
+		height: 40px;
+		justify-content: center;
+		margin: -22px 0 0;
+		opacity: 1;
+		padding: 0;
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transition: var(--transition-nav-swap);
+		width: 40px;
+	}
+
+	.c-site-header--light-theme & {
+		@media (--viewport-full) {
+			color: var(--color-white);
+		}
+	}
+
+	.c-search--masthead-reveal-search & {
+		@media (--viewport-full) {
+			opacity: 0;
+		}
+	}
+
+	.c-search--masthead-hide-nav & {
+		@media (--viewport-full) {
+			display: none;
+		}
+	}
+
+	&:focus {
+		outline: none;
+
+		.icon {
+
+			&:before {
+				border: 1px solid var(--color-link);
+				border-radius: 5px;
+				box-shadow: 0 0 0 1px var(--color-white);
+				outline: none;
+
+				.browser-safari & {
+					border-color: transparent;
+					box-shadow: none;
+				}
+			}
+		}
+
+		&:not(:focus-visible) {
+
+			.icon {
+
+				&:before {
+					border-color: transparent;
+					box-shadow: none;
+				}
+			}
+		}
+	}
+
+	&:focus-visible {
+		outline: none;
+
+		.icon {
+
+			&:before {
+				border: 1px solid var(--color-link);
+				border-radius: 5px;
+				box-shadow: 0 0 0 1px var(--color-white);
+				outline: none;
+			}
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Flyout Toggle
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__flyout-toggle {
+	align-items: center;
+	background: transparent;
+	border: 0;
+	display: flex;
+	font-size: 36px;
+	height: 36px;
+	justify-content: center;
+	margin-right: -5px;
+	outline: none;
+	position: absolute;
+	right: var(--grid-margin-small);
+	top: 20px;
+	transition: var(--transition-nav-swap);
+	width: 36px;
+
+	&:focus,
+	&:focus-visible {
+		outline: none;
+	}
+
+	@media (--viewport-medium) {
+		right: var(--grid-margin-medium);
+	}
+
+	@media (--viewport-full) {
+		right: var(--grid-margin);
+	}
+
+	@media (--viewport-full) {
+		display: none;
+	}
+
+	.device-ios.browser-safari & {
+		right: 0;
+	}
+}
+
+.c-site-header__flyout-toggle-icon {
+
+	.mobile-nav--active & {
+		@media (--viewport-medium-max) {
+			color: var(--color-white);
+		}
+
+		&:before {
+			@media (--viewport-medium-max) {
+				content: var(--icon-close);
+			}
+		}
+	}
 }
