@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.07
+* Fixed: Set Static Analysis format for GitHub in Actions.
 * Added: Block Category (Custom) for all custom blocks.
 * Updated: Block fields layout and language for consistency.
 * Updated: Removed `image_select` fields in favor of `button_group` fields on blocks.
