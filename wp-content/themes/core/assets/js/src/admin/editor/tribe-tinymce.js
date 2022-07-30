@@ -4,9 +4,9 @@
  * This is especially likely to happen when the TinyMCE editor is inside of a
  * repeater (as in the Accordion block, for example) due the restricted
  * horizontal space.
- * 
+ *
  * The issue is ticketed here: https://core.trac.wordpress.org/ticket/44911.
- * 
+ *
  * The issue is caused by some poor positioning logic in
  * `wp-includes/js/tinymce/plugins/wordpress/plugin.js`, which sometimes places
  * the floating toolbar slightly off-screen when positioning it next to the
@@ -16,10 +16,10 @@
  * element being edited once the scrolling finishes. Hiding the toolbar causes
  * the scrollbars to disappear and the plugin then shows the toolbar again,
  * triggering the scrollbars, triggering the hiding of the toolbar, etc, etc.
- * 
+ *
  * The fix should be rather simple, but difficult to apply. It would essentially
  * be a one-liner in the core TinyMCE Wordpress plugin, were that a normal
- * library you could patch or replace. Instead, we use this custom plugin to 
+ * library you could patch or replace. Instead, we use this custom plugin to
  * observe the toolbar and fix the positioning in the trouble cases. TinyMCE
  * plugins are meant to be independent and "closed", so there's no way to fix
  * the errant positioning function directly. Instead we quickly recalculate and
