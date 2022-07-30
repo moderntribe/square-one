@@ -1,3 +1,30 @@
+/**
+ * This custom TinyMCE plugin fixes an issue where the TinyMCE floating/inline
+ * toolbar (usually when editing a link in the WYSIWYG) "flickers" endlessly.
+ * This is especially likely to happen when the TinyMCE editor is inside of a
+ * repeater (as in the Accordion block, for example) due the restricted
+ * horizontal space.
+ * 
+ * The issue is ticketed here: https://core.trac.wordpress.org/ticket/44911.
+ * 
+ * The issue is caused by some poor positioning logic in
+ * `wp-includes/js/tinymce/plugins/wordpress/plugin.js`, which sometimes places
+ * the floating toolbar slightly off-screen when positioning it next to the
+ * inline element being edited. Overflowing the body this way causes horizontal
+ * scrollbars to appear and triggers a `scrollwindow` event. The same plugin
+ * hides the toolbar during scroll events to be repositioned over the inline
+ * element being edited once the scrolling finishes. Hiding the toolbar causes
+ * the scrollbars to disappear and the plugin then shows the toolbar again,
+ * triggering the scrollbars, triggering the hiding of the toolbar, etc, etc.
+ * 
+ * The fix should be rather simple, but difficult to apply. It would essentially
+ * be a one-liner in the core TinyMCE Wordpress plugin, were that a normal
+ * library you could patch or replace. Instead, we use this custom plugin to 
+ * observe the toolbar and fix the positioning in the trouble cases. TinyMCE
+ * plugins are meant to be independent and "closed", so there's no way to fix
+ * the errant positioning function directly. Instead we quickly recalculate and
+ * reposition the element ourselves after the bad positioning has been done.
+ */
 ( function() {
 	window.tinymce.PluginManager.add( 'tribe-tinymce', function( editor ) {
 		let mceIframe;
