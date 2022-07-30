@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.07
+* Fixed: TinyMCE floating toolbar repositioning loop. https://core.trac.wordpress.org/ticket/44911
 * Fixed: Set Static Analysis format for GitHub in Actions.
 * Added: Block Category (Custom) for all custom blocks.
 * Updated: Block fields layout and language for consistency.
