@@ -50,7 +50,7 @@ final class ColorThemeModelMiddlewareTest extends Test_Case {
 			'post_status' => 'publish',
 		] );
 
-		update_field( Appearance::COLOR_THEME, Appearance::THEME_WHITE, $post_id );
+		update_field( Appearance::COLOR_THEME, '#ffffff', $post_id );
 
 		$GLOBALS['post'] = get_post( $post_id );
 
