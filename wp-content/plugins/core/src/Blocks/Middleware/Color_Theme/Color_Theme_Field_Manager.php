@@ -3,16 +3,20 @@
 namespace Tribe\Project\Blocks\Middleware\Color_Theme;
 
 use Tribe\Libs\ACF\Field;
+use Tribe\Libs\Field_Models\Collections\Swatch_Collection;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Appearance;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Color_Theme_Field;
-use Tribe\Project\Blocks\Middleware\Color_Theme\Traits\With_Color_Choices;
 
 /**
  * @see Color_Theme_Field
  */
 class Color_Theme_Field_Manager implements Color_Theme_Field, Appearance {
 
-	use With_Color_Choices;
+	protected Swatch_Collection $swatch_collection;
+
+	public function __construct( Swatch_Collection $swatch_collection ) {
+		$this->swatch_collection = $swatch_collection;
+	}
 
 	/**
 	 * Retrieve the color theme field configuration.
@@ -28,7 +32,7 @@ class Color_Theme_Field_Manager implements Color_Theme_Field, Appearance {
 			'default_value' => self::THEME_DEFAULT,
 			'allow_null'    => false,
 			'allow_other'   => false,
-			'choices'       => $this->get_color_theme_choices(),
+			'choices'       => $this->swatch_collection->format_for_acf(),
 		] );
 	}
 

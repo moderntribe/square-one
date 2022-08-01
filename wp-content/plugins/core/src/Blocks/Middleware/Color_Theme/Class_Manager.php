@@ -2,7 +2,7 @@
 
 namespace Tribe\Project\Blocks\Middleware\Color_Theme;
 
-use Ds\Map;
+use Tribe\Libs\Field_Models\Collections\Swatch_Collection;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Appearance;
 
 /**
@@ -10,7 +10,7 @@ use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Appearance;
  */
 class Class_Manager implements Appearance {
 
-	protected Map $class_map;
+	protected Swatch_Collection $swatch_collection;
 
 	/**
 	 * An sprintf() compatible string for the base CSS class that will
@@ -20,22 +20,22 @@ class Class_Manager implements Appearance {
 	 */
 	protected string $class_blueprint;
 
-	public function __construct( Map $class_map, string $class_blueprint ) {
-		$this->class_map       = $class_map;
-		$this->class_blueprint = $class_blueprint;
+	public function __construct( Swatch_Collection $swatch_collection, string $class_blueprint ) {
+		$this->swatch_collection = $swatch_collection;
+		$this->class_blueprint   = $class_blueprint;
 	}
 
 	/**
 	 * Retrieve the mapped CSS class from a color hex code.
 	 *
-	 * @param string $hex e.g. #FFFFFF
+	 * @param string $color_format e.g. #FFFFFF, rgb(255,0,0), rgba(255,0,0, 1) etc...
 	 *
 	 * @return string
 	 */
-	public function get_class( string $hex ): string {
-		$theme = $this->class_map->get( $hex, '' );
+	public function get_class( string $color_format ): string {
+		$swatch = $this->swatch_collection->get_by_value( $color_format );
 
-		return $theme ? $this->sanitize_class( $theme ) : '';
+		return $swatch ? $this->sanitize_class( $swatch->slug ) : '';
 	}
 
 	protected function sanitize_class( string $class ): string {
