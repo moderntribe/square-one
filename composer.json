@@ -98,7 +98,7 @@
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/acf-menu-chooser": "^1.1",
-    "moderntribe/square1-field-models": "^1.0",
+    "moderntribe/square1-field-models": "dev-feature/color-swatch-model",
     "moderntribe/tribe-acf-post-list-field": "^2.0",
     "moderntribe/tribe-libs": "^3.5",
     "nickford/acf-swatch": "1.0.7",
