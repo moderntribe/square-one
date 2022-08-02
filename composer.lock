@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8659e27156c2948aa5b75382fbe6bea9",
+    "content-hash": "11f3dfe48eb15195dbdecdf3d434b8b2",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1426,43 +1426,6 @@
             "time": "2022-08-01T21:39:19+00:00"
         },
         {
-            "name": "moderntribe/tribe-acf-post-list-field",
-            "version": "v2.2.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/moderntribe/tribe-acf-post-list-field.git",
-                "reference": "d31ab77209b8763cc453fd6528bb20d6efdf0501"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-acf-post-list-field/zipball/d31ab77209b8763cc453fd6528bb20d6efdf0501",
-                "reference": "d31ab77209b8763cc453fd6528bb20d6efdf0501",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^7.2"
-            },
-            "type": "wordpress-plugin",
-            "autoload": {
-                "psr-4": {
-                    "Tribe\\ACF_Post_List\\": "src"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Modern Tribe",
-                    "email": "admin@tri.be"
-                }
-            ],
-            "description": "A post list field type for Advanced Custom Fields",
-            "support": {
-                "source": "https://github.com/moderntribe/tribe-acf-post-list-field/tree/v2.2.7",
-                "issues": "https://github.com/moderntribe/tribe-acf-post-list-field/issues"
-            },
-            "time": "2021-11-02T16:12:34+00:00"
-        },
-        {
             "name": "moderntribe/tribe-libs",
             "version": "dev-feature/acf-with-field-prefix-trait",
             "source": {
@@ -2841,6 +2804,57 @@
             "time": "2021-05-03T11:20:27+00:00"
         },
         {
+            "name": "psr/simple-cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/simple-cache/tree/master"
+            },
+            "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
             "name": "ralouphie/getallheaders",
             "version": "3.0.3",
             "source": {
@@ -2963,6 +2977,69 @@
                 }
             ],
             "time": "2022-03-18T05:03:40+00:00"
+        },
+        {
+            "name": "sabre/cache",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sabre-io/cache.git",
+                "reference": "be9b6a2aa3bf07098ea12bf758ef62b3eade8101"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sabre-io/cache/zipball/be9b6a2aa3bf07098ea12bf758ef62b3eade8101",
+                "reference": "be9b6a2aa3bf07098ea12bf758ef62b3eade8101",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0",
+                "psr/simple-cache": "^1.0"
+            },
+            "provide": {
+                "psr/simple-cache-implementation": "~1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.17.1",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sabre\\Cache\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Evert Pot",
+                    "email": "me@evertpot.com",
+                    "homepage": "https://evertpot.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple cache abstraction layer implementing PSR-16",
+            "homepage": "http://sabre.io/dav/",
+            "keywords": [
+                "apc",
+                "apcu",
+                "cache",
+                "memcache",
+                "memcached",
+                "psr-16",
+                "sabre",
+                "simple-cache"
+            ],
+            "support": {
+                "forum": "https://groups.google.com/group/sabredav-discuss",
+                "issues": "https://github.com/sabre-io/cache/issues",
+                "source": "https://github.com/fruux/sabre-skel"
+            },
+            "time": "2022-06-24T09:25:13+00:00"
         },
         {
             "name": "spatie/data-transfer-object",
@@ -7547,57 +7624,6 @@
                 "source": "https://github.com/php-fig/event-dispatcher/tree/1.0.0"
             },
             "time": "2019-01-08T18:20:26+00:00"
-        },
-        {
-            "name": "psr/simple-cache",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/simple-cache.git",
-                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\SimpleCache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interfaces for simple caching",
-            "keywords": [
-                "cache",
-                "caching",
-                "psr",
-                "psr-16",
-                "simple-cache"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/simple-cache/tree/master"
-            },
-            "time": "2017-10-23T01:57:42+00:00"
         },
         {
             "name": "rmccue/requests",
