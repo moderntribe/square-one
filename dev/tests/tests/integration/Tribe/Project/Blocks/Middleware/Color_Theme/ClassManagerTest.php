@@ -3,21 +3,40 @@
 namespace Tribe\Project\Blocks\Middleware\Color_Theme;
 
 use Ds\Map;
+use Tribe\Libs\Field_Models\Collections\Swatch_Collection;
 use Tribe\Tests\Test_Case;
 
 final class ClassManagerTest extends Test_Case {
 
 	public function test_it_gets_css_classes_from_swatch_hex_codes(): void {
-		$map = new Map( [
-			'#FFF'    => 'white',
-			'#000'    => 'black',
-			'#00FF00' => 'green',
-			'#FFFF00' => 'banana-yellow',
-			'#FFC0CB' => 'Cotton Candy Pink',
-			'#b0e0e6' => 'poWDer_Blue',
+		$collection = Swatch_Collection::create( [
+			'white'             => [
+				'color' => '#FFF',
+				'slug'  => 'white',
+			],
+			'black'             => [
+				'color' => '#000',
+				'slug'  => 'black',
+			],
+			'green'             => [
+				'color' => '#00FF00',
+				'slug'  => 'green',
+			],
+			'banana-yellow'     => [
+				'color' => '#FFFF00',
+				'slug'  => 'banana-yellow',
+			],
+			'Cotton Candy Pink' => [
+				'color' => '#FFC0CB',
+				'slug'  => 'Cotton Candy Pink',
+			],
+			'poWDer_Blue'       => [
+				'color' => '#b0e0e6',
+				'slug'  => 'poWDer_Blue',
+			],
 		] );
 
-		$class_manager = new Class_Manager( $map, 't-theme--%s' );
+		$class_manager = new Class_Manager( $collection, 't-theme--%s' );
 
 		$this->assertSame( '', $class_manager->get_class( '#A020F0' ) );
 		$this->assertSame( 't-theme--white', $class_manager->get_class( '#FFF' ) );
