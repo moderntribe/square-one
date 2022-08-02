@@ -16,7 +16,7 @@ class Color_Theme_Repeater_Field_Middleware extends Abstract_Field_Middleware im
 
 	use With_Field_Finder;
 
-	public const MIDDLEWARE_KEY = 'color_theme_parent_key';
+	public const MIDDLEWARE_KEY = 'color_theme_parent_keys';
 
 	protected Color_Theme_Field $color_theme;
 
@@ -28,29 +28,32 @@ class Color_Theme_Repeater_Field_Middleware extends Abstract_Field_Middleware im
 
 	/**
 	 * @param \Tribe\Libs\ACF\Block_Config      $block
-	 * @param array{color_theme_parent_key?: string} $params
+	 * @param array{color_theme_parent_key?: string[]} $params
 	 *
 	 * @return \Tribe\Libs\ACF\Block_Config
 	 */
 	protected function set_fields( Block_Config $block, array $params = [] ): Block_Config {
-		$parent_key = $params[ self::MIDDLEWARE_KEY ] ?? '';
+		$parent_keys = $params[ self::MIDDLEWARE_KEY ] ?? [];
 
-		if ( ! $parent_key ) {
+		if ( ! $parent_keys || ! is_array( $parent_keys ) ) {
 			return $block;
 		}
 
-		$fields       = $block->get_fields();
-		$block_name   = $block->get_block()->get_attributes()['name'];
-		$parent_field = $this->find_field( $fields, $parent_key );
+		$fields = $block->get_fields();
 
-		if ( ! $parent_field ) {
-			return $block;
+		foreach ( $parent_keys as $parent_key ) {
+			$block_name   = $block->get_block()->get_attributes()['name'];
+			$parent_field = $this->find_field( $fields, $parent_key );
+
+			if ( ! $parent_field ) {
+				continue;
+			}
+
+			$parent_field->add_field( $this->color_theme->get_field(
+				$block_name,
+				esc_html__( 'Color Theme', 'tribe' )
+			) );
 		}
-
-		$parent_field->add_field( $this->color_theme->get_field(
-			$block_name,
-			esc_html__( 'Color Theme', 'tribe' )
-		) );
 
 		return $block->set_fields( $fields );
 	}
