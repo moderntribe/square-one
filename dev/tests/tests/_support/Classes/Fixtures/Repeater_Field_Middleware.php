@@ -4,8 +4,8 @@ namespace Tribe\Tests\Fixtures;
 
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
+use Tribe\Libs\ACF\Traits\With_Field_Finder;
 use Tribe\Project\Block_Middleware\Contracts\Abstract_Field_Middleware;
-use Tribe\Project\Block_Middleware\Traits\With_Field_Finder;
 
 class Repeater_Field_Middleware extends Abstract_Field_Middleware {
 
