@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd303f47af0463b99c75fb8a210fca4a",
+    "content-hash": "8659e27156c2948aa5b75382fbe6bea9",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -70,16 +70,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.231.18",
+            "version": "3.232.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "76db7b327e023c7bbce77a0bfc9fb4d559e765b3"
+                "reference": "140af6f27803d8cb6f1ba6405a1133f5f90eb9f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/76db7b327e023c7bbce77a0bfc9fb4d559e765b3",
-                "reference": "76db7b327e023c7bbce77a0bfc9fb4d559e765b3",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/140af6f27803d8cb6f1ba6405a1133f5f90eb9f1",
+                "reference": "140af6f27803d8cb6f1ba6405a1133f5f90eb9f1",
                 "shasum": ""
             },
             "require": {
@@ -156,9 +156,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.231.18"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.232.0"
             },
-            "time": "2022-08-01T18:18:21+00:00"
+            "time": "2022-08-02T18:16:04+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -1389,12 +1389,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-field-models.git",
-                "reference": "67f8c6c3fbede7dc7394eb133a9a5668922fb029"
+                "reference": "00a47b1f37936e8b3ad1f878fba5e24e1fc72671"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-field-models/zipball/67f8c6c3fbede7dc7394eb133a9a5668922fb029",
-                "reference": "67f8c6c3fbede7dc7394eb133a9a5668922fb029",
+                "url": "https://api.github.com/repos/moderntribe/square1-field-models/zipball/00a47b1f37936e8b3ad1f878fba5e24e1fc72671",
+                "reference": "00a47b1f37936e8b3ad1f878fba5e24e1fc72671",
                 "shasum": ""
             },
             "require": {
@@ -1423,7 +1423,7 @@
                 "issues": "https://github.com/moderntribe/square1-field-models/issues",
                 "source": "https://github.com/moderntribe/square1-field-models/tree/feature/color-swatch-model"
             },
-            "time": "2022-08-01T21:20:04+00:00"
+            "time": "2022-08-01T21:39:19+00:00"
         },
         {
             "name": "moderntribe/tribe-acf-post-list-field",
@@ -1464,16 +1464,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "3.5.0",
+            "version": "dev-feature/acf-with-field-prefix-trait",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "78c3837d500045f2a11fbaf9415015b117d95116"
+                "reference": "97653d57e15d3d26a51c17b198c256772d001c01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/78c3837d500045f2a11fbaf9415015b117d95116",
-                "reference": "78c3837d500045f2a11fbaf9415015b117d95116",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/97653d57e15d3d26a51c17b198c256772d001c01",
+                "reference": "97653d57e15d3d26a51c17b198c256772d001c01",
                 "shasum": ""
             },
             "require": {
@@ -1536,7 +1536,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.5-dev"
+                    "dev-master": "3.6-dev"
                 }
             },
             "autoload": {
@@ -1582,9 +1582,9 @@
             "description": "A library for use on Modern Tribe service projects.",
             "support": {
                 "issues": "https://github.com/moderntribe/tribe-libs/issues",
-                "source": "https://github.com/moderntribe/tribe-libs/tree/3.5.0"
+                "source": "https://github.com/moderntribe/tribe-libs/tree/feature/acf-with-field-prefix-trait"
             },
-            "time": "2022-07-20T21:00:01+00:00"
+            "time": "2022-08-02T20:10:50+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -10628,11 +10628,19 @@
             "time": "2021-07-11T04:52:41+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "moderntribe/tribe-libs",
+            "version": "dev-feature/acf-with-field-prefix-trait",
+            "alias": "3.5.0",
+            "alias_normalized": "3.5.0.0"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "moderntribe/acf-image-select": 20,
         "moderntribe/square1-field-models": 20,
+        "moderntribe/tribe-libs": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20
     },
