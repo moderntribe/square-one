@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2202.08
+* Fixed: False positive on `have_posts()` using PHPStan if proceeded by an `if ( have_posts() ):`, utilizing a new [wordpress-overrides.stub file](dev/stubs/wordpress-overrides.stub)  
+
 ## 2022.07
 * Fixed: TinyMCE floating toolbar repositioning loop. https://core.trac.wordpress.org/ticket/44911
 * Fixed: Set Static Analysis format for GitHub in Actions.
