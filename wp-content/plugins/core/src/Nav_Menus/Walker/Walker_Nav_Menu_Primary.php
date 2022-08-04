@@ -150,11 +150,15 @@ class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 		// don't link top-level items with children in the primary nav
 		if ( $has_children && $depth === 0 ) {
 			unset( $atts['href'] );
-			$atts['data-js'] = 'c-nav-child-menu-trigger';
-			$atts['title']   = esc_attr__( 'Toggle Sub-Menu', 'tribe' );
+			$atts['data-js']       = 'c-nav-child-menu-trigger';
+			$atts['title']         = esc_attr__( 'Toggle Sub-Menu', 'tribe' );
+			$atts['aria-expanded'] = 'false';
+			$atts['aria-haspopup'] = 'true';
+			$atts['aria-controls'] = 'menu-item-child-' . esc_attr( $this->current_item->ID ) . '"';
 		}
 
 		$attributes = '';
+
 		foreach ( $atts as $attr => $value ) {
 			if ( empty( $value ) ) {
 				continue;

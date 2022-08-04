@@ -158,6 +158,7 @@ class Site_Header_Controller extends Abstract_Controller {
 			Image_Controller::IMG_ID       => $image_id,
 			Image_Controller::CLASSES      => [ 'c-site-header__logo-image' ],
 			Image_Controller::AUTO_SHIM    => false,
+			Image_Controller::USE_LAZYLOAD => false,
 			Image_Controller::SRC_SIZE     => 'medium',
 			Image_Controller::SRCSET_SIZES => [
 				'medium',
