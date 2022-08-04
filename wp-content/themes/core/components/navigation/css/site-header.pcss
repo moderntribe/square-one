@@ -1,0 +1,86 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Site Header Navigation
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary {
+	margin-top: var(--spacer-50);
+	margin-bottom: var(--spacer-50);
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: List Item
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__list-item {
+	margin-top: var(--spacer-20);
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: Top-Level List Item
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__list-item--depth-0 {
+	margin-bottom: var(--spacer-30);
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: Links & Buttons
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__action {
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: Top-Level Links & Buttons
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__action--depth-0 {
+	@mixin a-btn-reset;
+	@mixin t-text-button;
+
+	&:focus {
+		outline: 1px dotted currentColor;
+	}
+
+	/* CASE: Item has a submenu */
+	&.c-nav-primary__action--has-children {
+
+		&:after {
+			@mixin icon;
+
+			content: var(--icon-chevron-down);
+			position: relative;
+			display: inline-block;
+			top: 0.1em;
+			left: 0.25em;
+			transition: var(--transition);
+		}
+
+		/* CASE: This submenu is active */
+		.c-nav-primary__list-child--active & {
+
+			&:after {
+				transform: rotate(180deg);
+			}
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: Submenu List
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__list-child {
+	display: none;
+
+	/* CASE: This submenu is active */
+	.c-nav-primary__list-child--active & {
+		display: block;
+	}
+}
