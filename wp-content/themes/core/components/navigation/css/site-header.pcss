@@ -49,6 +49,7 @@
 	margin-bottom: var(--spacer-30);
 
 	@media (--viewport-full) {
+		position: relative;
 		margin-bottom: 0;
 	}
 }
@@ -58,9 +59,11 @@
  * ----------------------------------------------------------------------------- */
 
 .c-nav-primary__action {
+	transition: var(--transition);
+	text-decoration: underline transparent;
 
 	&:hover {
-		text-decoration: underline;
+		text-decoration: underline currentColor;
 	}
 }
 
@@ -72,6 +75,9 @@
 	@mixin a-btn-reset;
 	@mixin t-text-button;
 
+	transition: var(--transition);
+	text-decoration: underline transparent;
+
 	@media (--viewport-full) {
 		@mixin t-input;
 
@@ -80,6 +86,10 @@
 
 	&:focus {
 		outline: 1px dotted currentColor;
+	}
+
+	&:hover {
+		text-decoration: underline currentColor;
 	}
 
 	/* CASE: Item has a submenu */
@@ -113,8 +123,43 @@
 .c-nav-primary__list-child {
 	display: none;
 
+	@media(--viewport-full) {
+		position: absolute;
+		top:100%;
+		left: calc(-1 * var(--spacer-40));
+		width: var(--grid-3-col);
+		margin: 12px calc(-1 * var(--spacer-40)) 0 0;
+		padding: var(--spacer-30) var(--spacer-40);
+		border-radius: var(--border-radius-base);
+		border: 1px solid var(--color-border);
+		background: var(--color-bgd);
+		box-shadow: var(--box-shadow-10);
+	}
+
+	/* CASE: Last top-level menu item should align it's submenu right to prevent overflowing the viewport. */
+	.c-nav-primary__list-item--depth-0:last-child & {
+		@media(--viewport-full) {
+			left: auto;
+			right: 0;
+		}
+	}
+
 	/* CASE: This submenu is active */
 	.c-nav-primary__list-child--active & {
 		display: block;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: Submenu List Items
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__list-item--depth-1 {
+	@media (--viewport-full) {
+		margin-top: var(--spacer-20);
+
+		&:first-child {
+			margin-top: 0;
+		}
 	}
 }
