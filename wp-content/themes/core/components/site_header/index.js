@@ -17,6 +17,7 @@ const init = () => {
 	if ( ! el.container ) {
 		return;
 	}
+
 	siteHeader( el.container );
 };
 
