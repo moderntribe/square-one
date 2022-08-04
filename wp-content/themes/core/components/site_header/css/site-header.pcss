@@ -61,6 +61,7 @@
 	display: none;
 
 	@media (--viewport-full) {
+		position: relative;
 		display: flex;
 		flex-flow: row nowrap;
 		align-items: center;
@@ -70,6 +71,26 @@
 
 	/* CASE: Mobile flyout active */
 	.c-site-header--mobile-nav-active & {
+		display: block;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Desktop Search Flyout Container
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__search-flyout {
+	@media (--viewport-full) {
+		display: none;
+		position: absolute;
+		z-index: 1;
+		right: 0;
+		top: -10px;
+		width: var(--grid-4-col);
+	}
+
+	/* CASE: Search flyout active */
+	.c-site-header--search-active & {
 		display: block;
 	}
 }
@@ -149,6 +170,8 @@
 .c-site-header__search-toggle {
 	@mixin a-btn-reset;
 
+	position: relative;
+	z-index: 1;
 	display: none;
 	width: 42px;
 	height: 36px;
@@ -157,5 +180,20 @@
 
 	@media (--viewport-full) {
 		display: block;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Desktop Search Flyout Toggle Icon
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__search-toggle-icon {
+
+	/* CASE: Search flyout active */
+	.c-site-header--search-active & {
+
+		&:before {
+			content: var(--icon-close);
+		}
 	}
 }

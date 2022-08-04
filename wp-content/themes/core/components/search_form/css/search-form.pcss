@@ -6,13 +6,6 @@
 
 .c-search {
 	position: relative;
-
-	/* CASE: Search Form in the site header */
-	&.c-search--site-header {
-		@media (--viewport-full) {
-			display: none;
-		}
-	}
 }
 
 .c-search__input {
@@ -21,6 +14,14 @@
 	background: var(--color-white);
 	border: 1px solid var(--color-neutral-20);
 	color: var(--color-neutral-70);
+
+	/* CASE: Search Form in the site header */
+	.c-search--site-header & {
+		padding-left: 42px;
+		padding-right: 42px;
+		border: none;
+		border-bottom: 1px solid var(--color-black);
+	}
 }
 
 .c-search__submit-button,
@@ -62,6 +63,19 @@
 
 	&:before {
 		content: var(--icon-search);
+	}
+
+	/* CASE: Search Form in the site header */
+	.c-search--site-header & {
+		@media (--viewport-full) {
+			right: auto;
+			left: 0;
+
+			&:before {
+				font-size: 32px;
+				line-height: 42px;
+			}
+		}
 	}
 }
 

@@ -20,8 +20,10 @@ $c = Site_Header_Controller::factory();
 
 		<div class="c-site-header__nav-container" data-js="c-site-header-nav-container">
 
-			<?php /* Search Form */
-			get_template_part( 'components/search_form/search_form', null, $c->get_search_form_args() ); ?>
+			<div class="c-site-header__search-flyout" id="search-flyout" data-js="search-flyout">
+				<?php /* Search Form */
+				get_template_part( 'components/search_form/search_form', null, $c->get_search_form_args() ); ?>
+			</div>
 
 			<?php /* Main Nav */
 			get_template_part( 'components/navigation/navigation', null, $c->get_main_nav_args() ); ?>
