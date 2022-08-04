@@ -24,6 +24,8 @@
 .c-site-header__container {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	gap: var(--grid-gutter);
 	width: 100%;
 	height: var(--site-header-height);
 
@@ -58,6 +60,14 @@
 .c-site-header__nav-container {
 	display: none;
 
+	@media (--viewport-full) {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+		justify-content: flex-end;
+		gap: var(--spacer-30);
+	}
+
 	/* CASE: Mobile flyout active */
 	.c-site-header--mobile-nav-active & {
 		display: block;
@@ -81,7 +91,7 @@
 .c-site-header__logo-link {
 	display: block;
 	width: 100%;
-	max-width: var(--grid-3-col);
+	max-width: 220px; /* Arbitrary value to prevent logo over-sizing */
 }
 
 /* -----------------------------------------------------------------------------
@@ -107,7 +117,7 @@
 	}
 
 	@media (--viewport-full) {
-		right: var(--grid-gutter);
+		display: none;
 	}
 
 	&:focus,
@@ -140,4 +150,12 @@
 	@mixin a-btn-reset;
 
 	display: none;
+	width: 42px;
+	height: 36px;
+	font-size: 32px;
+	line-height: 42px;
+
+	@media (--viewport-full) {
+		display: block;
+	}
 }

@@ -7,22 +7,50 @@
 .c-nav-primary {
 	margin-top: var(--spacer-50);
 	margin-bottom: var(--spacer-50);
+
+	@media (--viewport-full) {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
 }
 
 /* -----------------------------------------------------------------------------
- * Site Header Nav: List Item
+ * Site Header Nav: List
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__list {
+	@media (--viewport-full) {
+		display: flex;
+		flex-flow: row nowrap;
+		gap: var(--spacer-30);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: List Items
  * ----------------------------------------------------------------------------- */
 
 .c-nav-primary__list-item {
 	margin-top: var(--spacer-20);
+
+	@media (--viewport-full) {
+		display: flex;
+		align-items: center;
+		margin-top: 0;
+		white-space: nowrap;
+	}
 }
 
 /* -----------------------------------------------------------------------------
- * Site Header Nav: Top-Level List Item
+ * Site Header Nav: Top-Level List Items
  * ----------------------------------------------------------------------------- */
 
 .c-nav-primary__list-item--depth-0 {
 	margin-bottom: var(--spacer-30);
+
+	@media (--viewport-full) {
+		margin-bottom: 0;
+	}
 }
 
 /* -----------------------------------------------------------------------------
@@ -43,6 +71,12 @@
 .c-nav-primary__action--depth-0 {
 	@mixin a-btn-reset;
 	@mixin t-text-button;
+
+	@media (--viewport-full) {
+		@mixin t-input;
+
+		font-weight: 700;
+	}
 
 	&:focus {
 		outline: 1px dotted currentColor;

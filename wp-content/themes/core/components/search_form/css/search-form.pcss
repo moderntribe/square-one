@@ -6,6 +6,13 @@
 
 .c-search {
 	position: relative;
+
+	/* CASE: Search Form in the site header */
+	&.c-search--site-header {
+		@media (--viewport-full) {
+			display: none;
+		}
+	}
 }
 
 .c-search__input {
