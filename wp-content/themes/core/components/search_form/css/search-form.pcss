@@ -8,6 +8,10 @@
 	position: relative;
 }
 
+/* -----------------------------------------------------------------------------
+ * Search Form: Search Field
+ * ----------------------------------------------------------------------------- */
+
 .c-search__input {
 	width: 100%;
 	padding: var(--spacer-20) 76px var(--spacer-20) var(--spacer-30);
@@ -24,11 +28,15 @@
 	}
 }
 
-.c-search__submit-button,
-.c-search__clear-button {
+/* -----------------------------------------------------------------------------
+ * Search Form: Submit Button
+ * ----------------------------------------------------------------------------- */
+
+.c-search__submit-button {
 	position: absolute;
 	display: flex;
 	top: 50%;
+	right: 12px;
 	width: 32px;
 	height: 32px;
 	justify-content: center;
@@ -45,6 +53,7 @@
 	&:before {
 		@mixin icon;
 
+		content: var(--icon-search);
 		font-size: 26px;
 	}
 
@@ -55,14 +64,6 @@
 	&:hover,
 	&:focus {
 		color: var(--color-primary);
-	}
-}
-
-.c-search__submit-button {
-	right: 12px;
-
-	&:before {
-		content: var(--icon-search);
 	}
 
 	/* CASE: Search Form in the site header */
@@ -76,14 +77,5 @@
 				line-height: 42px;
 			}
 		}
-	}
-}
-
-.c-search__clear-button {
-	right: 44px;
-	color: var(--color-neutral-50);
-
-	&:before {
-		content: var(--icon-close);
 	}
 }
