@@ -28,18 +28,18 @@ class Post_Loop_Field_Config extends Field_Model {
 	];
 
 	/**
-	 * The Block Config's NAME constant to be used as the
-	 * field prefix.
-	 *
-	 * @see \Tribe\Libs\ACF\Block_Config::NAME
-	 */
-	public string $block_name = '';
-
-	/**
-	 * The ACF group name to wrap this post loop in to
-	 * ensure its uniqueness.
+	 * The ACF group/field/section where the Post Loop Fields will appear
+	 * under.
 	 */
 	public string $group = '';
+
+	/**
+	 * The name of the field, generally a constant you created in a
+	 * Block_Config.
+	 *
+	 * @note This name must be unique to the block.
+	 */
+	public string $field_name = '';
 
 	/**
 	 * Which query types are available for the user to select.

@@ -4,7 +4,6 @@ namespace Tribe\Project\Templates\Components\blocks\content_loop;
 
 use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
-use Tribe\Project\Blocks\Middleware\Post_Loop\Post_Loop_Controller;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop as Content_Loop_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\card\Card_Controller;
@@ -30,7 +29,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	public const ENABLE_PAGINATION = 'enable_pagination';
 	public const LAYOUT            = 'layout';
 	public const LEADIN            = 'leadin';
-	public const POSTS             = Post_Loop_Controller::POSTS;
+	public const POSTS             = 'posts';
 	public const TITLE             = 'title';
 
 	/**

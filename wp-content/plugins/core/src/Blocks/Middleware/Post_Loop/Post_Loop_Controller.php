@@ -10,12 +10,8 @@ use WP_Query;
 
 /**
  * Build a list of Post_Proxy objects for use as the "$posts" property in controllers.
- *
- * @see \Tribe\Project\Blocks\Middleware\Post_Loop\Model_Middleware\Post_Loop_Field_Model_Middleware
  */
 class Post_Loop_Controller {
-
-	public const POSTS = 'posts';
 
 	protected Post_Loop_Model $model;
 	protected CacheInterface $store;

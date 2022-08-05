@@ -4,7 +4,6 @@ namespace Tribe\Project\Templates\Components\blocks\card_grid;
 
 use Tribe\Libs\Field_Models\Models\Cta;
 use Tribe\Libs\Utils\Markup_Utils;
-use Tribe\Project\Blocks\Middleware\Post_Loop\Post_Loop_Controller;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\card\Card_Controller;
@@ -27,7 +26,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	public const LEADIN            = 'leadin';
 	public const LOOP_ATTRS        = 'loop_attrs';
 	public const LOOP_CLASSES      = 'loop_classes';
-	public const POSTS             = Post_Loop_Controller::POSTS;
+	public const POSTS             = 'posts';
 	public const TITLE             = 'title';
 
 	/**

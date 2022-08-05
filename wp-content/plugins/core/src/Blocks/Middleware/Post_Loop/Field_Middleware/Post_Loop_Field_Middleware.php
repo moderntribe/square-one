@@ -24,7 +24,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	use With_Field_Finder;
 
 	public const NAME           = 'post_loop';
-	public const MIDDLEWARE_KEY = 'post_loop_field_config';
+	public const MIDDLEWARE_KEY = 'post_loop_field_configs';
 
 	public const QUERY_TYPE        = 'query_type';
 	public const QUERY_TYPE_AUTO   = 'query_type_auto';
@@ -59,26 +59,37 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	protected Post_Loop_Field_Config $config;
 
 	/**
-	 * Inject the post loop field group into configured blocks.
+	 * Inject the post loop field group underneath specified parent fields.
 	 *
-	 * @param \Tribe\Libs\ACF\Block_Config                                                                                    $block
-	 * @param array{post_loop_field_config: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config}|mixed[] $params
+	 * @param \Tribe\Libs\ACF\Block_Config                                                                                       $block
+	 * @param array{post_loop_field_configs: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config[]}|mixed[] $params
 	 *
 	 * @return \Tribe\Libs\ACF\Block_Config
 	 */
 	public function set_fields( Block_Config $block, array $params = [] ): Block_Config {
-		$post_loop_config = $params[ self::MIDDLEWARE_KEY ] ?? false;
+		$post_loop_configs = $params[ self::MIDDLEWARE_KEY ] ?? [];
 
-		if ( ! $post_loop_config instanceof Post_Loop_Field_Config ) {
+		if ( ! $post_loop_configs || ! is_array( $post_loop_configs ) ) {
 			return $block;
 		}
 
-		$this->config = $post_loop_config;
+		$fields = $block->get_fields();
 
-		$fields  = $block->get_fields();
-		$section = $this->find_field( $fields, $this->config->group );
+		// Configure each post loop this block has specified to configure
+		foreach ( $post_loop_configs as $post_loop_config ) {
+			if ( ! $post_loop_config instanceof Post_Loop_Field_Config ) {
+				continue;
+			}
 
-		if ( $section ) {
+			$this->config = $post_loop_config;
+
+			// Find the field/group/section where our post loop fields will be added to.
+			$section = $this->find_field( $fields, $this->config->group );
+
+			if ( ! $section ) {
+				continue;
+			}
+
 			$section->add_field( $this->get_post_loop_group() );
 		}
 
@@ -86,8 +97,8 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	}
 
 	protected function get_post_loop_group(): Field_Group {
-		$group = new Field_Group( $this->config->block_name . '_' . self::NAME, [
-			'name' => self::NAME,
+		$group = new Field_Group( $this->config->field_name, [
+			'name' => $this->config->field_name,
 		] );
 
 		foreach ( $this->build_fields() as $field ) {
@@ -134,7 +145,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	 * @return \Tribe\Libs\ACF\Field
 	 */
 	protected function get_query_type_field(): Field {
-		return new Field( $this->config->block_name . '_' . self::QUERY_TYPE, [
+		return new Field( $this->build_field_key( self::QUERY_TYPE ), [
 			'label'   => esc_html__( 'Query type', 'tribe' ),
 			'name'    => self::QUERY_TYPE,
 			'type'    => 'button_group',
@@ -146,13 +157,13 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	 * Dynamic query acf field group.
 	 */
 	protected function get_query_group(): Has_Sub_Fields {
-		$group = new Field_Group( $this->config->block_name . '_' . self::GROUP_QUERY, [
-			'label'             => esc_html__( 'Build your query', 'tribe' ),
+		$group = new Field_Group( $this->build_field_key( self::GROUP_QUERY ), [
+			'label'             => esc_html__( 'Build Your Query', 'tribe' ),
 			'name'              => self::GROUP_QUERY,
 			'conditional_logic' => [
 				[
 					[
-						'field'    => $this->get_key_with_prefix( self::QUERY_TYPE ),
+						'field'    => $this->get_key_with_prefix( $this->build_field_key( self::QUERY_TYPE ) ),
 						'operator' => '==',
 						'value'    => self::QUERY_TYPE_AUTO,
 					],
@@ -162,7 +173,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 
 		$fields = [];
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::QUERY_LIMIT, [
+		$fields[] = new Field( $this->build_field_key( self::QUERY_LIMIT ), [
 			'label'         => esc_html__( 'Limit', 'tribe' ),
 			'name'          => self::QUERY_LIMIT,
 			'min'           => $this->config->limit_min,
@@ -172,7 +183,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'default_value' => $this->config->query_limit,
 		] );
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::QUERY_POST_TYPES, [
+		$fields[] = new Field( $this->build_field_key( self::QUERY_POST_TYPES ), [
 			'label'    => esc_html__( 'Post Types', 'tribe' ),
 			'name'     => self::QUERY_POST_TYPES,
 			'type'     => 'select',
@@ -181,7 +192,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'multiple' => true,
 		] );
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::QUERY_ORDER, [
+		$fields[] = new Field( $this->build_field_key( self::QUERY_ORDER ), [
 			'label'         => esc_html__( 'Order', 'tribe' ),
 			'name'          => self::QUERY_ORDER,
 			'type'          => 'select',
@@ -196,13 +207,13 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'return_format' => 'value',
 		] );
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::QUERY_ORDER_BY, [
-			'label'         => esc_html__( 'Order by', 'tribe' ),
+		$fields[] = new Field( $this->build_field_key( self::QUERY_ORDER_BY ), [
+			'label'         => esc_html__( 'Order By', 'tribe' ),
 			'name'          => self::QUERY_ORDER_BY,
 			'type'          => 'select',
 			'choices'       => [
-				self::OPTION_DATE  => esc_html__( 'Post date', 'tribe' ),
-				self::OPTION_TITLE => esc_html__( 'Post title', 'tribe' ),
+				self::OPTION_DATE  => esc_html__( 'Post Date', 'tribe' ),
+				self::OPTION_TITLE => esc_html__( 'Post Title', 'tribe' ),
 			],
 			'default_value' => self::OPTION_DATE,
 			'multiple'      => false,
@@ -215,13 +226,13 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	}
 
 	protected function get_taxonomy_filter_group(): Has_Sub_Fields {
-		$group = new Field_Group( $this->config->block_name . '_' . self::GROUP_TAXONOMIES, [
+		$group = new Field_Group( $this->build_field_key( self::GROUP_TAXONOMIES ), [
 			'label'             => esc_html__( 'Filter by taxonomy terms', 'tribe' ),
 			'name'              => self::GROUP_TAXONOMIES,
 			'conditional_logic' => [
 				[
 					[
-						'field'    => $this->get_key_with_prefix( self::QUERY_TYPE ),
+						'field'    => $this->get_key_with_prefix( $this->build_field_key( self::QUERY_TYPE ) ),
 						'operator' => '==',
 						'value'    => self::QUERY_TYPE_AUTO,
 					],
@@ -242,8 +253,8 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 		asort( $taxonomies );
 
 		foreach ( $taxonomies as $taxonomy => $label ) {
-			$fields[] = new Field( $this->config->block_name . '_' . $taxonomy, [
-				'label'         => sprintf( esc_html__( 'Filter by %s', 'tribe' ), $label ),
+			$fields[] = new Field( $this->build_field_key( $taxonomy ), [
+				'label'         => sprintf( esc_html__( 'Filter By %s', 'tribe' ), $label ),
 				'name'          => $taxonomy,
 				'type'          => 'taxonomy',
 				'taxonomy'      => $taxonomy,
@@ -261,7 +272,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	}
 
 	protected function get_manual_query_repeater(): Has_Sub_Fields {
-		$repeater = new Repeater( $this->config->block_name . '_' . self::MANUAL_POSTS, [
+		$repeater = new Repeater( $this->build_field_key( self::MANUAL_POSTS ), [
 			'label'             => esc_html__( 'Manual Posts', 'tribe' ),
 			'name'              => self::MANUAL_POSTS,
 			'type'              => 'repeater',
@@ -272,7 +283,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'conditional_logic' => [
 				[
 					[
-						'field'    => $this->get_key_with_prefix( self::QUERY_TYPE ),
+						'field'    => $this->get_key_with_prefix( $this->build_field_key( self::QUERY_TYPE ) ),
 						'operator' => '==',
 						'value'    => self::QUERY_TYPE_MANUAL,
 					],
@@ -282,7 +293,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 
 		$fields = [];
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::MANUAL_POST, [
+		$fields[] = new Field( $this->build_field_key( self::MANUAL_POST ), [
 			'label'      => esc_html__( 'Post Selection', 'tribe' ),
 			'name'       => self::MANUAL_POST,
 			'type'       => 'post_object',
@@ -290,47 +301,47 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'post_type'  => $this->config->post_types_manual,
 		] );
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::MANUAL_TOGGLE, [
+		$fields[] = new Field( $this->build_field_key( self::MANUAL_TOGGLE ), [
 			'label' => esc_html__( 'Create or Override Content', 'tribe' ),
 			'name'  => self::MANUAL_TOGGLE,
 			'type'  => 'true_false',
 		] );
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::MANUAL_TITLE, [
+		$fields[] = new Field( $this->build_field_key( self::MANUAL_TITLE ), [
 			'label'             => esc_html__( 'Post Title', 'tribe' ),
 			'name'              => self::MANUAL_TITLE,
 			'type'              => 'text',
 			'conditional_logic' => [
 				[
-					'field'    => $this->get_key_with_prefix( self::MANUAL_TOGGLE ),
+					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
 					'operator' => '==',
 					'value'    => '1',
 				],
 			],
 		] );
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::MANUAL_POST_DATE, [
+		$fields[] = new Field( $this->build_field_key( self::MANUAL_POST_DATE ), [
 			'label'             => esc_html__( 'Post Date', 'tribe' ),
 			'name'              => self::MANUAL_POST_DATE,
 			'type'              => 'date_time_picker',
-			'instructions'      => esc_html__( 'Set or override the post date', 'tribe' ),
+			'instructions'      => esc_html__( 'Set or override the post date.', 'tribe' ),
 			'display_format'    => 'F j, Y g:i a',
 			'return_format'     => 'Y-m-d H:i:s',
 			'first_day'         => true,
 			'conditional_logic' => [
 				[
-					'field'    => $this->get_key_with_prefix( self::MANUAL_TOGGLE ),
+					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
 					'operator' => '==',
 					'value'    => '1',
 				],
 			],
 		] );
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::MANUAL_POST_AUTHOR, [
+		$fields[] = new Field( $this->build_field_key( self::MANUAL_POST_AUTHOR ), [
 			'label'             => esc_html__( 'Post Author', 'tribe' ),
 			'name'              => self::MANUAL_POST_AUTHOR,
 			'type'              => 'user',
-			'instructions'      => esc_html__( 'Set or override the post author', 'tribe' ),
+			'instructions'      => esc_html__( 'Set or override the post author.', 'tribe' ),
 			'required'          => false,
 			'role'              => [], // an array of roles to filter by
 			'allow_null'        => true,
@@ -338,18 +349,18 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'return_format'     => 'id', // array, object, id
 			'conditional_logic' => [
 				[
-					'field'    => $this->get_key_with_prefix( self::MANUAL_TOGGLE ),
+					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
 					'operator' => '==',
 					'value'    => '1',
 				],
 			],
 		] );
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::MANUAL_POST_CATEGORY, [
+		$fields[] = new Field( $this->build_field_key( self::MANUAL_POST_CATEGORY ), [
 			'label'             => esc_html__( 'Post Category', 'tribe' ),
 			'name'              => self::MANUAL_POST_CATEGORY,
 			'type'              => 'taxonomy',
-			'instructions'      => esc_html__( 'Set or override the primary post category', 'tribe' ),
+			'instructions'      => esc_html__( 'Set or override the primary post category.', 'tribe' ),
 			'taxonomy'          => Category::NAME,
 			'field_type'        => 'select',
 			'add_term'          => false,
@@ -360,35 +371,35 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'return_format'     => 'id',
 			'conditional_logic' => [
 				[
-					'field'    => $this->get_key_with_prefix( self::MANUAL_TOGGLE ),
+					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
 					'operator' => '==',
 					'value'    => '1',
 				],
 			],
 		] );
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::MANUAL_EXCERPT, [
+		$fields[] = new Field( $this->build_field_key( self::MANUAL_EXCERPT ), [
 			'label'             => esc_html__( 'Post Excerpt', 'tribe' ),
 			'name'              => self::MANUAL_EXCERPT,
 			'type'              => 'textarea',
 			'conditional_logic' => [
 				[
-					'field'    => $this->get_key_with_prefix( self::MANUAL_TOGGLE ),
+					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
 					'operator' => '==',
 					'value'    => '1',
 				],
 			],
 		] );
 
-		$fields[] = $this->get_cta_field( $this->config->block_name . '_' . $this->config->group, [
+		$fields[] = $this->get_cta_field( $this->config->field_name, [
 			[
-				'field'    => $this->get_key_with_prefix( self::MANUAL_TOGGLE ),
+				'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
 				'operator' => '==',
 				'value'    => '1',
 			],
 		] );
 
-		$fields[] = new Field( $this->config->block_name . '_' . self::MANUAL_IMAGE, [
+		$fields[] = new Field( $this->build_field_key( self::MANUAL_IMAGE ), [
 			'label'             => esc_html__( 'Image', 'tribe' ),
 			'name'              => self::MANUAL_IMAGE,
 			'type'              => 'image',
@@ -396,7 +407,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'instructions'      => $this->config->image_instructions,
 			'conditional_logic' => [
 				[
-					'field'    => $this->get_key_with_prefix( self::MANUAL_TOGGLE ),
+					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
 					'operator' => '==',
 					'value'    => '1',
 				],
@@ -407,7 +418,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	}
 
 	protected function get_key_with_prefix( string $name ): string {
-		return sprintf( '%s_%s_%s', 'field', $this->config->block_name, $name );
+		return sprintf( '%s_%s', 'field', $name );
 	}
 
 	/**
@@ -442,6 +453,17 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 		$hidden_fields = $this->config->hide_fields;
 
 		return isset( $hidden_fields[ $field->get( 'name' ) ] );
+	}
+
+	/**
+	 * Build a unique field key based on the block and the provided group.
+	 *
+	 * @param string $name The field name.
+	 *
+	 * @return string The formatted field key.
+	 */
+	protected function build_field_key( string $name ): string {
+		return sprintf( '%s_%s', $this->config->field_name, $name );
 	}
 
 }

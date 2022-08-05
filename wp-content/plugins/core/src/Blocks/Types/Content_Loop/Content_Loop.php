@@ -6,6 +6,7 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Libs\ACF\Traits\With_Field_Prefix;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 use Tribe\Project\Block_Middleware\Contracts\Has_Middleware_Params;
 use Tribe\Project\Blocks\Fields\Cta_Field;
@@ -18,6 +19,7 @@ use Tribe\Project\Post_Types\Post\Post;
 class Content_Loop extends Block_Config implements Cta_Field, Has_Middleware_Params {
 
 	use With_Cta_Field;
+	use With_Field_Prefix;
 
 	public const NAME = 'contentloop';
 
@@ -80,7 +82,7 @@ class Content_Loop extends Block_Config implements Cta_Field, Has_Middleware_Par
 			$this->get_cta_field( self::NAME )
 		);
 
-		// Populated via Block Middleware
+		// Post loop fields will be added to this section via block middleware.
 		$this->add_section( new Field_Section( self::SECTION_LOOP_ITEMS, esc_html__( 'Loop Items', 'tribe' ), 'accordion' ) );
 
 		$this->add_section( new Field_Section( self::SECTION_APPEARANCE, esc_html__( 'Appearance', 'tribe' ), 'accordion' ) )
@@ -101,18 +103,20 @@ class Content_Loop extends Block_Config implements Cta_Field, Has_Middleware_Par
 	/**
 	 * Config the query post loop field for middleware.
 	 *
-	 * @return array{array{post_loop_field_config: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config}}
+	 * @return array<array{post_loop_field_configs: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config[]}>
 	 */
 	public function get_middleware_params(): array {
-		$config                    = new Post_Loop_Field_Config();
-		$config->block_name        = self::NAME;
-		$config->group             = sprintf( 'section__%s', self::SECTION_LOOP_ITEMS );
-		$config->limit_min         = 3;
-		$config->limit_max         = 10;
-		$config->post_types        = [
+		$config             = new Post_Loop_Field_Config();
+		$config->field_name = self::POST_LIST;
+		$config->group      = $this->get_section_key( self::SECTION_LOOP_ITEMS );
+		$config->limit_max  = 10;
+		$config->limit_min  = 3;
+
+		$config->post_types = [
 			Post::NAME,
 			Page::NAME,
 		];
+
 		$config->post_types_manual = [
 			Post::NAME,
 			Page::NAME,
@@ -120,7 +124,9 @@ class Content_Loop extends Block_Config implements Cta_Field, Has_Middleware_Par
 
 		return [
 			[
-				Post_Loop_Field_Middleware::MIDDLEWARE_KEY => $config,
+				Post_Loop_Field_Middleware::MIDDLEWARE_KEY => [
+					$config,
+				],
 			],
 		];
 	}

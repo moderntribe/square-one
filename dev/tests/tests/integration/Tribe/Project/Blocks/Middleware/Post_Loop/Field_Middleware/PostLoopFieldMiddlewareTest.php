@@ -6,6 +6,7 @@ use Ds\Map;
 use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field_Section;
+use Tribe\Libs\ACF\Traits\With_Field_Prefix;
 use Tribe\Libs\Pipeline\Pipeline;
 use Tribe\Project\Block_Middleware\Contracts\Has_Middleware_Params;
 use Tribe\Project\Block_Middleware\Guards\Block_Field_Middleware_Guard;
@@ -17,9 +18,15 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 
 	public function test_it_injects_the_post_loop_field_into_a_block(): void {
 		$block = new class extends Block_Config implements Has_Middleware_Params {
+
+			use With_Field_Prefix;
+
 			public const NAME = 'test_block';
 
-			public const SECTION_CARDS = 's-cards';
+			public const SECTION_CARDS      = 's-cards';
+			public const SECTION_FEATURED   = 's-featured';
+			public const CARD_LIST          = 'card_list';
+			public const FEATURED_CARD_LIST = 'featured_card_list';
 
 			public function add_block() {
 				$this->set_block( new Block( self::NAME, [
@@ -28,25 +35,36 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 			}
 
 			public function add_fields() {
-				// Populated via Block Middleware
+				// Post loop fields will be added to this section via block middleware.
 				$this->add_section( new Field_Section( self::SECTION_CARDS, esc_html__( 'Cards', 'tribe' ), 'accordion' ) );
+
+				// Post loop fields will be added to this section via block middleware.
+				$this->add_section( new Field_Section( self::SECTION_FEATURED, esc_html__( 'Featured Cards', 'tribe' ), 'accordion' ) );
 			}
 
 			/**
 			 * Config the query post loop field for middleware.
 			 *
-			 * @return array{array{post_loop_field_config: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config}}
+			 * @return array<array{post_loop_field_configs: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config[]}>
 			 */
 			public function get_middleware_params(): array {
-				$config             = new Post_Loop_Field_Config();
-				$config->block_name = self::NAME;
-				$config->group      = sprintf( 'section__%s', self::SECTION_CARDS );
-				$config->limit_min  = 2;
-				$config->limit_max  = 10;
+				$card_config             = new Post_Loop_Field_Config();
+				$card_config->field_name = self::CARD_LIST;
+				$card_config->group      = $this->get_section_key( self::SECTION_CARDS );
+				$card_config->limit_min  = 2;
+				$card_config->limit_max  = 10;
+
+				$featured_config                  = new Post_Loop_Field_Config();
+				$featured_config->field_name      = self::FEATURED_CARD_LIST;
+				$featured_config->group           = $this->get_section_key( self::SECTION_FEATURED );
+				$featured_config->available_types = Post_Loop_Field_Config::OPTION_MANUAL;
 
 				return [
 					[
-						Post_Loop_Field_Middleware::MIDDLEWARE_KEY => $config,
+						Post_Loop_Field_Middleware::MIDDLEWARE_KEY => [
+							$card_config,
+							$featured_config,
+						],
 					],
 				];
 			}
@@ -66,11 +84,11 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 		                            ] );
 
 		$processed_block = ( new Add_Fields_Pipeline( $pipeline ) )->process( $block, $block->get_middleware_params() );
-		$attributes = $processed_block->get_field_group()->get_attributes();
+		$attributes      = $processed_block->get_field_group()->get_attributes();
 
-		$this->assertSame( 'group_test_block', $attributes[ 'key'] );
-		$this->assertSame( Post_Loop_Field_Middleware::NAME, $attributes['fields'][1]['name'] );
-		$this->assertSame( sprintf( 'field_test_block_%s', Post_Loop_Field_Middleware::NAME ), $attributes['fields'][1]['key'] );
+		$this->assertSame( 'group_test_block', $attributes['key'] );
+		$this->assertSame( $block::CARD_LIST, $attributes['fields'][1]['name'] );
+		$this->assertSame( sprintf( 'field_%s', $block::CARD_LIST ), $attributes['fields'][1]['key'] );
 		$this->assertCount( 4, $attributes['fields'][1]['sub_fields'] );
 
 		// Test manual post subfields were added to ensure the next test is doing proper assertions.
@@ -84,9 +102,13 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 
 	public function test_it_does_not_add_hidden_post_loop_fields(): void {
 		$block = new class extends Block_Config implements Has_Middleware_Params {
+
+			use With_Field_Prefix;
+
 			public const NAME = 'test_block';
 
 			public const SECTION_CARDS = 's-cards';
+			public const CARD_LIST     = 'card_list';
 
 			public function add_block() {
 				$this->set_block( new Block( self::NAME, [
@@ -102,14 +124,14 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 			/**
 			 * Config the query post loop field for middleware.
 			 *
-			 * @return array{array{post_loop_field_config: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config}}
+			 * @return array<array{post_loop_field_configs: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config[]}>
 			 */
 			public function get_middleware_params(): array {
-				$config             = new Post_Loop_Field_Config();
-				$config->block_name = self::NAME;
-				$config->group      = sprintf( 'section__%s', self::SECTION_CARDS );
-				$config->limit_min  = 2;
-				$config->limit_max  = 10;
+				$config              = new Post_Loop_Field_Config();
+				$config->field_name  = self::CARD_LIST;
+				$config->group       = $this->get_section_key( self::SECTION_CARDS );
+				$config->limit_min   = 2;
+				$config->limit_max   = 10;
 				$config->hide_fields = [
 					Post_Loop_Field_Middleware::MANUAL_EXCERPT,
 					Post_Loop_Field_Middleware::MANUAL_TITLE,
@@ -117,7 +139,9 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 
 				return [
 					[
-						Post_Loop_Field_Middleware::MIDDLEWARE_KEY => $config,
+						Post_Loop_Field_Middleware::MIDDLEWARE_KEY => [
+							$config,
+						],
 					],
 				];
 			}
@@ -137,11 +161,11 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 		                            ] );
 
 		$processed_block = ( new Add_Fields_Pipeline( $pipeline ) )->process( $block, $block->get_middleware_params() );
-		$attributes = $processed_block->get_field_group()->get_attributes();
+		$attributes      = $processed_block->get_field_group()->get_attributes();
 
-		$this->assertSame( 'group_test_block', $attributes[ 'key'] );
-		$this->assertSame( Post_Loop_Field_Middleware::NAME, $attributes['fields'][1]['name'] );
-		$this->assertSame( sprintf( 'field_test_block_%s', Post_Loop_Field_Middleware::NAME ), $attributes['fields'][1]['key'] );
+		$this->assertSame( 'group_test_block', $attributes['key'] );
+		$this->assertSame( $block::CARD_LIST, $attributes['fields'][1]['name'] );
+		$this->assertSame( sprintf( 'field_%s', $block::CARD_LIST ), $attributes['fields'][1]['key'] );
 
 		$manual_repeater_sub_fields = $attributes['fields'][1]['sub_fields'][3]['sub_fields'];
 
