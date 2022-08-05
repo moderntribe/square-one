@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "833e1cad59f4331cd32b866fc0a2c2be",
+    "content-hash": "a23f7f35eaced205b39832353686072f",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1385,16 +1385,16 @@
         },
         {
             "name": "moderntribe/square1-field-models",
-            "version": "dev-feature/color-swatch-model",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-field-models.git",
-                "reference": "cd8e11b81b729c2b6fac1f093e9f68defc8ee10b"
+                "reference": "2cae1d08ac5190b9e3cccbbfab0fc2a93e6e5054"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-field-models/zipball/cd8e11b81b729c2b6fac1f093e9f68defc8ee10b",
-                "reference": "cd8e11b81b729c2b6fac1f093e9f68defc8ee10b",
+                "url": "https://api.github.com/repos/moderntribe/square1-field-models/zipball/2cae1d08ac5190b9e3cccbbfab0fc2a93e6e5054",
+                "reference": "2cae1d08ac5190b9e3cccbbfab0fc2a93e6e5054",
                 "shasum": ""
             },
             "require": {
@@ -1421,22 +1421,22 @@
             "description": "Data Transfer Objects (models) for Advanced custom fields",
             "support": {
                 "issues": "https://github.com/moderntribe/square1-field-models/issues",
-                "source": "https://github.com/moderntribe/square1-field-models/tree/feature/color-swatch-model"
+                "source": "https://github.com/moderntribe/square1-field-models/tree/1.2.0"
             },
-            "time": "2022-08-05T17:08:41+00:00"
+            "time": "2022-08-05T20:21:56+00:00"
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "dev-feature/acf-with-field-prefix-trait",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "97653d57e15d3d26a51c17b198c256772d001c01"
+                "reference": "4e6c4811f210dc63fc216dfa1023393eac96adaa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/97653d57e15d3d26a51c17b198c256772d001c01",
-                "reference": "97653d57e15d3d26a51c17b198c256772d001c01",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/4e6c4811f210dc63fc216dfa1023393eac96adaa",
+                "reference": "4e6c4811f210dc63fc216dfa1023393eac96adaa",
                 "shasum": ""
             },
             "require": {
@@ -1545,9 +1545,9 @@
             "description": "A library for use on Modern Tribe service projects.",
             "support": {
                 "issues": "https://github.com/moderntribe/tribe-libs/issues",
-                "source": "https://github.com/moderntribe/tribe-libs/tree/feature/acf-with-field-prefix-trait"
+                "source": "https://github.com/moderntribe/tribe-libs/tree/3.5.1"
             },
-            "time": "2022-08-02T20:10:50+00:00"
+            "time": "2022-08-05T20:26:53+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -10654,19 +10654,10 @@
             "time": "2021-07-11T04:52:41+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "moderntribe/tribe-libs",
-            "version": "dev-feature/acf-with-field-prefix-trait",
-            "alias": "3.5.0",
-            "alias_normalized": "3.5.0.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "moderntribe/acf-image-select": 20,
-        "moderntribe/square1-field-models": 20,
-        "moderntribe/tribe-libs": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20
     },
