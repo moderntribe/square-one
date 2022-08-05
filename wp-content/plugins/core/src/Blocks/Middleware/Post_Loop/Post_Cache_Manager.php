@@ -3,6 +3,7 @@
 namespace Tribe\Project\Blocks\Middleware\Post_Loop;
 
 use Psr\SimpleCache\CacheInterface;
+use Tribe\Libs\Field_Models\Models\Post_Proxy;
 use Tribe\Project\Taxonomies\Category\Category;
 
 class Post_Cache_Manager {
@@ -17,7 +18,7 @@ class Post_Cache_Manager {
 	 * Add the manual post to the store for term look up and to the WordPress post cache as
 	 * WordPress checks this first to see if a post exists or not.
 	 *
-	 * @param \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Proxy $post_proxy
+	 * @param \Tribe\Libs\Field_Models\Models\Post_Proxy $post_proxy
 	 *
 	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 *

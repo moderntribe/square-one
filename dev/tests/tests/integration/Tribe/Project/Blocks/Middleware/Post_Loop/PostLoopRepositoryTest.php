@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Blocks\Middleware\Post_Loop;
 
+use Tribe\Libs\Field_Models\Models\Post_Proxy;
 use Tribe\Tests\Test_Case;
 
 final class PostLoopRepositoryTest extends Test_Case {

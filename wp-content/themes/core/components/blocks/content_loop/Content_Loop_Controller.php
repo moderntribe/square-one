@@ -55,7 +55,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	private Cta $cta;
 
 	/**
-	 * @var \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Proxy[]
+	 * @var \Tribe\Libs\Field_Models\Models\Post_Proxy[]
 	 */
 	private array $posts;
 	private string $description;

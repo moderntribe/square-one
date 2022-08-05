@@ -19,7 +19,7 @@ class Post_Loop_Repository {
 	 * @throws \DI\NotFoundException
 	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 *
-	 * @return \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Proxy[]
+	 * @return \Tribe\Libs\Field_Models\Models\Post_Proxy[]
 	 */
 	public function get_posts( array $field_data ): array {
 		return $this->factory->make( $field_data )->get_posts();

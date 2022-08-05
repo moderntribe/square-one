@@ -53,7 +53,7 @@ class Term_Manager {
 				continue;
 			}
 
-			/** @var \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Proxy $post */
+			/** @var \Tribe\Libs\Field_Models\Models\Post_Proxy $post */
 			$post = $this->store->get( (string) $object_id );
 
 			$terms = array_replace(

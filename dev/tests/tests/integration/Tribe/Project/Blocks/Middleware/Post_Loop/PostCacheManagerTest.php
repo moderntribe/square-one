@@ -3,6 +3,7 @@
 namespace Tribe\Project\Blocks\Middleware\Post_Loop;
 
 use Psr\SimpleCache\CacheInterface;
+use Tribe\Libs\Field_Models\Models\Post_Proxy;
 use Tribe\Tests\Test_Case;
 use WP_Post;
 

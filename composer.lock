@@ -1389,12 +1389,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/square1-field-models.git",
-                "reference": "00a47b1f37936e8b3ad1f878fba5e24e1fc72671"
+                "reference": "cd8e11b81b729c2b6fac1f093e9f68defc8ee10b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/square1-field-models/zipball/00a47b1f37936e8b3ad1f878fba5e24e1fc72671",
-                "reference": "00a47b1f37936e8b3ad1f878fba5e24e1fc72671",
+                "url": "https://api.github.com/repos/moderntribe/square1-field-models/zipball/cd8e11b81b729c2b6fac1f093e9f68defc8ee10b",
+                "reference": "cd8e11b81b729c2b6fac1f093e9f68defc8ee10b",
                 "shasum": ""
             },
             "require": {
@@ -1423,7 +1423,7 @@
                 "issues": "https://github.com/moderntribe/square1-field-models/issues",
                 "source": "https://github.com/moderntribe/square1-field-models/tree/feature/color-swatch-model"
             },
-            "time": "2022-08-01T21:39:19+00:00"
+            "time": "2022-08-05T17:08:41+00:00"
         },
         {
             "name": "moderntribe/tribe-libs",

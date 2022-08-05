@@ -3,6 +3,7 @@
 namespace Tribe\Project\Blocks\Middleware\Post_Loop;
 
 use Psr\SimpleCache\CacheInterface;
+use Tribe\Libs\Field_Models\Models\Post_Proxy;
 use Tribe\Project\Blocks\Middleware\Post_Loop\Field_Middleware\Post_Loop_Field_Middleware;
 use Tribe\Project\Blocks\Middleware\Post_Loop\Models\Post_Loop_Model;
 use WP_Post;
@@ -37,7 +38,7 @@ class Post_Loop_Controller {
 	 *
 	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 *
-	 * @return \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Proxy[]
+	 * @return \Tribe\Libs\Field_Models\Models\Post_Proxy[]
 	 */
 	public function get_posts( array $posts = [], bool $manual_posts = false, ?Post_Loop_Model $model = null ): array {
 		if ( $model ) {
@@ -66,7 +67,7 @@ class Post_Loop_Controller {
 	 *
 	 * @see WP_Post::get_instance()
 	 *
-	 * @return \Tribe\Project\Blocks\Middleware\Post_Loop\Post_Proxy[]
+	 * @return \Tribe\Libs\Field_Models\Models\Post_Proxy[]
 	 */
 	protected function proxy_posts( array $posts, bool $manual_posts = false ): array {
 		return array_map( function ( $post ) use ( $manual_posts ) {
