@@ -7,6 +7,7 @@
 .c-nav-primary {
 	margin-top: var(--spacer-50);
 	margin-bottom: var(--spacer-50);
+	transition: var(--transition-nav-swap);
 
 	@media (--viewport-full) {
 		margin-top: 0;
@@ -15,6 +16,11 @@
 
 	/* CASE: Desktop search flyout active */
 	.c-site-header--search-active & {
+		opacity: 0;
+	}
+
+	/* CASE: Desktop search flyout active */
+	.c-site-header--hide-nav & {
 		display: none;
 	}
 }

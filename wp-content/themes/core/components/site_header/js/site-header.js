@@ -3,31 +3,33 @@
  */
 
 import delegate from 'delegate';
-import * as tools from 'utils/tools';
+
 import * as globalOptions from 'config/options';
 import globalState from 'config/state';
 
 const el = {};
 const state = {
-	desktop: true,
 	searchAnimating: false,
 	searchOpen: false,
-	searchFlyoutOpen: false,
 };
 
 /**
  * @function closeSearch
  * @description Close the search menu for desktop.
+ *
+ * @param reFocus bool	Should the close method move the cursor back to the search flyout toggle?
  */
-
-const closeSearch = () => {
-	el.container.classList.remove( 'c-search--site-header-hide-nav' );
+const closeSearch = ( reFocus = true ) => {
+	el.container.classList.remove( 'c-site-header--hide-nav' );
 	setTimeout( () => {
-		el.container.classList.remove( 'c-search--site-header-reveal-search' );
-		el.desktopSearchToggle.focus();
+		el.container.classList.remove( 'c-site-header--search-active' );
+		el.desktopSearchToggle.setAttribute( 'aria-expanded', 'false' );
+		if ( reFocus ) {
+			el.desktopSearchToggle.focus();
+		}
 	}, 25 );
 	setTimeout( () => {
-		el.container.classList.remove( 'c-search--site-header-animate-search' );
+		el.container.classList.remove( 'c-site-header--search-animating' );
 		state.searchAnimating = false;
 		state.searchOpen = false;
 	}, 500 );
@@ -37,17 +39,19 @@ const closeSearch = () => {
  * @function openSearch
  * @description Open the search menu for desktop.
  */
-
 const openSearch = () => {
-	el.container.classList.add( 'c-search--site-header-animate-search' );
+	el.container.classList.add( 'c-site-header--search-animating' );
+
 	setTimeout( () => {
-		el.container.classList.add( 'c-search--site-header-reveal-search' );
+		el.container.classList.add( 'c-site-header--search-active' );
+		el.desktopSearchToggle.setAttribute( 'aria-expanded', 'true' );
 	}, 25 );
+
 	setTimeout( () => {
-		el.container.classList.remove( 'c-search--site-header-hide-nav' );
+		el.container.classList.add( 'c-site-header--hide-nav' );
 		state.searchAnimating = false;
 		state.searchOpen = true;
-		el.desktopSearchInput.focus();
+		el.searchFormInput.focus();
 	}, 500 );
 };
 
@@ -55,7 +59,6 @@ const openSearch = () => {
  * @function toggleSearch
  * @description
  */
-
 const toggleSearch = () => {
 	if ( state.searchAnimating ) {
 		return;
@@ -70,75 +73,92 @@ const toggleSearch = () => {
 };
 
 /**
- * @function maybeMoveSearch
- * @description Moves search in and out of the nav element. Mobile needs it inside, desktop out.
- */
-
-const maybeMoveSearch = () => {
-	if ( ! el.searchForm ) {
-		return;
-	}
-
-	if ( globalState.v_width < globalOptions.FULL_BREAKPOINT && state.desktop ) {
-		el.searchForm.classList.remove( 'c-search--site-header' );
-		el.searchForm.classList.add( 'c-search--mobile-site-header' );
-		el.nav.insertAdjacentElement( 'afterbegin', el.searchForm );
-		state.desktop = false;
-	} else if ( globalState.v_width >= globalOptions.FULL_BREAKPOINT && ! state.desktop ) {
-		el.searchForm.classList.add( 'c-search--site-header' );
-		el.searchForm.classList.remove( 'c-search--mobile-site-header' );
-		el.desktopSearchToggle.insertAdjacentElement( 'afterend', el.searchForm );
-		state.desktop = true;
-	}
-};
-
-/**
  * @function submitDefaultSearch
  * @description submits the form if there's characters on the input search
  */
-
 const submitSearchForm = () => {
-	if ( el.desktopSearchInput.value.length !== 0 ) {
-		el.searchForm.submit();
-		el.desktopSearchInput.value = '';
+	if ( el.searchFormInput.value.length !== 0 ) {
+		el.searchFlyout.submit();
+		el.searchFormInput.value = '';
 	}
 };
 
 /**
- * @function cacheElements
+ * Close the search flyout if clicked outside.
+ *
+ * @param e
  */
+const handleClickOut = ( e ) => {
+	if ( ! state.searchOpen ) {
+		return;
+	}
 
-const cacheElements = () => {
-	el.searchForm = tools.getNodes( 'search-form', false, el.container )[ 0 ];
-	el.nav = tools.getNodes( 'c-nav-main', false, el.container )[ 0 ];
-	el.desktopSearchInput = tools.getNodes( '.c-search--site-header > [data-js="search-form-input"]', false, el.container, true )[ 0 ];
-	el.desktopSearchToggle = tools.getNodes( 'search-toggle', false, el.container )[ 0 ];
-	el.searchFormTrigger = el.searchForm.querySelector( 'button[type="submit"]' );
+	// Clicked outside the nav container, close it.
+	if ( ! e.target.closest( '[data-js="c-site-header-nav-container"]' ) ) {
+		closeSearch();
+	}
+};
+
+/**
+ * Close the search flyout on Escape key up.
+ *
+ * @param e
+ */
+const handleEscKeyOut = ( e ) => {
+	if ( e.key !== 'Escape' || ! state.searchOpen ) {
+		return;
+	}
+
+	closeSearch();
+};
+
+/**
+ * Close the search flyout when tabbing out of it.
+ *
+ * @param e
+ */
+const handleTabKeyOut = ( e ) => {
+	if ( e.key !== 'Tab' || ! state.searchOpen ) {
+		return;
+	}
+
+	// Tabbed outside the nav container, close it.
+	if ( ! e.target.closest( '[data-js="c-site-header-nav-container"]' ) ) {
+		closeSearch( false );
+	}
 };
 
 /**
  * @function executeResize
  */
-
 const executeResize = () => {
 	if ( globalState.v_width < globalOptions.FULL_BREAKPOINT && state.searchOpen ) {
 		closeSearch();
 	}
-
-	maybeMoveSearch();
 };
 
 /**
  * @function bindEvents
  */
-
 const bindEvents = () => {
-	delegate( el.container, '.c-site-header__search-toggle[data-js="search-toggle"]', 'click', toggleSearch );
-	delegate( el.container, '.c-search--site-header [data-js="search-form-clear"]', 'click', toggleSearch );
+	delegate( el.container, '[data-js="search-toggle"]', 'click', toggleSearch );
+	delegate( el.navContainer, 'input, button', 'keyup', handleEscKeyOut );
 
 	el.searchFormTrigger.addEventListener( 'click', submitSearchForm );
-
+	document.addEventListener( 'click', handleClickOut );
+	document.addEventListener( 'keyup', handleTabKeyOut );
 	document.addEventListener( 'modern_tribe/resize_executed', executeResize );
+};
+
+/**
+ * @function cacheElements
+ */
+const cacheElements = () => {
+	el.navContainer = el.container.querySelector( '[data-js="c-site-header-nav-container"]' );
+	el.searchFlyout = el.container.querySelector( '[data-js="search-flyout"]' );
+	el.desktopSearchToggle = el.container.querySelector( '[data-js="search-toggle"]' );
+	el.searchFormInput = el.container.querySelector( '[data-js="search-form-input"]' );
+	el.searchFormTrigger = el.searchFlyout.querySelector( 'button[type="submit"]' );
 };
 
 /**
@@ -149,9 +169,8 @@ const init = ( container ) => {
 
 	cacheElements();
 	bindEvents();
-	maybeMoveSearch();
 
-	console.info( 'SquareOne Theme: Initialized site header scripts.' );
+	console.info( 'SquareOne Theme: Initialized Site Header component scripts.' );
 };
 
 export default init;

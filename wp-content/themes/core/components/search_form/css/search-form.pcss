@@ -21,10 +21,16 @@
 
 	/* CASE: Search Form in the site header */
 	.c-search--site-header & {
-		padding-left: 42px;
-		padding-right: 42px;
+		padding: 12px 42px;
 		border: none;
 		border-bottom: 1px solid var(--color-black);
+
+		&:focus {
+			border-top: none !important; /* Important to override default input focus styles */
+			border-right: none !important; /* Important to override default input focus styles */
+			border-left: none !important; /* Important to override default input focus styles */
+			outline: none;
+		}
 	}
 }
 
