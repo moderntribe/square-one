@@ -45,6 +45,12 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 		add_filter( 'block_categories_all', function ( array $categories ): array {
 			return $this->container->get( Block_Category::class )->custom_block_category( $categories );
 		}, 10, 1 );
+
+		add_action( 'init', function (): void {
+			foreach ( $this->container->get( Blocks_Definer::PATTERNS ) as $pattern ) {
+				$pattern->register();
+			}
+		}, 10, 1 );
 	}
 
 }
