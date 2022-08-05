@@ -5,6 +5,7 @@ namespace Tribe\Project\Blocks;
 use Tribe\Libs\ACF\Block_Registrar;
 use Tribe\Libs\ACF\Block_Renderer;
 use Tribe\Libs\Container\Abstract_Subscriber;
+use Tribe\Project\Blocks\Patterns\Pattern_Category;
 
 class Blocks_Subscriber extends Abstract_Subscriber {
 
@@ -45,6 +46,16 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 		add_filter( 'block_categories_all', function ( array $categories ): array {
 			return $this->container->get( Block_Category::class )->custom_block_category( $categories );
 		}, 10, 1 );
+
+		add_action( 'init', function (): void {
+			foreach ( $this->container->get( Blocks_Definer::PATTERNS ) as $pattern ) {
+				$pattern->register();
+			}
+		}, 10, 1 );
+
+		add_action( 'init', function (): void {
+			$this->container->get( Pattern_Category::class )->register_block_category();
+		}, 10, 0 );
 	}
 
 }

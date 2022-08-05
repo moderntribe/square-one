@@ -4,6 +4,7 @@ namespace Tribe\Project\Blocks;
 
 use DI;
 use Tribe\Libs\Container\Definer_Interface;
+use Tribe\Project\Blocks\Patterns\Loop_Pattern;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Buttons\Buttons;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
@@ -23,6 +24,7 @@ use Tribe\Project\Blocks\Types\Section_Nav\Section_Nav;
 use Tribe\Project\Blocks\Types\Spacer\Spacer;
 use Tribe\Project\Blocks\Types\Stats\Stats;
 use Tribe\Project\Blocks\Types\Tabs\Tabs;
+use Tribe\Project\Blocks\Types\Tribe_Query_Loop\Tribe_Query_Loop;
 
 class Blocks_Definer implements Definer_Interface {
 
@@ -30,6 +32,7 @@ class Blocks_Definer implements Definer_Interface {
 	public const DENY_BLOCK_STYLES = 'blocks.deny_block_styles';
 	public const STYLES            = 'blocks.style_overrides';
 	public const TYPES             = 'blocks.types';
+	public const PATTERNS          = 'blocks.patterns';
 
 	public function define(): array {
 		return [
@@ -53,6 +56,7 @@ class Blocks_Definer implements Definer_Interface {
 				DI\get( Spacer::class ),
 				DI\get( Stats::class ),
 				DI\get( Tabs::class ),
+				DI\get( Tribe_Query_Loop::class ),
 			] ),
 
 			/**
@@ -129,6 +133,9 @@ class Blocks_Definer implements Definer_Interface {
 
 			Block_Deny_List::class       => DI\autowire()->constructor( DI\get( self::DENY_LIST ) ),
 			Block_Style_Deny_List::class => DI\autowire()->constructor( DI\get( self::DENY_BLOCK_STYLES ) ),
+			self::PATTERNS               => DI\add( [
+				DI\get( Loop_Pattern::class ),
+			] ),
 		];
 	}
 
