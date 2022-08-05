@@ -2,6 +2,9 @@
  * Scripts to control the site header navigation
  */
 
+import globalState from 'config/state';
+import * as globalOptions from 'config/options';
+import * as a11y from 'utils/dom/accessibility';
 import * as bodyLock from 'utils/dom/body-lock';
 
 const el = {};
@@ -15,9 +18,19 @@ const options = {
 	navRevealSpeed: 400,
 };
 
+const handleNavKeyEvents = ( e ) => {
+	if ( globalState.v_width >= globalOptions.FULL_BREAKPOINT ) {
+		return;
+	}
+
+	// eslint-disable-next-line no-use-before-define
+	a11y.focusLoop( e, el.navToggle, el.container, closeNavFlyout );
+};
+
 const closeNavFlyout = () => {
 	el.container.classList.remove( 'c-site-header--nav-active' );
 	el.navToggle.focus();
+	el.container.removeEventListener( 'keydown', handleNavKeyEvents );
 
 	setTimeout( () => {
 		el.container.classList.remove( 'c-site-header--nav-animating' );
@@ -35,6 +48,7 @@ const openNavFlyout = () => {
 	document.body.style.overflowY = 'hidden';
 	el.container.classList.add( 'c-site-header--nav-animating' );
 	el.navToggle.setAttribute( 'aria-expanded', 'true' );
+	el.container.addEventListener( 'keydown', handleNavKeyEvents );
 
 	setTimeout( () => {
 		el.container.classList.add( 'c-site-header--nav-active' );
