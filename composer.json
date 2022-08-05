@@ -44,10 +44,6 @@
     },
     {
       "type": "vcs",
-      "url": "git@github.com:moderntribe/tribe-acf-post-list-field.git"
-    },
-    {
-      "type": "vcs",
       "url": "git@github.com:bordoni/phpass.git"
     },
     {
