@@ -53,8 +53,19 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	public const OPTION_ASC  = 'asc';
 	public const OPTION_DESC = 'desc';
 
-	public const OPTION_DATE  = 'date';
-	public const OPTION_TITLE = 'title';
+	// Order by options
+	// @link https://developer.wordpress.org/reference/classes/wp_query/#order-orderby-parameters
+	public const OPTION_AUTHOR        = 'author';
+	public const OPTION_COMMENT_COUNT = 'comment_count';
+	public const OPTION_DATE          = 'date';
+	public const OPTION_ID            = 'ID';
+	public const OPTION_MENU_ORDER    = 'menu_order';
+	public const OPTION_MODIFIED      = 'modified';
+	public const OPTION_NAME          = 'name';
+	public const OPTION_NONE          = 'none';
+	public const OPTION_PARENT        = 'parent';
+	public const OPTION_TITLE         = 'title';
+	public const OPTION_TYPE          = 'type';
 
 	protected Post_Loop_Field_Config $config;
 
@@ -212,8 +223,17 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'name'          => self::QUERY_ORDER_BY,
 			'type'          => 'select',
 			'choices'       => [
-				self::OPTION_DATE  => esc_html__( 'Post Date', 'tribe' ),
-				self::OPTION_TITLE => esc_html__( 'Post Title', 'tribe' ),
+				self::OPTION_DATE          => esc_html__( 'Post Date', 'tribe' ),
+				self::OPTION_TITLE         => esc_html__( 'Post Title', 'tribe' ),
+				self::OPTION_ID            => esc_html__( 'Post ID', 'tribe' ),
+				self::OPTION_TYPE          => esc_html__( 'Post Type', 'tribe' ),
+				self::OPTION_NAME          => esc_html__( 'Post Slug', 'tribe' ),
+				self::OPTION_AUTHOR        => esc_html__( 'Author', 'tribe' ),
+				self::OPTION_COMMENT_COUNT => esc_html__( 'Comment Count', 'tribe' ),
+				self::OPTION_MENU_ORDER    => esc_html__( 'Menu Order', 'tribe' ),
+				self::OPTION_MODIFIED      => esc_html__( 'Last Modified Date', 'tribe' ),
+				self::OPTION_NONE          => esc_html__( 'None', 'tribe' ),
+				self::OPTION_PARENT        => esc_html__( 'Parent Post/Page ID', 'tribe' ),
 			],
 			'default_value' => self::OPTION_DATE,
 			'multiple'      => false,
