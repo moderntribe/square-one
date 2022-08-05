@@ -69,11 +69,19 @@ const toggleNavFlyout = () => {
 	state.navOpen ? closeNavFlyout() : openNavFlyout();
 };
 
+const executeResize = () => {
+	if ( globalState.v_width >= globalOptions.FULL_BREAKPOINT && state.navOpen ) {
+		closeNavFlyout();
+	}
+};
+
 /**
  * @function bindEvents
  */
 const bindEvents = () => {
 	el.navToggle.addEventListener( 'click', toggleNavFlyout );
+
+	document.addEventListener( 'modern_tribe/resize_executed', executeResize );
 };
 
 /**
