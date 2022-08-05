@@ -247,7 +247,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 
 	protected function get_taxonomy_filter_group(): Has_Sub_Fields {
 		$group = new Field_Group( $this->build_field_key( self::GROUP_TAXONOMIES ), [
-			'label'             => esc_html__( 'Filter by taxonomy terms', 'tribe' ),
+			'label'             => esc_html__( 'Filter By Taxonomy Terms', 'tribe' ),
 			'name'              => self::GROUP_TAXONOMIES,
 			'conditional_logic' => [
 				[
