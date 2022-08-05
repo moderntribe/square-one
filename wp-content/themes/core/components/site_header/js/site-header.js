@@ -94,7 +94,7 @@ const handleClickOut = ( e ) => {
 	}
 
 	// Clicked outside the nav container, close it.
-	if ( ! e.target.closest( '[data-js="c-site-header-nav-container"]' ) ) {
+	if ( ! e.target.closest( '[data-js="nav-flyout"]' ) ) {
 		closeSearch();
 	}
 };
@@ -123,7 +123,7 @@ const handleTabKeyOut = ( e ) => {
 	}
 
 	// Tabbed outside the nav container, close it.
-	if ( ! e.target.closest( '[data-js="c-site-header-nav-container"]' ) ) {
+	if ( ! e.target.closest( '[data-js="nav-flyout"]' ) ) {
 		closeSearch( false );
 	}
 };
@@ -142,7 +142,7 @@ const executeResize = () => {
  */
 const bindEvents = () => {
 	delegate( el.container, '[data-js="search-toggle"]', 'click', toggleSearch );
-	delegate( el.navContainer, 'input, button', 'keyup', handleEscKeyOut );
+	delegate( el.mobileNavFlyout, 'input, button', 'keyup', handleEscKeyOut );
 
 	el.searchFormTrigger.addEventListener( 'click', submitSearchForm );
 	document.addEventListener( 'click', handleClickOut );
@@ -154,7 +154,7 @@ const bindEvents = () => {
  * @function cacheElements
  */
 const cacheElements = () => {
-	el.navContainer = el.container.querySelector( '[data-js="c-site-header-nav-container"]' );
+	el.mobileNavFlyout = el.container.querySelector( '[data-js="nav-flyout"]' );
 	el.searchFlyout = el.container.querySelector( '[data-js="search-flyout"]' );
 	el.desktopSearchToggle = el.container.querySelector( '[data-js="search-toggle"]' );
 	el.searchFormInput = el.container.querySelector( '[data-js="search-form-input"]' );

@@ -77,7 +77,7 @@ class Site_Header_Controller extends Abstract_Controller {
 				'data-js'       => 'flyout-toggle',
 				'aria-expanded' => 'false',
 				'aria-haspopup' => 'true',
-				'aria-controls' => 'site-header-flyout',
+				'aria-controls' => 'nav-flyout',
 			],
 		];
 	}

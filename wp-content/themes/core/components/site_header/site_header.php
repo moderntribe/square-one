@@ -18,7 +18,7 @@ $c = Site_Header_Controller::factory();
 		<?php /* Mobile menu toggle */
 		get_template_part( 'components/button/button', null, $c->get_flyout_toggle_args() ); ?>
 
-		<div class="c-site-header__nav-container" data-js="c-site-header-nav-container">
+		<div class="c-site-header__nav-container" id="nav-flyout" data-js="nav-flyout">
 
 			<div class="c-site-header__search-flyout" id="search-flyout" data-js="search-flyout">
 				<?php /* Search Form */

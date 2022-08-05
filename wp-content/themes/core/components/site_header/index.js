@@ -10,7 +10,7 @@ const el = {
 
 /**
  * @function init
- * @description Kick off this modules functions
+ * @description Kick off this module's functions
  */
 
 const init = () => {
