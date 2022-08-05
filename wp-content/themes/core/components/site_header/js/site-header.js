@@ -64,12 +64,7 @@ const toggleSearch = () => {
 		return;
 	}
 	state.searchAnimating = true;
-
-	if ( state.searchOpen ) {
-		closeSearch();
-	} else {
-		openSearch();
-	}
+	state.searchOpen ? closeSearch() : openSearch();
 };
 
 /**
