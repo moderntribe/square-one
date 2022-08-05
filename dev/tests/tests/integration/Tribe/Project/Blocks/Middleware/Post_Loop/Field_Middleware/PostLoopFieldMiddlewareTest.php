@@ -87,9 +87,12 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 		$attributes      = $processed_block->get_field_group()->get_attributes();
 
 		$this->assertSame( 'group_test_block', $attributes['key'] );
-		$this->assertSame( $block::CARD_LIST, $attributes['fields'][1]['name'] );
-		$this->assertSame( sprintf( 'field_%s', $block::CARD_LIST ), $attributes['fields'][1]['key'] );
-		$this->assertCount( 4, $attributes['fields'][1]['sub_fields'] );
+
+		// Cards
+		$card_list = $attributes['fields'][1];
+		$this->assertSame( $block::CARD_LIST, $card_list['name'] );
+		$this->assertSame( sprintf( 'field_%s', $block::CARD_LIST ), $card_list['key'] );
+		$this->assertCount( 4, $card_list['sub_fields'] );
 
 		// Test manual post subfields were added to ensure the next test is doing proper assertions.
 		$manual_repeater_sub_fields = $attributes['fields'][1]['sub_fields'][3]['sub_fields'];
@@ -98,6 +101,13 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 
 		$this->assertArrayHasKey( Post_Loop_Field_Middleware::MANUAL_TITLE, $field_names );
 		$this->assertArrayHasKey( Post_Loop_Field_Middleware::MANUAL_EXCERPT, $field_names );
+
+		// Featured cards
+		$featured_cards = $attributes['fields'][3];
+		$this->assertSame( $block::FEATURED_CARD_LIST, $featured_cards['name'] );
+		$this->assertSame( sprintf( 'field_%s', $block::FEATURED_CARD_LIST ), $featured_cards['key'] );
+		$this->assertCount( 4, $card_list['sub_fields'] );
+
 	}
 
 	public function test_it_does_not_add_hidden_post_loop_fields(): void {
