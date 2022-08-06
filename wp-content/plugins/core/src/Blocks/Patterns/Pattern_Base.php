@@ -40,6 +40,10 @@ abstract class Pattern_Base implements Pattern_Interface {
 
 	public function __construct() {
 		foreach ( $this->get_args() as $key => $value ) {
+			if ( ! property_exists( $this, $key ) ) {
+				continue;
+			}
+
 			$this->{$key} = $value;
 		}
 	}
