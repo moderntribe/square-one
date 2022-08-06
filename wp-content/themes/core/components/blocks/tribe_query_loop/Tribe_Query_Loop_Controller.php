@@ -32,6 +32,11 @@ class Tribe_Query_Loop_Controller extends Abstract_Controller {
 	private array $classes;
 
 	/**
+	 * @var string[]
+	 */
+	private array $content_classes;
+
+	/**
 	 * @var \WP_Post[]
 	 */
 	private array $posts;
@@ -166,7 +171,7 @@ class Tribe_Query_Loop_Controller extends Abstract_Controller {
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT => get_the_date( 'F Y', $item->ID ?? 0 ),
+						Container_Controller::CONTENT => get_the_date( 'F Y', $item->ID ),
 						Container_Controller::CLASSES => [ 'c-card__date' ],
 					],
 				),
