@@ -2,7 +2,6 @@
 
 namespace Tribe\Project\Blocks\Middleware\Color_Theme;
 
-use Ds\Map;
 use Tribe\Libs\Field_Models\Collections\Swatch_Collection;
 use Tribe\Tests\Test_Case;
 

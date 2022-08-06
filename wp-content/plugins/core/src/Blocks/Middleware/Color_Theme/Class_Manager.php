@@ -3,12 +3,11 @@
 namespace Tribe\Project\Blocks\Middleware\Color_Theme;
 
 use Tribe\Libs\Field_Models\Collections\Swatch_Collection;
-use Tribe\Project\Blocks\Middleware\Color_Theme\Contracts\Appearance;
 
 /**
  * Retrieve a theme CSS class based on an acf-swatch hex code.
  */
-class Class_Manager implements Appearance {
+class Class_Manager {
 
 	protected Swatch_Collection $swatch_collection;
 
