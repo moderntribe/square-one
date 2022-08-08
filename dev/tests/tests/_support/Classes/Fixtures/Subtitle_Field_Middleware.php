@@ -8,7 +8,7 @@ use Tribe\Project\Block_Middleware\Contracts\Abstract_Field_Middleware;
 
 class Subtitle_Field_Middleware extends Abstract_Field_Middleware {
 
-	public const NAME = 'global_fields';
+	public const NAME = 'test_global_fields';
 
 	public const FIELD = 'subtitle';
 
