@@ -25,7 +25,7 @@ class Class_Manager {
 	}
 
 	/**
-	 * Retrieve the mapped CSS class from a color hex code.
+	 * Retrieve the mapped CSS class from a color code.
 	 *
 	 * @param string $color_format e.g. #FFFFFF, rgb(255,0,0), rgba(255,0,0, 1) etc...
 	 *
