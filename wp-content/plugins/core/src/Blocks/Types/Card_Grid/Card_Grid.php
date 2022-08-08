@@ -6,7 +6,6 @@ use Tribe\Libs\ACF\Block;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
-use Tribe\Libs\ACF\Traits\With_Field_Prefix;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
 use Tribe\Project\Block_Middleware\Contracts\Has_Middleware_Params;
 use Tribe\Project\Blocks\Block_Category;
@@ -18,7 +17,6 @@ use Tribe\Project\Blocks\Middleware\Post_Loop\Field_Middleware\Post_Loop_Field_M
 class Card_Grid extends Block_Config implements Cta_Field, Has_Middleware_Params {
 
 	use With_Cta_Field;
-	use With_Field_Prefix;
 
 	public const NAME = 'cardgrid';
 
