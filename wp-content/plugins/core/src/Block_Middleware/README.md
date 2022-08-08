@@ -1,5 +1,6 @@
 # Block Middleware
 
+- [Video Guides](#video-guides)
 - [Introduction](#introduction)
   - [Use Cases](#use-cases)
 - [Building Custom Block Field/Model Middleware](#building-custom-block-fieldmodel-middleware)
@@ -7,6 +8,22 @@
   - [Register Field Middleware](#register-field-middleware)
   - [Register Model Middleware](#register-model-middleware)
   - [Assign Blocks To Middleware](#assign-blocks-to-middleware)
+
+## Video Guides
+
+- [Block Middleware Overview](https://d.pr/K963cu)
+
+### Color Theme Middleware
+
+- [How to add the Color Theme Middleware to an existing block](https://d.pr/aIi5HY)
+- [How to add the Color Theme Middleware to a repeater](https://d.pr/cUAx8b)
+- [How to customize the Color Theme Swatches](https://d.pr/lIlzaZ)
+
+### Post Loop Field Middleware
+
+- [Post Loop Field Overview](https://d.pr/Px5xSe)
+- [How to configure the Post Loop Field Middleware](https://d.pr/FicVgp)
+- [How to use the Post Loop Field in non-block controllers](https://d.pr/UP7fcL)
 
 ## Introduction
 

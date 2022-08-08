@@ -15,12 +15,11 @@ use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Contracts\Model;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Field_Middleware\Color_Theme_Field_Middleware;
 use Tribe\Project\Blocks\Middleware\Color_Theme\Model_Middleware\Color_Theme_Field_Model_Middleware;
+use Tribe\Project\Blocks\Middleware\Post_Loop\Field_Middleware\Post_Loop_Field_Middleware;
 use Tribe\Project\Blocks\Types\Accordion\Accordion;
 use Tribe\Project\Blocks\Types\Accordion\Accordion_Model;
 use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid;
-use Tribe\Project\Blocks\Types\Card_Grid\Card_Grid_Model;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
-use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop_Model;
 use Tribe\Project\Blocks\Types\Hero\Hero;
 use Tribe\Project\Blocks\Types\Hero\Hero_Model;
 use Tribe\Project\Blocks\Types\Interstitial\Interstitial;
@@ -59,8 +58,6 @@ class Block_Middleware_Definer implements Definer_Interface {
 	 */
 	public const MODEL_MIDDLEWARE = [
 		Accordion_Model::class    => true,
-		Card_Grid_Model::class    => true,
-		Content_Loop_Model::class => true,
 		Hero_Model::class         => true,
 		Interstitial_Model::class => true,
 		Media_Text_Model::class   => true,
@@ -95,8 +92,12 @@ class Block_Middleware_Definer implements Definer_Interface {
 			 */
 			self::BLOCK_MIDDLEWARE            => DI\add( [
 				Accordion::class    => true,
-				Card_Grid::class    => true,
-				Content_Loop::class => true,
+				Card_Grid::class    => [
+					Post_Loop_Field_Middleware::class,
+				],
+				Content_Loop::class => [
+					Post_Loop_Field_Middleware::class,
+				],
 				Hero::class         => true,
 				Interstitial::class => true,
 				Media_Text::class   => true,
@@ -112,6 +113,7 @@ class Block_Middleware_Definer implements Definer_Interface {
 			 */
 			self::FIELD_MIDDLEWARE_COLLECTION => DI\add( [
 				DI\get( Color_Theme_Field_Middleware::class ),
+				DI\get( Post_Loop_Field_Middleware::class ),
 			] ),
 
 			/**
