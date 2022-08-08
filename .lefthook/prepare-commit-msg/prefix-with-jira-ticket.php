@@ -25,7 +25,7 @@ function is_valid_commit_source( string $source ): bool {
 }
 
 function parse_ticket( string $branch ): string {
-	if ( preg_match( '/[A-Z]{2,}-\d+/i', $branch, $matches ) ) {
+	if ( preg_match( '/[A-Z0-9]{2,}-\d+/i', $branch, $matches ) ) {
 		return $matches[0];
 	}
 

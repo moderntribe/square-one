@@ -90,6 +90,15 @@ class Theme_Subscriber extends Abstract_Subscriber {
 	}
 
 	private function oembed(): void {
+		// Fix reusable blocks from not rendering embeds on the frontend by re-running autoembed at a higher priority than do_blocks()
+		add_filter( 'the_content', static function ( $content ) {
+			if ( is_admin() ) {
+				return $content;
+			}
+
+			return $GLOBALS['wp_embed']->autoembed( $content );
+		}, 10, 1 );
+
 		add_filter( 'oembed_dataparse', function ( $html, $data, $url ) {
 			return $this->container->get( Oembed_Filter::class )->get_video_component( (string) $html, (object) $data, (string) $url );
 		}, 999, 3 );
@@ -115,9 +124,6 @@ class Theme_Subscriber extends Abstract_Subscriber {
 		}, 0, 0 );
 		add_action( 'enqueue_block_editor_assets', function (): void {
 			$this->container->get( Web_Fonts::class )->enqueue_fonts();
-		}, 0, 0 );
-		add_action( 'tribe/unsupported_browser/head', function (): void {
-			$this->container->get( Web_Fonts::class )->inject_unsupported_browser_fonts();
 		}, 0, 0 );
 		add_action( 'after_setup_theme', function (): void {
 			$this->container->get( Web_Fonts::class )->add_tinymce_editor_fonts();

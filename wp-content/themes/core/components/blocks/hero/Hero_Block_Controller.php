@@ -196,8 +196,6 @@ class Hero_Block_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-hero__description',
-				't-sink',
-				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description,
 		] );

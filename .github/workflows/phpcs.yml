@@ -89,4 +89,4 @@ jobs:
 
       - name: Static Analysis
         if: ${{ steps.filter.outputs.wpcontent == 'true' }}
-        run: ./vendor/bin/phpstan --memory-limit=-1
+        run: ./vendor/bin/phpstan --memory-limit=-1 --error-format=github

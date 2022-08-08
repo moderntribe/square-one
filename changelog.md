@@ -2,7 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2202.08
+* Fixed: Branches that have Jira projects in them that contained numbers in the name would not properly prefix git commits, e.g. `feature/DATA22-3/some-new-feature`
+* Fixed: False positive on `have_posts()` using PHPStan if proceeded by an `if ( have_posts() ):`, utilizing a new [wordpress-overrides.stub file](dev/stubs/wordpress-overrides.stub)  
+
+## 2022.07
+* Fixed: TinyMCE floating toolbar repositioning loop. https://core.trac.wordpress.org/ticket/44911
+* Fixed: Set Static Analysis format for GitHub in Actions.
+* Added: Block Category (Custom) for all custom blocks.
+* Updated: Block fields layout and language for consistency.
+* Updated: Removed `image_select` fields in favor of `button_group` fields on blocks.
+* Added: MVP Site Footer.
+* Updated: ACF (5.12.3), Gravity Forms (2.6.4), Disable Emojis (1.7.4), Limit Login Attempts Reloaded (2.25.3), Post 2 Posts (1.7), User Switching (1.6.0), Yoast SEO (19.3)
+* Fixed: A typo in the default theme name.
+* Updated: Move General Settings to Appearance > ["Theme Name" Options and adjust Analytics & Social Media usages appropriately. 
+* Fixed: Embeds in reusable blocks not displaying on the frontend. https://core.trac.wordpress.org/ticket/46457
+* Added: Core Columns block with support for headings, paragraphs, lists, and images.
+* Updated: Base kitchen sink styles for improves specificity and admin support.
+* Fixed: Misnamed Buttons Block classes and attached button styles
+* Removed: Legacy "unsupported browser" feature and all related build system features.
+
 ## 2022.06
+* Fixed: Erroneous link clicks in card.js for mouse right-clicks on Windows. 
 * Bumped: Tribe Libs to 3.4.18 to update block generators to escape labels.
 * Added: PHP side functionality and filter for unregistering block styles.
 * Fixed: Replaces `__()` with `esc_html__()` in `wp-content/plugins/core/src/Blocks` folder

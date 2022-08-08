@@ -10,19 +10,24 @@ class Nav_Menus_Definer implements Definer_Interface {
 
 	public const LOCATIONS = 'menu.locations';
 	public const PRIMARY   = 'primary';
-	public const SECONDARY = 'secondary';
+	public const FOOTER    = 'footer';
+	public const LEGAL     = 'legal';
 
 	public function define(): array {
 		return [
-			self::LOCATIONS  => [
+			self::LOCATIONS => [
 				DI\get( 'menu.primary' ),
-				DI\get( 'menu.secondary' ),
+				DI\get( 'menu.footer' ),
+				DI\get( 'menu.legal' ),
 			],
-			'menu.primary'   => static function () {
-				return new Menu_Location( Nav_Menus_Definer::PRIMARY, __( 'Menu: Site', 'tribe' ) );
+			'menu.primary'  => static function () {
+				return new Menu_Location( Nav_Menus_Definer::PRIMARY, esc_html__( 'Masthead: Main', 'tribe' ) );
 			},
-			'menu.secondary' => static function () {
-				return new Menu_Location( Nav_Menus_Definer::SECONDARY, __( 'Menu: Footer', 'tribe' ) );
+			'menu.footer'   => static function () {
+				return new Menu_Location( Nav_Menus_Definer::FOOTER, esc_html__( 'Footer: Primary', 'tribe' ) );
+			},
+			'menu.legal'    => static function () {
+				return new Menu_Location( Nav_Menus_Definer::LEGAL, esc_html__( 'Footer: Legal', 'tribe' ) );
 			},
 		];
 	}

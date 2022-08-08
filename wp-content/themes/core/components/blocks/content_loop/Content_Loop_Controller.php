@@ -165,7 +165,6 @@ class Content_Loop_Controller extends Abstract_Controller {
 				$card_description =
 					[
 						Container_Controller::CONTENT => wpautop( $post->post_excerpt ),
-						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
 					];
 			}
 
@@ -320,8 +319,6 @@ class Content_Loop_Controller extends Abstract_Controller {
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-content-loop__description',
-				't-sink',
-				's-sink',
 			],
 			Container_Controller::CONTENT => $this->description,
 		] );

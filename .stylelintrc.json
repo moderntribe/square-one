@@ -29,7 +29,7 @@
     } ],
     "selector-pseudo-element-colon-notation": "single",
     "selector-pseudo-class-no-unknown": [true, {
-      "ignorePseudoClasses": ["global"]
+      "ignorePseudoClasses": ["global", "where"]
     }],
     "value-no-vendor-prefix": true
   }
