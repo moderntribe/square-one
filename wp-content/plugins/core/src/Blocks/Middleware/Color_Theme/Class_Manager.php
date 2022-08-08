@@ -5,7 +5,7 @@ namespace Tribe\Project\Blocks\Middleware\Color_Theme;
 use Tribe\Libs\Field_Models\Collections\Swatch_Collection;
 
 /**
- * Retrieve a theme CSS class based on an acf-swatch hex code.
+ * Retrieve a theme CSS class based on an acf-swatch color code.
  */
 class Class_Manager {
 
