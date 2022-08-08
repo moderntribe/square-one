@@ -3,12 +3,9 @@
 namespace Tribe\Project\Blocks\Middleware\Post_Loop;
 
 use DI\FactoryInterface;
-use Tribe\Libs\ACF\Traits\With_Field_Finder;
 use Tribe\Project\Blocks\Middleware\Post_Loop\Models\Post_Loop_Model;
 
 class Post_Loop_Controller_Factory {
-
-	use With_Field_Finder;
 
 	protected FactoryInterface $container;
 
