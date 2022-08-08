@@ -3,7 +3,7 @@
 namespace Tribe\Project\Blocks\Contracts;
 
 /**
- * The Model Interface.
+ * The Block Model Interface.
  */
 interface Model {
 
