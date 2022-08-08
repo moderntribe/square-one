@@ -27,8 +27,8 @@ class Repeater_Field_Middleware extends Abstract_Field_Middleware {
 		$fields = $block->get_fields();
 
 		foreach ( $parent_keys as $parent_key ) {
-			$block_name = $block->get_block()->get_attributes()['name'];
-			$parent_field     = $this->find_field( $fields, $parent_key );
+			$block_name   = $block->get_block()->get_attributes()['name'];
+			$parent_field = $this->find_field( $fields, $parent_key );
 
 			if ( ! $parent_field ) {
 				continue;
