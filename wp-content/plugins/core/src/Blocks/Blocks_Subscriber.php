@@ -54,7 +54,7 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 		}, 10, 1 );
 
 		add_action( 'init', function (): void {
-			$this->container->get( Pattern_Category::class )->register_block_category();
+			$this->container->get( Pattern_Category::class )->register_pattern_category();
 		}, 10, 0 );
 	}
 
