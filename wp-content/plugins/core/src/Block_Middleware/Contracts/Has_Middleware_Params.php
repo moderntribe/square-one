@@ -16,7 +16,7 @@ interface Has_Middleware_Params {
 	 *
 	 * @see \Tribe\Project\Block_Middleware\Contracts\Field_Middleware
 	 *
-	 * @return mixed[][]
+	 * @return array<int, array<string, array<int, mixed>>>
 	 */
 	public function get_middleware_params(): array;
 

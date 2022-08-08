@@ -13,9 +13,12 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Components\Traits\Primary_Term;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Content_Loop_Controller extends Abstract_Controller {
+
+	use Primary_Term;
 
 	public const ATTRS             = 'attrs';
 	public const CLASSES           = 'classes';
@@ -52,9 +55,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	private Cta $cta;
 
 	/**
-	 * @var array<string, mixed>
-	 *
-	 * @see \Tribe\ACF_Post_List\Post_List_Field::format_post()
+	 * @var \Tribe\Libs\Field_Models\Models\Post_Proxy[]
 	 */
 	private array $posts;
 	private string $description;
@@ -103,14 +104,14 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 	public function get_posts_card_args( string $layout = Card_Controller::STYLE_PLAIN ): array {
 		$cards = [];
+
 		foreach ( $this->posts as $post ) {
-			$link             = $post['link'];
 			$uuid             = uniqid( 'p-' );
-			$cat              = get_the_category( $post['post_id'] );
+			$cat              = $this->get_primary_term( $post->ID );
 			$card_description = [];
 
 			$image_array = [
-				Image_Controller::IMG_ID       => $post['image_id'],
+				Image_Controller::IMG_ID       => $post->image->id,
 				Image_Controller::AS_BG        => true,
 				Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-ratio-16-9' ],
 				Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE_SMALL,
@@ -122,9 +123,9 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 			$card_cta =
 				[
-					Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
-					Link_Controller::URL     => $link['url'],
-					Link_Controller::TARGET  => $link['target'],
+					Link_Controller::CONTENT => esc_html__( 'Read More', 'tribe' ),
+					Link_Controller::URL     => $post->cta->link->url,
+					Link_Controller::TARGET  => $post->cta->link->target,
 					Link_Controller::CLASSES => [
 						'u-hidden',
 					],
@@ -143,9 +144,9 @@ class Content_Loop_Controller extends Abstract_Controller {
 			if ( $layout !== Card_Controller::STYLE_INLINE || $this->layout !== 'layout_feature' ) {
 				$card_cta =
 					[
-						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
-						Link_Controller::URL     => $link['url'],
-						Link_Controller::TARGET  => $link['target'],
+						Link_Controller::CONTENT => esc_html__( 'Read More', 'tribe' ),
+						Link_Controller::URL     => $post->cta->link->url,
+						Link_Controller::TARGET  => $post->cta->link->target,
 						Link_Controller::CLASSES => [
 							'c-block__cta-link',
 							'a-cta',
@@ -163,19 +164,19 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 				$card_description =
 					[
-						Container_Controller::CONTENT => wpautop( $post['excerpt'] ),
+						Container_Controller::CONTENT => wpautop( $post->post_excerpt ),
 						Container_Controller::CLASSES => [ 't-sink', 's-sink' ],
 					];
 			}
 
 			$cards[] = [
 				Card_Controller::STYLE           => $layout,
-				Card_Controller::USE_TARGET_LINK => (bool) $link['url'],
+				Card_Controller::USE_TARGET_LINK => (bool) $post->cta->link->url,
 				Card_Controller::META_PRIMARY    => defer_template_part(
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT => $cat[0]->name ?? '',
+						Container_Controller::CONTENT => $cat->name ?? '',
 						Container_Controller::CLASSES => [ 't-tag' ],
 					],
 				),
@@ -185,7 +186,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 					[
 						Text_Controller::TAG     => 'h3',
 						Text_Controller::CLASSES => [ 'h5' ],
-						Text_Controller::CONTENT => $post['title'],
+						Text_Controller::CONTENT => $post->post_title,
 						// Required for screen reader accessibility, below.
 						Text_Controller::ATTRS   => [ 'id' => $uuid . '-title' ],
 					]
@@ -194,7 +195,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT => get_the_date( 'F Y', $post['post_id'] ?? 0 ),
+						Container_Controller::CONTENT => get_the_date( 'F Y', $post->post() ),
 						Container_Controller::CLASSES => [ 'c-card__date' ],
 					],
 				),

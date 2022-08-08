@@ -13,9 +13,9 @@ use Tribe\Libs\ACF\Block_Config;
 interface Field_Middleware extends Middleware {
 
 	/**
-	 * @param \Tribe\Libs\ACF\Block_Config $block The block to add fields to.
-	 * @param \Closure                     $next  The next Field_Middleware in the stack.
-	 * @param array                        $params Optional parameters to customize the middleware logic.
+	 * @param \Tribe\Libs\ACF\Block_Config $block  The block to add fields to.
+	 * @param \Closure                     $next   The next Field_Middleware in the stack.
+	 * @param array<string, string[]>      $params Optional parameters to customize the middleware logic.
 	 *
 	 * @return \Tribe\Libs\ACF\Block_Config
 	 */
