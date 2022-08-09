@@ -95,7 +95,7 @@
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/acf-menu-chooser": "^1.1",
     "moderntribe/square1-field-models": "^1.2",
-    "moderntribe/tribe-libs": "dev-feature/update-block-middleware-generator as 3.6.0",
+    "moderntribe/tribe-libs": "3.6.*",
     "nickford/acf-swatch": "1.0.7",
     "php-di/php-di": "^6.0",
     "php-ds/php-ds": "^1.4",

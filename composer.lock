@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56eb93b10eb37bd9311e2256b0fc0e15",
+    "content-hash": "a8347ef95a8bd570f572784235f085fb",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -70,16 +70,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.232.3",
+            "version": "3.232.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "96fae7f4b2ab11a3eb3fceacef7cb4b12e46b27c"
+                "reference": "c23943f845b4418d82b8a804ebc2b961de9f9eea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/96fae7f4b2ab11a3eb3fceacef7cb4b12e46b27c",
-                "reference": "96fae7f4b2ab11a3eb3fceacef7cb4b12e46b27c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c23943f845b4418d82b8a804ebc2b961de9f9eea",
+                "reference": "c23943f845b4418d82b8a804ebc2b961de9f9eea",
                 "shasum": ""
             },
             "require": {
@@ -156,9 +156,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.232.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.232.4"
             },
-            "time": "2022-08-08T18:19:49+00:00"
+            "time": "2022-08-09T18:20:29+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -1427,16 +1427,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "dev-feature/update-block-middleware-generator",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "2cbed7ea850873dd07b08c83c5116b0a44179078"
+                "reference": "7ae638c80b1b4e013fa977d97bb8f02bd0a3802d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/2cbed7ea850873dd07b08c83c5116b0a44179078",
-                "reference": "2cbed7ea850873dd07b08c83c5116b0a44179078",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/7ae638c80b1b4e013fa977d97bb8f02bd0a3802d",
+                "reference": "7ae638c80b1b4e013fa977d97bb8f02bd0a3802d",
                 "shasum": ""
             },
             "require": {
@@ -1545,9 +1545,9 @@
             "description": "A library for use on Modern Tribe service projects.",
             "support": {
                 "issues": "https://github.com/moderntribe/tribe-libs/issues",
-                "source": "https://github.com/moderntribe/tribe-libs/tree/feature/update-block-middleware-generator"
+                "source": "https://github.com/moderntribe/tribe-libs/tree/3.6.0"
             },
-            "time": "2022-08-09T16:53:16+00:00"
+            "time": "2022-08-09T20:43:22+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -10636,18 +10636,10 @@
             "time": "2021-07-11T04:52:41+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "moderntribe/tribe-libs",
-            "version": "dev-feature/update-block-middleware-generator",
-            "alias": "3.6.0",
-            "alias_normalized": "3.6.0.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "moderntribe/acf-image-select": 20,
-        "moderntribe/tribe-libs": 20,
         "roots/wp-password-bcrypt": 20,
         "filp/whoops": 20
     },
