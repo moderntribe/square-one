@@ -52,14 +52,6 @@ class Site_Header_Controller extends Abstract_Controller {
 		return Markup_Utils::concat_attrs( $this->attrs );
 	}
 
-	public function get_logo(): string {
-		return sprintf(
-			'<div class="c-masthead__logo" data-js="logo"><a href="%s" class="c-masthead__logo-icon icon icon-logo" rel="home"><span class="u-visually-hidden">%s</span></a></div>',
-			esc_url( home_url() ),
-			get_bloginfo( 'blogname' )
-		);
-	}
-
 	public function get_logo_args(): array {
 		return [
 			Container_Controller::CLASSES => [ 'c-site-header__logo' ],
@@ -138,12 +130,10 @@ class Site_Header_Controller extends Abstract_Controller {
 	}
 
 	private function get_logo_link(): string {
-		$content = ! empty( $this->get_logo_image() ) ? $this->get_logo_image() : get_bloginfo( 'name' );
-
 		return tribe_template_part( 'components/link/link', '', [
 			Link_Controller::CLASSES => [ 'c-site-header__logo-link', 't-display-x-small' ],
 			Link_Controller::URL     => home_url( '/' ),
-			Link_Controller::CONTENT => $content,
+			Link_Controller::CONTENT => $this->get_logo_image() ?: get_bloginfo( 'name' ),
 		] );
 	}
 
