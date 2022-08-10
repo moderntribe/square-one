@@ -233,9 +233,10 @@ const toggleNavFlyout = () => {
 };
 
 /**
- * Be sure to close the flyout when switching to desktop.
+ * Handle resize events for this module
  */
 const executeResize = () => {
+	// Close (reset) the nav flyout on desktop
 	if ( globalState.v_width >= globalOptions.FULL_BREAKPOINT && state.navOpen ) {
 		closeNavFlyout();
 	}
@@ -254,7 +255,7 @@ const bindEvents = () => {
 };
 
 /**
- * Cache elements needed for this script
+ * Cache elements needed for this module
  */
 const cacheElements = () => {
 	el.navContainer = el.container.querySelector( '[data-js="nav-flyout"]' );

@@ -14,8 +14,7 @@ const state = {
 };
 
 /**
- * @function closeSearch
- * @description Close the search menu for desktop.
+ * Close the search form
  *
  * @param reFocus bool	Should the close method move the cursor back to the search flyout toggle?
  */
@@ -36,8 +35,7 @@ const closeSearch = ( reFocus = true ) => {
 };
 
 /**
- * @function openSearch
- * @description Open the search menu for desktop.
+ * Open the search form
  */
 const openSearch = () => {
 	el.container.classList.add( 'c-site-header--search-animating' );
@@ -56,8 +54,7 @@ const openSearch = () => {
 };
 
 /**
- * @function toggleSearch
- * @description
+ * Toggle the search form
  */
 const toggleSearch = () => {
 	if ( state.searchAnimating ) {
@@ -68,8 +65,7 @@ const toggleSearch = () => {
 };
 
 /**
- * @function submitDefaultSearch
- * @description submits the form if there's characters on the input search
+ * Submit the form if there are characters in the input search
  */
 const submitSearchForm = () => {
 	if ( el.searchFormInput.value.length !== 0 ) {
@@ -124,16 +120,17 @@ const handleTabKeyOut = ( e ) => {
 };
 
 /**
- * @function executeResize
+ * Handle resize events for this module
  */
 const executeResize = () => {
+	// Close (reset) the search flyout on mobile
 	if ( globalState.v_width < globalOptions.FULL_BREAKPOINT && state.searchOpen ) {
 		closeSearch();
 	}
 };
 
 /**
- * @function bindEvents
+ * Bind events for this module
  */
 const bindEvents = () => {
 	delegate( el.container, '[data-js="search-toggle"]', 'click', toggleSearch );
@@ -146,7 +143,7 @@ const bindEvents = () => {
 };
 
 /**
- * @function cacheElements
+ * Cache elements needed for this module
  */
 const cacheElements = () => {
 	el.mobileNavFlyout = el.container.querySelector( '[data-js="nav-flyout"]' );
