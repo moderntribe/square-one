@@ -15,7 +15,7 @@ $c = Subheader_Single_Controller::factory( $args );
 		<div <?php echo $c->get_content_classes(); ?>>
 
 			<?php
-			if ( empty( $c->get_tag_link() ) ) { ?>
+			if ( ! empty( $c->get_tag_link() ) ) { ?>
 				<div>
 					<?php get_template_part( 'components/link/link', '', $c->get_tag_args() ); ?>
 				</div>
