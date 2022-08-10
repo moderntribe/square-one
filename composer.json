@@ -108,7 +108,6 @@
     "roots/wp-password-bcrypt": "dev-master",
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "vlucas/phpdotenv": "^5.3",
-    "wpackagist-plugin/configure-smtp": "3.1",
     "wpackagist-plugin/disable-emojis": "1.7.4",
     "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
     "wpackagist-plugin/limit-login-attempts-reloaded": "2.25.3",
@@ -117,6 +116,7 @@
     "wpackagist-plugin/regenerate-thumbnails": "3.1.5",
     "wpackagist-plugin/user-switching": "1.6.0",
     "wpackagist-plugin/wordpress-seo": "19.3",
+    "wpackagist-plugin/wp-mail-smtp": "^3.5",
     "wpackagist-plugin/wp-tota11y": "1.2.0"
   },
   "require-dev": {
