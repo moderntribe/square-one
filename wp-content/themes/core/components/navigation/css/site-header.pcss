@@ -137,9 +137,9 @@
 	overflow: hidden;
 	position: relative;
 
-	@media(--viewport-full) {
+	@media (--viewport-full) {
 		position: absolute;
-		top:100%;
+		top: 100%;
 		left: calc(-1 * var(--spacer-40));
 		width: var(--grid-3-col);
 		margin: 12px calc(-1 * var(--spacer-40)) 0 0;
@@ -148,13 +148,14 @@
 		border: 1px solid transparent;
 		background: var(--color-bgd);
 		box-shadow: none;
+
 		/* On desktop we want to show the border & box shadow as part of the slide-down revea, so this matches that timing. */
 		transition: border-color 250ms 25ms ease-in-out, box-shadow 250ms 25ms ease-in-out;
 	}
 
 	/* CASE: Last top-level menu item should align it's submenu right to prevent overflowing the viewport. */
 	.c-nav-primary__list-item--depth-0:last-child & {
-		@media(--viewport-full) {
+		@media (--viewport-full) {
 			left: auto;
 			right: 0;
 		}
@@ -164,7 +165,7 @@
 	.c-nav-primary__list-child--animating & {
 		display: block;
 
-		@media(--viewport-full) {
+		@media (--viewport-full) {
 			border-color: var(--color-border);
 			box-shadow: var(--box-shadow-10);
 		}
