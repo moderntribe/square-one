@@ -1395,16 +1395,16 @@
         },
         {
             "name": "moderntribe/tribe-libs",
-            "version": "4.0.3",
+            "version": "4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moderntribe/tribe-libs.git",
-                "reference": "131d332d74088087747a9a61f0aada13af328bfa"
+                "reference": "aafd382dbfe3ef0485c8f43755b2b56b4122be6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/131d332d74088087747a9a61f0aada13af328bfa",
-                "reference": "131d332d74088087747a9a61f0aada13af328bfa",
+                "url": "https://api.github.com/repos/moderntribe/tribe-libs/zipball/aafd382dbfe3ef0485c8f43755b2b56b4122be6c",
+                "reference": "aafd382dbfe3ef0485c8f43755b2b56b4122be6c",
                 "shasum": ""
             },
             "require": {
@@ -1519,9 +1519,9 @@
             "description": "A library for use on Modern Tribe service projects.",
             "support": {
                 "issues": "https://github.com/moderntribe/tribe-libs/issues",
-                "source": "https://github.com/moderntribe/tribe-libs/tree/4.0.3"
+                "source": "https://github.com/moderntribe/tribe-libs/tree/4.0.4"
             },
-            "time": "2022-08-17T22:44:35+00:00"
+            "time": "2022-08-18T20:06:47+00:00"
         },
         {
             "name": "monolog/monolog",
