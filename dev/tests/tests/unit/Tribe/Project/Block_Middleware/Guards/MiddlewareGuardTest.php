@@ -2,11 +2,11 @@
 
 namespace Tribe\Project\Block_Middleware\Guards;
 
-use Codeception\Test\Unit;
 use Ds\Map;
 use Tribe\Libs\ACF\Block_Config;
 use Tribe\Project\Block_Middleware\Contracts\Middleware;
 use Tribe\Project\Blocks\Contracts\Model;
+use Tribe\Tests\Unit;
 
 final class MiddlewareGuardTest extends Unit {
 
