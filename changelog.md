@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
   * Includes updated `wp s1 generate block <name> --with-post-loop-middleware` and `wp s1 generate block <name> --with-middleware` commands.
   * Includes new `wp s1 generate block:middleware <name>` command.
   * See the block middleware README.md linked above.
+* Updated: The `Colors` class has been replaced with a `Swatch_Collection` from [square1-field-models](https://github.com/moderntribe/square1-field-models/releases/tag/1.2.0).
 * Fixed: Removed return statement for an `add_action` in Admin_Subscriber.php.
 * Fixed: Branches that have Jira projects in them that contained numbers in the name would not properly prefix git commits, e.g. `feature/DATA22-3/some-new-feature`
 * Fixed: False positive on `have_posts()` using PHPStan if proceeded by an `if ( have_posts() ):`, utilizing a new [wordpress-overrides.stub file](dev/stubs/wordpress-overrides.stub)  
