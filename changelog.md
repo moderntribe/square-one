@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2202.08
 * Changed: Added basic support for PHP8.0. This is an intermediate update to show how **existing PHP7.4 projects** can jump to PHP8.0 when their hosts force an upgrade. A future PR will bring in PHP8.0 mini
+* Removed: The Tribe Admin Dashboard plugin (not PHP8.0 compatible).
 * Bumped: Tribe Libs to the `4.x` major version + plugin updates.
 * Removed: Any dependencies that Tribe Libs already provides in `composer.json`.
 * Fixed: PHPCS throwing `trim()` errors on certain files due to bad WordPress rule typing.
