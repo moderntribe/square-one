@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 * Removed: The Tribe Admin Dashboard plugin (not PHP8.0 compatible).
 * Removed: Mailgun composer dependency. If projects need this, they should just use the plugin instead.
 * Bumped: Tribe Libs to the `4.x` major version + plugin updates.
+* Bumped: johnbillion/extended-cpts to the `5.x` major version.
 * Removed: Any dependencies that Tribe Libs already provides in `composer.json`.
 * Fixed: PHPCS throwing `trim()` errors on certain files due to bad WordPress rule typing.
 * Changed: Replaced [Function Mocker](https://github.com/lucatume/function-mocker) with [Brain Monkey](https://brain-wp.github.io/BrainMonkey/) for Unit testing as Function Mocker isn't fully PHP8.0 compatible.
