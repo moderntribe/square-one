@@ -1,29 +1,14 @@
 # Block Middleware
 
-- [Video Guides](#video-guides)
 - [Introduction](#introduction)
+- [Video Guides](#video-guides)
   - [Use Cases](#use-cases)
-- [Building Custom Block Field/Model Middleware](#building-custom-block-fieldmodel-middleware)
+- [Generate a Block with Middleware](#generate-a-block-with-middleware)
+- [Creating Custom Block Field/Model Middleware](#creating-custom-block-fieldmodel-middleware)
 - [Registering Middleware](#registering-middleware)
   - [Register Field Middleware](#register-field-middleware)
   - [Register Model Middleware](#register-model-middleware)
-  - [Assign Blocks To Middleware](#assign-blocks-to-middleware)
-
-## Video Guides
-
-- [Block Middleware Overview](https://d.pr/K963cu)
-
-### Color Theme Middleware
-
-- [How to add the Color Theme Middleware to an existing block](https://d.pr/aIi5HY)
-- [How to add the Color Theme Middleware to a repeater](https://d.pr/cUAx8b)
-- [How to customize the Color Theme Swatches](https://d.pr/lIlzaZ)
-
-### Post Loop Field Middleware
-
-- [Post Loop Field Overview](https://d.pr/Px5xSe)
-- [How to configure the Post Loop Field Middleware](https://d.pr/FicVgp)
-- [How to use the Post Loop Field in non-block controllers](https://d.pr/UP7fcL)
+  - [Manually Assign Blocks To Middleware](#manually-assign-blocks-to-middleware)
 
 ## Introduction
 
@@ -34,15 +19,80 @@ This feature gives us the power to do two things:
 1. Modify a block's `Block_Config` just before it's registered with ACF.
 2. Modify a block's `Base_Model` before data is passed to a controller.
 
-This utilizes a Pipeline design pattern, where the block can be passed to unlimited amount of middleware in the order they are registered and each stage and decided if it's going to modify the block in some way or just pass it on to the next stage.
+This utilizes a Pipeline design pattern, where the block can be passed through any number of middleware implementations in the order they are registered. Each stage, or "pipe", can decide if it's going to modify the block in some way and either make a modification and pass it to the next stage, or simply skip doing anything and passing it to the next stage. Your middleware
+should always pass the modified data to the next stage.
+
+## Video Guides
+
+- [Block Middleware Overview](https://d.pr/K963cu) - A technical overview of the entire Block Middleware system.
+
+### Color Theme Middleware
+
+- [How to add the Color Theme Middleware to an existing block](https://d.pr/aIi5HY)
+- [How to add the Color Theme Middleware to a repeater](https://d.pr/cUAx8b) - **NOTE: This is currently outdated as the middleware key you provide in `get_middleware_params()` should now return an array of fields, using the new [With_Field_Prefix Trait available in all Block_Configs](https://github.com/moderntribe/tribe-libs/blob/3.6.0/src/ACF/Traits/With_Field_Prefix.php).**
+
+### Post Loop Field Middleware
+
+- [Post Loop Field Overview](https://d.pr/Px5xSe)
+- [How to configure the Post Loop Field Middleware](https://d.pr/FicVgp) - **NOTE: This is currently outdated as the middleware key you provide in `get_middleware_params()` should now return an array of `$config` instances. See [generating a new block with Post Loop Field Middleware](#example---generate-a-new-block-named-my_custom_block-that-has-post-loop-middleware-support) for the most up-to-date example.
+- [How to use the Post Loop Field in non-block controllers](https://d.pr/UP7fcL)
 
 ### Use Cases
 
 1. Global or shared field systems. Create a set of ACF fields, inject them into a block, and then you can change that field in a single spot and have it update across all blocks where it's enabled.
+2. Modify any fields/field data on the fly, for example of a field had to be renamed, but you want to use the old data until the post is saved by a user.
 
-## Building Custom Block Field/Model Middleware
+## Generate a Block with Middleware
 
-TODO: add `wp s1 generate middleware` command to automate this.
+New options have been added to the `wp s1 generate block` command, run the following help command to see the options:
+
+> TIP: Remove the `so` prefix if you're not using Tribe's local docker environment.
+
+```shell
+so wp help s1 generate block
+```
+
+#### Example - Generate a new block named `My_Custom_Block` that has Post Loop Middleware support:**
+
+```shell
+so wp -- s1 generate block My_Custom_Block --with-post-loop-middleware
+```
+
+The above command will create all the files required to create a block with Post Loop Middleware, the only thing it currently
+doesn't do is build the cards/output the posts in the view. Once generated, you can begin to customize the block as you see fit.
+
+If you have made other custom middleware and need to generate a block that has the basic building blocks to configure that middleware, you can pass the `--with-middleware` option.
+
+#### Example - Generate a new block named `My_Other_Custom_Block` that contains the skeleton for a middleware implementation:
+
+```shell
+so wp -- s1 generate block My_Other_Custom_Block --with-middleware
+```
+
+## Creating Custom Block Field/Model Middleware
+
+Use the CLI generator to create example Block Middleware you can then customize, see available options by running the help command:
+
+> TIP: Remove the `so` prefix if you're not using Tribe's local docker environment.
+
+```shell
+so wp s1 help generate block:middleware
+```
+
+#### Example - Generate block middleware called `Inject_Css`:
+
+```shell
+so wp s1 generate block:middleware Inject_Css
+```
+
+The above command will perform the following actions:
+
+1. Generate a `Inject_Css_Field_Middleware` class that injects a text field called Custom CSS into blocks that are configured to process middleware in the [Block_Middleware_Definer](Block_Middleware_Definer.php).
+2. Generate a `Inject_Css_Model_Middleware` class that will take the entered CSS class, and merge it into the block's existing CSS classes.
+3. Automatically registers the Field/Model Middleware in the [Block_Middleware_Definer](Block_Middleware_Definer.php).
+4. Generate integration tests for the Field/Model Middleware that should later be customized by the developer as they make modifications to the example implementation.
+
+> TIP: Not all middleware requires both a Field and Model implementation. Simply delete the classes you don't need and remove them from the [Block_Middleware_Definer](Block_Middleware_Definer.php) and delete respective automated test classes.
 
 You can currently create two types of middleware out of the box:
 
@@ -68,6 +118,7 @@ Add your field middleware to the collection in the order you want it to run:
 				DI\get( Color_Theme_Field_Middleware::class ),
 			] ),
 ```
+
 ### Register Model Middleware
 
 Add your model middleware to the collection in the order you want it to run:
@@ -84,9 +135,9 @@ Add your model middleware to the collection in the order you want it to run:
 			] ),
 ```
 
-### Assign Blocks To Middleware
+### Manually Assign Blocks To Middleware
 
-Block models under `MODEL_MIDDLEWARE` constant will be passed through all model middleware, e.g.
+Block models under the `MODEL_MIDDLEWARE` constant will be passed through all model middleware, e.g.
 
 ```php
         use Tribe\Project\Blocks\Types\Accordion\Accordion_Model;
