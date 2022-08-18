@@ -4,7 +4,7 @@ namespace Tribe\Project\Object_Meta;
 
 use Tribe\Project\Object_Meta\Contracts\Abstract_Settings_With_Tab;
 
-class Theme_Setting_Tabs extends Abstract_Settings_With_Tab {
+class Theme_Setting extends Abstract_Settings_With_Tab {
 
 	public const NAME = 'theme_options';
 
