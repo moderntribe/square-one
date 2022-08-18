@@ -10,10 +10,7 @@ use Tribe\Project\Templates\Models\Collections\Logo_Collection;
 
 class Logos_Model extends Base_Model {
 
-	/**
-	 * @return array
-	 */
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Logos_Block_Controller::ATTRS       => $this->get_attrs(),
 			Logos_Block_Controller::CLASSES     => $this->get_classes(),

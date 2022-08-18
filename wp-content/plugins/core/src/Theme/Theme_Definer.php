@@ -3,8 +3,9 @@
 namespace Tribe\Project\Theme;
 
 use DI;
+use Psr\Container\ContainerInterface;
 use Tribe\Libs\Container\Definer_Interface;
-use Tribe\Project\Theme\Config\Colors;
+use Tribe\Libs\Field_Models\Collections\Swatch_Collection;
 use Tribe\Project\Theme\Config\Font_Sizes;
 use Tribe\Project\Theme\Config\Gradients;
 use Tribe\Project\Theme\Config\Web_Fonts;
@@ -33,17 +34,40 @@ class Theme_Definer implements Definer_Interface {
 
 			/**
 			 * Define the colors that will be available in color palettes
+			 *
+			 * @link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-support/#block-color-palettes
+			 *
+			 * @see \Tribe\Project\Blocks\Middleware\Color_Theme\Color_Theme_Field_Manager::get_field()
 			 */
 			self::CONFIG_COLORS       => [
-				self::WHITE => [ 'color' => '#ffffff', 'label' => __( 'White', 'tribe' ) ],
-				self::BLACK => [ 'color' => '#151515', 'label' => __( 'Black', 'tribe' ) ],
-				self::GREY  => [ 'color' => '#696969', 'label' => __( 'Grey', 'tribe' ) ],
-				self::BLUE  => [ 'color' => '#0074e0', 'label' => __( 'Blue', 'tribe' ) ],
-				self::GREEN => [ 'color' => '#18814e', 'label' => __( 'Green', 'tribe' ) ],
+				self::WHITE => [
+					'name'  => __( 'White', 'tribe' ),
+					'slug'  => self::WHITE,
+					'color' => '#ffffff',
+				],
+				self::BLACK => [
+					'name'  => __( 'Black', 'tribe' ),
+					'slug'  => self::BLACK,
+					'color' => '#151515',
+				],
+				self::GREY  => [
+					'name'  => __( 'Grey', 'tribe' ),
+					'slug'  => self::GREY,
+					'color' => '#696969',
+				],
+				self::BLUE  => [
+					'name'  => __( 'Blue', 'tribe' ),
+					'slug'  => self::BLUE,
+					'color' => '#0074e0',
+				],
+				self::GREEN => [
+					'name'  => __( 'Green', 'tribe' ),
+					'slug'  => self::GREEN,
+					'color' => '#18814e',
+				],
 			],
 
-			Colors::class             => DI\create()
-				->constructor( DI\get( self::CONFIG_COLORS ) ),
+			Swatch_Collection::class  => static fn ( ContainerInterface $c ) => Swatch_Collection::create( $c->get( self::CONFIG_COLORS ) ),
 
 			/**
 			 * Define the gradients that will be available in color palettes

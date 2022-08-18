@@ -7,10 +7,7 @@ use Tribe\Project\Templates\Components\blocks\spacer\Spacer_Block_Controller;
 
 class Spacer_Model extends Base_Model {
 
-	/**
-	 * @return array
-	 */
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Spacer_Block_Controller::ATTRS           => $this->get_attrs(),
 			Spacer_Block_Controller::CLASSES         => $this->get_classes(),

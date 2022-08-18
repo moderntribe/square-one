@@ -33,8 +33,8 @@ class Admin_Subscriber extends Abstract_Subscriber {
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
 			return $this->container->get( Editor_Styles::class )->mce_editor_body_class( (array) $settings );
 		}, 10, 1 );
-		add_action( 'admin_init', function () {
-			return $this->container->get( Editor_Styles::class )->enqueue_mce_editor_styles();
+		add_action( 'admin_init', function (): void {
+			$this->container->get( Editor_Styles::class )->enqueue_mce_editor_styles();
 		}, 10, 1 );
 	}
 

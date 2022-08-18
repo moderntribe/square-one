@@ -44,10 +44,6 @@
     },
     {
       "type": "vcs",
-      "url": "git@github.com:moderntribe/tribe-acf-post-list-field.git"
-    },
-    {
-      "type": "vcs",
       "url": "git@github.com:bordoni/phpass.git"
     },
     {
@@ -98,14 +94,15 @@
     "mailgun/mailgun-php": "^2.8",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/acf-menu-chooser": "^1.1",
-    "moderntribe/square1-field-models": "^1.0",
-    "moderntribe/tribe-acf-post-list-field": "^2.0",
-    "moderntribe/tribe-libs": "^3.4",
+    "moderntribe/square1-field-models": "^1.2",
+    "moderntribe/tribe-libs": "3.6.*",
     "nickford/acf-swatch": "1.0.7",
     "php-di/php-di": "^6.0",
+    "php-ds/php-ds": "^1.4",
     "php-http/client-common": "^1.9.0",
     "php-http/curl-client": "^1.7",
     "roots/wp-password-bcrypt": "dev-master",
+    "sabre/cache": "^1.0",
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "vlucas/phpdotenv": "^5.3",
     "wpackagist-plugin/configure-smtp": "3.1",

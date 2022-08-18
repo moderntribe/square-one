@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 
 ## 2202.08
+* Added: [The Block Middleware Feature](wp-content/plugins/core/src/Block_Middleware/README.md)! Review the README for screencasts.
+  * The Tribe ACF Post List plugin has been replaced with a Post Loop middleware implementation (see Content Loop/Card Grid blocks).
+  * Customize which middleware/blocks are available in the [Block_Middleware_Definer.php](wp-content/plugins/core/src/Block_Middleware/Block_Middleware_Definer.php).
+  * Breaking: Block Models now require the `init_data()` method instead of the `get_data()` method.
+  * Block Models now implement a [Model Interface](wp-content/plugins/core/src/Blocks/Contracts/Model.php).
+  * A new [Global Color Theme Middleware](wp-content/plugins/core/src/Blocks/Middleware/Color_Theme/README.md) has been added that allow Global Color Swatches to be added to blocks of your choice.
+* Updated: Tribe Libs has been updated to version `3.6.0`.
+  * Includes updated `wp s1 generate block <name> --with-post-loop-middleware` and `wp s1 generate block <name> --with-middleware` commands.
+  * Includes new `wp s1 generate block:middleware <name>` command.
+  * See the block middleware README.md linked above.
+* Updated: The `Colors` class has been replaced with a `Swatch_Collection` from [square1-field-models](https://github.com/moderntribe/square1-field-models/releases/tag/1.2.0).
+* Fixed: Removed return statement for an `add_action` in Admin_Subscriber.php.
 * Fixed: Branches that have Jira projects in them that contained numbers in the name would not properly prefix git commits, e.g. `feature/DATA22-3/some-new-feature`
 * Fixed: False positive on `have_posts()` using PHPStan if proceeded by an `if ( have_posts() ):`, utilizing a new [wordpress-overrides.stub file](dev/stubs/wordpress-overrides.stub)  
 
