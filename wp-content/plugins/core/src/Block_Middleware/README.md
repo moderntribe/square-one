@@ -29,7 +29,7 @@ should always pass the modified data to the next stage.
 ### Color Theme Middleware
 
 - [How to add the Color Theme Middleware to an existing block](https://d.pr/aIi5HY)
-- [How to add the Color Theme Middleware to a repeater](https://d.pr/cUAx8b) - **NOTE: This is currently outdated as the middleware key you provide in `get_middleware_params()` should now return an array of fields, using the new [With_Field_Prefix Trait available in all Block_Configs](https://github.com/moderntribe/tribe-libs/blob/3.6.0/src/ACF/Traits/With_Field_Prefix.php).**
+- [How to add the Color Theme Middleware to a repeater](https://d.pr/cUAx8b) - **IMPORTANT: This is currently outdated, see the [Color Theme README.md for up-to-date examples](../Blocks/Middleware/Color_Theme/README.md).**
 
 ### Post Loop Field Middleware
 
