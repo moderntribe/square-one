@@ -12,9 +12,7 @@ This block middleware adds a centrally configured ACF swatch field with a single
 
 It will search the existing fields for that parent, and if found, it will insert the color theme field at then of that repeater.
 
-To configure this, your `Block Config` should implement the [Has Middleware Params](../../../Block_Middleware/Contracts/Has_Middleware_Params.php) and assign the unique key to the parent field we need to search for in the `get_middleware_params()` method.
-
-> Important: Certain field types have different prefixes, e.g field_, group_ or s-section, and you must provide the **full** field key in order to find it.
+To configure this, your `Block Config` should implement the [Has Middleware Params](../../../Block_Middleware/Contracts/Has_Middleware_Params.php) contract and assign an array of unique field keys to the parent field we need to search for in the `get_middleware_params()` method.
 
 Buttons block example:
 
@@ -39,12 +37,14 @@ class Buttons extends Block_Config implements Cta_Field, Has_Middleware_Params {
 	/**
 	 * Utilize block middleware to inject a color theme field into the "buttons" repeater.
 	 *
-	 * @return string[][]
+	 * @return array<array{color_theme_parent_key?: string[]}>
 	 */
 	public function get_middleware_params(): array {
 		return [
 			[
-				Color_Theme_Repeater_Field_Middleware::MIDDLEWARE_KEY => 'field_' . self::NAME . '_' . self::BUTTONS,
+				Color_Theme_Repeater_Field_Middleware::MIDDLEWARE_KEY => [
+				    $this->get_field_key( self::BUTTONS ),
+                ],
 			],
 		];
 	}
