@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 ## 2202.08
+* Changed: Added basic support for PHP8.0. This is an intermediate update to show how **existing PHP7.4 projects** can jump to PHP8.0 when their hosts force an upgrade. A future PR will bring in PHP8.0 mini
+* Bumped: Tribe Libs to the `4.x` major version + plugin updates.
+* Removed: Any dependencies that Tribe Libs already provides in `composer.json`.
+* Fixed: PHPCS throwing `trim()` errors on certain files due to bad WordPress rule typing.
+* Changed: Replaced [Function Mocker](https://github.com/lucatume/function-mocker) with [Brain Monkey](https://brain-wp.github.io/BrainMonkey/) for Unit testing as Function Mocker isn't fully PHP8.0 compatible.
+* Added: New [Unit Test Class](dev/tests/tests/_support/Classes/Unit.php) that configures Brain Monkey.
+* Updated: Existing Unit tests to use Brain Monkey where they were using Function Mocker.
 * Added: [The Block Middleware Feature](wp-content/plugins/core/src/Block_Middleware/README.md)! Review the README for screencasts.
   * The Tribe ACF Post List plugin has been replaced with a Post Loop middleware implementation (see Content Loop/Card Grid blocks).
   * Customize which middleware/blocks are available in the [Block_Middleware_Definer.php](wp-content/plugins/core/src/Block_Middleware/Block_Middleware_Definer.php).
