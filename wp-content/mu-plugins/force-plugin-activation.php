@@ -27,7 +27,6 @@ class Force_Plugin_Activation {
 		'acf-image-select/acf-image-select.php',
 		'acf-menu-chooser/acf-menu-chooser.php',
 		'acf-swatch/acf-swatch.php',
-		'tribe-acf-post-list-field/tribe-acf-post-list-field.php',
 	];
 
 	/**
