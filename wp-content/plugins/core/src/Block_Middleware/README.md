@@ -34,7 +34,7 @@ should always pass the modified data to the next stage.
 ### Post Loop Field Middleware
 
 - [Post Loop Field Overview](https://d.pr/Px5xSe)
-- [How to configure the Post Loop Field Middleware](https://d.pr/FicVgp) - **NOTE: This is currently outdated as the middleware key you provide in `get_middleware_params()` should now return an array of `$config` instances. See [generating a new block with Post Loop Field Middleware](#example---generate-a-new-block-named-my_custom_block-that-has-post-loop-middleware-support) for the most up-to-date example.
+- [How to configure the Post Loop Field Middleware](https://d.pr/FicVgp) - **IMPORTANT: This is currently outdated as the middleware key you provide in `get_middleware_params()` should now return an array of `$config` instances. See [generating a new block with Post Loop Field Middleware]**(#example---generate-a-new-block-named-my_custom_block-that-has-post-loop-middleware-support) for the most up-to-date example.
 - [How to use the Post Loop Field in non-block controllers](https://d.pr/UP7fcL)
 
 ### Use Cases
