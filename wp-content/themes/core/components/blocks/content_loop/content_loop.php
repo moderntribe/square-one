@@ -38,9 +38,7 @@ $c = Content_Loop_Controller::factory( $args );
 						<?php endif; ?>
 					<?php } ?>
 
-					<?php if ( ! empty( $c->get_cta()['content'] ) ) : ?>
-						<?php echo $c->get_cta(); ?>
-					<?php endif; ?>
+					<?php echo $c->get_cta(); ?>
 				</div>
 
 			<?php elseif ( $c->get_layout() === Content_Loop::LAYOUT_COLUMNS ) : ?>
