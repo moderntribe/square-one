@@ -10,7 +10,7 @@ use Tribe\Project\Templates\Components\blocks\media_text\Media_Text_Block_Contro
 
 class Media_Text_Model extends Base_Model {
 
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Media_Text_Block_Controller::ATTRS       => $this->get_attrs(),
 			Media_Text_Block_Controller::CLASSES     => $this->get_classes(),

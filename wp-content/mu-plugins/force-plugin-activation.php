@@ -26,7 +26,7 @@ class Force_Plugin_Activation {
 		'disable-emojis/disable-emojis.php',
 		'acf-image-select/acf-image-select.php',
 		'acf-menu-chooser/acf-menu-chooser.php',
-		'tribe-acf-post-list-field/tribe-acf-post-list-field.php',
+		'acf-swatch/acf-swatch.php',
 	];
 
 	/**
