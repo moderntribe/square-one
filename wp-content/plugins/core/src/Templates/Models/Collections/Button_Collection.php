@@ -7,8 +7,8 @@ use Tribe\Project\Templates\Models\Button;
 
 class Button_Collection extends DataTransferObjectCollection {
 
-	public static function create( array $stats ): Button_Collection {
-		return new self( Button::arrayOf( $stats ) );
+	public static function create( array $repeater ): Button_Collection {
+		return new self( Button::arrayOf( $repeater ) );
 	}
 
 	public function current(): Button {

@@ -27,7 +27,7 @@ x-chrome: &chrome
     - 4444
 
 x-php: &php
-  image: moderntribe/squareone-php:74-3.0
+  image: moderntribe/squareone-php:80-2.0
   working_dir: /application
   user: "${SQ1_UID:-1000}:${SQ1_GID:-1000}"
   volumes:
