@@ -13,7 +13,7 @@ use Tribe\Project\Templates\Components\blocks\gallery_grid\Gallery_Grid_Controll
  */
 class Gallery_Grid_Model extends Base_Model {
 
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Gallery_Grid_Controller::ATTRS          => $this->get_attrs(),
 			Gallery_Grid_Controller::CLASSES        => $this->get_classes(),

@@ -10,7 +10,7 @@ use Tribe\Project\Templates\Models\Collections\Accordion_Row_Collection;
 
 class Accordion_Model extends Base_Model {
 
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Accordion_Block_Controller::ATTRS       => $this->get_attrs(),
 			Accordion_Block_Controller::CLASSES     => $this->get_classes(),

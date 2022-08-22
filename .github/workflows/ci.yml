@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-versions: [ '7.4' ]
+        php-versions: [ '8.0' ]
 
     env:
       cache_version: 2 # increment to flush all caches
@@ -47,7 +47,6 @@ jobs:
           php -r "file_exists( 'wp-content/themes/core/local-config.json' ) || copy( 'wp-content/themes/core/local-config-sample.json', 'wp-content/themes/core/local-config.json' );"
           php -r "file_exists( 'dev/tests/.env' ) || copy( 'dev/tests/.env-dist', 'dev/tests/.env' );"
           echo "define( 'TWIG_CACHE', false );" >> local-config.php
-          echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
           echo "define( 'FORCE_SSL_LOGIN', false );" >> local-config.php
           echo "define( 'FORCE_SSL_ADMIN', false );" >> local-config.php
           printf 'SQ1_UID=%d\nSQ1_GID=%d\n' $(id -u) $(id -g) > dev/docker/.env

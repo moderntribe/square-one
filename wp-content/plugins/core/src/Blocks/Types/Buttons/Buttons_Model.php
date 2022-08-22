@@ -8,7 +8,7 @@ use Tribe\Project\Templates\Models\Collections\Button_Collection;
 
 class Buttons_Model extends Base_Model {
 
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Buttons_Block_Controller::ATTRS   => $this->get_attrs(),
 			Buttons_Block_Controller::CLASSES => $this->get_classes(),
