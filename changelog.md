@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 ## 2202.08
+* Fixed: Added role="region" to accordion tab content for improved accessibility.
+* Updated: Improved display of ACF gallery field when used in sidebar editor so that it is easier to edit image meta data.
+* Updated: Links block
+  * Fixed both layouts to properly match designs now.
+  * Removed "Link Header" field from block.
+  * Improved typography and spacing styles to match designs.
 * Changed: Added basic support for PHP8.0. This is an intermediate update to show how **existing PHP7.4 projects** can jump to PHP8.0 when their hosts force an upgrade. A future PR will bring in PHP8.0 minimums + optimizations.
 * Removed: The Tribe Admin Dashboard plugin (not PHP8.0 compatible).
 * Removed: Mailgun composer dependency. If projects need this, they should just use the plugin instead.
