@@ -5,7 +5,7 @@ namespace Tribe\Project\Templates\Components\site_header;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
 use Tribe\Project\Nav_Menus\Walker\Walker_Nav_Menu_Primary;
-use Tribe\Project\Object_Meta\Theme_Options;
+use Tribe\Project\Object_Meta\Masthead_Settings;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\button\Button_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
@@ -28,9 +28,9 @@ class Site_Header_Controller extends Abstract_Controller {
 	 * @var string[]
 	 */
 	private array $attrs;
-	private Theme_Options $settings;
+	private Masthead_Settings $settings;
 
-	public function __construct( array $args, Theme_Options $settings ) {
+	public function __construct( array $args, Masthead_Settings $settings ) {
 		$args = $this->parse_args( $args );
 
 		$this->settings = $settings;
@@ -138,7 +138,7 @@ class Site_Header_Controller extends Abstract_Controller {
 	}
 
 	private function get_logo_image(): string {
-		$image_id = $this->settings->get_value( Theme_Options::MASTHEAD_LOGO );
+		$image_id = $this->settings->get_value( Masthead_Settings::MASTHEAD_LOGO );
 
 		if ( empty( $image_id ) ) {
 			return '';

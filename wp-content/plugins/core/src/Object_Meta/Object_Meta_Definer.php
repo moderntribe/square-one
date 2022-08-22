@@ -29,8 +29,9 @@ class Object_Meta_Definer implements Definer_Interface {
 			 * @var \Tribe\Project\Object_Meta\Contracts\Abstract_Tab[]
 			 */
 			self::THEME_OPTIONS_COLLECTION                      => DI\add( [
-				DI\get( Analytics_Settings::class ),
+				DI\get( Masthead_Settings::class ),
 				DI\get( Footer_Settings::class ),
+				DI\get( Analytics_Settings::class ),
 				DI\get( Social_Settings::class ),
 			] ),
 
