@@ -16,7 +16,7 @@ use Tribe\Project\Templates\Models\Collections\Icon_Collection;
  */
 class Icon_Grid_Model extends Base_Model {
 
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Icon_Grid_Controller::ATTRS       => $this->get_attrs(),
 			Icon_Grid_Controller::CLASSES     => $this->get_classes(),

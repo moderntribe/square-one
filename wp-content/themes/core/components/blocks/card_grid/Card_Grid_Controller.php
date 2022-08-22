@@ -57,9 +57,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 	private array $loop_classes;
 
 	/**
-	 * @var array<string, mixed>
-	 *
-	 * @see \Tribe\ACF_Post_List\Post_List_Field::format_post()
+	 * @var \Tribe\Libs\Field_Models\Models\Post_Proxy[]
 	 */
 	private array $posts;
 	private string $description;
@@ -142,7 +140,6 @@ class Card_Grid_Controller extends Abstract_Controller {
 		$cards = [];
 
 		foreach ( $this->posts as $post ) {
-			$link    = $post['link'];
 			$uuid    = uniqid( 'p-' );
 			$cards[] = [
 				Card_Controller::STYLE           => Card_Controller::STYLE_ELEVATED,
@@ -153,7 +150,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 					[
 						Text_Controller::TAG     => 'h3',
 						Text_Controller::CLASSES => [ 'h5' ],
-						Text_Controller::CONTENT => $post['title'],
+						Text_Controller::CONTENT => $post->post_title,
 						// Required for screen reader accessibility, below.
 						Text_Controller::ATTRS   => [ 'id' => $uuid . '-title' ],
 					]
@@ -162,14 +159,14 @@ class Card_Grid_Controller extends Abstract_Controller {
 					'components/container/container',
 					null,
 					[
-						Container_Controller::CONTENT => wpautop( $post['excerpt'] ),
+						Container_Controller::CONTENT => wpautop( $post->post_excerpt ),
 					],
 				),
 				Card_Controller::IMAGE           => defer_template_part(
 					'components/image/image',
 					null,
 					[
-						Image_Controller::IMG_ID       => $post['image_id'],
+						Image_Controller::IMG_ID       => $post->image->id,
 						Image_Controller::AS_BG        => true,
 						Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-ratio-4-3' ],
 						Image_Controller::SRC_SIZE     => Image_Sizes::FOUR_THREE,
@@ -184,8 +181,8 @@ class Card_Grid_Controller extends Abstract_Controller {
 					null,
 					[
 						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
-						Link_Controller::URL     => $link['url'],
-						Link_Controller::TARGET  => $link['target'],
+						Link_Controller::URL     => $post->cta->link->url,
+						Link_Controller::TARGET  => $post->cta->link->target,
 						Link_Controller::CLASSES => [ 'a-cta', 'is-target-link' ],
 						Link_Controller::ATTRS   => [
 							// These attrs provide the most screen reader accessible link.
@@ -246,7 +243,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 				'c-block__leadin',
 				'b-card-grid__leadin',
 			],
-			Text_Controller::CONTENT => $this->leadin ?? '',
+			Text_Controller::CONTENT => $this->leadin,
 		] );
 	}
 
@@ -256,7 +253,7 @@ class Card_Grid_Controller extends Abstract_Controller {
 				'c-block__description',
 				'b-card-grid__description',
 			],
-			Container_Controller::CONTENT => $this->description ?? '',
+			Container_Controller::CONTENT => $this->description,
 		] );
 	}
 

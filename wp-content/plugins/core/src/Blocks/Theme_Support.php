@@ -2,20 +2,20 @@
 
 namespace Tribe\Project\Blocks;
 
-use Tribe\Project\Theme\Config\Colors;
+use Tribe\Libs\Field_Models\Collections\Swatch_Collection;
 use Tribe\Project\Theme\Config\Font_Sizes;
 use Tribe\Project\Theme\Config\Gradients;
 
 class Theme_Support {
 
-	private Colors $colors;
+	private Swatch_Collection $swatch_collection;
 	private Gradients $gradients;
 	private Font_Sizes $font_sizes;
 
-	public function __construct( Colors $colors, Gradients $gradients, Font_Sizes $font_sizes ) {
-		$this->colors     = $colors;
-		$this->gradients  = $gradients;
-		$this->font_sizes = $font_sizes;
+	public function __construct( Swatch_Collection $swatch_collection, Gradients $gradients, Font_Sizes $font_sizes ) {
+		$this->swatch_collection = $swatch_collection;
+		$this->gradients         = $gradients;
+		$this->font_sizes        = $font_sizes;
 	}
 
 	/**
@@ -40,12 +40,8 @@ class Theme_Support {
 	}
 
 	private function color_palette(): void {
-		add_theme_support( 'editor-color-palette', $this->get_colors() );
+		add_theme_support( 'editor-color-palette', $this->swatch_collection->format_for_blocks() );
 		add_theme_support( 'editor-gradient-presets', $this->get_gradients() );
-	}
-
-	private function get_colors(): array {
-		return $this->colors->format_for_blocks();
 	}
 
 	private function get_gradients(): array {

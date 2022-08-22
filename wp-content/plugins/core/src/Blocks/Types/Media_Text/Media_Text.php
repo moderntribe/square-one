@@ -119,9 +119,7 @@ class Media_Text extends Block_Config implements Cta_Field {
 						 self::IMAGE => esc_html__( 'Image', 'tribe' ),
 						 self::EMBED => esc_html__( 'Video', 'tribe' ),
 					 ],
-					 'default_value' => [
-						 self::IMAGE,
-					 ],
+					 'default_value' => self::IMAGE,
 				 ] )
 			 )->add_field( new Field( self::NAME . '_' . self::IMAGE, [
 					'label'             => esc_html__( 'Image', 'tribe' ),
