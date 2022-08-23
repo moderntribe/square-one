@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Controller;
+use Tribe\Project\Templates\Components\subheader\Subheader_Single_Controller;
 
 /**
  * @var array $args Arguments passed to the template
@@ -15,13 +15,13 @@ $c = Subheader_Single_Controller::factory( $args );
 		<div <?php echo $c->get_content_classes(); ?>>
 
 			<?php
-			if ( $c->get_tag_name() !== null && $c->get_tag_link() !== null ) { ?>
+			if ( ! empty( $c->get_tag_link() ) ) { ?>
 				<div>
-					<?php get_template_part( 'components/link/link', 'null', $c->get_tag_args() ); ?>
+					<?php get_template_part( 'components/link/link', '', $c->get_tag_args() ); ?>
 				</div>
 			<?php } ?>
 
-			<?php get_template_part( 'components/text/text', null, $c->get_title_args() ); ?>
+			<?php get_template_part( 'components/text/text', '', $c->get_title_args() ); ?>
 
 			<div class="c-subheader__meta">
 				<?php if ( $c->should_render_byline() ) : ?>
