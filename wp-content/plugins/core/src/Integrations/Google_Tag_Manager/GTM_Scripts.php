@@ -2,13 +2,13 @@
 
 namespace Tribe\Project\Integrations\Google_Tag_Manager;
 
-use Tribe\Project\Object_Meta\Theme_Options;
+use Tribe\Project\Object_Meta\Analytics_Settings;
 
 class GTM_Scripts {
 
-	private Theme_Options $settings;
+	private Analytics_Settings $settings;
 
-	public function __construct( Theme_Options $settings ) {
+	public function __construct( Analytics_Settings $settings ) {
 		$this->settings = $settings;
 	}
 
@@ -19,7 +19,7 @@ class GTM_Scripts {
 	 */
 	public function inject_google_tag_manager_head_tag(): void {
 
-		$id = $this->settings->get_value( Theme_Options::ANALYTICS_GTM_ID );
+		$id = $this->settings->get_value( Analytics_Settings::ANALYTICS_GTM_ID );
 
 		if ( empty( $id ) ) {
 			return;
@@ -53,7 +53,7 @@ class GTM_Scripts {
 	 */
 	public function inject_google_tag_manager_body_tag(): void {
 
-		$id = $this->settings->get_value( Theme_Options::ANALYTICS_GTM_ID );
+		$id = $this->settings->get_value( Analytics_Settings::ANALYTICS_GTM_ID );
 
 		if ( empty( $id ) ) {
 			return;

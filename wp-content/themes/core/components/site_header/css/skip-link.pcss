@@ -2,6 +2,8 @@
  *
  * Accessibility Skip Link
  *
+ * Must appear within a landmark element to pass a11y.
+ *
  * ----------------------------------------------------------------------------- */
 
 .a11y-skip-link {
@@ -25,13 +27,10 @@
 		clip: inherit;
 		background-color: var(--color-bgd);
 		color: var(--color-text);
+	}
 
-		.admin-bar & {
-			top: var(--spacer-wpadmin-mobile);
-
-			@media (--viewport-wpadmin) {
-				top: var(--spacer-wpadmin-desktop);
-			}
-		}
+	/* CASE: The Site Header Nav Flyout is active so this link is irrelevant. */
+	.c-site-header--nav-active & {
+		display: none;
 	}
 }

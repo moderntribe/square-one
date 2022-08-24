@@ -33,12 +33,6 @@ $c = Search_Form_Controller::factory( $args );
 	<?php get_template_part(
 		'components/button/button',
 		null,
-		$c->get_clear_button_args()
-	); ?>
-
-	<?php get_template_part(
-		'components/button/button',
-		null,
 		$c->get_submit_button_args()
 	); ?>
 

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tribe\Project\Templates\Components\header\subheader;
+namespace Tribe\Project\Templates\Components\subheader;
 
 use Tribe\Project\Templates\Components\link\Link_Controller;
 
