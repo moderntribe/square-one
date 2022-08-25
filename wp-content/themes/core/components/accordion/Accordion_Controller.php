@@ -231,6 +231,7 @@ class Accordion_Controller extends Abstract_Controller {
 			self::ROW_CONTENT_ATTRS             => [
 				'hidden'      => 'true',
 				'aria-hidden' => 'true',
+				'role'        => 'region',
 			],
 			self::ROW_CONTENT_CONTAINER_ATTRS   => [
 				'data-depth' => '0',

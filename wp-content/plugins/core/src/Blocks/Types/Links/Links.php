@@ -25,7 +25,6 @@ class Links extends Block_Config implements Cta_Field {
 	public const SECTION_LINKS = 's-links';
 	public const LINKS_TITLE   = 'links_title';
 	public const LINKS         = 'links';
-	public const LINK_HEADER   = 'link_header';
 	public const LINK_CONTENT  = 'link_content';
 
 	public const SECTION_APPEARANCE = 's-appearance';
@@ -161,12 +160,7 @@ class Links extends Block_Config implements Cta_Field {
 
 		$group->add_field( $link );
 
-		$group->add_field( new Field( self::NAME . '_' . self::LINK_HEADER, [
-			'label' => esc_html__( 'Link Header', 'tribe' ),
-			'name'  => self::LINK_HEADER,
-			'type'  => 'text',
-		] )
-		)->add_field( new Field( self::NAME . '_' . self::LINK_CONTENT, [
+		$group->add_field( new Field( self::NAME . '_' . self::LINK_CONTENT, [
 			'label'        => esc_html__( 'Link Content', 'tribe' ),
 			'name'         => self::LINK_CONTENT,
 			'type'         => 'wysiwyg',
