@@ -1,0 +1,190 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Site Header Navigation
+ *
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary {
+	margin-top: var(--spacer-50);
+	margin-bottom: var(--spacer-50);
+	transition: var(--transition-nav-swap);
+
+	@media (--viewport-full) {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	/* CASE: Desktop search flyout active */
+	.c-site-header--search-active & {
+		opacity: 0;
+	}
+
+	/* CASE: Desktop search flyout active */
+	.c-site-header--hide-nav & {
+		display: none;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: List
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__list {
+	@media (--viewport-full) {
+		display: flex;
+		flex-flow: row nowrap;
+		gap: var(--spacer-30);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: List Items
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__list-item {
+	margin-top: var(--spacer-20);
+
+	@media (--viewport-full) {
+		display: flex;
+		align-items: center;
+		margin-top: 0;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: Top-Level List Items
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__list-item--depth-0 {
+	margin-bottom: var(--spacer-30);
+
+	@media (--viewport-full) {
+		position: relative;
+		margin-bottom: 0;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: Links & Buttons
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__action {
+	transition: var(--transition);
+	text-decoration: underline transparent;
+
+	&:hover {
+		text-decoration: underline currentColor;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: Top-Level Links & Buttons
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__action--depth-0 {
+	@mixin a-btn-reset;
+	@mixin t-text-button;
+
+	transition: var(--transition);
+	text-decoration: underline transparent;
+
+	@media (--viewport-full) {
+		@mixin t-input;
+
+		font-weight: 700;
+	}
+
+	&:focus {
+		outline: 1px dotted currentColor;
+	}
+
+	&:hover {
+		text-decoration: underline currentColor;
+	}
+
+	/* CASE: Item has a submenu */
+	&.c-nav-primary__action--has-children {
+
+		&:after {
+			@mixin icon;
+
+			content: var(--icon-chevron-down);
+			position: relative;
+			display: inline-block;
+			top: 0.1em;
+			left: 0.25em;
+			transition: var(--transition);
+		}
+
+		/* CASE: This submenu is active */
+		.c-nav-primary__list-child--active & {
+
+			&:after {
+				transform: rotate(180deg);
+			}
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: Submenu List
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__list-child {
+	display: none;
+	max-height: 0;
+	overflow: hidden;
+	position: relative;
+
+	@media (--viewport-full) {
+		position: absolute;
+		top: 100%;
+		left: calc(-1 * var(--spacer-40));
+		width: var(--grid-3-col);
+		margin: 12px calc(-1 * var(--spacer-40)) 0 0;
+		padding: 0 var(--spacer-40);
+		border-radius: var(--border-radius-base);
+		border: 1px solid transparent;
+		background: var(--color-bgd);
+		box-shadow: none;
+
+		/* On desktop we want to show the border & box shadow as part of the slide-down reveal, so this matches that timing. */
+		transition: border-color 250ms 25ms ease-in-out, box-shadow 250ms 25ms ease-in-out;
+	}
+
+	/* CASE: Last top-level menu item should align it's submenu right to prevent overflowing the viewport. */
+	.c-nav-primary__list-item--depth-0:last-child & {
+		@media (--viewport-full) {
+			left: auto;
+			right: 0;
+		}
+	}
+
+	/* CASE: This submenu is animating */
+	.c-nav-primary__list-child--animating & {
+		display: block;
+
+		@media (--viewport-full) {
+			border-color: var(--color-border);
+			box-shadow: var(--box-shadow-10);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header Nav: Submenu List Items
+ * ----------------------------------------------------------------------------- */
+
+.c-nav-primary__list-item--depth-1 {
+	@media (--viewport-full) {
+		margin-top: var(--spacer-20);
+
+		&:first-child {
+			margin-top: var(--spacer-30);
+		}
+
+		&:last-child {
+			margin-bottom: var(--spacer-30);
+		}
+	}
+}

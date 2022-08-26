@@ -4,6 +4,7 @@
  * @description Initializes all components found in the components directory of the theme
  */
 
+import siteHeader from 'components/site_header';
 import accordion from 'components/accordion';
 import card from 'components/card';
 import comments from 'components/comments';
@@ -19,6 +20,7 @@ import search from 'routes/search';
 import blockGallerySlider from 'components/blocks/gallery_slider';
 
 const init = () => {
+	siteHeader();
 	accordion();
 	card();
 	comments();
