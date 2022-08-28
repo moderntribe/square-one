@@ -213,9 +213,8 @@ class Share_Controller extends Abstract_Controller {
 			case self::LINKEDIN:
 				$label      = esc_html__( 'Share on LinkedIn', 'tribe' );
 				$link       = sprintf(
-					'https://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s',
+					'https://www.linkedin.com/sharing/share-offsite/?url=%1$s',
 					urlencode( esc_url_raw( $data['link'] ) ),
-					urlencode( $data['title'] )
 				);
 				$icon       = 'icon-linkedin';
 				$attributes = [
