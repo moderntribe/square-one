@@ -113,7 +113,8 @@ class Share_Controller extends Abstract_Controller {
 		} elseif ( is_search() ) {
 			$query = get_search_query();
 
-			$data['link']  = $this->normalize_url( get_search_link( $query ) );
+			$data['link'] = $this->normalize_url( get_search_link( $query ) );
+			/* translators: %s: Search results. */
 			$data['title'] = sprintf( esc_html__( 'Search Results: %s', 'tribe' ), esc_attr( $query ) );
 		}
 
