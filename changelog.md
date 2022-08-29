@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2202.08
+* Fixed: Updated Linkedin share link URL.
 * Updated: Added separate file with registerBlockType filter which runs before ready event.
 * Content Loop Block refactoring
 * Fixed: Added role="region" to accordion tab content for improved accessibility.
