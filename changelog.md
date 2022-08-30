@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2202.08
+* Fixed: Post Loop Block Middleware config being shared across blocks due to non-unique ACF key names.
 * Fixed: Updated Linkedin share link URL.
 * Updated: Added separate file with registerBlockType filter which runs before ready event.
 * Content Loop Block refactoring
