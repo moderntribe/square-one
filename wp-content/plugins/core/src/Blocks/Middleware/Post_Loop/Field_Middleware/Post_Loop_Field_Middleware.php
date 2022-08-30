@@ -92,7 +92,8 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 				continue;
 			}
 
-			$this->config = $post_loop_config;
+			$this->config             = $post_loop_config;
+			$this->config->block_name = $block::NAME;
 
 			// Find the field/group/section where our post loop fields will be added to.
 			$section = $this->find_field( $fields, $this->config->group );
@@ -108,7 +109,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	}
 
 	protected function get_post_loop_group(): Field_Group {
-		$group = new Field_Group( $this->config->field_name, [
+		$group = new Field_Group( $this->config->block_name . '_' . $this->config->field_name, [
 			'name' => $this->config->field_name,
 		] );
 
@@ -483,7 +484,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 	 * @return string The formatted field key.
 	 */
 	protected function build_field_key( string $name ): string {
-		return sprintf( '%s_%s', $this->config->field_name, $name );
+		return sprintf( '%s_%s_%s', $this->config->block_name, $this->config->field_name, $name );
 	}
 
 }
