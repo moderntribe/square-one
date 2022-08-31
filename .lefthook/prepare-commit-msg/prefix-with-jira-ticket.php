@@ -25,8 +25,8 @@ function is_valid_commit_source( string $source ): bool {
 }
 
 function parse_ticket( string $branch ): string {
-	if ( preg_match( '/[A-Z0-9]{2,}-\d+/i', $branch, $matches ) ) {
-		return $matches[0];
+	if ( preg_match( '/[A-Z0-9]{2,}-\d+\//i', $branch, $matches ) ) {
+		return rtrim( $matches[0], '/' );
 	}
 
 	return '';
@@ -38,6 +38,7 @@ function is_protected_branch( string $branch ): bool {
 		'master',
 		'develop',
 		'sprint/',
+		'server/',
 	];
 
 	foreach ( $protected_branches as $protected_branch ) {
@@ -47,6 +48,11 @@ function is_protected_branch( string $branch ): bool {
 	}
 
 	return false;
+}
+
+// Don't run during automated tests.
+if ( ! empty( $_ENV['TEST_DB_USER'] ) ) {
+	return;
 }
 
 /**
