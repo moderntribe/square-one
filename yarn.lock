@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@arkweid/lefthook@0.7.5":
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/@arkweid/lefthook/-/lefthook-0.7.5.tgz#e7572c2d182158fac26eecb74eebb1af822cb084"
-  integrity sha512-+fLkcRWhVbgm4yWit6aiodjEGK6yRhwDnRZeIqOpiSbnppNRznDEYGYDBGKf7cxqj5LhUkn60nc1UzZ5JSdF1A==
-
 "@babel/cli@^7.7.0":
   version "7.16.0"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.16.0.tgz#a729b7a48eb80b49f48a339529fc4129fd7bcef3"
@@ -1176,6 +1171,11 @@
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
+
+"@evilmartians/lefthook@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@evilmartians/lefthook/-/lefthook-1.1.1.tgz#26e0de9ca3df1c8d2d97840f187a52cd95bb5f59"
+  integrity sha512-5C/AD937A6jz4mdBLAKXIeYVkxvLmPWxlv1YWfuHcIwZ2wp4W3z1Htjjtp+7gtO41CoCycIJcaxLfwaAsbS6qA==
 
 "@gulp-sourcemaps/identity-map@1.X":
   version "1.0.2"
