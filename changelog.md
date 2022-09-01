@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## 2202.08
+* Updated: Lefthook package renamed from @arkweid/lefthook to @evilmartians/lefthook. Updated to v1.1.1.
+* Updated: `prefix-with-jira-ticket.php` lefthook script for better ticket matching and added tests.
 * Fixed: Post Loop Block Middleware config being shared across blocks due to non-unique ACF key names.
 * Fixed: Updated Linkedin share link URL.
 * Updated: Added separate file with registerBlockType filter which runs before ready event.

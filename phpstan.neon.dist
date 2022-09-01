@@ -12,6 +12,7 @@ parameters:
 	bootstrapFiles:
 		- vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
 		- vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
+		- .lefthook/prepare-commit-msg/prefix-with-jira-ticket.php
 	stubFiles:
 		- dev/stubs/wordpress-overrides.stub
 	tmpDir: .phpstan-cache/
