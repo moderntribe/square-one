@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2202.08
+## 2022.09
+* Added: Git ignore [lefthook-local.yml](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md#local-config) so developers can customize the version of PHP calling the script if required. 
+
+## 2022.08
 * Updated: Lefthook package renamed from @arkweid/lefthook to @evilmartians/lefthook. Updated to v1.1.1.
 * Updated: `prefix-with-jira-ticket.php` lefthook script for better ticket matching and added tests.
 * Fixed: Post Loop Block Middleware config being shared across blocks due to non-unique ACF key names.
