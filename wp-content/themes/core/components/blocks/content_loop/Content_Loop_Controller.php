@@ -116,7 +116,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 			$cards[] = [
 				Card_Controller::STYLE           => $layout,
 				Card_Controller::USE_TARGET_LINK => (bool) $post->cta->link->url,
-				Card_Controller::META_PRIMARY    => $this->get_card_meta_primary( $cat->name ),
+				Card_Controller::META_PRIMARY    => $this->get_card_meta_primary( $cat->name ?? '' ),
 				Card_Controller::TITLE           => $this->get_card_title( $post->post_title, $uuid ),
 				Card_Controller::META_SECONDARY  => $this->get_card_meta_secondary( (string) get_the_date( 'F Y', $post->post() ) ),
 				Card_Controller::DESCRIPTION     => $show ? $this->get_card_description( $post->post_excerpt ) : null,
@@ -245,7 +245,11 @@ class Content_Loop_Controller extends Abstract_Controller {
 		] );
 	}
 
-	private function get_card_meta_primary( string $cat_name ): Deferred_Component {
+	private function get_card_meta_primary( string $cat_name ): ?Deferred_Component {
+		if ( ! $cat_name ) {
+			return null;
+		}
+
 		return defer_template_part(
 			'components/container/container',
 			'',
