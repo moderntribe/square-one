@@ -28,6 +28,12 @@ class Post_Loop_Field_Config extends Field_Model {
 	];
 
 	/**
+	 * Automatically populated with the $block::NAME constant value when
+	 * the middleware is processed to build ACF keys.
+	 */
+	public string $block_name = '';
+
+	/**
 	 * The ACF group/field/section where the Post Loop Fields will appear
 	 * under.
 	 */
@@ -36,8 +42,6 @@ class Post_Loop_Field_Config extends Field_Model {
 	/**
 	 * The name of the field, generally a constant you created in a
 	 * Block_Config.
-	 *
-	 * @note This name must be unique to the block.
 	 */
 	public string $field_name = '';
 

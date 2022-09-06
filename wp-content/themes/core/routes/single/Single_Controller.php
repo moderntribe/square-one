@@ -4,10 +4,10 @@ namespace Tribe\Project\Templates\Routes\single;
 
 use Tribe\Project\Taxonomies\Category\Category;
 use Tribe\Project\Templates\Components\Abstract_Controller;
-use Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
-use Tribe\Project\Templates\Components\header\subheader\Subheader_Single_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
+use Tribe\Project\Templates\Components\subheader\Subheader_Controller;
+use Tribe\Project\Templates\Components\subheader\Subheader_Single_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
 use Tribe\Project\Templates\Components\Traits\Primary_Term;
 use Tribe\Project\Theme\Config\Image_Sizes;
@@ -62,10 +62,10 @@ class Single_Controller extends Abstract_Controller {
 	}
 
 	public function get_term_link_args( WP_Term $term ): array {
-		return  [
+		return [
 			Link_Controller::CONTENT => $term->name,
 			Link_Controller::URL     => get_term_link( $term ),
-			Link_Controller::CLASSES => ['a-tag-link','a-tag-link--secondary','c-tags-list__list_item'],
+			Link_Controller::CLASSES => [ 'a-tag-link', 'a-tag-link--secondary', 'c-tags-list__list_item' ],
 		];
 	}
 
@@ -77,17 +77,17 @@ class Single_Controller extends Abstract_Controller {
 		$alt_text = (string) get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 
 		return [
-				Image_Controller::IMG_ID       => $image_id,
-				Image_Controller::AS_BG        => false,
-				Image_Controller::CLASSES      => [ 'c-single-featured-image', 'alignwide' ],
-				Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
-				Image_Controller::SRCSET_SIZES => [
-					Image_Sizes::CORE_MOBILE,
-					Image_Sizes::CORE_FULL,
-				],
-				Image_Controller::IMG_ALT_TEXT => ! empty( $alt_text ) ? $alt_text : '',
-				Image_Controller::HTML         => ! empty( $caption ) ? '<figcaption class="item-single__featured-image-caption t-caption">' . wp_get_attachment_caption( $image_id ) . '</figcaption>' : '',
-			];
+			Image_Controller::IMG_ID       => $image_id,
+			Image_Controller::AS_BG        => false,
+			Image_Controller::CLASSES      => [ 'c-single-featured-image', 'alignwide' ],
+			Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+			Image_Controller::SRCSET_SIZES => [
+				Image_Sizes::CORE_MOBILE,
+				Image_Sizes::CORE_FULL,
+			],
+			Image_Controller::IMG_ALT_TEXT => $alt_text,
+			Image_Controller::HTML         => ! empty( $caption ) ? '<figcaption class="item-single__featured-image-caption t-caption">' . wp_get_attachment_caption( $image_id ) . '</figcaption>' : '',
+		];
 	}
 
 	public function get_sidebar_id(): string {

@@ -14,6 +14,8 @@ import plugins from './plugins';
 import viewportDims from './viewport-dims';
 import editor from '../editor';
 import blockStyles from './block-styles';
+import registerBlockFilter from '../editor/register-block-filter';
+import acfGallery from '../editor/acf-gallery';
 
 import { on, ready } from 'utils/events';
 
@@ -60,7 +62,11 @@ const init = () => {
  */
 
 const domReady = () => {
+	// Should run before ready.
+	registerBlockFilter();
 	ready( init );
+
+	acfGallery();
 };
 
 export default domReady;

@@ -155,7 +155,7 @@ class Slider_Controller extends Abstract_Controller {
 			self::CAROUSEL_ATTRS  => [ 'data-js' => 'c-slider-carousel' ],
 			self::CLASSES         => [ 'c-slider' ],
 			self::MAIN_ATTRS      => [ 'data-js' => 'c-slider' ],
-			self::MAIN_CLASSES    => [ 'c-slider__main', 'swiper-container' ],
+			self::MAIN_CLASSES    => [ 'c-slider__main', 'swiper' ],
 			self::SLIDE_CLASSES   => [ 'c-slider__slide', 'swiper-slide' ],
 			self::WRAPPER_CLASSES => [ 'c-slider__wrapper', 'swiper-wrapper' ],
 		];

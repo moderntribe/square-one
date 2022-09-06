@@ -2,7 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
-## 2202.08
+## 2022.09
+* Added: Git ignore [lefthook-local.yml](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md#local-config) so developers can customize the version of PHP calling the script if required.
+* Fixed: Regression from removing default typing of tab panel classes property
+
+## 2022.08
+* Updated: Swiper to version `8.3.2`.
+* Updated: Lefthook package renamed from @arkweid/lefthook to @evilmartians/lefthook. Updated to v1.1.1.
+* Updated: `prefix-with-jira-ticket.php` lefthook script for better ticket matching and added tests.
+* Fixed: Post Loop Block Middleware config being shared across blocks due to non-unique ACF key names.
+* Fixed: Updated Linkedin share link URL.
+* Updated: Added separate file with registerBlockType filter which runs before ready event.
+* Content Loop Block refactoring
+* Fixed: Added role="region" to accordion tab content for improved accessibility.
+* Updated: Improved display of ACF gallery field when used in sidebar editor so that it is easier to edit image meta data.
+* Updated: Links block
+  * Fixed both layouts to properly match designs now.
+  * Removed "Link Header" field from block.
+  * Improved typography and spacing styles to match designs.
+* Added: MVP Site masthead and primary navigation pattern.
 * Changed: Added basic support for PHP8.0. This is an intermediate update to show how **existing PHP7.4 projects** can jump to PHP8.0 when their hosts force an upgrade. A future PR will bring in PHP8.0 minimums + optimizations.
 * Removed: The Tribe Admin Dashboard plugin (not PHP8.0 compatible).
 * Removed: Mailgun composer dependency. If projects need this, they should just use the plugin instead.
@@ -26,7 +44,7 @@ All notable changes to this project will be documented in this file.
 * Updated: The `Colors` class has been replaced with a `Swatch_Collection` from [square1-field-models](https://github.com/moderntribe/square1-field-models/releases/tag/1.2.0).
 * Fixed: Removed return statement for an `add_action` in Admin_Subscriber.php.
 * Fixed: Branches that have Jira projects in them that contained numbers in the name would not properly prefix git commits, e.g. `feature/DATA22-3/some-new-feature`
-* Fixed: False positive on `have_posts()` using PHPStan if proceeded by an `if ( have_posts() ):`, utilizing a new [wordpress-overrides.stub file](dev/stubs/wordpress-overrides.stub)  
+* Fixed: False positive on `have_posts()` using PHPStan if proceeded by an `if ( have_posts() ):`, utilizing a new [wordpress-overrides.stub file](dev/stubs/wordpress-overrides.stub)
 
 ## 2022.07
 * Fixed: TinyMCE floating toolbar repositioning loop. https://core.trac.wordpress.org/ticket/44911
