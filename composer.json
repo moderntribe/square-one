@@ -7,6 +7,9 @@
     }
   ],
   "config": {
+    "platform": {
+      "php": "8.0.0"
+    },
     "vendor-dir": "vendor",
     "sort-packages": true,
     "preferred-install": {
@@ -86,7 +89,7 @@
     "guzzlehttp/psr7": "^1.4",
     "humanmade/s3-uploads": "3.0.4",
     "johnbillion/extended-cpts": "^5.0",
-    "johnpbloch/wordpress-core": "5.9.3",
+    "johnpbloch/wordpress-core": "^6.0.2",
     "johnpbloch/wordpress-core-installer": "2.0.*",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/acf-menu-chooser": "^1.1",
