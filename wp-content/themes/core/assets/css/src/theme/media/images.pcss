@@ -15,6 +15,21 @@ img {
 	}
 }
 
+.wp-block-image {
+	max-width: var(--grid-width-staggered);
+	width: calc(100% - 2 * var(--grid-gutter-small));
+	margin-left: auto;
+	margin-right: auto;
+
+	@media (--viewport-medium) {
+		width: calc(100% - 2 * var(--grid-gutter-medium));
+	}
+
+	@media (--viewport-full) {
+		width: calc(100% - 2 * var(--grid-gutter));
+	}
+}
+
 /* -----------------------------------------------------------------------------
  * Media: Wrapper
  *

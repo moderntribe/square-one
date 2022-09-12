@@ -37,7 +37,11 @@
 .alignleft,
 .alignright {
 
-	.wp-block-image & {
+	&.wp-block-image {
+		@media (--viewport-medium) {
+			max-width: var(--grid-5-col);
+		}
+
 		/* CASE: Image has not been resized by the editor */
 		&:not(.is-resized) {
 			@media (--viewport-medium) {
@@ -65,28 +69,28 @@
 
 .alignleft {
 
-	.wp-block-image & {
+	&.wp-block-image {
 		@media (--viewport-medium) {
 			float: left;
 			margin-right: var(--grid-gutter);
 		}
 
 		@media (--viewport-full) {
-			margin-left: calc(-1 * (var(--grid-1-col) + var(--grid-gutter)));
+			margin-left: calc(((100vw - var(--grid-10-col)) / 2) - (var(--grid-1-col) + var(--grid-gutter)));
 		}
 	}
 }
 
 .alignright {
 
-	.wp-block-image & {
+	&.wp-block-image {
 		@media (--viewport-medium) {
 			float: right;
 			margin-left: var(--grid-gutter);
 		}
 
 		@media (--viewport-full) {
-			margin-right: calc(-1 * (var(--grid-1-col) + var(--grid-gutter)));
+			margin-right: calc(((100vw - var(--grid-10-col)) / 2) - (var(--grid-1-col) + var(--grid-gutter)));
 		}
 	}
 }
