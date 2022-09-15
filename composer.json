@@ -107,7 +107,6 @@
     "wpackagist-plugin/regenerate-thumbnails": "3.1.5",
     "wpackagist-plugin/user-switching": "1.7.0",
     "wpackagist-plugin/wordpress-seo": "19.5.1",
-    "wpackagist-plugin/wp-mail-smtp": "^3.5",
     "wpackagist-plugin/wp-tota11y": "1.2.0"
   },
   "require-dev": {
