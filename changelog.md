@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## 2022.09
 * Added: Git ignore [lefthook-local.yml](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md#local-config) so developers can customize the version of PHP calling the script if required.
 * Fixed: Regression from removing default typing of tab panel classes property
+* Removed: The Configure SMTP plugin
 
 ## 2022.08
 * Updated: Swiper to version `8.3.2`.
