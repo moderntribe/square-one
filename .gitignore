@@ -143,6 +143,7 @@ phpcs.xml
 .phpcs-cache
 phpstan.neon
 .phpstan-cache
+/lefthook-local.yml
 
 
 # Added by so cli

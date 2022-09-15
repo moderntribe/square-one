@@ -5,7 +5,7 @@
 
 import _ from 'lodash';
 import { trigger } from 'utils/events';
-import SwiperCore, { Navigation, Pagination, A11y, Autoplay, Thumbs } from 'swiper/core';
+import SwiperCore, { Navigation, Pagination, A11y, Autoplay, Thumbs } from 'swiper';
 
 SwiperCore.use( [ Navigation, Pagination, A11y, Autoplay, Thumbs ] );
 

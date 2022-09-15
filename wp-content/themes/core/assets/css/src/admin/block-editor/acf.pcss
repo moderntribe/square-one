@@ -41,3 +41,42 @@
 		margin: 5px 5px 0 0;
 	}
 }
+
+/* -----------------------------------------------------------------------------
+ * Sidebar Editor Tweaks
+ * ----------------------------------------------------------------------------- */
+.edit-post-sidebar {
+
+	.acf-fields {
+
+		> .acf-field.acf-accordion {
+			/* Add a little right margin to the accordion for better alignment */
+			&.-open {
+				margin-right: 6px !important;
+			}
+		}
+	}
+}
+
+/* Update the Gallery field when used in the sidebar for improved usability */
+.acf-gallery.ui-resizable.-open {
+	.edit-post-sidebar & {
+		.acf-gallery-main {
+			.acf-fr {
+				display: none;
+			}
+		}
+
+		.acf-gallery-side,
+		.acf-gallery-side-inner,
+		.acf-gallery-side-info {
+			z-index: 3;
+
+			/**
+			 * Sidebar width is calculated and set via JS
+			 * see: js/admin/editor/acf-gallery.js
+			 */
+			width: var(--sidebar-width) !important;
+		}
+	}
+}

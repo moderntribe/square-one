@@ -17,7 +17,7 @@ class Gallery_Slider_Model extends Base_Model {
 	/**
 	 * @return array
 	 */
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Gallery_Slider_Controller::ATTRS           => $this->get_attrs(),
 			Gallery_Slider_Controller::CLASSES         => $this->get_classes(),

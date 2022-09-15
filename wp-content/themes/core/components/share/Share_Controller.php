@@ -113,8 +113,9 @@ class Share_Controller extends Abstract_Controller {
 		} elseif ( is_search() ) {
 			$query = get_search_query();
 
-			$data['link']  = $this->normalize_url( get_search_link( $query ) );
-			$data['title'] = sprintf( __( 'Search Results: %s', 'tribe' ), esc_attr( $query ) );
+			$data['link'] = $this->normalize_url( get_search_link( $query ) );
+			/* translators: %s: Search results. */
+			$data['title'] = sprintf( esc_html__( 'Search Results: %s', 'tribe' ), esc_attr( $query ) );
 		}
 
 		return $data;
@@ -133,7 +134,7 @@ class Share_Controller extends Abstract_Controller {
 
 		switch ( $network ) {
 			case self::EMAIL:
-				$label = __( 'Share through Email', 'tribe' );
+				$label = esc_html__( 'Share through Email', 'tribe' );
 				$link  = sprintf(
 					'mailto:?subject=%1$s&body=%2$s',
 					urlencode( $data['title'] ),
@@ -144,7 +145,7 @@ class Share_Controller extends Abstract_Controller {
 				return $this->build_link_args( $link, $label, $icon );
 
 			case self::PRINT:
-				$label      = __( 'Print this page', 'tribe' );
+				$label      = esc_html__( 'Print this page', 'tribe' );
 				$link       = '#';
 				$icon       = 'icon-print';
 				$attributes = [ 'onclick' => 'window.print();return false;' ];
@@ -156,7 +157,7 @@ class Share_Controller extends Abstract_Controller {
 					return [];
 				}
 
-				$label      = __( 'Share on Pinterest', 'tribe' );
+				$label      = esc_html__( 'Share on Pinterest', 'tribe' );
 				$link       = sprintf(
 					'https://pinterest.com/pin/create/button/?url=%1$s&amp;media=%2$s&amp;description=%3$s',
 					urlencode( esc_url_raw( $data['link'] ) ),
@@ -179,7 +180,7 @@ class Share_Controller extends Abstract_Controller {
 					$text .= "...";
 				}
 
-				$label      = __( 'Share on Twitter', 'tribe' );
+				$label      = esc_html__( 'Share on Twitter', 'tribe' );
 				$link       = sprintf(
 					'https://twitter.com/share?url=%1$s&text=%2$s',
 					urlencode( esc_url_raw( $data['link'] ) ),
@@ -195,7 +196,7 @@ class Share_Controller extends Abstract_Controller {
 				return $this->build_link_args( $link, $label, $icon, $attributes );
 
 			case self::FACEBOOK:
-				$label      = __( 'Share on Facebook', 'tribe' );
+				$label      = esc_html__( 'Share on Facebook', 'tribe' );
 				$link       = sprintf(
 					'https://www.facebook.com/sharer.php?u=%1$s&t=%2$s',
 					urlencode( esc_url_raw( $data['link'] ) ),
@@ -211,11 +212,10 @@ class Share_Controller extends Abstract_Controller {
 				return $this->build_link_args( $link, $label, $icon, $attributes );
 
 			case self::LINKEDIN:
-				$label      = __( 'Share on LinkedIn', 'tribe' );
+				$label      = esc_html__( 'Share on LinkedIn', 'tribe' );
 				$link       = sprintf(
-					'https://www.linkedin.com/shareArticle?mini=true&url=%1$s&title=%2$s',
+					'https://www.linkedin.com/sharing/share-offsite/?url=%1$s',
 					urlencode( esc_url_raw( $data['link'] ) ),
-					urlencode( $data['title'] )
 				);
 				$icon       = 'icon-linkedin';
 				$attributes = [

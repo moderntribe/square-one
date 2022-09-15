@@ -4,6 +4,7 @@ namespace Tribe\Project\Templates\Routes\index;
 
 use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Taxonomy\Term_Object;
+use Tribe\Project\Blocks\Middleware\Post_Loop\Post_Loop_Controller;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop;
 use Tribe\Project\Object_Meta\Post_Archive_Featured_Settings;
 use Tribe\Project\Object_Meta\Post_Archive_Settings;
@@ -11,15 +12,13 @@ use Tribe\Project\Object_Meta\Taxonomy_Archive_Settings;
 use Tribe\Project\Settings\Post_Settings;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\blocks\content_loop\Content_Loop_Controller;
-use Tribe\Project\Templates\Components\header\subheader\Subheader_Controller;
+use Tribe\Project\Templates\Components\subheader\Subheader_Controller;
 use Tribe\Project\Templates\Components\Traits\Page_Title;
-use Tribe\Project\Templates\Components\Traits\Post_List_Field_Formatter;
 use Tribe\Project\Templates\Components\Traits\With_Pagination_Helper;
 use WP_Term;
 
 class Index_Controller extends Abstract_Controller {
 
-	use Post_List_Field_Formatter;
 	use Page_Title;
 	use With_Pagination_Helper;
 
@@ -27,34 +26,31 @@ class Index_Controller extends Abstract_Controller {
 
 	protected string $sidebar_id = '';
 	protected Post_Settings $post_settings;
+	protected Post_Loop_Controller $post_loop;
 
-	public function __construct( Post_Settings $post_settings, array $args = [] ) {
+	public function __construct( Post_Settings $post_settings, Post_Loop_Controller $post_loop, array $args = [] ) {
 		$args = $this->parse_args( $args );
 
 		$this->sidebar_id    = (string) $args[ self::SIDEBAR_ID ];
 		$this->post_settings = $post_settings;
+		$this->post_loop     = $post_loop;
 	}
 
 	public function get_sidebar_id(): string {
 		return $this->sidebar_id;
 	}
 
+	/**
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
 	public function get_content_loop_args(): array {
 		global $wp_query;
-
-		$posts = [];
-
-		if ( ! empty( $wp_query->posts ) ) {
-			foreach ( $wp_query->posts as $post ) {
-				$posts[] = $this->formatted_post( $post, 45 );
-			}
-		}
 
 		/** change LAYOUT to Content_Loop::LAYOUT_ROW to get one post per row */
 		return [
 			Content_Loop_Controller::CLASSES => [ 'item-index__loop' ],
 			Content_Loop_Controller::LAYOUT  => Content_Loop::LAYOUT_COLUMNS,
-			Content_Loop_Controller::POSTS   => $posts,
+			Content_Loop_Controller::POSTS   => $this->post_loop->get_posts( $wp_query->posts ),
 		];
 	}
 
@@ -63,24 +59,21 @@ class Index_Controller extends Abstract_Controller {
 	 *
 	 * @param int $max_posts The maximum number of featured posts to display.
 	 *
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 *
 	 * @return array
 	 */
 	public function get_content_loop_featured_args( int $max_posts = 6 ): array {
-
+		// @phpstan-ignore-next-line
 		$featured_post_query = $this->post_settings->get_setting( Post_Archive_Featured_Settings::FEATURED_POSTS, [] );
-		$featured_post_array = [];
 
 		if ( empty( $featured_post_query ) ) {
 			return [];
 		}
 
-		foreach ( $featured_post_query as $post ) {
-			$featured_post_array[] = $this->formatted_post( $post, 45 );
-		}
-
 		return [
 			Content_Loop_Controller::LAYOUT            => Content_Loop::LAYOUT_FEATURE,
-			Content_Loop_Controller::POSTS             => array_slice( $featured_post_array, 0, $max_posts ),
+			Content_Loop_Controller::POSTS             => $this->post_loop->get_posts( array_slice( $featured_post_query, 0, $max_posts ) ),
 			Content_Loop_Controller::ENABLE_PAGINATION => false,
 		];
 	}
@@ -88,7 +81,7 @@ class Index_Controller extends Abstract_Controller {
 	/**
 	 * Prepare data for the Subheader Component.
 	 *
-	 * @see \Tribe\Project\Templates\Components\header\subheader\Subheader_Controller
+	 * @see \Tribe\Project\Templates\Components\subheader\Subheader_Controller
 	 *
 	 * @return array
 	 */

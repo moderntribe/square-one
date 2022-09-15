@@ -7,16 +7,14 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Block_Middleware\Contracts\Has_Middleware_Params;
 use Tribe\Project\Blocks\Block_Category;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
-use Tribe\Project\Post_Types\Post\Post;
-use Tribe\Project\Post_Types\Sample\Sample;
-use Tribe\Project\Taxonomies\Category\Category;
-use Tribe\Project\Taxonomies\Example\Example;
-use Tribe\Project\Taxonomies\Post_Tag\Post_Tag;
+use Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config;
+use Tribe\Project\Blocks\Middleware\Post_Loop\Field_Middleware\Post_Loop_Field_Middleware;
 
-class Card_Grid extends Block_Config implements Cta_Field {
+class Card_Grid extends Block_Config implements Cta_Field, Has_Middleware_Params {
 
 	use With_Cta_Field;
 
@@ -80,50 +78,29 @@ class Card_Grid extends Block_Config implements Cta_Field {
 		// Content Fields
 		//==========================================
 		$this->add_field( new Field( self::NAME . '_' . self::LEADIN, [
-					'label' => esc_html__( 'Overline', 'tribe' ),
-					'name'  => self::LEADIN,
-					'type'  => 'text',
-				] )
-			)->add_field( new Field( self::NAME . '_' . self::TITLE, [
-					 'label' => esc_html__( 'Title', 'tribe' ),
-					 'name'  => self::TITLE,
-					 'type'  => 'text',
-				 ] )
-			 )->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
-					'label'        => esc_html__( 'Description', 'tribe' ),
-					'name'         => self::DESCRIPTION,
-					'type'         => 'wysiwyg',
-					'toolbar'      => Classic_Editor_Formats::MINIMAL,
-					'tabs'         => 'visual',
-					'media_upload' => 0,
-				] )
-			)->add_field(
-				$this->get_cta_field( self::NAME )
-			);
+				'label' => esc_html__( 'Overline', 'tribe' ),
+				'name'  => self::LEADIN,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
+				'label' => esc_html__( 'Title', 'tribe' ),
+				'name'  => self::TITLE,
+				'type'  => 'text',
+			] )
+		)->add_field( new Field( self::NAME . '_' . self::DESCRIPTION, [
+				'label'        => esc_html__( 'Description', 'tribe' ),
+				'name'         => self::DESCRIPTION,
+				'type'         => 'wysiwyg',
+				'toolbar'      => Classic_Editor_Formats::MINIMAL,
+				'tabs'         => 'visual',
+				'media_upload' => 0,
+			] )
+		)->add_field(
+			$this->get_cta_field( self::NAME )
+		);
 
-			$this->add_section( new Field_Section( self::SECTION_CARDS, esc_html__( 'Cards', 'tribe' ), 'accordion' ) )
-				->add_field( new Field( self::NAME . '_' . self::POST_LIST, [
-					'label'             => esc_html__( '', 'tribe' ),
-					'name'              => self::POST_LIST,
-					'type'              => 'tribe_post_list',
-					'available_types'   => 'both',
-					'post_types'        => [
-						Post::NAME,
-						Sample::NAME,
-					],
-					'post_types_manual' => [
-						Post::NAME,
-						Sample::NAME,
-					],
-					'taxonomies'        => [
-						Post_Tag::NAME,
-						Category::NAME,
-						Example::NAME,
-					],
-					'limit_min'         => 2,
-					'limit_max'         => 10,
-				] )
-			);
+		// Post loop fields will be added to this section via block middleware.
+		$this->add_section( new Field_Section( self::SECTION_CARDS, esc_html__( 'Cards', 'tribe' ), 'accordion' ) );
 
 		//==========================================
 		// Setting Fields
@@ -140,6 +117,27 @@ class Card_Grid extends Block_Config implements Cta_Field {
 					 'default_value' => self::LAYOUT_STACKED,
 				 ] )
 			 );
+	}
+
+	/**
+	 * Config the query post loop field for middleware.
+	 *
+	 * @return array<array{post_loop_field_configs: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config[]}>
+	 */
+	public function get_middleware_params(): array {
+		$config             = new Post_Loop_Field_Config();
+		$config->field_name = self::POST_LIST;
+		$config->group      = $this->get_section_key( self::SECTION_CARDS );
+		$config->limit_max  = 10;
+		$config->limit_min  = 2;
+
+		return [
+			[
+				Post_Loop_Field_Middleware::MIDDLEWARE_KEY => [
+					$config,
+				],
+			],
+		];
 	}
 
 }

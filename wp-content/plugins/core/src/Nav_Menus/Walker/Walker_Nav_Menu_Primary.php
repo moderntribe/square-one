@@ -43,12 +43,12 @@ class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 
 		// Setup sub-menu classes
 		$classes = Markup_Utils::class_attribute( [
-			$args['theme_location'] . '__list-child',
-			$args['theme_location'] . '__list-child--depth-' . $depth,
+			'c-nav-' . $args['theme_location'] . '__list-child',
+			'c-nav-' . $args['theme_location'] . '__list-child--depth-' . $depth,
 		] );
 
 		$indent  = str_repeat( "\t", $depth );
-		$output .= "\n$indent<ul$id$classes data-js=\"child-menu\">\n";
+		$output .= "\n$indent<ul$id$classes data-js=\"c-nav-child-menu\">\n";
 	}
 
 	/**
@@ -150,11 +150,15 @@ class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 		// don't link top-level items with children in the primary nav
 		if ( $has_children && $depth === 0 ) {
 			unset( $atts['href'] );
-			$atts['data-js'] = 'trigger-child-menu';
-			$atts['title']   = __( 'Toggle Sub-Menu', 'tribe' );
+			$atts['data-js']       = 'c-nav-child-menu-trigger';
+			$atts['title']         = esc_attr__( 'Toggle Sub-Menu', 'tribe' );
+			$atts['aria-expanded'] = 'false';
+			$atts['aria-haspopup'] = 'true';
+			$atts['aria-controls'] = 'menu-item-child-' . esc_attr( $this->current_item->ID ) . '"';
 		}
 
 		$attributes = '';
+
 		foreach ( $atts as $attr => $value ) {
 			if ( empty( $value ) ) {
 				continue;
