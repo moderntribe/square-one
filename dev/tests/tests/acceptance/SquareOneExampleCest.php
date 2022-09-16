@@ -20,10 +20,4 @@ class SquareOneExampleCest {
 		$I->see( $title );
 	}
 
-	public function i_can_login_as_admin( AcceptanceTester $I ) {
-		$I->loginAsAdmin();
-		$I->amOnAdminPage('/');
-		$I->seeElement( '.dashicons-dashboard' );
-	}
-
 }
