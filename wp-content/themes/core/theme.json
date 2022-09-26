@@ -2,6 +2,36 @@
   "$schema": "https://schemas.wp.org/trunk/theme.json",
   "version": 2,
   "settings": {
+    "blocks": {
+      "core/column": {
+        "spacing": {
+          "blockGap": true,
+          "margin": true,
+          "padding": true
+        }
+      },
+      "core/columns": {
+        "border": {
+          "radius": true
+        },
+        "spacing": {
+          "blockGap": true,
+          "margin": true,
+          "padding": true
+        }
+      },
+      "core/image": {
+        "border": {
+          "radius": true
+        }
+      },
+      "core/media-text": {
+        "spacing": {
+          "margin": true,
+          "padding": true
+        }
+      }
+    },
     "border": {
       "radius": false,
       "color": false,
