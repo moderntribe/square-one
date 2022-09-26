@@ -63,8 +63,6 @@ class Blocks_Definer implements Definer_Interface {
 			 */
 			self::DENY_LIST              => [
 				'core/archives',
-				'core/button',
-				'core/buttons',
 				'core/calendar',
 				'core/categories',
 				'core/cover',
@@ -72,7 +70,6 @@ class Blocks_Definer implements Definer_Interface {
 				'core/html',
 				'core/latest-comments',
 				'core/latest-posts',
-				'core/media-text',
 				'core/more',
 				'core/nextpage',
 				'core/rss',
