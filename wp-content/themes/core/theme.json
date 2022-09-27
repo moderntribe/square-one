@@ -20,6 +20,11 @@
           "padding": true
         }
       },
+      "core/group": {
+        "border": {
+          "radius": true
+        }
+      },
       "core/image": {
         "border": {
           "radius": true
@@ -40,7 +45,7 @@
     },
     "color": {
       "background": true,
-      "custom": false,
+      "custom": true,
       "customDuotone": false,
       "customGradient": false,
       "defaultDuotone": false,
@@ -48,6 +53,38 @@
       "defaultPalette": false,
       "duotone": [],
       "gradients": [],
+      "palette": [
+        {
+          "name": "White",
+          "slug": "white",
+          "color": "#ffffff"
+        },
+        {
+          "name": "Light Grey",
+          "slug": "light-grey",
+          "color": "#eeeeee"
+        },
+        {
+          "name": "Grey",
+          "slug": "grey",
+          "color": "#696969"
+        },
+        {
+          "name": "Black",
+          "slug": "black",
+          "color": "#151515"
+        },
+        {
+          "name": "Blue",
+          "slug": "blue",
+          "color": "#0074e0"
+        },
+        {
+          "name": "Green",
+          "slug": "green",
+          "color": "#18814e"
+        }
+      ],
       "link": false,
       "text": true
     },
