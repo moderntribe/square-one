@@ -23,6 +23,10 @@
       "core/group": {
         "border": {
           "radius": true
+        },
+        "spacing": {
+          "margin": true,
+          "padding": true
         }
       },
       "core/image": {
