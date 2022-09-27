@@ -63,6 +63,8 @@ class Blocks_Definer implements Definer_Interface {
 			 */
 			self::DENY_LIST              => [
 				'core/archives',
+				'core/button',
+				'core/buttons',
 				'core/calendar',
 				'core/categories',
 				'core/cover',
