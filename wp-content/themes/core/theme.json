@@ -53,10 +53,9 @@
       "customDuotone": false,
       "customGradient": false,
       "defaultDuotone": false,
-      "defaultGradients": false,
+      "defaultGradients": true,
       "defaultPalette": false,
       "duotone": [],
-      "gradients": [],
       "palette": [
         {
           "name": "White",
