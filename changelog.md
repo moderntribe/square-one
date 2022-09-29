@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 * Fixed: Regression wrong social icon classes being outputted for the Follow component. Icons now show properly show up.
 * Added: Git ignore [lefthook-local.yml](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md#local-config) so developers can customize the version of PHP calling the script if required.
 * Fixed: Regression from removing default typing of tab panel classes property
+* Added: Gravity Forms style support the consent field.
 
 ## 2022.08
 * Updated: Swiper to version `8.3.2`.
