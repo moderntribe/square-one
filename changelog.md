@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.09
+* Added: Lefthook pre-commit merge marker detection, once pulled run `nvm use` and then `lefthook install -a` to update.
 * Fixed: Single Controller `get_author_id()` now returns an integer type instead of a string.
 * Fixed: Regression wrong social icon classes being outputted for the Follow component. Icons now show properly show up.
 * Added: Git ignore [lefthook-local.yml](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md#local-config) so developers can customize the version of PHP calling the script if required.
