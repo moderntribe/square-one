@@ -1,0 +1,9 @@
+.ginput_container_consent {
+	@mixin form-control-radio-checkbox-base;
+	@mixin form-control-radio-checkbox;
+	@mixin form-control-checkbox;
+
+	input[type="checkbox"]:checked + label:after {
+		content: var(--icon-check);
+	}
+}
