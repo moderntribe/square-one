@@ -25,6 +25,9 @@ pre-commit:
     phpcs-mu:
       glob: "wp-content/mu-plugins/*.php"
       <<: *phpcs
+  scripts:
+    "detect-merge-markers.sh":
+      runner: sh
 
 # prefix with jira ticket
 prepare-commit-msg:
