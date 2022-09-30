@@ -40,7 +40,7 @@ class Follow_Controller extends Abstract_Controller {
 			$link        = new Social_Link();
 			$link->title = $this->get_label( $social_site );
 			$link->url   = $url;
-			$link->class = $social_site;
+			$link->class = str_replace( 'social_', '', $social_site );
 
 			return $link->toArray();
 		}, $this->social_keys ) );
