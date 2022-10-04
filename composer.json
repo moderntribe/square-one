@@ -99,7 +99,6 @@
     "sabre/cache": "^1.0",
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "vlucas/phpdotenv": "^5.3",
-    "wpackagist-plugin/configure-smtp": "3.1",
     "wpackagist-plugin/disable-emojis": "1.7.4",
     "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
     "wpackagist-plugin/limit-login-attempts-reloaded": "2.25.4",

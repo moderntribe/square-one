@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0971a1ad873ff85427c7a98d0744dc3",
+    "content-hash": "a85354a3f9fdf5129f8c6d14122a7722",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -3631,24 +3631,6 @@
                 }
             ],
             "time": "2021-12-12T23:22:04+00:00"
-        },
-        {
-            "name": "wpackagist-plugin/configure-smtp",
-            "version": "3.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/configure-smtp/",
-                "reference": "tags/3.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/configure-smtp.3.1.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/configure-smtp/"
         },
         {
             "name": "wpackagist-plugin/disable-emojis",
