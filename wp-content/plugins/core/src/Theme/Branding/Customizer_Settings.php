@@ -28,7 +28,7 @@ class Customizer_Settings {
 				'label'       => __( 'Site Login Logo', 'tribe' ),
 				'description' => __( 'Recommended minimum width: 700px. Recommended file type: .png.', 'tribe' ),
 				'section'     => 'title_tagline',
-				'settings'    => self::SITE_BRANDING_LOGIN_LOGO,
+				'id'          => self::SITE_BRANDING_LOGIN_LOGO,
 				'mime_type'   => 'image',
 				'priority'    => 70,
 			]
@@ -43,7 +43,7 @@ class Customizer_Settings {
 				'label'       => __( 'Android Theme Color', 'tribe' ),
 				'description' => __( 'Select the theme color for android os while website is active in chrome.', 'tribe' ),
 				'section'     => 'title_tagline',
-				'settings'    => self::SITE_BRANDING_ANDROID_THEME_COLOR,
+				'id'          => self::SITE_BRANDING_ANDROID_THEME_COLOR,
 				'priority'    => 80,
 			]
 		) );
