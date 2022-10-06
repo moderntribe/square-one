@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.10
+* Updated: WordPress to 6.0.2, plugins to their latest version.
+* Fixed: Wrong array shape in Customizer_Settings.php.
+* Fixed: Notices being throw when opening the WordPress customizer.
 * Fixed: wordpress-stubs.patch failing to patch on php-stubs/wordpress-stubs v6.0.2
 
 ## 2022.09
