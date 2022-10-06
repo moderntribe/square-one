@@ -15,6 +15,7 @@ class Supports {
 		$this->support_responsive_embeds();
 		$this->support_html5();
 		$this->remove_support_block_widgets();
+		$this->wp_v6_customizer_fix();
 	}
 
 	/**
@@ -55,6 +56,18 @@ class Supports {
 	 */
 	private function remove_support_block_widgets(): void {
 		remove_theme_support( 'widgets-block-editor' );
+	}
+
+	/**
+	 * Prevent notices from being thrown in the customizer on
+	 * WordPress version 6.x.
+	 */
+	private function wp_v6_customizer_fix(): void {
+		if ( ! is_customize_preview() || current_theme_supports( 'widgets' ) ) {
+			return;
+		}
+
+		add_theme_support( 'widgets' );
 	}
 
 }
