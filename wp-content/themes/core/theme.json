@@ -12,7 +12,9 @@
       },
       "core/columns": {
         "border": {
-          "radius": true
+          "radius": true,
+          "color": true,
+          "width": true
         },
         "spacing": {
           "blockGap": true,
@@ -22,7 +24,9 @@
       },
       "core/group": {
         "border": {
-          "radius": true
+          "radius": true,
+          "color": true,
+          "width": true
         },
         "spacing": {
           "margin": true,
