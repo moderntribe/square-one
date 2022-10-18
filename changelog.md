@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.10
+* Updated: Switched to an mT-owned version of a11y-dialog w/ misc bug fixes and update body lock/unlock scripts to address CSS-defined `scroll-behavior: scroll`. 
 * Fixed: wordpress-stubs.patch failing to patch on php-stubs/wordpress-stubs v6.0.2 (again)
 * Updated: WordPres core to v6.0.3
 * Updated: Plugins Gravity Forms v2.6.7, Limit Login Attempts Reloaded: v2.25.8, Yoast SEO: v19.8
