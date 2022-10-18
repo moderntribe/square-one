@@ -1,29 +1,29 @@
---- /vendor/php-stubs/wordpress-stubs/wordpress-stubs.php.old	2022-10-06 10:48:50.178969468 -0600
-+++ /vendor/php-stubs/wordpress-stubs/wordpress-stubs.php	2022-10-06 10:49:29.275733625 -0600
-@@ -114963,7 +114963,7 @@
-  * @param string $password Plain text user password to hash
-  * @return string The hash string of the password
-  */
--function wp_hash_password($password)
-+function __wp_hash_password($password)
- {
- }
- /**
-@@ -114988,7 +114988,7 @@
-  * @param string|int $user_id  Optional. User ID.
-  * @return bool False, if the $password does not match the hashed password
-  */
--function wp_check_password($password, $hash, $user_id = '')
-+function __wp_check_password($password, $hash, $user_id = '')
- {
- }
- /**
-@@ -115041,7 +115041,7 @@
-  * @param string $password The plaintext new user password
-  * @param int    $user_id  User ID
-  */
--function wp_set_password($password, $user_id)
-+function __wp_set_password($password, $user_id)
- {
- }
- /**
+--- /vendor/php-stubs/wordpress-stubs/wordpress-stubs.php.old	2022-10-18 08:42:40.564910905 -0600
++++ /vendor/php-stubs/wordpress-stubs/wordpress-stubs.php	2022-10-18 08:43:05.368178616 -0600
+@@ -117603,7 +117603,7 @@
+      * @param string $password Plain text user password to hash
+      * @return string The hash string of the password
+      */
+-    function wp_hash_password($password)
++    function __wp_hash_password($password)
+     {
+     }
+     /**
+@@ -117628,7 +117628,7 @@
+      * @param string|int $user_id  Optional. User ID.
+      * @return bool False, if the $password does not match the hashed password
+      */
+-    function wp_check_password($password, $hash, $user_id = '')
++    function __wp_check_password($password, $hash, $user_id = '')
+     {
+     }
+     /**
+@@ -117681,7 +117681,7 @@
+      * @param string $password The plaintext new user password
+      * @param int    $user_id  User ID
+      */
+-    function wp_set_password($password, $user_id)
++    function __wp_set_password($password, $user_id)
+     {
+     }
+     /**
