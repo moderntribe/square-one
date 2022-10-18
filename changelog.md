@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.10
+* Updated: WordPres core to v6.0.3
+* Updated: Plugins Gravity Forms v2.6.7, Limit Login Attempts Reloaded: v2.25.8, Yoast SEO: v19.8
 * Updated: WordPress to 6.0.2, plugins to their latest version.
 * Fixed: Wrong array shape in Customizer_Settings.php.
 * Fixed: Notices being throw when opening the WordPress customizer.
