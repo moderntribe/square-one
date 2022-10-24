@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 * Fixed: Wrong array shape in Customizer_Settings.php.
 * Fixed: Notices being throw when opening the WordPress customizer.
 * Fixed: wordpress-stubs.patch failing to patch on php-stubs/wordpress-stubs v6.0.2
+* Fixed: Bug in Term Sorter Plugin - argument expected to be array.
 
 ## 2022.09
 * Fixed: Single Controller `get_author_id()` now returns an integer type instead of a string.
