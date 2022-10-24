@@ -47,7 +47,7 @@
       "type": "package",
       "package": {
         "name": "gravityforms/gravityforms",
-        "version": "2.6.4",
+        "version": "2.6.7",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -86,7 +86,7 @@
     "guzzlehttp/psr7": "^1.4",
     "humanmade/s3-uploads": "3.0.4",
     "johnbillion/extended-cpts": "^5.0",
-    "johnpbloch/wordpress-core": "6.0.2",
+    "johnpbloch/wordpress-core": "6.0.3",
     "johnpbloch/wordpress-core-installer": "2.0.*",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/acf-menu-chooser": "^1.1",
@@ -101,12 +101,12 @@
     "vlucas/phpdotenv": "^5.3",
     "wpackagist-plugin/disable-emojis": "1.7.4",
     "wpackagist-plugin/gravity-forms-wcag-20-form-fields": "1.7.2",
-    "wpackagist-plugin/limit-login-attempts-reloaded": "2.25.5",
+    "wpackagist-plugin/limit-login-attempts-reloaded": "2.25.8",
     "wpackagist-plugin/posts-to-posts": "1.7",
     "wpackagist-plugin/redirection": "5.3.4",
     "wpackagist-plugin/regenerate-thumbnails": "3.1.5",
     "wpackagist-plugin/user-switching": "1.7.0",
-    "wpackagist-plugin/wordpress-seo": "19.7.2",
+    "wpackagist-plugin/wordpress-seo": "19.8",
     "wpackagist-plugin/wp-tota11y": "1.2.0"
   },
   "require-dev": {
