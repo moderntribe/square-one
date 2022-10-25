@@ -90,7 +90,7 @@
     "johnpbloch/wordpress-core-installer": "2.0.*",
     "moderntribe/acf-image-select": "dev-master",
     "moderntribe/acf-menu-chooser": "^1.1",
-    "moderntribe/tribe-libs": "^4.0.3",
+    "moderntribe/tribe-libs": "^4.2",
     "nickford/acf-swatch": "1.0.7",
     "php-ds/php-ds": "^1.4",
     "php-http/client-common": "^2.2",
