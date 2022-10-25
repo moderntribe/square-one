@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components\blocks\gallery_slider;
 
+use Tribe\Libs\Field_Models\Collections\Gallery_Collection;
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Field_Models\Models\Link;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -54,11 +56,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	private array $content_classes;
 
 	private Link $cta;
-
-	/**
-	 * @var string[]
-	 */
-	private array $gallery;
+	private Gallery_Collection $gallery;
 	private string $caption_display;
 	private string $description;
 	private string $image_ratio;
@@ -74,7 +72,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->cta               = $args[ self::CTA ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->gallery           = (array) $args[ self::GALLERY ];
+		$this->gallery           = $args[ self::GALLERY ];
 		$this->image_ratio       = (string) $args[ self::IMAGE_RATIO ];
 		$this->title             = (string) $args[ self::TITLE ];
 	}
@@ -138,34 +136,17 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * Get Slides
-	 *
-	 * @return array
-	 */
 	public function get_slides(): array {
-		$img_ids = ! empty( $this->gallery ) ? array_filter( wp_list_pluck( $this->gallery, 'id' ) ) : [];
-		$slides  = [];
-
-		if ( empty( $img_ids ) ) {
-			return $slides;
+		if ( ! $this->gallery->count() ) {
+			return [];
 		}
 
-		foreach ( $img_ids as $img_id ) {
-			$slides[] = $this->get_image_template( $img_id );
-		}
-
-		return $slides;
+		return array_map( fn ( Image $image ) => $this->get_image_template( $image ), $this->gallery->items() );
 	}
 
-	/**
-	 * @param int $img_id
-	 *
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
-	public function get_slide_img( int $img_id ): Deferred_Component {
+	public function get_slide_img( Image $image ): Deferred_Component {
 		$image_args = [
-			Image_Controller::IMG_ID       => $img_id,
+			Image_Controller::IMG_ID       => $image->id,
 			Image_Controller::CLASSES      => [ 'b-gallery-slider__image' ],
 			Image_Controller::AS_BG        => false,
 			Image_Controller::USE_LAZYLOAD => false,
@@ -189,7 +170,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			];
 		}
 
-		return defer_template_part( 'components/image/image', null, $image_args );
+		return defer_template_part( 'components/image/image', '', $image_args );
 	}
 
 	protected function defaults(): array {
@@ -201,7 +182,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			self::CONTENT_CLASSES   => [],
 			self::CTA               => new Link(),
 			self::DESCRIPTION       => '',
-			self::GALLERY           => [],
+			self::GALLERY           => new Gallery_Collection(),
 			self::IMAGE_RATIO       => self::FIXED,
 			self::TITLE             => '',
 		];
@@ -243,66 +224,58 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 	/**
 	 * Get markup with or without caption based on block setting.
 	 *
-	 * @param int $img_id
+	 * @param \Tribe\Libs\Field_Models\Models\Image $image The Image field model.
 	 *
 	 * @return string
 	 */
-	private function get_image_template( int $img_id ): string {
+	private function get_image_template( Image $image ): string {
 		if ( self::CAPTION_DISPLAY_SHOW === $this->caption_display ) {
-			$slide_markup  = $this->get_slide_img( $img_id );
-			$slide_markup .= defer_template_part( 'components/container/container', null, [
+			$slide_markup  = $this->get_slide_img( $image );
+			$slide_markup .= defer_template_part( 'components/container/container', '', [
 				Container_Controller::CLASSES => [
 					'b-gallery-slider__meta-wrap',
 				],
-				Container_Controller::CONTENT => $this->get_image_caption( $img_id ),
+				Container_Controller::CONTENT => $this->get_image_caption( $image ),
 			] );
 		} else {
-			$slide_markup = $this->get_slide_img( $img_id )->render();
+			$slide_markup = $this->get_slide_img( $image )->render();
 		}
 
 		return $slide_markup;
 	}
 
-	private function get_image_caption( int $slide_id ): ?Deferred_Component {
-		$thumbnail_image = get_posts( [ 'p' => $slide_id, 'post_type' => 'attachment' ] );
-
-		if ( empty( $thumbnail_image[0]->post_excerpt ) ) {
+	private function get_image_caption( Image $image ): ?Deferred_Component {
+		if ( ! $image->caption ) {
 			return null;
 		}
 
-		return defer_template_part( 'components/text/text', null, [
+		return defer_template_part( 'components/text/text', '', [
 			Text_Controller::CLASSES => [
 				'b-gallery-slider__meta-caption',
 			],
-			Text_Controller::CONTENT => esc_html( $thumbnail_image[0]->post_excerpt ),
+			Text_Controller::CONTENT => esc_html( $image->caption ),
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_title(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
+		return defer_template_part( 'components/text/text', '', [
 			Text_Controller::TAG     => 'h2',
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'b-gallery-slider__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title ?? '',
+			Text_Controller::CONTENT => $this->title,
 		] );
 	}
 
-	/**
-	 * @return \Tribe\Project\Templates\Components\Deferred_Component
-	 */
 	private function get_content(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
+		return defer_template_part( 'components/container/container', '', [
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-gallery-slider__description',
 			],
-			Container_Controller::CONTENT => $this->description ?? '',
+			Container_Controller::CONTENT => $this->description,
 		] );
 	}
 
@@ -311,7 +284,7 @@ class Gallery_Slider_Controller extends Abstract_Controller {
 			return null;
 		}
 
-		return defer_template_part( 'components/link/link', null, [
+		return defer_template_part( 'components/link/link', '', [
 			Link_Controller::URL     => $this->cta->url,
 			Link_Controller::CONTENT => $this->cta->title ?: $this->cta->url,
 			Link_Controller::TARGET  => $this->cta->target,

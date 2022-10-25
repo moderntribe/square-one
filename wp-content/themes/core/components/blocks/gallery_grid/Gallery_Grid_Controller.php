@@ -2,6 +2,8 @@
 
 namespace Tribe\Project\Templates\Components\blocks\gallery_grid;
 
+use Tribe\Libs\Field_Models\Collections\Gallery_Collection;
+use Tribe\Libs\Field_Models\Models\Image;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Gallery_Grid\Gallery_Grid;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -49,10 +51,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	 */
 	private array $content_classes;
 
-	/**
-	 * @var string[]
-	 */
-	private array $gallery_images;
+	private Gallery_Collection $gallery_images;
 	private bool $use_slideshow;
 	private string $columns;
 	private string $description;
@@ -69,7 +68,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 		$this->container_classes = (array) $args[ self::CONTAINER_CLASSES ];
 		$this->content_classes   = (array) $args[ self::CONTENT_CLASSES ];
 		$this->description       = (string) $args[ self::DESCRIPTION ];
-		$this->gallery_images    = (array) $args[ self::GALLERY_IMAGES ];
+		$this->gallery_images    = $args[ self::GALLERY_IMAGES ];
 		$this->id                = uniqid();
 		$this->lead_in           = (string) $args[ self::LEAD_IN ];
 		$this->title             = (string) $args[ self::TITLE ];
@@ -89,7 +88,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	}
 
 	public function use_slideshow(): bool {
-		return ! empty( $this->gallery_images ) ? $this->use_slideshow : false;
+		return $this->gallery_images->count() ? $this->use_slideshow : false;
 	}
 
 	public function get_container_classes(): string {
@@ -121,7 +120,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	}
 
 	public function get_slideshow_title(): string {
-		return $this->title ?? '';
+		return $this->title;
 	}
 
 	/**
@@ -145,52 +144,8 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 		];
 	}
 
-	/**
-	 * Get the Slider
-	 *
-	 * @return array
-	 */
-	public function get_slider_args(): array {
-		$main_attrs = [];
-
-		$main_attrs['data-swiper-options'] = $this->get_slider_options();
-
-		return [
-			Slider_Controller::SLIDES     => $this->get_slides(),
-			Slider_Controller::MAIN_ATTRS => $main_attrs,
-			Slider_Controller::CLASSES    => [ 'b-gallery-grid__slider' ],
-		];
-	}
-
-	public function get_gallery_img_ids(): array {
-		return ! empty( $this->gallery_images ) ? array_filter( wp_list_pluck( $this->gallery_images, 'id' ) ) : [];
-	}
-
-	public function get_slide_img( int $img_id ): Deferred_Component {
-		return defer_template_part(
-			'components/image/image',
-			null,
-			[
-				Image_Controller::IMG_ID       => $img_id,
-				Image_Controller::AS_BG        => false,
-				Image_Controller::USE_LAZYLOAD => false,
-				Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
-				Image_Controller::SRCSET_SIZES => [
-					'medium',
-					'medium_large',
-					'large',
-					Image_Sizes::CORE_FULL,
-				],
-			],
-		);
-	}
-
-	/**
-	 * @return array
-	 */
 	public function get_gallery_img_thumbs(): array {
-		$ids          = $this->get_gallery_img_ids();
-		$gallery_imgs = [];
+		$images       = [];
 		$i            = 1;
 		$img_size     = Image_Sizes::SQUARE_MEDIUM;
 		$img_bg       = true;
@@ -201,8 +156,8 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 			Image_Sizes::SQUARE_XSMALL,
 		];
 
-		if ( empty( $ids ) ) {
-			return $gallery_imgs;
+		if ( ! $this->gallery_images->count() ) {
+			return $images;
 		}
 
 		if ( $this->columns === Gallery_Grid::COLUMNS_ONE ) {
@@ -228,9 +183,9 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 			];
 		}
 
-		foreach ( $ids as $id ) {
-			$gallery_imgs[] = [
-				Image_Controller::IMG_ID       => $id,
+		foreach ( $this->gallery_images as $image ) {
+			$images[] = [
+				Image_Controller::IMG_ID       => $image->id,
 				Image_Controller::AS_BG        => $img_bg,
 				Image_Controller::USE_LAZYLOAD => false,
 				Image_Controller::WRAPPER_TAG  => 'div',
@@ -248,7 +203,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 			$i ++;
 		}
 
-		return $gallery_imgs;
+		return $images;
 	}
 
 	public function get_dialog_args(): array {
@@ -271,7 +226,7 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 			self::CONTAINER_CLASSES => [],
 			self::CONTENT_CLASSES   => [],
 			self::DESCRIPTION       => '',
-			self::GALLERY_IMAGES    => [],
+			self::GALLERY_IMAGES    => new Gallery_Collection(),
 			self::LEAD_IN           => '',
 			self::TITLE             => '',
 			self::USE_SLIDESHOW     => false,
@@ -284,6 +239,60 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 			self::CONTAINER_CLASSES => [ 'b-gallery-grid__container', 'l-container' ],
 			self::CONTENT_CLASSES   => [ 'b-gallery-grid__content' ],
 		];
+	}
+
+	private function get_slider_args(): array {
+		$main_attrs = [];
+
+		$main_attrs['data-swiper-options'] = $this->get_slider_options();
+
+		return [
+			Slider_Controller::SLIDES     => $this->get_slides(),
+			Slider_Controller::MAIN_ATTRS => $main_attrs,
+			Slider_Controller::CLASSES    => [ 'b-gallery-grid__slider' ],
+		];
+	}
+
+	private function get_slides(): array {
+		$slides = [];
+
+		if ( ! $this->gallery_images->count() ) {
+			return $slides;
+		}
+
+		foreach ( $this->gallery_images as $key => $image ) {
+			$img           = $this->get_slide_img( $image );
+			$slide_markup  = $img;
+			$slide_markup .= defer_template_part( 'components/container/container', '', [
+				Container_Controller::CLASSES => [
+					'b-gallery-grid__meta-wrap',
+				],
+				Container_Controller::CONTENT => $this->gallery_count( $key ) . $this->get_image_caption( $image ),
+			] );
+
+			$slides[] = $slide_markup;
+		}
+
+		return $slides;
+	}
+
+	private function get_slide_img( Image $image ): Deferred_Component {
+		return defer_template_part(
+			'components/image/image',
+			'',
+			[
+				Image_Controller::IMG_ID       => $image->id,
+				Image_Controller::AS_BG        => false,
+				Image_Controller::USE_LAZYLOAD => false,
+				Image_Controller::SRC_SIZE     => Image_Sizes::CORE_FULL,
+				Image_Controller::SRCSET_SIZES => [
+					'medium',
+					'medium_large',
+					'large',
+					Image_Sizes::CORE_FULL,
+				],
+			],
+		);
 	}
 
 	private function get_slider_options(): string {
@@ -299,94 +308,61 @@ class Gallery_Grid_Controller extends Abstract_Controller {
 	}
 
 	private function gallery_count( int $index ): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
+		return defer_template_part( 'components/text/text', '', [
 			Text_Controller::CLASSES => [
 				'b-gallery-grid__meta-count',
 			],
 			Text_Controller::CONTENT => sprintf(
 				__( '%d of %d', 'tribe' ),
 				$index + 1,
-				count( $this->get_gallery_img_ids() )
+				$this->gallery_images->count()
 			),
 		] );
 	}
 
-	private function get_image_caption( int $slide_id ): ?Deferred_Component {
-		$thumbnail_image = get_posts( [ 'p' => $slide_id, 'post_type' => 'attachment' ] );
-
-		if ( empty( $thumbnail_image[0] ) ) {
+	private function get_image_caption( Image $image ): ?Deferred_Component {
+		if ( ! $image->caption ) {
 			return null;
 		}
 
-		return defer_template_part( 'components/text/text', null, [
+		return defer_template_part( 'components/text/text', '', [
 			Text_Controller::CLASSES => [
 				'b-gallery-grid__meta-caption',
 			],
-			Text_Controller::CONTENT => esc_html( $thumbnail_image[0]->post_excerpt ?? '' ) ,
+			Text_Controller::CONTENT => esc_html( $image->caption ),
 		] );
-	}
-
-	private function get_image_template( int $index, int $img_id ): string {
-		$img           = $this->get_slide_img( $img_id );
-		$slide_markup  = $img;
-		$slide_markup .= defer_template_part( 'components/container/container', null, [
-			Container_Controller::CLASSES => [
-				'b-gallery-grid__meta-wrap',
-			],
-			Container_Controller::CONTENT => $this->gallery_count( $index ) . $this->get_image_caption( $img_id ),
-		] );
-
-		return $slide_markup;
-	}
-
-	/**
-	 * Get Slides
-	 *
-	 * @return array
-	 */
-	private function get_slides(): array {
-		$slide_ids = $this->get_gallery_img_ids();
-		$slides    = [];
-
-		if ( empty( $slide_ids ) ) {
-			return $slides;
-		}
-
-		return array_map( function ( $index, $slide_id ) {
-			return $this->get_image_template( $index, $slide_id );
-		}, array_keys( $slide_ids ), $slide_ids );
 	}
 
 	private function get_lead_in(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
+		return defer_template_part( 'components/text/text', '', [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
 				'b-gallery-grid__leadin',
 				'h6',
 			],
-			Text_Controller::CONTENT => $this->lead_in ?? '',
+			Text_Controller::CONTENT => $this->lead_in,
 		] );
 	}
 
 	private function get_title(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
+		return defer_template_part( 'components/text/text', '', [
 			Text_Controller::TAG     => 'h2',
 			Text_Controller::CLASSES => [
 				'c-block__title',
 				'b-gallery-grid__title',
 				'h3',
 			],
-			Text_Controller::CONTENT => $this->title ?? '',
+			Text_Controller::CONTENT => $this->title,
 		] );
 	}
 
 	private function get_content(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
+		return defer_template_part( 'components/container/container', '', [
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-gallery-grid__description',
 			],
-			Container_Controller::CONTENT => $this->description ?? '',
+			Container_Controller::CONTENT => $this->description,
 		] );
 	}
 

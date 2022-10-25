@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 ## 2022.10
+* Updated: Tribe Libs to v4.2
+* Updated: Gallery Slider/Grid blocks to use the new Gallery Field Model Collection & code clean up
+* Updated: Added `TRIBE_ENABLE_SVG_INLINE_STORAGE` define stub to local-config-sample.php
 * Removed: Yoast hook that was removing the schema to be output.
 * Updated: Switched to an mT-owned version of a11y-dialog w/ misc bug fixes and update body lock/unlock scripts to address CSS-defined `scroll-behavior: scroll`. 
 * Fixed: wordpress-stubs.patch failing to patch on php-stubs/wordpress-stubs v6.0.2 (again)

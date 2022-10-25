@@ -30,7 +30,7 @@ define( 'HMR_DEV', false );
 
 /*
  * Theme service worker
- * 
+ *
  * If your project needs to make use of the theme service worker, enable it here.
  */
 // define( 'ENABLE_THEME_SERVICE_WORKER', true );
@@ -53,6 +53,14 @@ define( 'ASSET_VERSION_TIMESTAMP', true );
  * If you enable Whoops, the Whoops error library will be used to provide better/prettier error logging.
  */
 define( 'WHOOPS_ENABLE', true );
+
+/*
+ * Disable inline SVG storage, newly uploaded SVG's will no longer have
+ * their markup stored in post meta.
+ *
+ * @link https://github.com/moderntribe/tribe-libs/tree/4.x/src/Media#fetching-stored-svg-markup
+ */
+//define( 'TRIBE_ENABLE_SVG_INLINE_STORAGE', false );
 
 /*
  * Glomar

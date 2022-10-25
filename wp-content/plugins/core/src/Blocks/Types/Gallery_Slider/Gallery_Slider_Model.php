@@ -2,6 +2,7 @@
 
 namespace Tribe\Project\Blocks\Types\Gallery_Slider;
 
+use Tribe\Libs\Field_Models\Collections\Gallery_Collection;
 use Tribe\Libs\Field_Models\Models\Link;
 use Tribe\Project\Blocks\Types\Base_Model;
 use Tribe\Project\Templates\Components\blocks\gallery_slider\Gallery_Slider_Controller;
@@ -24,7 +25,7 @@ class Gallery_Slider_Model extends Base_Model {
 			Gallery_Slider_Controller::TITLE           => $this->get( Gallery_Slider::TITLE, '' ),
 			Gallery_Slider_Controller::DESCRIPTION     => $this->get( Gallery_Slider::DESCRIPTION, '' ),
 			Gallery_Slider_Controller::CTA             => new Link( $this->get( Gallery_Slider::CTA, [] ) ),
-			Gallery_Slider_Controller::GALLERY         => $this->get( Gallery_Slider::GALLERY, [] ),
+			Gallery_Slider_Controller::GALLERY         => Gallery_Collection::create( $this->get( Gallery_Slider::GALLERY, [] ) ),
 			Gallery_Slider_Controller::IMAGE_RATIO     => $this->get( Gallery_Slider::IMAGE_RATIO, Gallery_Slider::FIXED ),
 			Gallery_Slider_Controller::CAPTION_DISPLAY => $this->get( Gallery_Slider::CAPTION_DISPLAY, Gallery_Slider::CAPTION_DISPLAY_SHOW ),
 		];
