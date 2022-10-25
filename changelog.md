@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.10
+* Removed: Yoast hook that was removing the schema to be output.
+* Updated: Switched to an mT-owned version of a11y-dialog w/ misc bug fixes and update body lock/unlock scripts to address CSS-defined `scroll-behavior: scroll`. 
+* Fixed: wordpress-stubs.patch failing to patch on php-stubs/wordpress-stubs v6.0.2 (again)
+* Updated: WordPres core to v6.0.3
+* Updated: Plugins Gravity Forms v2.6.7, Limit Login Attempts Reloaded: v2.25.8, Yoast SEO: v19.8
+* Updated: WordPress to 6.0.2, plugins to their latest version.
+* Fixed: Wrong array shape in Customizer_Settings.php.
+* Fixed: Notices being throw when opening the WordPress customizer.
+* Fixed: wordpress-stubs.patch failing to patch on php-stubs/wordpress-stubs v6.0.2
+* Fixed: Bug in Term Sorter Plugin - argument expected to be array.
+
 ## 2022.09
 * Added: Lefthook pre-commit merge marker detection, once pulled run `nvm use` and then `lefthook install -a` to update.
 * Fixed: Single Controller `get_author_id()` now returns an integer type instead of a string.
@@ -9,6 +21,7 @@ All notable changes to this project will be documented in this file.
 * Added: Git ignore [lefthook-local.yml](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md#local-config) so developers can customize the version of PHP calling the script if required.
 * Fixed: Regression from removing default typing of tab panel classes property
 * Added: Gravity Forms style support the consent field.
+* Removed: The Configure SMTP plugin
 
 ## 2022.08
 * Updated: Swiper to version `8.3.2`.
