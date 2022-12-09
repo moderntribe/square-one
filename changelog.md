@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2022.12
+* Added: .rsyncignore file and updated deployments to use it to decide which file type should never get synced and deployed to web servers.
+
 ## 2022.10
 * Removed: Yoast hook that was removing the schema to be output.
 * Updated: Switched to an mT-owned version of a11y-dialog w/ misc bug fixes and update body lock/unlock scripts to address CSS-defined `scroll-behavior: scroll`. 
