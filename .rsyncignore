@@ -1,0 +1,100 @@
+# Files and folders that should never be deployed to a web hosting environment via rsync.
+# This file is run via GitHub workflows, see the .github/workflows folder.
+
+# This file and any include files.
+.rsyncignore
+.rsyncinclude
+
+# Large/disallowed file types on WP Engine
+*.hqx
+*.bin
+*.exe
+*.dll
+*.deb
+*.dmg
+*.iso
+*.img
+*.msi
+*.msp
+*.msm
+*.mid
+*.midi
+*.kar
+*.mp3
+*.ogg
+*.m4a
+*.ra
+*.3gpp
+*.3gp
+*.mp4
+*.mpeg
+*.mpg
+*.mov
+*.webm
+*.flv
+*.m4v
+*.mng
+*.asx
+*.asf
+*.wmv
+*.avi
+
+# IDE configuration
+.editorconfig
+.idea/
+.vscode/
+
+# Build tools
+.babelrc
+.eslintignore
+.eslintrc
+.nvmrc
+.stylelintignore
+.stylelintrc.json
+Gruntfile.js
+babel.config.js
+bower.json
+gulpfile.js
+jest.config.json
+jest.setup.js
+package.json
+yarn.lock
+
+# Frontend Source files
+*.pcss
+*.scss
+
+# Quality tools
+codecov.yml
+phpcs.xml
+phpcs.xml.dist
+phpstan-baseline.neon
+phpstan.neon
+phpstan.neon.dist
+psalm.xml
+
+# Git
+*.gitignore
+*.gitmodules
+*.git
+*.gitkeep
+*.github
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.bz2
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.tgz
+
+# Log files and databases
+*.log
+*.sql
+
+# Apache
+.htaccess
