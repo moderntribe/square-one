@@ -108,7 +108,7 @@ jobs:
       # Rsync plugin and theme files
       - name: Sync Build WP-CONTENT folder to Deploy directory
         run: |
-          rsync -rpv --delete --exclude-from="${{env.BUILD_FOLDER}}/.rsyncignore" ${{env.BUILD_FOLDER}}/wp-content ${{env.DEPLOY_FOLDER}} \
+          rsync -rpv --delete --exclude-from="${{env.BUILD_FOLDER}}/.deploy-ignore" ${{env.BUILD_FOLDER}}/wp-content ${{env.DEPLOY_FOLDER}} \
             --exclude=dev \
             --exclude=dev_components \
             --exclude=docs \

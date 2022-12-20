@@ -2,8 +2,8 @@
 # This file is run via GitHub workflows, see the .github/workflows folder.
 
 # This file and any include files.
-.rsyncignore
-.rsyncinclude
+.deploy-ignore
+.deploy-include
 
 # Large/disallowed file types on WP Engine
 *.hqx
