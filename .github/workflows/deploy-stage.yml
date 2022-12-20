@@ -94,7 +94,7 @@ jobs:
           git config user.email "devops@tri.be"
           git config user.name "devops"
 
-      # Rsync wordpress
+      # Rsync WordPress
       - name: Sync Build WP folder to Deploy directory
         run: |
           rsync -rpv --delete ${{env.BUILD_FOLDER}}/wp/ ${{env.DEPLOY_FOLDER}} \
@@ -108,14 +108,7 @@ jobs:
       # Rsync plugin and theme files
       - name: Sync Build WP-CONTENT folder to Deploy directory
         run: |
-          rsync -rpv --delete ${{env.BUILD_FOLDER}}/wp-content ${{env.DEPLOY_FOLDER}} \
-            --exclude=.git \
-            --exclude=.gitmodules \
-            --exclude=.gitignore \
-            --exclude=.htaccess \
-            --exclude=.babelrc \
-            --exclude=.editorconfig \
-            --exclude=.eslintrc \
+          rsync -rpv --delete --exclude-from="${{env.BUILD_FOLDER}}/.deploy-ignore" ${{env.BUILD_FOLDER}}/wp-content ${{env.DEPLOY_FOLDER}} \
             --exclude=dev \
             --exclude=dev_components \
             --exclude=docs \
