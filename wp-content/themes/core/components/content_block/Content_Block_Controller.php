@@ -112,7 +112,10 @@ class Content_Block_Controller extends Abstract_Controller {
 			return null;
 		}
 
-		$this->content[ Text_Controller::TAG ]       = 'div';
+		if ( empty( $this->content[ Text_Controller::TAG ] ) ) {
+			$this->content[ Text_Controller::TAG ] = 'div';
+		}
+
 		$this->content[ Text_Controller::CLASSES ][] = 'c-content-block__content';
 
 		return $this->content;
