@@ -213,14 +213,14 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 			 * @return array<array{post_loop_field_configs: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config[]}>
 			 */
 			public function get_middleware_params(): array {
-				$config              = new Post_Loop_Field_Config();
-				$config->field_name  = self::CARD_LIST;
-				$config->group       = $this->get_section_key( self::SECTION_CARDS );
-				$config->limit_min   = 2;
-				$config->limit_max   = 10;
+				$config             = new Post_Loop_Field_Config();
+				$config->field_name = self::CARD_LIST;
+				$config->group      = $this->get_section_key( self::SECTION_CARDS );
+				$config->limit_min  = 2;
+				$config->limit_max  = 10;
 
 				$config->show_override_options = false;
-				$config->show_taxonomy_filter   = false;
+				$config->show_taxonomy_filter  = false;
 
 				return [
 					[
@@ -249,13 +249,14 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 		$attributes      = $processed_block->get_field_group()->get_attributes();
 
 		$repeater_sub_fields = $attributes['fields'][1]['sub_fields'];
-		$field_names = array_column( $repeater_sub_fields, 'name', 'name' );
+		$field_names		 = array_column( $repeater_sub_fields, 'name', 'name' );
 		$this->assertArrayNotHasKey( 'taxonomies', $field_names );
 
 		// We don't have other fields rather than post selection
 		$manual_repeater_sub_fields = $repeater_sub_fields[2]['sub_fields'];
-		$field_names = array_column( $manual_repeater_sub_fields, 'name', 'name' );
-		$this->assertArrayNotHasKey( Post_Loop_Field_Middleware::MANUAL_TOGGLE, $field_names );
+		$field_names 				= array_column( $manual_repeater_sub_fields, 'name', 'name' );
+		$this->assertCount( 1, $field_names );
+		$this->assertArrayHasKey( Post_Loop_Field_Middleware::MANUAL_POST, $field_names );
 	}
 
 	public function test_it_has_taxonomy_filtering() {
@@ -285,11 +286,11 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 			 * @return array<array{post_loop_field_configs: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config[]}>
 			 */
 			public function get_middleware_params(): array {
-				$config              = new Post_Loop_Field_Config();
-				$config->field_name  = self::CARD_LIST;
-				$config->group       = $this->get_section_key( self::SECTION_CARDS );
-				$config->limit_min   = 2;
-				$config->limit_max   = 10;
+				$config             = new Post_Loop_Field_Config();
+				$config->field_name = self::CARD_LIST;
+				$config->group      = $this->get_section_key( self::SECTION_CARDS );
+				$config->limit_min  = 2;
+				$config->limit_max  = 10;
 
 				return [
 					[
