@@ -128,7 +128,11 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 
 		$fields[] = $this->get_query_type_field();
 		$fields[] = $this->get_query_group();
-		$fields[] = $this->get_taxonomy_filter_group();
+
+		if ( $this->config->show_taxonomy_filter ) {
+			$fields[] = $this->get_taxonomy_filter_group();
+		}
+
 		$fields[] = $this->get_manual_query_repeater();
 
 		return $fields;
@@ -322,119 +326,120 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'post_type'  => $this->config->post_types_manual,
 		] );
 
-		$fields[] = new Field( $this->build_field_key( self::MANUAL_TOGGLE ), [
-			'label' => esc_html__( 'Create or Override Content', 'tribe' ),
-			'name'  => self::MANUAL_TOGGLE,
-			'type'  => 'true_false',
-		] );
+		if ( $this->config->show_overwrite_options ) {
+			$fields[] = new Field( $this->build_field_key( self::MANUAL_TOGGLE ), [
+				'label' => esc_html__( 'Create or Override Content', 'tribe' ),
+				'name'  => self::MANUAL_TOGGLE,
+				'type'  => 'true_false',
+			] );
 
-		$fields[] = new Field( $this->build_field_key( self::MANUAL_TITLE ), [
-			'label'             => esc_html__( 'Post Title', 'tribe' ),
-			'name'              => self::MANUAL_TITLE,
-			'type'              => 'text',
-			'conditional_logic' => [
+			$fields[] = new Field( $this->build_field_key( self::MANUAL_TITLE ), [
+				'label'             => esc_html__( 'Post Title', 'tribe' ),
+				'name'              => self::MANUAL_TITLE,
+				'type'              => 'text',
+				'conditional_logic' => [
+					[
+						'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
+						'operator' => '==',
+						'value'    => '1',
+					],
+				],
+			] );
+
+			$fields[] = new Field( $this->build_field_key( self::MANUAL_POST_DATE ), [
+				'label'             => esc_html__( 'Post Date', 'tribe' ),
+				'name'              => self::MANUAL_POST_DATE,
+				'type'              => 'date_time_picker',
+				'instructions'      => esc_html__( 'Set or override the post date.', 'tribe' ),
+				'display_format'    => 'F j, Y g:i a',
+				'return_format'     => 'Y-m-d H:i:s',
+				'first_day'         => true,
+				'conditional_logic' => [
+					[
+						'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
+						'operator' => '==',
+						'value'    => '1',
+					],
+				],
+			] );
+
+			$fields[] = new Field( $this->build_field_key( self::MANUAL_POST_AUTHOR ), [
+				'label'             => esc_html__( 'Post Author', 'tribe' ),
+				'name'              => self::MANUAL_POST_AUTHOR,
+				'type'              => 'user',
+				'instructions'      => esc_html__( 'Set or override the post author.', 'tribe' ),
+				'required'          => false,
+				'role'              => [], // an array of roles to filter by
+				'allow_null'        => true,
+				'multiple'          => false,
+				'return_format'     => 'id', // array, object, id
+				'conditional_logic' => [
+					[
+						'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
+						'operator' => '==',
+						'value'    => '1',
+					],
+				],
+			] );
+
+			$fields[] = new Field( $this->build_field_key( self::MANUAL_POST_CATEGORY ), [
+				'label'             => esc_html__( 'Post Category', 'tribe' ),
+				'name'              => self::MANUAL_POST_CATEGORY,
+				'type'              => 'taxonomy',
+				'instructions'      => esc_html__( 'Set or override the primary post category.', 'tribe' ),
+				'taxonomy'          => Category::NAME,
+				'field_type'        => 'select',
+				'add_term'          => false,
+				'save_terms'        => false,
+				'load_terms'        => false,
+				'multiple'          => false,
+				'allow_null'        => true,
+				'return_format'     => 'id',
+				'conditional_logic' => [
+					[
+						'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
+						'operator' => '==',
+						'value'    => '1',
+					],
+				],
+			] );
+
+			$fields[] = new Field( $this->build_field_key( self::MANUAL_EXCERPT ), [
+				'label'             => esc_html__( 'Post Excerpt', 'tribe' ),
+				'name'              => self::MANUAL_EXCERPT,
+				'type'              => 'textarea',
+				'conditional_logic' => [
+					[
+						'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
+						'operator' => '==',
+						'value'    => '1',
+					],
+				],
+			] );
+
+			$fields[] = $this->get_cta_field( $this->config->field_name, [
 				[
 					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
 					'operator' => '==',
 					'value'    => '1',
 				],
-			],
-		] );
+			] );
 
-		$fields[] = new Field( $this->build_field_key( self::MANUAL_POST_DATE ), [
-			'label'             => esc_html__( 'Post Date', 'tribe' ),
-			'name'              => self::MANUAL_POST_DATE,
-			'type'              => 'date_time_picker',
-			'instructions'      => esc_html__( 'Set or override the post date.', 'tribe' ),
-			'display_format'    => 'F j, Y g:i a',
-			'return_format'     => 'Y-m-d H:i:s',
-			'first_day'         => true,
-			'conditional_logic' => [
-				[
-					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
-					'operator' => '==',
-					'value'    => '1',
+			$fields[] = new Field( $this->build_field_key( self::MANUAL_IMAGE ), [
+				'label'             => esc_html__( 'Image', 'tribe' ),
+				'name'              => self::MANUAL_IMAGE,
+				'type'              => 'image',
+				'return_format'     => 'array',
+				'instructions'      => $this->config->image_instructions,
+				'conditional_logic' => [
+					[
+						'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
+						'operator' => '==',
+						'value'    => '1',
+					],
 				],
-			],
-		] );
-
-		$fields[] = new Field( $this->build_field_key( self::MANUAL_POST_AUTHOR ), [
-			'label'             => esc_html__( 'Post Author', 'tribe' ),
-			'name'              => self::MANUAL_POST_AUTHOR,
-			'type'              => 'user',
-			'instructions'      => esc_html__( 'Set or override the post author.', 'tribe' ),
-			'required'          => false,
-			'role'              => [], // an array of roles to filter by
-			'allow_null'        => true,
-			'multiple'          => false,
-			'return_format'     => 'id', // array, object, id
-			'conditional_logic' => [
-				[
-					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
-					'operator' => '==',
-					'value'    => '1',
-				],
-			],
-		] );
-
-		$fields[] = new Field( $this->build_field_key( self::MANUAL_POST_CATEGORY ), [
-			'label'             => esc_html__( 'Post Category', 'tribe' ),
-			'name'              => self::MANUAL_POST_CATEGORY,
-			'type'              => 'taxonomy',
-			'instructions'      => esc_html__( 'Set or override the primary post category.', 'tribe' ),
-			'taxonomy'          => Category::NAME,
-			'field_type'        => 'select',
-			'add_term'          => false,
-			'save_terms'        => false,
-			'load_terms'        => false,
-			'multiple'          => false,
-			'allow_null'        => true,
-			'return_format'     => 'id',
-			'conditional_logic' => [
-				[
-					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
-					'operator' => '==',
-					'value'    => '1',
-				],
-			],
-		] );
-
-		$fields[] = new Field( $this->build_field_key( self::MANUAL_EXCERPT ), [
-			'label'             => esc_html__( 'Post Excerpt', 'tribe' ),
-			'name'              => self::MANUAL_EXCERPT,
-			'type'              => 'textarea',
-			'conditional_logic' => [
-				[
-					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
-					'operator' => '==',
-					'value'    => '1',
-				],
-			],
-		] );
-
-		$fields[] = $this->get_cta_field( $this->config->field_name, [
-			[
-				'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
-				'operator' => '==',
-				'value'    => '1',
-			],
-		] );
-
-		$fields[] = new Field( $this->build_field_key( self::MANUAL_IMAGE ), [
-			'label'             => esc_html__( 'Image', 'tribe' ),
-			'name'              => self::MANUAL_IMAGE,
-			'type'              => 'image',
-			'return_format'     => 'array',
-			'instructions'      => $this->config->image_instructions,
-			'conditional_logic' => [
-				[
-					'field'    => $this->get_key_with_prefix( $this->build_field_key( self::MANUAL_TOGGLE ) ),
-					'operator' => '==',
-					'value'    => '1',
-				],
-			],
-		] );
-
+			] );
+		}
 		return $this->add_fields_to_parent( $repeater, $fields );
 	}
 

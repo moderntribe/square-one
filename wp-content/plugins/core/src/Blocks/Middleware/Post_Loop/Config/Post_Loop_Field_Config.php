@@ -81,6 +81,16 @@ class Post_Loop_Field_Config extends Field_Model {
 	];
 
 	/**
+	 * Should show 'Filter By Taxonomy Terms' group
+	 */
+	public bool $show_taxonomy_filter = true;
+
+	/**
+	 * Should show Override fields on Manual query
+	 */
+	public bool $show_overwrite_options = true;
+
+	/**
 	 * The minimum number of posts a user can limit the display to in
 	 * dynamic query or manual post creation modes.
 	 */
