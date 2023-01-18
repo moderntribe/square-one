@@ -81,7 +81,7 @@ class Post_Loop_Field_Config extends Field_Model {
 	];
 
 	/**
-	 * Should show 'Filter By Taxonomy Terms' group
+	 * Show 'Filter By Taxonomy Terms' group.
 	 */
 	public bool $show_taxonomy_filter = true;
 
