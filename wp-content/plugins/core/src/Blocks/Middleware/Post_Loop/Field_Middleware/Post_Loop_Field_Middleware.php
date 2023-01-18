@@ -440,6 +440,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 				],
 			] );
 		}
+
 		return $this->add_fields_to_parent( $repeater, $fields );
 	}
 
