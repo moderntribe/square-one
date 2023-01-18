@@ -86,7 +86,7 @@ class Post_Loop_Field_Config extends Field_Model {
 	public bool $show_taxonomy_filter = true;
 
 	/**
-	 * Should show Override fields on Manual query
+	 * Show Override fields on Manual query.
 	 */
 	public bool $show_override_options = true;
 
