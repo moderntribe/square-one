@@ -88,7 +88,7 @@ class Post_Loop_Field_Config extends Field_Model {
 	/**
 	 * Should show Override fields on Manual query
 	 */
-	public bool $show_overwrite_options = true;
+	public bool $show_override_options = true;
 
 	/**
 	 * The minimum number of posts a user can limit the display to in

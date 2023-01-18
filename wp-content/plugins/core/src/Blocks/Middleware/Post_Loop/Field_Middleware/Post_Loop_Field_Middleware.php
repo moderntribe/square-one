@@ -326,7 +326,7 @@ class Post_Loop_Field_Middleware extends Abstract_Field_Middleware implements Ct
 			'post_type'  => $this->config->post_types_manual,
 		] );
 
-		if ( $this->config->show_overwrite_options ) {
+		if ( $this->config->show_override_options ) {
 			$fields[] = new Field( $this->build_field_key( self::MANUAL_TOGGLE ), [
 				'label' => esc_html__( 'Create or Override Content', 'tribe' ),
 				'name'  => self::MANUAL_TOGGLE,

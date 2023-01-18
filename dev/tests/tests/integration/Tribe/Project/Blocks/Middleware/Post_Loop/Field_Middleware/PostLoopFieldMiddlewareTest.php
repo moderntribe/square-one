@@ -219,7 +219,7 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 				$config->limit_min   = 2;
 				$config->limit_max   = 10;
 
-				$config->show_overwrite_options = false;
+				$config->show_override_options = false;
 				$config->show_taxonomy_filter   = false;
 
 				return [
