@@ -240,21 +240,21 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 		] ) );
 
 		$pipeline = $this->container->make( Pipeline::class )
-			->via( 'add_fields' )
-			->through( [
-				new Post_Loop_Field_Middleware( $block_field_guard ),
-			] );
+		                            ->via( 'add_fields' )
+		                            ->through( [
+			                            new Post_Loop_Field_Middleware( $block_field_guard ),
+		                            ] );
 
 		$processed_block = ( new Add_Fields_Pipeline( $pipeline ) )->process( $block, $block->get_middleware_params() );
 		$attributes      = $processed_block->get_field_group()->get_attributes();
 
 		$repeater_sub_fields = $attributes['fields'][1]['sub_fields'];
-		$field_names		 = array_column( $repeater_sub_fields, 'name', 'name' );
+		$field_names         = array_column( $repeater_sub_fields, 'name', 'name' );
 		$this->assertArrayNotHasKey( 'taxonomies', $field_names );
 
 		// We don't have other fields rather than post selection
 		$manual_repeater_sub_fields = $repeater_sub_fields[2]['sub_fields'];
-		$field_names 				= array_column( $manual_repeater_sub_fields, 'name', 'name' );
+		$field_names                = array_column( $manual_repeater_sub_fields, 'name', 'name' );
 		$this->assertCount( 1, $field_names );
 		$this->assertArrayHasKey( Post_Loop_Field_Middleware::MANUAL_POST, $field_names );
 	}
@@ -310,16 +310,16 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 		] ) );
 
 		$pipeline = $this->container->make( Pipeline::class )
-			->via( 'add_fields' )
-			->through( [
-				new Post_Loop_Field_Middleware( $block_field_guard ),
-			] );
+		                            ->via( 'add_fields' )
+		                            ->through( [
+			                            new Post_Loop_Field_Middleware( $block_field_guard ),
+		                            ] );
 
 		$processed_block = ( new Add_Fields_Pipeline( $pipeline ) )->process( $block, $block->get_middleware_params() );
 		$attributes      = $processed_block->get_field_group()->get_attributes();
 
 		$repeater_sub_fields = $attributes['fields'][1]['sub_fields'];
-		$field_names = array_column( $repeater_sub_fields, 'name', 'name' );
+		$field_names         = array_column( $repeater_sub_fields, 'name', 'name' );
 		$this->assertArrayHasKey( 'taxonomies', $field_names );
 	}
 
