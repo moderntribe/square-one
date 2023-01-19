@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2023.01
+* Added: 2 parameters are added to the Post_Loop_Field_Config class. `show_taxonomy_filter` - allows hiding taxonomy filtering fields. `show_override_option` - allow hiding Override fields group for manual query
+
 ## 2022.12
 * Added: .deploy-ignore file and updated deployments to use it to decide which file type should never get synced and deployed to web servers.
 
