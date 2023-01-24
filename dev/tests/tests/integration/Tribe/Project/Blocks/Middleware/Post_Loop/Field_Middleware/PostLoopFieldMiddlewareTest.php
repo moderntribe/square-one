@@ -186,4 +186,141 @@ final class PostLoopFieldMiddlewareTest extends Test_Case {
 		$this->assertArrayNotHasKey( Post_Loop_Field_Middleware::MANUAL_EXCERPT, $field_names );
 	}
 
+	public function test_it_does_not_have_taxonomy_filtering_manual_override() {
+		$block = new class extends Block_Config implements Has_Middleware_Params {
+
+			use With_Field_Prefix;
+
+			public const NAME = 'test_block';
+
+			public const SECTION_CARDS = 's-cards';
+			public const CARD_LIST     = 'card_list';
+
+			public function add_block() {
+				$this->set_block( new Block( self::NAME, [
+					'title' => esc_html__( 'A Test Block', 'tribe' ),
+				] ) );
+			}
+
+			public function add_fields() {
+				// Populated via Block Middleware
+				$this->add_section( new Field_Section( self::SECTION_CARDS, esc_html__( 'Cards', 'tribe' ), 'accordion' ) );
+			}
+
+			/**
+			 * Config the query post loop field for middleware.
+			 *
+			 * @return array<array{post_loop_field_configs: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config[]}>
+			 */
+			public function get_middleware_params(): array {
+				$config             = new Post_Loop_Field_Config();
+				$config->field_name = self::CARD_LIST;
+				$config->group      = $this->get_section_key( self::SECTION_CARDS );
+				$config->limit_min  = 2;
+				$config->limit_max  = 10;
+
+				$config->show_override_options = false;
+				$config->show_taxonomy_filter  = false;
+
+				return [
+					[
+						Post_Loop_Field_Middleware::MIDDLEWARE_KEY => [
+							$config,
+						],
+					],
+				];
+			}
+
+		};
+
+		$block_field_guard = new Block_Field_Middleware_Guard( new Map( [
+			get_class( $block ) => [
+				Post_Loop_Field_Middleware::class,
+			],
+		] ) );
+
+		$pipeline = $this->container->make( Pipeline::class )
+		                            ->via( 'add_fields' )
+		                            ->through( [
+			                            new Post_Loop_Field_Middleware( $block_field_guard ),
+		                            ] );
+
+		$processed_block = ( new Add_Fields_Pipeline( $pipeline ) )->process( $block, $block->get_middleware_params() );
+		$attributes      = $processed_block->get_field_group()->get_attributes();
+
+		$repeater_sub_fields = $attributes['fields'][1]['sub_fields'];
+		$field_names         = array_column( $repeater_sub_fields, 'name', 'name' );
+		$this->assertArrayNotHasKey( 'taxonomies', $field_names );
+
+		// We don't have other fields rather than post selection
+		$manual_repeater_sub_fields = $repeater_sub_fields[2]['sub_fields'];
+		$field_names                = array_column( $manual_repeater_sub_fields, 'name', 'name' );
+		$this->assertCount( 1, $field_names );
+		$this->assertArrayHasKey( Post_Loop_Field_Middleware::MANUAL_POST, $field_names );
+	}
+
+	public function test_it_has_taxonomy_filtering() {
+		$block = new class extends Block_Config implements Has_Middleware_Params {
+
+			use With_Field_Prefix;
+
+			public const NAME = 'test_block';
+
+			public const SECTION_CARDS = 's-cards';
+			public const CARD_LIST     = 'card_list';
+
+			public function add_block() {
+				$this->set_block( new Block( self::NAME, [
+					'title' => esc_html__( 'A Test Block', 'tribe' ),
+				] ) );
+			}
+
+			public function add_fields() {
+				// Populated via Block Middleware
+				$this->add_section( new Field_Section( self::SECTION_CARDS, esc_html__( 'Cards', 'tribe' ), 'accordion' ) );
+			}
+
+			/**
+			 * Config the query post loop field for middleware.
+			 *
+			 * @return array<array{post_loop_field_configs: \Tribe\Project\Blocks\Middleware\Post_Loop\Config\Post_Loop_Field_Config[]}>
+			 */
+			public function get_middleware_params(): array {
+				$config             = new Post_Loop_Field_Config();
+				$config->field_name = self::CARD_LIST;
+				$config->group      = $this->get_section_key( self::SECTION_CARDS );
+				$config->limit_min  = 2;
+				$config->limit_max  = 10;
+
+				return [
+					[
+						Post_Loop_Field_Middleware::MIDDLEWARE_KEY => [
+							$config,
+						],
+					],
+				];
+			}
+
+		};
+
+		$block_field_guard = new Block_Field_Middleware_Guard( new Map( [
+			get_class( $block ) => [
+				Post_Loop_Field_Middleware::class,
+			],
+		] ) );
+
+		$pipeline = $this->container->make( Pipeline::class )
+		                            ->via( 'add_fields' )
+		                            ->through( [
+			                            new Post_Loop_Field_Middleware( $block_field_guard ),
+		                            ] );
+
+		$processed_block = ( new Add_Fields_Pipeline( $pipeline ) )->process( $block, $block->get_middleware_params() );
+		$attributes      = $processed_block->get_field_group()->get_attributes();
+
+		$repeater_sub_fields = $attributes['fields'][1]['sub_fields'];
+		$field_names         = array_column( $repeater_sub_fields, 'name', 'name' );
+		$this->assertArrayHasKey( 'taxonomies', $field_names );
+	}
+
 }
