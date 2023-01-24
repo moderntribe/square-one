@@ -148,7 +148,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	}
 
 	public function get_cta(): ?Deferred_Component {
-		if ( $this->cta->link->url ) {
+		if ( empty( $this->cta->link->url ) ) {
 			return null;
 		}
 
