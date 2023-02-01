@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2023.02
+* Fixed: Removed extraneous quote in primary nav walker causing invalid `aria-controls` attribute in primary nav dropdown.
 ## 2023.01
 * Added: 2 parameters are added to the Post_Loop_Field_Config class. `show_taxonomy_filter` - allows hiding taxonomy filtering fields. `show_override_option` - allow hiding Override fields group for manual query
 * Fixed: Content Loop Block Controller method for `get_cta()` was returning early on a `true` boolean value. Should have been `false`.
