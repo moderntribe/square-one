@@ -154,7 +154,7 @@ class Walker_Nav_Menu_Primary extends Walker_Nav_Menu {
 			$atts['title']         = esc_attr__( 'Toggle Sub-Menu', 'tribe' );
 			$atts['aria-expanded'] = 'false';
 			$atts['aria-haspopup'] = 'true';
-			$atts['aria-controls'] = 'menu-item-child-' . esc_attr( $this->current_item->ID ) . '"';
+			$atts['aria-controls'] = 'menu-item-child-' . esc_attr( $this->current_item->ID );
 		}
 
 		$attributes = '';
