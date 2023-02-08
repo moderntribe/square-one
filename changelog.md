@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2023.02
+* Fixed: Fixed the TinyMCE floating toolbar fix, which would break with multiple editors active on the same page.
 * Fixed: Removed extraneous quote in primary nav walker causing invalid `aria-controls` attribute in primary nav dropdown.
 
 ## 2023.01
