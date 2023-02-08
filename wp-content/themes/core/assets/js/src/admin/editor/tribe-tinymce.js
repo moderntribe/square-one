@@ -27,7 +27,6 @@
  */
 ( function() {
 	window.tinymce.PluginManager.add( 'tribe-tinymce', function( editor ) {
-		let mceIframe;
 		let currentSelection;
 
 		editor.on( 'nodechange', function( event ) {
@@ -35,17 +34,18 @@
 		} );
 
 		editor.on( 'init', function() {
-			mceIframe = document.getElementById( editor.id + '_ifr' );
-
 			window.tinymce.$( '.mce-inline-toolbar-grp:not(.tribe-tinymce-processed)' ).each( ( index, toolbar ) => {
 				toolbar.classList.add( 'tribe-tinymce-processed' );
 
-				const observer = new MutationObserver( function( ) {
+				const observer = new MutationObserver( function() {
 					// Only respond when there is a current selection and the toolbar has
 					// the specific class condition we need to fix.
 					if ( ! currentSelection || ! toolbar.classList.contains( 'mce-arrow-left' ) ) {
 						return;
 					}
+
+					// Get the current editor Iframe.
+					const mceIframe = document.getElementById( window.wpActiveEditor + '_ifr' );
 
 					// We are essentially overriding the reposition() function in
 					// wp-includes/js/tinymce/plugins/wordpress/plugin.js to prevent
