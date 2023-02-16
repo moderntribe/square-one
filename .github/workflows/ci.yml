@@ -29,7 +29,7 @@ jobs:
       - name: Set up PHP, with composer and extensions
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
         with:
-          php_version: '8.0'
+          php-version: '8.0'
           coverage: none
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
