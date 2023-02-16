@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 ## 2023.02
+* Fixed: The `ci.yml` GitHub workflow will now use the properly configured PHP version. It will also only change the composer cached based on the root composer.lock file.
+* Fixed: The `deploy-stage.yml` GitHub workflow will now properly deploy using PHP8.0 instead of PHP7.4
+* Updated: All GitHub workflows to remove [deprecated set-output](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/).
+* Updated: Use `ramsey/composer-install` action where possible in GitHub workflows, which handles caching out of the box.
+* Updated: Use the latest version of all 3rd party GitHub actions.
+* Updated: composer dependencies.
 * Fixed: Fixed the TinyMCE floating toolbar fix, which would break with multiple editors active on the same page.
 * Fixed: Removed extraneous quote in primary nav walker causing invalid `aria-controls` attribute in primary nav dropdown.
 
