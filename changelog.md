@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 * Updated: Use `ramsey/composer-install` action where possible in GitHub workflows, which handles caching out of the box.
 * Updated: Use the latest version of all 3rd party GitHub actions.
 * Updated: composer dependencies.
+* Updated: phpstan will no longer user the GitHub error formatting in workflows because it doesn't show a file or line where an error occurred.
 * Fixed: Fixed the TinyMCE floating toolbar fix, which would break with multiple editors active on the same page.
 * Fixed: Removed extraneous quote in primary nav walker causing invalid `aria-controls` attribute in primary nav dropdown.
 
