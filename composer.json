@@ -18,7 +18,8 @@
       "ffraenz/private-composer-installer": true,
       "johnpbloch/wordpress-core-installer": true,
       "cweagans/composer-patches": true,
-      "phpstan/extension-installer": true
+      "phpstan/extension-installer": true,
+      "php-http/discovery": true
     }
   },
   "description": "Modern Tribe's Square One WordPress setup",
