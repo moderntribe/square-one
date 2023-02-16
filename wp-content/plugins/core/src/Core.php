@@ -42,7 +42,7 @@ class Core {
 	/**
 	 * @var string[] Names of classes implementing Definer_Interface.
 	 */
-	private array   $definers = [
+	private array $definers = [
 		Block_Middleware_Definer::class,
 		Blocks_Definer::class,
 		CLI_Definer::class,
