@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2023.02
+* Updated: Browserlist versions to latest.
 * Fixed: The `ci.yml` GitHub workflow will now use the properly configured PHP version. It will also only change the composer cached based on the root composer.lock file.
 * Fixed: The `deploy-stage.yml` GitHub workflow will now properly deploy using PHP8.0 instead of PHP7.4
 * Updated: All GitHub workflows to remove [deprecated set-output](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/).
