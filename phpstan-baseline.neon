@@ -6,11 +6,6 @@ parameters:
 			path: wp-content/plugins/core/src/Assets/Theme/Scripts.php
 
 		-
-			message: "#^Parameter \\#2 \\$block_style_name of function unregister_block_style expects string, array\\<string\\> given\\.$#"
-			count: 1
-			path: wp-content/plugins/core/src/Blocks/Block_Style_Override.php
-
-		-
 			message: "#^Parameter \\#3 \\$deps of function wp_enqueue_style expects array\\<string\\>, false given\\.$#"
 			count: 1
 			path: wp-content/plugins/core/src/Integrations/Gravity_Forms/Form_Styles.php
@@ -21,59 +16,9 @@ parameters:
 			path: wp-content/plugins/core/src/Theme/Config/Web_Fonts.php
 
 		-
-			message: "#^Call to function is_array\\(\\) with string\\|null will always evaluate to false\\.$#"
-			count: 1
-			path: wp-content/plugins/core/src/Theme/Media/Image_Wrap.php
-
-		-
-			message: "#^Call to function array_key_exists\\(\\) with 'g\\-cta' and string will always evaluate to false\\.$#"
-			count: 1
-			path: wp-content/themes/core/components/blocks/buttons/Buttons_Block_Controller.php
-
-		-
-			message: "#^Parameter \\#2 \\$search of function array_key_exists expects array, string given\\.$#"
-			count: 1
-			path: wp-content/themes/core/components/blocks/buttons/Buttons_Block_Controller.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between 0 and 0 will always evaluate to true\\.$#"
-			count: 1
-			path: wp-content/themes/core/components/blocks/buttons/Buttons_Block_Controller.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: wp-content/themes/core/components/blocks/buttons/Buttons_Block_Controller.php
-
-		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 1
-			path: wp-content/themes/core/components/blocks/content_loop/Content_Loop_Controller.php
-
-		-
 			message: "#^Property WP_Post\\:\\:\\$post_excerpt \\(string\\) on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: wp-content/themes/core/components/blocks/gallery_grid/Gallery_Grid_Controller.php
-
-		-
-			message: "#^Property WP_Post\\:\\:\\$post_excerpt \\(string\\) on left side of \\?\\? is not nullable\\.$#"
-			count: 1
-			path: wp-content/themes/core/components/blocks/gallery_slider/Gallery_Slider_Controller.php
-
-		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 1
-			path: wp-content/themes/core/components/blocks/icon_grid/Icon_Grid_Controller.php
-
-		-
-			message: "#^Result of && is always true\\.$#"
-			count: 1
-			path: wp-content/themes/core/components/header/subheader/subheader-single.php
-
-		-
-			message: "#^Strict comparison using \\!\\=\\= between string and null will always evaluate to true\\.$#"
-			count: 2
-			path: wp-content/themes/core/components/header/subheader/subheader-single.php
 
 		-
 			message: "#^Parameter \\#1 \\$text of function esc_attr expects string, \\(float\\|int\\) given\\.$#"
@@ -97,26 +42,10 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$default of method Tribe\\\\Libs\\\\ACF\\\\ACF_Settings\\:\\:get_setting\\(\\) expects null, array given\\.$#"
-			count: 2
+			count: 1
 			path: wp-content/themes/core/routes/index/Index_Controller.php
 
 		-
 			message: "#^Parameter \\#2 \\$default of method Tribe\\\\Libs\\\\ACF\\\\ACF_Settings\\:\\:get_setting\\(\\) expects null, string given\\.$#"
 			count: 2
 			path: wp-content/themes/core/routes/index/Index_Controller.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: wp-content/themes/core/routes/search/search.php
-
-		-
-			message: "#^While loop condition is always true\\.$#"
-			count: 1
-			path: wp-content/themes/core/routes/search/search.php
-
-		-
-			message: "#^Parameter \\#2 \\$user_id of function get_the_author_meta expects int\\|false, string given\\.$#"
-			count: 2
-			path: wp-content/themes/core/routes/single/single.php
-
