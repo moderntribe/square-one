@@ -59,7 +59,7 @@ class Styles {
 	 * @action admin_enqueue_scripts
 	 */
 	public function remove_editor_style_reset(): void {
-		if ( ! isset( wp_styles()->registered['wp-edit-blocks']->deps ) ) {
+		if ( false === wp_styles()->query( 'wp-edit-blocks' ) ) {
 			return;
 		}
 
