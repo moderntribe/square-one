@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2023.03
+* Fixed: Reverted browserlist "not dead" key.
+
 ## 2023.02
 * Updated: Browserlist versions to latest.
 * Fixed: The `ci.yml` GitHub workflow will now use the properly configured PHP version. It will also only change the composer cached based on the root composer.lock file.
