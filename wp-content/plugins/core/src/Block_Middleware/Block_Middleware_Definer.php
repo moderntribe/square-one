@@ -50,8 +50,6 @@ class Block_Middleware_Definer implements Definer_Interface {
 	 * A block can also define specific middleware
 	 * as an array.
 	 *
-	 * @phpstan-ignore-next-line
-	 *
 	 * @link https://github.com/phpstan/phpstan/issues/7273 (phpstan bug)
 	 *
 	 * @var array<class-string, bool|\Tribe\Project\Block_Middleware\Contracts\Middleware[]>
