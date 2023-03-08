@@ -3,6 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 # 2023.03
+* Updated: PHPStan Baseline Cleanup.
 * Fixed: Reverted browserlist "not dead" key.
 
 ## 2023.02
