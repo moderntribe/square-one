@@ -1,4 +1,4 @@
-import { getBlockTypes, unregisterBlockType } from '@wordpress/blocks';
+import { getBlockTypes, unregisterBlockType, unregisterBlockVariation } from '@wordpress/blocks';
 import { BLOCK_DENYLIST } from '../config/wp-settings';
 
 /**
@@ -10,14 +10,17 @@ import { BLOCK_DENYLIST } from '../config/wp-settings';
 const removeDenyListedBlocks = () => {
 	const registeredBlockTypes = getBlockTypes().map( block => block.name );
 	const blocksToUnregister = BLOCK_DENYLIST.filter( blockName => registeredBlockTypes.includes( blockName ) );
+	const embedVariationToBlock = BLOCK_DENYLIST.filter( blockName => blockName.includes( 'embed' ) );
 
-	if ( ! blocksToUnregister.length ) {
+	if ( ! blocksToUnregister.length && ! embedVariationToBlock.length ) {
 		return;
 	}
 
 	blocksToUnregister.forEach( type => unregisterBlockType( type ) );
+	embedVariationToBlock.forEach( variation => unregisterBlockVariation( 'core/embed', variation.replace( 'embed/', '' ) ) );
 
 	console.info( 'SquareOne Admin: Unregistered these blocks from Gutenberg: ', blocksToUnregister );
+	console.info( 'SquareOne Admin: Unregistered these embed variations from Gutenberg: ', embedVariationToBlock );
 };
 
 /**
