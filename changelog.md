@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2023.05
+* Fixed: docker-compose.yml syntax errors when using docker-compose v2.17.x. See https://github.com/docker/compose/issues/10411
+
 # 2023.03
 * Updated: PHPStan Baseline Cleanup.
 * Fixed: Reverted browserlist "not dead" key.
