@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2023.08
+* Updated: The minimum composer PHP version was updated to `>=7.4` to support PHP 8.1 and 8.2.
+* Updated: WordPress to 6.3.1 and all plugins to their latest versions.
+* Fixed: Deprecated messages in memcached-object-cache.php in PHP 8.2.
+
 # 2023.05
 * Fixed: docker-compose.yml syntax errors when using docker-compose v2.17.x. See https://github.com/docker/compose/issues/10411
 
