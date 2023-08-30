@@ -3,7 +3,7 @@
  * @description JavaScript that drives Dialog
  */
 
-import A11yDialog from 'mt-a11y-dialog';
+import A11yDialog from '@moderntribe/a11y-dialog';
 import * as tools from 'utils/tools';
 import { trigger } from 'utils/events';
 

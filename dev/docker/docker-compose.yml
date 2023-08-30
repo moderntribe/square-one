@@ -1,4 +1,4 @@
-version: "3.4"
+version: '3.9'
 
 x-networks: &proxynetwork
   networks:
@@ -15,7 +15,6 @@ x-nginx: &nginx
     - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     - ./nginx/fastcgi.conf:/etc/nginx/fastcgi_params
 
-
 x-memcached: &memcached
   image: memcached:alpine
 
@@ -27,7 +26,7 @@ x-chrome: &chrome
     - 4444
 
 x-php: &php
-  image: moderntribe/squareone-php:74-3.0
+  image: moderntribe/squareone-php:80-2.0
   working_dir: /application
   user: "${SQ1_UID:-1000}:${SQ1_GID:-1000}"
   volumes:
@@ -56,19 +55,15 @@ x-php: &php
 services:
 
   memcached:
-    <<: *memcached
-    <<: *proxynetwork
+    <<: [*memcached, *proxynetwork]
 
   php-fpm:
-    <<: *php
-    <<: *proxynetwork
-    <<: *internaldns
+    <<: [*php, *proxynetwork, *internaldns]
     links:
       - memcached
 
   webserver:
-    <<: *nginx
-    <<: *proxynetwork
+    <<: [*nginx, *proxynetwork]
     links:
       - php-fpm:php
     environment:
@@ -80,13 +75,10 @@ services:
   ##################################################
 
   memcached-tests:
-    <<: *memcached
-    <<: *proxynetwork
+    <<: [*memcached, *proxynetwork]
 
   php-tests:
-    <<: *php
-    <<: *proxynetwork
-    <<: *internaldns
+    <<: [*php, *proxynetwork, *internaldns]
     links:
       - memcached-tests:memcached
       - chrome
@@ -108,17 +100,14 @@ services:
       - DISABLE_OBJECT_CACHE=true
 
   webserver-tests:
-    <<: *nginx
-    <<: *proxynetwork
+    <<: [*nginx, *proxynetwork]
     links:
       - php-tests:php
     environment:
       - VIRTUAL_HOST=square1test.tribe,*.square1test.tribe
 
   chrome:
-    <<: *chrome
-    <<: *proxynetwork
-    <<: *internaldns
+    <<: [*chrome, *proxynetwork, *internaldns]
 
 networks:
   proxy:

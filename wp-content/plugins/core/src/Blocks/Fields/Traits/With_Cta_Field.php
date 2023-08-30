@@ -12,15 +12,33 @@ use Tribe\Libs\ACF\Field_Group;
  */
 trait With_Cta_Field {
 
-	public function get_cta_field( string $block_name ): Field_Group {
-		$group = new Field_Group( $block_name . '_' . self::GROUP_CTA );
-		$group->set_attributes( [
-			'label'  => esc_html__( 'Call to Action', 'tribe' ),
-			'name'   => self::GROUP_CTA,
-			'layout' => 'block',
+	/**
+	 * Get Cta Field
+	 *
+	 * @param string $block_name The Block::NAME constant or a repeater parent.
+	 * @param array  $conditional_logic ACF conditional logic array to only appear under some condition.
+	 *
+	 * @return \Tribe\Libs\ACF\Field_Group
+	 */
+	public function get_cta_field( string $block_name, array $conditional_logic = [] ): Field_Group {
+		$group = new Field_Group( $block_name . '_' . self::GROUP_CTA, [
+			'label'             => esc_html__( 'Call to Action', 'tribe' ),
+			'name'              => self::GROUP_CTA,
+			'layout'            => 'block',
+			'conditional_logic' => $conditional_logic,
 		] );
 
-		$link = new Field( $block_name . '_' . self::LINK, [
+		foreach ( $this->get_cta_sub_fields( $block_name ) as $field ) {
+			$group->add_field( $field );
+		}
+
+		return $group;
+	}
+
+	public function get_cta_sub_fields( string $block_name ): array {
+		$fields = [];
+
+		$fields[] = new Field( $block_name . '_' . self::LINK, [
 			'label'   => esc_html__( 'Call to Action', 'tribe' ),
 			'name'    => self::LINK,
 			'type'    => 'link',
@@ -29,7 +47,7 @@ trait With_Cta_Field {
 			],
 		] );
 
-		$screen_reader = new Field( $block_name . '_' . self::ADD_ARIA_LABEL, [
+		$fields[] = new Field( $block_name . '_' . self::ADD_ARIA_LABEL, [
 			'label'   => esc_html__( 'Add Screen Reader Text', 'tribe' ),
 			'name'    => self::ADD_ARIA_LABEL,
 			'type'    => 'true_false',
@@ -39,7 +57,7 @@ trait With_Cta_Field {
 			],
 		] );
 
-		$screen_reader_label = new Field( $block_name . '_' . self::ARIA_LABEL, [
+		$fields[] = new Field( $block_name . '_' . self::ARIA_LABEL, [
 			'label'             => esc_html__( 'Screen Reader Label', 'tribe' ),
 			'instructions'      => esc_html__(
 				'A custom label for screen readers if the button\'s action or purpose isn\'t easily identifiable.',
@@ -58,11 +76,7 @@ trait With_Cta_Field {
 			],
 		] );
 
-		$group->add_field( $link );
-		$group->add_field( $screen_reader );
-		$group->add_field( $screen_reader_label );
-
-		return $group;
+		return $fields;
 	}
 
 }

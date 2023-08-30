@@ -40,7 +40,6 @@ $c = Links_Block_Controller::factory( $args );
 								Link_Controller::ADD_ARIA_LABEL => $link->cta->add_aria_label,
 								Link_Controller::ARIA_LABEL     => $link->cta->aria_label,
 								Link_Controller::CLASSES        => [ 'b-links__list-link' ],
-								Link_Controller::HEADER         => $link->link_header,
 								Link_Controller::DESCRIPTION    => $link->link_content,
 							] ); ?>
 						</li>

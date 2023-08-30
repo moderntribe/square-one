@@ -4,6 +4,7 @@ namespace Tribe\Project\Admin;
 
 use Tribe\Libs\Container\Abstract_Subscriber;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Admin\Editor\Editor_Script_Loader;
 use Tribe\Project\Admin\Editor\Editor_Styles;
 
 class Admin_Subscriber extends Abstract_Subscriber {
@@ -19,6 +20,7 @@ class Admin_Subscriber extends Abstract_Subscriber {
 	private function editor(): void {
 		$this->editor_styles();
 		$this->editor_formats();
+		$this->editor_scripts();
 	}
 
 	private function editor_styles(): void {
@@ -31,8 +33,8 @@ class Admin_Subscriber extends Abstract_Subscriber {
 		add_filter( 'tiny_mce_before_init', function ( $settings ) {
 			return $this->container->get( Editor_Styles::class )->mce_editor_body_class( (array) $settings );
 		}, 10, 1 );
-		add_action( 'admin_init', function () {
-			return $this->container->get( Editor_Styles::class )->enqueue_mce_editor_styles();
+		add_action( 'admin_init', function (): void {
+			$this->container->get( Editor_Styles::class )->enqueue_mce_editor_styles();
 		}, 10, 1 );
 	}
 
@@ -48,6 +50,12 @@ class Admin_Subscriber extends Abstract_Subscriber {
 		}, 10, 1 );
 		add_filter( 'acf/fields/wysiwyg/toolbars', function ( $toolbars ) {
 			return $this->container->get( Classic_Editor_Formats::class )->add_minimal_toolbar( (array) $toolbars );
+		}, 10, 1 );
+	}
+
+	private function editor_scripts(): void {
+		add_filter( 'mce_external_plugins', function ( $plugins ) {
+			return $this->container->get( Editor_Script_Loader::class )->add_mce_plugins( $plugins );
 		}, 10, 1 );
 	}
 

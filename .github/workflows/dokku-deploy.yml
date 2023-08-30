@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cloning repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: ${{ inputs.branch }}
@@ -64,9 +64,9 @@ jobs:
         id: define_app
         run: |
           if [[ ${{ inputs.is_review_app }} == "true" ]]; then
-            echo ::set-output name=deploy_app::${{ env.REVIEW_APP }}
+            echo "deploy_app=${{ env.REVIEW_APP }}" >> "$GITHUB_OUTPUT"
           else
-            echo ::set-output name=deploy_app::${{ inputs.app_name }}
+            echo "deploy_app=${{ inputs.app_name }}" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Deploy to ${{ steps.define_app.outputs.deploy_app }}

@@ -13,7 +13,7 @@ use Tribe\Project\Templates\Components\blocks\section_nav\Section_Nav_Block_Cont
  */
 class Section_Nav_Model extends Base_Model {
 
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Section_Nav_Block_Controller::ATTRS            => $this->get_attrs(),
 			Section_Nav_Block_Controller::CLASSES          => $this->get_classes(),

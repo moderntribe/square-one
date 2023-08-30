@@ -152,6 +152,7 @@ class Tabs_Controller extends Abstract_Controller {
 			self::LAYOUT             => self::LAYOUT_HORIZONTAL,
 			self::TABS               => new Tab_Collection(),
 			self::TAB_BUTTON_CLASSES => [],
+			self::TAB_PANEL_CLASSES  => [],
 			self::TOGGLE_CLASSES     => [],
 		];
 	}

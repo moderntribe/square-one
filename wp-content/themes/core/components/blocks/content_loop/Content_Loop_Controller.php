@@ -3,6 +3,7 @@
 namespace Tribe\Project\Templates\Components\blocks\content_loop;
 
 use Tribe\Libs\Field_Models\Models\Cta;
+use Tribe\Libs\Field_Models\Models\Link;
 use Tribe\Libs\Utils\Markup_Utils;
 use Tribe\Project\Blocks\Types\Content_Loop\Content_Loop as Content_Loop_Block;
 use Tribe\Project\Templates\Components\Abstract_Controller;
@@ -13,9 +14,12 @@ use Tribe\Project\Templates\Components\Deferred_Component;
 use Tribe\Project\Templates\Components\image\Image_Controller;
 use Tribe\Project\Templates\Components\link\Link_Controller;
 use Tribe\Project\Templates\Components\text\Text_Controller;
+use Tribe\Project\Templates\Components\Traits\Primary_Term;
 use Tribe\Project\Theme\Config\Image_Sizes;
 
 class Content_Loop_Controller extends Abstract_Controller {
+
+	use Primary_Term;
 
 	public const ATTRS             = 'attrs';
 	public const CLASSES           = 'classes';
@@ -52,9 +56,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	private Cta $cta;
 
 	/**
-	 * @var array<string, mixed>
-	 *
-	 * @see \Tribe\ACF_Post_List\Post_List_Field::format_post()
+	 * @var \Tribe\Libs\Field_Models\Models\Post_Proxy[]
 	 */
 	private array $posts;
 	private string $description;
@@ -103,103 +105,23 @@ class Content_Loop_Controller extends Abstract_Controller {
 
 	public function get_posts_card_args( string $layout = Card_Controller::STYLE_PLAIN ): array {
 		$cards = [];
+
 		foreach ( $this->posts as $post ) {
-			$link             = $post['link'];
-			$uuid             = uniqid( 'p-' );
-			$cat              = get_the_category( $post['post_id'] );
-			$card_description = [];
-
-			$image_array = [
-				Image_Controller::IMG_ID       => $post['image_id'],
-				Image_Controller::AS_BG        => true,
-				Image_Controller::CLASSES      => [ 'c-image--bg', 's-aspect-ratio-16-9' ],
-				Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE_SMALL,
-				Image_Controller::SRCSET_SIZES => [
-					Image_Sizes::SIXTEEN_NINE_SMALL,
-					Image_Sizes::SIXTEEN_NINE,
-				],
-			];
-
-			$card_cta =
-				[
-					Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
-					Link_Controller::URL     => $link['url'],
-					Link_Controller::TARGET  => $link['target'],
-					Link_Controller::CLASSES => [
-						'u-hidden',
-					],
-					Link_Controller::ATTRS   => [
-						// These attrs provide the most screen reader accessible link.
-						'id'               => $uuid . '-link',
-						'aria-labelledby'  => $uuid . '-title',
-						'aria-describedby' => $uuid . '-link',
-						// Sets this link as the card's click-within target link.
-						'data-js'          => 'target-link',
-					],
-				];
+			$uuid = uniqid( 'p-' );
+			$cat  = $this->get_primary_term( $post->ID );
 
 			// CASE: If not Inline Card Style and is the featured layout
-
-			if ( $layout !== Card_Controller::STYLE_INLINE || $this->layout !== 'layout_feature' ) {
-				$card_cta =
-					[
-						Link_Controller::CONTENT => __( 'Read More', 'tribe' ),
-						Link_Controller::URL     => $link['url'],
-						Link_Controller::TARGET  => $link['target'],
-						Link_Controller::CLASSES => [
-							'c-block__cta-link',
-							'a-cta',
-						],
-						Link_Controller::ATTRS   => [
-							// These attrs provide the most screen reader accessible link.
-							'id'               => $uuid . '-link',
-							'aria-labelledby'  => $uuid . '-title',
-							'aria-describedby' => $uuid . '-link',
-							// Sets this link as the card's click-within target link.
-							'data-js'          => 'target-link',
-						],
-					];
-
-				$card_description = [ Container_Controller::CONTENT => wpautop( $post['excerpt'] ) ];
-			}
+			$show = $layout !== Card_Controller::STYLE_INLINE || $this->layout !== 'layout_feature';
 
 			$cards[] = [
 				Card_Controller::STYLE           => $layout,
-				Card_Controller::USE_TARGET_LINK => (bool) $link['url'],
-				Card_Controller::META_PRIMARY    => defer_template_part(
-					'components/container/container',
-					null,
-					[
-						Container_Controller::CONTENT => $cat[0]->name ?? '',
-						Container_Controller::CLASSES => [ 't-tag' ],
-					],
-				),
-				Card_Controller::TITLE           => defer_template_part(
-					'components/text/text',
-					null,
-					[
-						Text_Controller::TAG     => 'h3',
-						Text_Controller::CLASSES => [ 'h5' ],
-						Text_Controller::CONTENT => $post['title'],
-						// Required for screen reader accessibility, below.
-						Text_Controller::ATTRS   => [ 'id' => $uuid . '-title' ],
-					]
-				),
-				Card_Controller::META_SECONDARY  => defer_template_part(
-					'components/container/container',
-					null,
-					[
-						Container_Controller::CONTENT => get_the_date( 'F Y', $post['post_id'] ?? 0 ),
-						Container_Controller::CLASSES => [ 'c-card__date' ],
-					],
-				),
-				Card_Controller::DESCRIPTION     => defer_template_part(
-					'components/container/container',
-					null,
-					$card_description,
-				),
-				Card_Controller::IMAGE           => defer_template_part( 'components/image/image', null, $image_array ),
-				Card_Controller::CTA             => defer_template_part( 'components/link/link', null, $card_cta ),
+				Card_Controller::USE_TARGET_LINK => (bool) $post->cta->link->url,
+				Card_Controller::META_PRIMARY    => $this->get_card_meta_primary( $cat->name ?? '' ),
+				Card_Controller::TITLE           => $this->get_card_title( $post->post_title, $uuid ),
+				Card_Controller::META_SECONDARY  => $this->get_card_meta_secondary( (string) get_the_date( 'F Y', $post->post() ) ),
+				Card_Controller::DESCRIPTION     => $show ? $this->get_card_description( $post->post_excerpt ) : null,
+				Card_Controller::IMAGE           => $this->get_card_image( $post->image->id ),
+				Card_Controller::CTA             => $this->get_card_cta( $post->cta->link, $uuid, $show ),
 			];
 		}
 
@@ -225,8 +147,12 @@ class Content_Loop_Controller extends Abstract_Controller {
 		];
 	}
 
-	public function get_cta(): Deferred_Component {
-		return defer_template_part( 'components/link/link', null, [
+	public function get_cta(): ?Deferred_Component {
+		if ( empty( $this->cta->link->url ) ) {
+			return null;
+		}
+
+		return defer_template_part( 'components/link/link', '', [
 			Link_Controller::URL            => $this->cta->link->url,
 			Link_Controller::CONTENT        => $this->cta->link->title ?: $this->cta->link->url,
 			Link_Controller::TARGET         => $this->cta->link->target,
@@ -282,7 +208,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_leadin(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
+		return defer_template_part( 'components/text/text', '', [
 			Text_Controller::CLASSES => [
 				'c-block__leadin',
 				'b-content-loop__leadin',
@@ -296,7 +222,7 @@ class Content_Loop_Controller extends Abstract_Controller {
 	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_title(): Deferred_Component {
-		return defer_template_part( 'components/text/text', null, [
+		return defer_template_part( 'components/text/text', '', [
 			Text_Controller::TAG     => 'h2',
 			Text_Controller::CLASSES => [
 				'c-block__title',
@@ -310,13 +236,115 @@ class Content_Loop_Controller extends Abstract_Controller {
 	 * @return \Tribe\Project\Templates\Components\Deferred_Component
 	 */
 	private function get_content(): Deferred_Component {
-		return defer_template_part( 'components/container/container', null, [
+		return defer_template_part( 'components/container/container', '', [
 			Container_Controller::CLASSES => [
 				'c-block__description',
 				'b-content-loop__description',
 			],
 			Container_Controller::CONTENT => $this->description,
 		] );
+	}
+
+	private function get_card_meta_primary( string $cat_name ): ?Deferred_Component {
+		if ( ! $cat_name ) {
+			return null;
+		}
+
+		return defer_template_part(
+			'components/container/container',
+			'',
+			[
+				Container_Controller::CONTENT => $cat_name,
+				Container_Controller::CLASSES => [ 't-tag' ],
+			],
+		);
+	}
+
+	private function get_card_title( string $post_title, string $uuid ): Deferred_Component {
+		return defer_template_part(
+			'components/text/text',
+			'',
+			[
+				Text_Controller::TAG     => 'h3',
+				Text_Controller::CLASSES => [ 'h5' ],
+				Text_Controller::CONTENT => $post_title,
+				// Required for screen reader accessibility, below.
+				Text_Controller::ATTRS   => [ 'id' => $uuid . '-title' ],
+			]
+		);
+	}
+
+	private function get_card_meta_secondary( string $date ): Deferred_Component {
+		return defer_template_part(
+			'components/container/container',
+			'',
+			[
+				Container_Controller::CONTENT => $date,
+				Container_Controller::CLASSES => [ 'c-card__date' ],
+			],
+		);
+	}
+
+	private function get_card_description( string $post_excerpt ): Deferred_Component {
+		return defer_template_part(
+			'components/container/container',
+			'',
+			[
+				Container_Controller::CONTENT => wpautop( $post_excerpt ),
+			],
+		);
+	}
+
+	private function get_card_image( int $post_image_id ): ?Deferred_Component {
+		if ( ! $post_image_id ) {
+			return null;
+		}
+
+		return defer_template_part( 'components/image/image', '', [
+			Image_Controller::IMG_ID       => $post_image_id,
+			Image_Controller::AS_BG        => true,
+			Image_Controller::CLASSES      => [
+				'c-image--bg',
+				's-aspect-ratio-16-9',
+			],
+			Image_Controller::SRC_SIZE     => Image_Sizes::SIXTEEN_NINE_SMALL,
+			Image_Controller::SRCSET_SIZES => [
+				Image_Sizes::SIXTEEN_NINE_SMALL,
+				Image_Sizes::SIXTEEN_NINE,
+			],
+		] );
+	}
+
+	private function get_card_cta( Link $post_cta_link, string $uuid, bool $show = false ): ?Deferred_Component {
+		if ( ! $post_cta_link->url ) {
+			return null;
+		}
+
+		$card_cta_args = [
+			Link_Controller::CONTENT => esc_html__( 'Read More', 'tribe' ),
+			Link_Controller::URL     => $post_cta_link->url,
+			Link_Controller::TARGET  => $post_cta_link->target,
+			Link_Controller::CLASSES => [
+				'u-hidden',
+			],
+			Link_Controller::ATTRS   => [
+				// These attrs provide the most screen reader accessible link.
+				'id'               => $uuid . '-link',
+				'aria-labelledby'  => $uuid . '-title',
+				'aria-describedby' => $uuid . '-link',
+				// Sets this link as the card's click-within target link.
+				'data-js'          => 'target-link',
+			],
+		];
+
+		if ( $show ) {
+			$card_cta_args[ Link_Controller::CLASSES ] = [
+				'c-block__cta-link',
+				'a-cta',
+			];
+		}
+
+		return defer_template_part( 'components/link/link', '', $card_cta_args );
 	}
 
 }

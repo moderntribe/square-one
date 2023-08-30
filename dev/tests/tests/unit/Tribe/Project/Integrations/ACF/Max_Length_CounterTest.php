@@ -1,102 +1,88 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace Tribe\Project\Integrations\ACF;
 
-use tad\FunctionMocker\FunctionMocker;
+use Brain\Monkey;
+use Tribe\Tests\Unit;
 
-class Max_Length_CounterTest extends \Codeception\Test\Unit {
+final class Max_Length_CounterTest extends Unit {
+
 	/**
-	 * @var \UnitTester
+	 * @dataProvider fieldDataProvider
 	 */
-	protected $tester;
+	public function test_it_adds_counter_div( array $field, ?string $expected ) {
+		Monkey\Functions\when( 'esc_attr' )->returnArg();
+		Monkey\Functions\when( 'esc_html' )->returnArg();
 
-	protected function _setUpBeforeClass(): void {
-		FunctionMocker::setUp();
-		FunctionMocker::replace( 'esc_attr', static function ( $string ) {
-			return $string;
-		} );
-		FunctionMocker::replace( 'esc_html', static function ( $string ) {
-			return $string;
-		} );
-	}
-
-	protected function _before() {
-	}
-
-	protected function _after() {
-	}
-
-	/**
-     * @dataProvider fieldDataProvider
-     */
-    public function test_add_counter_div( $field, $expected ) {
 		$counter = new Max_Length_Counter();
 		$counter->add_counter_div( $field );
 		$output = $this->getActualOutput();
 		$this->assertEquals( $expected, $output );
 	}
 
-	public function fieldDataProvider() {
+	public function fieldDataProvider(): array {
 		return [
-			'show counter with no value' => [
+			'show counter with no value'          => [
 				[
-					'wrapper' => [
+					'wrapper'   => [
 						'class' => Max_Length_Counter::MAX_LENGTH_COUNTER_WRAPPER_CLASS,
 					],
 					'maxlength' => '10',
-					'value' => '',
+					'value'     => '',
 				],
-				'<div class="textright ' . Max_Length_Counter::MAX_LENGTH_COUNTER_DIV_CLASS . '">0 / 10</div>'
+				'<div class="textright ' . Max_Length_Counter::MAX_LENGTH_COUNTER_DIV_CLASS . '">0 / 10</div>',
 			],
 			'show counter with value length of 5' => [
 				[
-					'wrapper' => [
+					'wrapper'   => [
 						'class' => Max_Length_Counter::MAX_LENGTH_COUNTER_WRAPPER_CLASS,
 					],
 					'maxlength' => '10',
-					'value' => '12345',
+					'value'     => '12345',
 				],
-				'<div class="textright ' . Max_Length_Counter::MAX_LENGTH_COUNTER_DIV_CLASS . '">5 / 10</div>'
+				'<div class="textright ' . Max_Length_Counter::MAX_LENGTH_COUNTER_DIV_CLASS . '">5 / 10</div>',
 			],
-			'no maxlength set' => [
+			'no maxlength set'                    => [
 				[
-					'wrapper' => [
+					'wrapper'   => [
 						'class' => Max_Length_Counter::MAX_LENGTH_COUNTER_WRAPPER_CLASS,
 					],
 					'maxlength' => '',
-					'value' => '12345',
+					'value'     => '12345',
 				],
-				NULL
+				null,
 			],
-			'no wrapper class set' => [
+			'no wrapper class set'                => [
 				[
-					'wrapper' => [
+					'wrapper'   => [
 						'class' => '',
 					],
 					'maxlength' => '10',
-					'value' => '',
+					'value'     => '',
 				],
-				NULL
+				null,
 			],
-			'wrapper class not included' => [
+			'wrapper class not included'          => [
 				[
-					'wrapper' => [
+					'wrapper'   => [
 						'class' => 'cool-class another-cool-class',
 					],
 					'maxlength' => '10',
-					'value' => '',
+					'value'     => '',
 				],
-				NULL
+				null,
 			],
-			'wrapper class with no maxlength' => [
+			'wrapper class with no maxlength'     => [
 				[
-					'wrapper' => [
+					'wrapper'   => [
 						'class' => Max_Length_Counter::MAX_LENGTH_COUNTER_DIV_CLASS,
 					],
 					'maxlength' => '0',
-					'value' => '',
+					'value'     => '',
 				],
-				NULL
-			]
+				null,
+			],
 		];
 	}
+
 }

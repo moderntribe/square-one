@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Block_Category;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
@@ -29,16 +30,15 @@ class Interstitial extends Block_Config implements Cta_Field {
 
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Interstitial', 'tribe' ),
-			'description' => esc_html__( 'Interstitial block', 'tribe' ),
-			'icon'        => '<svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M.5.5h19v19H.5z"/><path d="M13.6 12.7H6.4v3.6h7.2v-3.6zM3.7 4.6h12.6v1.8H3.7zM6.4 7.3h7.2v1.8H6.4z" fill="#000"/><path d="M10.517 14.305H8.732v.17h1.785v-.17zM10.517 14.393v-.567l.298.284.299.283-.299.283-.298.283v-.566z" fill="#fff"/></svg>',
-			'keywords'    => [ esc_html__( 'interstitial', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
-			'category'    => 'layout',
-			'supports'    => [
+			'title'    => esc_html__( 'Interstitial', 'tribe' ),
+			'icon'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 4.5H22.5V19.3782L19.4641 13.8871C19.3573 13.6941 19.1711 13.5578 18.9548 13.5146C18.7385 13.4713 18.5141 13.5255 18.3414 13.6626L10.9885 19.5H1.5V4.5ZM11.2439 21C11.2483 21 11.2527 21 11.2571 21H22.1114C22.1209 21.0002 22.1305 21.0002 22.14 21H22.5C23.3284 21 24 20.3284 24 19.5V4.5C24 3.67157 23.3284 3 22.5 3H1.5C0.671573 3 0 3.67157 0 4.5V19.5C0 20.3284 0.671573 21 1.5 21H11.2439ZM20.8534 19.5H13.401L18.5801 15.3883L20.8534 19.5ZM11.25 6.75H3.75V8.25H11.25V6.75ZM3.75 9.75H12.75V11.25H3.75V9.75ZM8.25 12.75H3.75V14.25H8.25V12.75ZM12.75 15.75C13.5784 15.75 14.25 15.0784 14.25 14.25C14.25 13.4216 13.5784 12.75 12.75 12.75C11.9216 12.75 11.25 13.4216 11.25 14.25C11.25 15.0784 11.9216 15.75 12.75 15.75Z" fill="black"/></svg>',
+			'keywords' => [ esc_html__( 'interstitial', 'tribe' ), esc_html__( 'display', 'tribe' ) ],
+			'category' => Block_Category::CUSTOM_BLOCK_CATEGORY_SLUG,
+			'supports' => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'  => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
@@ -60,16 +60,12 @@ class Interstitial extends Block_Config implements Cta_Field {
 
 	protected function add_fields(): void {
 		$this->add_field( new Field( self::NAME . '_' . self::LEADIN, [
-				'label'       => esc_html__( 'Leadin', 'tribe' ),
-				'name'        => self::LEADIN,
-				'type'        => 'text',
-				'placeholder' => esc_html__( 'Leadin (optional)', 'tribe' ),
-				'wrapper'     => [
-					'class' => 'tribe-acf-hide-label',
-				],
+				'label' => esc_html__( 'Overline', 'tribe' ),
+				'name'  => self::LEADIN,
+				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
-				'label'        => esc_html__( 'Content', 'tribe' ),
+				'label'        => esc_html__( 'Description', 'tribe' ),
 				'name'         => self::TITLE,
 				'type'         => 'wysiwyg',
 				'toolbar'      => Classic_Editor_Formats::MINIMAL,

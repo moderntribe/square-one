@@ -26,7 +26,7 @@ class Force_Plugin_Activation {
 		'disable-emojis/disable-emojis.php',
 		'acf-image-select/acf-image-select.php',
 		'acf-menu-chooser/acf-menu-chooser.php',
-		'tribe-acf-post-list-field/tribe-acf-post-list-field.php',
+		'acf-swatch/acf-swatch.php',
 	];
 
 	/**
@@ -98,7 +98,7 @@ class Force_Plugin_Activation {
 		add_filter( 'option_active_plugins', [ $this, 'force_plugins' ], 10, 1 );
 		add_filter( 'site_option_active_sitewide_plugins', [ $this, 'force_plugins' ], 10, 1 );
 		add_filter( 'plugin_action_links', [ $this, 'plugin_action_links' ], 99, 2 );
-		add_filter( 'network_admin_plugin_action_links', [ $this, 'plugin_action_links' ], 99, 4 );
+		add_filter( 'network_admin_plugin_action_links', [ $this, 'plugin_action_links' ], 99, 2 );
 		add_filter( 'all_plugins', [ $this, 'hide_from_blog' ], 99, 1 );
 	}
 

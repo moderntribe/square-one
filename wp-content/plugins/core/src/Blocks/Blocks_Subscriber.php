@@ -2,16 +2,26 @@
 
 namespace Tribe\Project\Blocks;
 
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Tribe\Libs\ACF\Block_Registrar;
 use Tribe\Libs\ACF\Block_Renderer;
 use Tribe\Libs\Container\Abstract_Subscriber;
+use Tribe\Project\Block_Middleware\Block_Field_Registrar;
 
 class Blocks_Subscriber extends Abstract_Subscriber {
 
 	public function register(): void {
 		add_action( 'acf/init', function (): void {
-			foreach ( $this->container->get( Blocks_Definer::TYPES ) as $type ) {
-				$this->container->get( Block_Registrar::class )->register( $type );
+			try {
+				// Pass blocks through field middleware before registering them with ACF.
+				$field_registrar = $this->container->get( Block_Field_Registrar::class );
+				$field_registrar->register();
+			} catch ( NotFoundExceptionInterface | ContainerExceptionInterface $e ) {
+				// Block middleware likely disabled in Core.php, just register them.
+				foreach ( $this->container->get( Blocks_Definer::TYPES ) as $type ) {
+					$this->container->get( Block_Registrar::class )->register( $type );
+				}
 			}
 		}, 10, 1 );
 
@@ -41,6 +51,10 @@ class Blocks_Subscriber extends Abstract_Subscriber {
 				$style_override->register();
 			}
 		}, 10, 0 );
+
+		add_filter( 'block_categories_all', function ( array $categories ): array {
+			return $this->container->get( Block_Category::class )->custom_block_category( $categories );
+		}, 10, 1 );
 	}
 
 }

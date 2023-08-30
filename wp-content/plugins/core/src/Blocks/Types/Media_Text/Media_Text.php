@@ -7,6 +7,7 @@ use Tribe\Libs\ACF\Block_Config;
 use Tribe\Libs\ACF\Field;
 use Tribe\Libs\ACF\Field_Section;
 use Tribe\Project\Admin\Editor\Classic_Editor_Formats;
+use Tribe\Project\Blocks\Block_Category;
 use Tribe\Project\Blocks\Fields\Cta_Field;
 use Tribe\Project\Blocks\Fields\Traits\With_Cta_Field;
 
@@ -37,21 +38,20 @@ class Media_Text extends Block_Config implements Cta_Field {
 	 */
 	public function add_block(): void {
 		$this->set_block( new Block( self::NAME, [
-			'title'       => esc_html__( 'Media + Text', 'tribe' ),
-			'description' => esc_html__( 'An image or video plus text content with several layout options.', 'tribe' ),
-			'icon'        => '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M13 17h8v-2h-8v2zM3 19h8V5H3v14zM13 9h8V7h-8v2zm0 4h8v-2h-8v2z"></path></svg>',
-			'keywords'    => [
+			'title'    => esc_html__( 'Media + Text', 'tribe' ),
+			'icon'     => '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M13 17h8v-2h-8v2zM3 19h8V5H3v14zM13 9h8V7h-8v2zm0 4h8v-2h-8v2z"></path></svg>',
+			'keywords' => [
 				esc_html__( 'image', 'tribe' ),
 				esc_html__( 'video', 'tribe' ),
 				esc_html__( 'display', 'tribe' ),
 				esc_html__( 'text', 'tribe' ),
 			],
-			'category'    => 'layout',
-			'supports'    => [
+			'category' => Block_Category::CUSTOM_BLOCK_CATEGORY_SLUG,
+			'supports' => [
 				'align'  => false,
 				'anchor' => true,
 			],
-			'example'     => [
+			'example'  => [
 				'attributes' => [
 					'mode' => 'preview',
 					'data' => [
@@ -79,24 +79,10 @@ class Media_Text extends Block_Config implements Cta_Field {
 	 * Register Fields for block
 	 */
 	public function add_fields(): void {
-		$this->add_field( new Field( self::NAME . '_' . self::WIDTH, [
-				'label'         => esc_html__( 'Block Width', 'tribe' ),
-				'name'          => self::WIDTH,
-				'type'          => 'button_group',
-				'choices'       => [
-					self::WIDTH_GRID => esc_html__( 'Wide', 'tribe' ),
-					self::WIDTH_FULL => esc_html__( 'Full-Width', 'tribe' ),
-				],
-				'default_value' => self::WIDTH_GRID,
-			] )
-		)->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
-				'label'       => esc_html__( 'Lead in', 'tribe' ),
-				'name'        => self::LEAD_IN,
-				'type'        => 'text',
-				'wrapper'     => [
-					'class' => 'tribe-acf-hide-label',
-				],
-				'placeholder' => 'Leadin (optional)',
+		$this->add_field( new Field( self::NAME . '_' . self::LEAD_IN, [
+				'label' => esc_html__( 'Overline', 'tribe' ),
+				'name'  => self::LEAD_IN,
+				'type'  => 'text',
 			] )
 		)->add_field( new Field( self::NAME . '_' . self::TITLE, [
 				'label' => esc_html__( 'Title', 'tribe' ),
@@ -113,7 +99,16 @@ class Media_Text extends Block_Config implements Cta_Field {
 			] )
 		)->add_field(
 			$this->get_cta_field( self::NAME )
-		);
+		)->add_field( new Field( self::NAME . '_' . self::WIDTH, [
+			'label'         => esc_html__( 'Block Width', 'tribe' ),
+			'name'          => self::WIDTH,
+			'type'          => 'button_group',
+			'choices'       => [
+				self::WIDTH_GRID => esc_html__( 'Wide', 'tribe' ),
+				self::WIDTH_FULL => esc_html__( 'Full-Width', 'tribe' ),
+			],
+			'default_value' => self::WIDTH_GRID,
+		] ) );
 
 		$this->add_section( new Field_Section( self::SECTION_MEDIA, esc_html__( 'Media', 'tribe' ), 'accordion' ) )
 			 ->add_field( new Field( self::NAME . '_' . self::MEDIA_TYPE, [
@@ -124,9 +119,7 @@ class Media_Text extends Block_Config implements Cta_Field {
 						 self::IMAGE => esc_html__( 'Image', 'tribe' ),
 						 self::EMBED => esc_html__( 'Video', 'tribe' ),
 					 ],
-					 'default_value' => [
-						 self::IMAGE,
-					 ],
+					 'default_value' => self::IMAGE,
 				 ] )
 			 )->add_field( new Field( self::NAME . '_' . self::IMAGE, [
 					'label'             => esc_html__( 'Image', 'tribe' ),

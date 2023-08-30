@@ -51,7 +51,7 @@
 
 .b-links__container {
 	/* CASE: Layout Inline */
-	.b-links--layout-inline & {
+	.c-block--layout-inline & {
 		@media (--viewport-full) {
 			display: flex;
 			justify-content: space-between;
@@ -64,10 +64,10 @@
  * ----------------------------------------------------------------------------- */
 
 .b-links__header {
-	/* CASE: Layout Inline */
-	.b-links--layout-inline & {
-		margin-bottom: var(--spacer-60);
+	margin-bottom: var(--spacer-60);
 
+	/* CASE: Layout Inline */
+	.c-block--layout-inline & {
 		@media (--viewport-full) {
 			margin-bottom: 0;
 			padding-right: var(--grid-gutter);
@@ -77,7 +77,7 @@
 	}
 
 	/* CASE: Layout Stacked: Content Block elements are inline (floated) */
-	.b-links--layout-stacked & {
+	.c-block--layout-stacked & {
 		@mixin clearfix;
 
 		margin-bottom: var(--spacer-60);
@@ -86,11 +86,11 @@
 }
 
 /* -----------------------------------------------------------------------------
- * Links: Title
+ * Links: Leadin
  * ----------------------------------------------------------------------------- */
 
-.b-links__title {
-
+.b-links__leadin {
+	@mixin t-overline;
 }
 
 /* -----------------------------------------------------------------------------
@@ -98,13 +98,8 @@
  * ----------------------------------------------------------------------------- */
 
 .b-links__description {
-
-	> p {
-		@mixin t-body-large;
-	}
-
 	/* CASE: Layout Inline */
-	.b-links--layout-inline & {
+	.c-block--layout-inline & {
 		margin-top: var(--spacer-20);
 	}
 }
@@ -115,9 +110,8 @@
 
 .b-links__content {
 	/* CASE: Layout Inline */
-	.b-links--layout-inline & {
+	.c-block--layout-inline & {
 		@media (--viewport-full) {
-			padding-left: var(--grid-gutter);
 			max-width: var(--grid-4-col);
 			width: calc(33.3333% + var(--grid-gutter));
 		}
@@ -129,19 +123,44 @@
  * ----------------------------------------------------------------------------- */
 
 .b-links__list-title {
-	/* CASE: Layout Inline */
-	.b-links--layout-inline & {
-		margin-bottom: var(--spacer-10);
-	}
+	margin-bottom: var(--spacer-20);
 }
 
 .b-links__list {
+	padding-left: 0;
+
 	/* CASE: Layout Stacked */
-	.b-links--layout-stacked & li {
+	.c-block--layout-stacked & li {
 		border-bottom: 1px solid var(--color-grey-light);
 
 		&:last-child {
 			border-bottom: 0;
+		}
+	}
+}
+
+.b-links__list-item {
+	list-style-type: none;
+
+	p {
+		@mixin t-body-small;
+
+		padding-left: 28px;
+	}
+
+	.c-block--layout-stacked & {
+
+		&:first-child {
+			@media (--viewport-full) {
+				padding-bottom: var(--spacer-40);
+			}
+		}
+
+		~ .b-links__list-item {
+			@media (--viewport-full) {
+				border-top: 1px solid var(--color-neutral-10);
+				padding: var(--spacer-40) 0;
+			}
 		}
 	}
 }
@@ -153,15 +172,12 @@
 	position: relative;
 	padding: var(--spacer-10) 0 var(--spacer-10) 28px;
 	transition: var(--transition);
+	color: var(--color-primary);
+	text-decoration: none;
 
-	.b-links & {
-		color: var(--color-primary);
-		text-decoration: none;
-
-		&:focus,
-		&:hover {
-			color: var(--color-secondary);
-		}
+	&:focus,
+	&:hover {
+		color: var(--color-secondary);
 	}
 
 	&:before {
@@ -178,14 +194,5 @@
 		line-height: 1.8;
 		text-align: center;
 		transition: var(--transition);
-	}
-
-	/* CASE: Layout Stacked */
-	.b-links--layout-stacked & {
-		padding: var(--spacer-40) 0 var(--spacer-40) 28px;
-
-		&:before {
-			top: 28px;
-		}
 	}
 }

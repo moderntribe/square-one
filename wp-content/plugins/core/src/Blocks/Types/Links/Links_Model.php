@@ -10,7 +10,7 @@ use Tribe\Project\Templates\Models\Collections\Link_Collection;
 
 class Links_Model extends Base_Model {
 
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Links_Block_Controller::ATTRS       => $this->get_attrs(),
 			Links_Block_Controller::CLASSES     => $this->get_classes(),

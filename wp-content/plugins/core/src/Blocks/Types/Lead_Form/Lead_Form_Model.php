@@ -9,10 +9,7 @@ use Tribe\Project\Templates\Components\blocks\lead_form\Lead_Form_Block_Controll
 
 class Lead_Form_Model extends Base_Model {
 
-	/**
-	 * @return array
-	 */
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Lead_Form_Block_Controller::ATTRS       => $this->get_attrs(),
 			Lead_Form_Block_Controller::CLASSES     => $this->get_classes(),

@@ -20,41 +20,38 @@ jobs:
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
         with:
-          php-version: '7.4'
+          php-version: '8.0'
+          coverage: none
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Get Build Repository
       - name: Check out build branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: ${{ env.BUILD_FOLDER }}
-          ref: ${{github.ref}}
+          ref: ${{ github.ref }}
 
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Configure composer
+        working-directory: ${{ env.BUILD_FOLDER }}
+        run: echo "${{ secrets.COMPOSER_ENV }}" > .env
 
-      - name: Cache composer dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      # Install composer: Add env for plugin keys, composer install, and cleanup
       - name: Install composer dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          working-directory: ${{ env.BUILD_FOLDER }}
+          composer-options: "--optimize-autoloader --ignore-platform-reqs --no-dev"
+
+      - name: Clean up composer configuration
         working-directory: ${{ env.BUILD_FOLDER }}
         run: |
-          echo "${{ secrets.COMPOSER_ENV }}" > .env
-          composer install --optimize-autoloader --ignore-platform-reqs --no-dev
           rm .env
           rm -rf vendor/moderntribe/tribe-libs/.git
           rm -rf wp-content/plugins/panel-builder/.git
 
       # Set up node version
       - name: Set up node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version-file: "${{ env.BUILD_FOLDER }}/.nvmrc"
           cache: 'yarn'
@@ -94,7 +91,7 @@ jobs:
           git config user.email "devops@tri.be"
           git config user.name "devops"
 
-      # Rsync wordpress
+      # Rsync WordPress
       - name: Sync Build WP folder to Deploy directory
         run: |
           rsync -rpv --delete ${{env.BUILD_FOLDER}}/wp/ ${{env.DEPLOY_FOLDER}} \
@@ -108,14 +105,7 @@ jobs:
       # Rsync plugin and theme files
       - name: Sync Build WP-CONTENT folder to Deploy directory
         run: |
-          rsync -rpv --delete ${{env.BUILD_FOLDER}}/wp-content ${{env.DEPLOY_FOLDER}} \
-            --exclude=.git \
-            --exclude=.gitmodules \
-            --exclude=.gitignore \
-            --exclude=.htaccess \
-            --exclude=.babelrc \
-            --exclude=.editorconfig \
-            --exclude=.eslintrc \
+          rsync -rpv --delete --exclude-from="${{env.BUILD_FOLDER}}/.deploy-ignore" ${{env.BUILD_FOLDER}}/wp-content ${{env.DEPLOY_FOLDER}} \
             --exclude=dev \
             --exclude=dev_components \
             --exclude=docs \

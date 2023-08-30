@@ -3,7 +3,7 @@
 namespace Tribe\Project\Templates\Components\site_footer;
 
 use Tribe\Project\Nav_Menus\Nav_Menus_Definer;
-use Tribe\Project\Object_Meta\Theme_Options;
+use Tribe\Project\Object_Meta\Footer_Settings;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Components\container\Container_Controller;
 use Tribe\Project\Templates\Components\image\Image_Controller;
@@ -15,9 +15,9 @@ class Site_Footer_Controller extends Abstract_Controller {
 
 	use Copyright;
 
-	private Theme_Options $settings;
+	private Footer_Settings $settings;
 
-	public function __construct( Theme_Options $settings ) {
+	public function __construct( Footer_Settings $settings ) {
 		$this->settings = $settings;
 	}
 
@@ -29,7 +29,7 @@ class Site_Footer_Controller extends Abstract_Controller {
 	}
 
 	public function get_description_args(): array {
-		$description = $this->settings->get_value( Theme_Options::FOOTER_DESCRIPTION );
+		$description = $this->settings->get_value( Footer_Settings::FOOTER_DESCRIPTION );
 
 		if ( empty( $description ) ) {
 			return [];
@@ -42,8 +42,8 @@ class Site_Footer_Controller extends Abstract_Controller {
 	}
 
 	public function get_ctas_args(): array {
-		$ctas  = $this->get_cta( Theme_Options::FOOTER_CTA_1 );
-		$ctas .= $this->get_cta( Theme_Options::FOOTER_CTA_2 );
+		$ctas  = $this->get_cta( Footer_Settings::FOOTER_CTA_1 );
+		$ctas .= $this->get_cta( Footer_Settings::FOOTER_CTA_2 );
 
 		if ( empty( $ctas ) ) {
 			return [];
@@ -101,7 +101,7 @@ class Site_Footer_Controller extends Abstract_Controller {
 	}
 
 	private function get_logo_image(): string {
-		$image_id = $this->settings->get_value( Theme_Options::FOOTER_LOGO );
+		$image_id = $this->settings->get_value( Footer_Settings::FOOTER_LOGO );
 
 		if ( empty( $image_id ) ) {
 			return '';

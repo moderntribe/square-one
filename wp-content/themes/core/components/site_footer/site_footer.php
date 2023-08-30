@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use \Tribe\Project\Templates\Components\site_footer\Site_Footer_Controller;
+use Tribe\Project\Templates\Components\site_footer\Site_Footer_Controller;
 
 /**
  * @var array $args Arguments passed to the template

@@ -2,7 +2,105 @@
 
 All notable changes to this project will be documented in this file.
 
+# 2023.08
+* Updated: The minimum composer PHP version was updated to `>=7.4` to support PHP 8.1 and 8.2.
+* Updated: WordPress to 6.3.1 and all plugins to their latest versions.
+* Fixed: Deprecated messages in memcached-object-cache.php in PHP 8.2.
+
+# 2023.05
+* Fixed: docker-compose.yml syntax errors when using docker-compose v2.17.x. See https://github.com/docker/compose/issues/10411
+
+# 2023.03
+* Updated: PHPStan Baseline Cleanup.
+* Fixed: Reverted browserlist "not dead" key.
+
+## 2023.02
+* Updated: Browserlist versions to latest.
+* Fixed: The `ci.yml` GitHub workflow will now use the properly configured PHP version. It will also only change the composer cached based on the root composer.lock file.
+* Fixed: The `deploy-stage.yml` GitHub workflow will now properly deploy using PHP8.0 instead of PHP7.4
+* Updated: All GitHub workflows to remove [deprecated set-output](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/).
+* Updated: Use `ramsey/composer-install` action where possible in GitHub workflows, which handles caching out of the box.
+* Updated: Use the latest version of all 3rd party GitHub actions.
+* Updated: composer dependencies.
+* Updated: phpstan will no longer user the GitHub error formatting in workflows because it doesn't show a file or line where an error occurred.
+* Fixed: Fixed the TinyMCE floating toolbar fix, which would break with multiple editors active on the same page.
+* Fixed: Removed extraneous quote in primary nav walker causing invalid `aria-controls` attribute in primary nav dropdown.
+
+## 2023.01
+* Added: 2 parameters are added to the Post_Loop_Field_Config class. `show_taxonomy_filter` - allows hiding taxonomy filtering fields. `show_override_option` - allow hiding Override fields group for manual query
+* Fixed: Content Loop Block Controller method for `get_cta()` was returning early on a `true` boolean value. Should have been `false`.
+* Update: Added a `TAG` override check on incoming `$args[]` for the `render_content` method of the Content Block component.
+
+## 2022.12
+* Added: .deploy-ignore file and updated deployments to use it to decide which file type should never get synced and deployed to web servers.
+
+## 2022.10
+* Removed: Yoast hook that was removing the schema to be output.
+* Updated: Switched to an mT-owned version of a11y-dialog w/ misc bug fixes and update body lock/unlock scripts to address CSS-defined `scroll-behavior: scroll`. 
+* Fixed: wordpress-stubs.patch failing to patch on php-stubs/wordpress-stubs v6.0.2 (again)
+* Updated: WordPres core to v6.0.3
+* Updated: Plugins Gravity Forms v2.6.7, Limit Login Attempts Reloaded: v2.25.8, Yoast SEO: v19.8
+* Updated: WordPress to 6.0.2, plugins to their latest version.
+* Fixed: Wrong array shape in Customizer_Settings.php.
+* Fixed: Notices being throw when opening the WordPress customizer.
+* Fixed: wordpress-stubs.patch failing to patch on php-stubs/wordpress-stubs v6.0.2
+* Fixed: Bug in Term Sorter Plugin - argument expected to be array.
+
+## 2022.09
+* Added: Lefthook pre-commit merge marker detection, once pulled run `nvm use` and then `lefthook install -a` to update.
+* Fixed: Single Controller `get_author_id()` now returns an integer type instead of a string.
+* Fixed: Regression wrong social icon classes being outputted for the Follow component. Icons now show properly show up.
+* Added: Git ignore [lefthook-local.yml](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md#local-config) so developers can customize the version of PHP calling the script if required.
+* Fixed: Regression from removing default typing of tab panel classes property
+* Added: Gravity Forms style support the consent field.
+* Removed: The Configure SMTP plugin
+
+## 2022.08
+* Updated: Swiper to version `8.3.2`.
+* Updated: Lefthook package renamed from @arkweid/lefthook to @evilmartians/lefthook. Updated to v1.1.1.
+* Updated: `prefix-with-jira-ticket.php` lefthook script for better ticket matching and added tests.
+* Fixed: Post Loop Block Middleware config being shared across blocks due to non-unique ACF key names.
+* Fixed: Updated Linkedin share link URL.
+* Updated: Added separate file with registerBlockType filter which runs before ready event.
+* Content Loop Block refactoring
+* Fixed: Added role="region" to accordion tab content for improved accessibility.
+* Updated: Improved display of ACF gallery field when used in sidebar editor so that it is easier to edit image meta data.
+* Updated: Links block
+  * Fixed both layouts to properly match designs now.
+  * Removed "Link Header" field from block.
+  * Improved typography and spacing styles to match designs.
+* Added: MVP Site masthead and primary navigation pattern.
+* Changed: Added basic support for PHP8.0. This is an intermediate update to show how **existing PHP7.4 projects** can jump to PHP8.0 when their hosts force an upgrade. A future PR will bring in PHP8.0 minimums + optimizations.
+* Removed: The Tribe Admin Dashboard plugin (not PHP8.0 compatible).
+* Removed: Mailgun composer dependency. If projects need this, they should just use the plugin instead.
+* Bumped: Tribe Libs to the `4.x` major version + plugin updates.
+* Bumped: johnbillion/extended-cpts to the `5.x` major version.
+* Removed: Any dependencies that Tribe Libs already provides in `composer.json`.
+* Fixed: PHPCS throwing `trim()` errors on certain files due to bad WordPress rule typing.
+* Changed: Replaced [Function Mocker](https://github.com/lucatume/function-mocker) with [Brain Monkey](https://brain-wp.github.io/BrainMonkey/) for Unit testing as Function Mocker isn't fully PHP8.0 compatible.
+* Added: New [Unit Test Class](dev/tests/tests/_support/Classes/Unit.php) that configures Brain Monkey.
+* Updated: Existing Unit tests to use Brain Monkey where they were using Function Mocker.
+* Added: [The Block Middleware Feature](wp-content/plugins/core/src/Block_Middleware/README.md)! Review the README for screencasts.
+  * The Tribe ACF Post List plugin has been replaced with a Post Loop middleware implementation (see Content Loop/Card Grid blocks).
+  * Customize which middleware/blocks are available in the [Block_Middleware_Definer.php](wp-content/plugins/core/src/Block_Middleware/Block_Middleware_Definer.php).
+  * Breaking: Block Models now require the `init_data()` method instead of the `get_data()` method.
+  * Block Models now implement a [Model Interface](wp-content/plugins/core/src/Blocks/Contracts/Model.php).
+  * A new [Global Color Theme Middleware](wp-content/plugins/core/src/Blocks/Middleware/Color_Theme/README.md) has been added that allow Global Color Swatches to be added to blocks of your choice.
+* Updated: Tribe Libs has been updated to version `3.6.0`.
+  * Includes updated `wp s1 generate block <name> --with-post-loop-middleware` and `wp s1 generate block <name> --with-middleware` commands.
+  * Includes new `wp s1 generate block:middleware <name>` command.
+  * See the block middleware README.md linked above.
+* Updated: The `Colors` class has been replaced with a `Swatch_Collection` from [square1-field-models](https://github.com/moderntribe/square1-field-models/releases/tag/1.2.0).
+* Fixed: Removed return statement for an `add_action` in Admin_Subscriber.php.
+* Fixed: Branches that have Jira projects in them that contained numbers in the name would not properly prefix git commits, e.g. `feature/DATA22-3/some-new-feature`
+* Fixed: False positive on `have_posts()` using PHPStan if proceeded by an `if ( have_posts() ):`, utilizing a new [wordpress-overrides.stub file](dev/stubs/wordpress-overrides.stub)
+
 ## 2022.07
+* Fixed: TinyMCE floating toolbar repositioning loop. https://core.trac.wordpress.org/ticket/44911
+* Fixed: Set Static Analysis format for GitHub in Actions.
+* Added: Block Category (Custom) for all custom blocks.
+* Updated: Block fields layout and language for consistency.
+* Updated: Removed `image_select` fields in favor of `button_group` fields on blocks.
 * Added: MVP Site Footer.
 * Updated: ACF (5.12.3), Gravity Forms (2.6.4), Disable Emojis (1.7.4), Limit Login Attempts Reloaded (2.25.3), Post 2 Posts (1.7), User Switching (1.6.0), Yoast SEO (19.3)
 * Fixed: A typo in the default theme name.

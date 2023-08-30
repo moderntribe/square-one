@@ -1,9 +1,10 @@
 import * as tests from '../tests';
 
 const browser = tests.browserTests();
-let scroll = 0;
 const scroller = browser.ie || browser.firefox || browser.safari || browser.ios || ( browser.chrome && ! browser.edge ) ? document.documentElement : document.body;
 let locked = false;
+let scroll = 0;
+let scrollBehavior = '';
 
 /**
  * @function isLocked
@@ -19,12 +20,13 @@ const isLocked = () => locked;
  */
 
 const lock = () => {
-	const style = document.body.style;
 	scroll = scroller.scrollTop;
+	scrollBehavior = document.documentElement.style.scrollBehavior;
 	locked = true;
 
-	style.position = 'fixed';
-	style.marginTop = `-${ scroll }px`;
+	document.documentElement.style.scrollBehavior = 'auto';
+	document.body.style.position = 'fixed';
+	document.body.style.marginTop = `-${ scroll }px`;
 };
 
 /**
@@ -33,12 +35,11 @@ const lock = () => {
  */
 
 const unlock = () => {
-	const style = document.body.style;
-
-	style.position = 'static';
-	style.marginTop = '0px';
+	document.body.style.position = 'static';
+	document.body.style.marginTop = '0px';
 
 	scroller.scrollTop = scroll;
+	document.documentElement.style.scrollBehavior = scrollBehavior;
 	locked = false;
 };
 

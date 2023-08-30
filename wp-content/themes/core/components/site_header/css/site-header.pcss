@@ -1,0 +1,228 @@
+/* -----------------------------------------------------------------------------
+ *
+ * Component: Site Header
+ *
+ * ----------------------------------------------------------------------------- */
+
+:root {
+	--site-header-height: 76px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header {
+	position: relative;
+	z-index: 1;
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Container
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--grid-gutter);
+	width: 100%;
+	height: var(--site-header-height);
+
+	/* CASE: Mobile flyout active */
+	.c-site-header--nav-active & {
+		position: fixed;
+		display: block;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		overflow-y: auto;
+		background-color: var(--color-bgd);
+
+		/* CASE: WP Admin Bar active */
+		.admin-bar & {
+			height: calc(100% - var(--spacer-wpadmin-mobile));
+			top: var(--spacer-wpadmin-mobile);
+
+			@media (--viewport-wpadmin) {
+				height: calc(100% - var(--spacer-wpadmin-desktop));
+				top: var(--spacer-wpadmin-desktop);
+			}
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Mobile Nav Container
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__nav-container {
+	display: none;
+
+	@media (--viewport-full) {
+		position: relative;
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+		justify-content: flex-end;
+		gap: var(--spacer-30);
+	}
+
+	/* CASE: Mobile flyout active */
+	.c-site-header--nav-active & {
+		display: block;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Desktop Search Flyout Container
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__search-flyout {
+	@media (--viewport-full) {
+		opacity: 0;
+		display: none;
+		position: absolute;
+		z-index: 1;
+		right: 0;
+		width: var(--grid-4-col);
+		transition: var(--transition-nav-swap);
+	}
+
+	/* CASE: Desktop search flyout animating */
+	.c-site-header--search-animating & {
+		display: block;
+	}
+
+	/* CASE: Search flyout active */
+	.c-site-header--search-active & {
+		opacity: 1;
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Logo
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__logo {
+	display: flex;
+	align-items: center;
+	height: var(--site-header-height);
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Logo Link
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__logo-link {
+	display: block;
+	width: 100%;
+	max-width: 220px; /* Arbitrary value to prevent logo over-sizing */
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Logo Figure & Img tag
+ *
+ * 100% height applied to force SVGs to scale properly within the logo container.
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__logo-img,
+.c-site-header__logo-figure {
+	height: 100%;
+	max-height: var(--site-header-height);
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Mobile Nav Flyout Toggle
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__flyout-toggle {
+	position: absolute;
+	top: 20px;
+	right: var(--grid-gutter-small);
+	width: 32px;
+	height: 32px;
+	margin-left: auto;
+	padding: 0;
+	font-size: 32px;
+	line-height: 32px;
+	border: 0;
+	background: transparent;
+	transition: var(--transition);
+
+	@media (--viewport-medium) {
+		right: var(--grid-gutter-medium);
+	}
+
+	@media (--viewport-full) {
+		display: none;
+	}
+
+	&:focus {
+		outline: 1px dotted;
+	}
+
+	&:focus,
+	&:hover {
+		color: var(--color-primary);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Mobile Nav Flyout Toggle Icon
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__flyout-toggle-icon {
+	/* CASE: Mobile flyout active */
+	.c-site-header--nav-active & {
+
+		&:before {
+			content: var(--icon-close);
+		}
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Desktop Search Flyout Toggle
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__search-toggle {
+	@mixin a-btn-reset;
+
+	position: relative;
+	z-index: 1;
+	display: none;
+	width: 32px;
+	height: 32px;
+	font-size: 32px;
+	line-height: 32px;
+	transition: var(--transition);
+
+	@media (--viewport-full) {
+		display: block;
+	}
+
+	&:focus {
+		outline: 1px dotted currentColor;
+	}
+
+	&:focus,
+	&:hover {
+		color: var(--color-primary);
+	}
+}
+
+/* -----------------------------------------------------------------------------
+ * Site Header: Desktop Search Flyout Toggle Icon
+ * ----------------------------------------------------------------------------- */
+
+.c-site-header__search-toggle-icon {
+	/* CASE: Search flyout active */
+	.c-site-header--search-active & {
+
+		&:before {
+			content: var(--icon-close);
+		}
+	}
+}

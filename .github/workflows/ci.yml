@@ -5,10 +5,11 @@ on:
   pull_request:
     branches:
       - main
+      - develop
   push:
     branches:
       - main
-
+      - develop
 jobs:
 
   ci:
@@ -17,7 +18,6 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-versions: [ '7.4' ]
 
     env:
       cache_version: 2 # increment to flush all caches
@@ -28,11 +28,14 @@ jobs:
     steps:
       - name: Set up PHP, with composer and extensions
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+        with:
+          php-version: '8.0'
+          coverage: none
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Open permissions on output and directories
         run:  chmod 777 dev/tests/tests/_output
@@ -47,7 +50,6 @@ jobs:
           php -r "file_exists( 'wp-content/themes/core/local-config.json' ) || copy( 'wp-content/themes/core/local-config-sample.json', 'wp-content/themes/core/local-config.json' );"
           php -r "file_exists( 'dev/tests/.env' ) || copy( 'dev/tests/.env-dist', 'dev/tests/.env' );"
           echo "define( 'TWIG_CACHE', false );" >> local-config.php
-          echo "define( 'TRIBE_GLOMAR', false );" >> local-config.php
           echo "define( 'FORCE_SSL_LOGIN', false );" >> local-config.php
           echo "define( 'FORCE_SSL_ADMIN', false );" >> local-config.php
           printf 'SQ1_UID=%d\nSQ1_GID=%d\n' $(id -u) $(id -g) > dev/docker/.env
@@ -59,11 +61,10 @@ jobs:
           printf '{ "github-oauth": { "github.com": "%s" } }\n' "${{ secrets.GITHUB_TOKEN }}" > dev/docker/composer/auth.json
 
       - name: Check for Cached Composer Dependencies
-        id: cache-composer-dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: dev/docker/composer/cache
-          key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-${{ env.cache_version }}-composer-${{ hashFiles('composer.lock') }}
           restore-keys: ${{ runner.os }}-${{ env.cache_version }}-composer-
 
       - name: Create docker network
@@ -79,7 +80,7 @@ jobs:
         working-directory: dev/docker
 
       - name: Set up node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'

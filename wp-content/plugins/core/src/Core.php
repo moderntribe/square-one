@@ -5,8 +5,12 @@ namespace Tribe\Project;
 use DI\ContainerBuilder;
 use Tribe\Project\Admin\Admin_Subscriber;
 use Tribe\Project\Assets\Assets_Subscriber;
+use Tribe\Project\Block_Middleware\Block_Middleware_Definer;
 use Tribe\Project\Blocks\Blocks_Definer;
 use Tribe\Project\Blocks\Blocks_Subscriber;
+use Tribe\Project\Blocks\Middleware\Color_Theme\Color_Theme_Definer;
+use Tribe\Project\Blocks\Middleware\Post_Loop\Post_Loop_Definer;
+use Tribe\Project\Blocks\Middleware\Post_Loop\Post_Loop_Subscriber;
 use Tribe\Project\Cache\Cache_Subscriber;
 use Tribe\Project\CLI\CLI_Definer;
 use Tribe\Project\Integrations\ACF\ACF_Subscriber;
@@ -39,11 +43,14 @@ class Core {
 	 * @var string[] Names of classes implementing Definer_Interface.
 	 */
 	private array $definers = [
+		Block_Middleware_Definer::class,
 		Blocks_Definer::class,
 		CLI_Definer::class,
+		Color_Theme_Definer::class,
 		Nav_Menus_Definer::class,
 		Object_Meta_Definer::class,
 		P2P_Definer::class,
+		Post_Loop_Definer::class,
 		Routes_Definer::class,
 		Settings_Definer::class,
 		Theme_Definer::class,
@@ -61,6 +68,7 @@ class Core {
 		Google_Tag_Manager_Subscriber::class,
 		Gravity_Forms_Subscriber::class,
 		Nav_Menus_Subscriber::class,
+		Post_Loop_Subscriber::class,
 		Query_Subscriber::class,
 		Routes_Subscriber::class,
 		Theme_Subscriber::class,
@@ -80,12 +88,13 @@ class Core {
 	private array $lib_definers = [
 		'\Tribe\Libs\Assets\Assets_Definer',
 		'\Tribe\Libs\Blog_Copier\Blog_Copier_Definer',
-		'\Tribe\Libs\Cache\Cache_Definer',
 		'\Tribe\Libs\CLI\CLI_Definer',
+		'\Tribe\Libs\Cache\Cache_Definer',
 		'\Tribe\Libs\Generators\Generator_Definer',
 		'\Tribe\Libs\Media\Media_Definer',
 		'\Tribe\Libs\Object_Meta\Object_Meta_Definer',
 		'\Tribe\Libs\P2P\P2P_Definer',
+		'\Tribe\Libs\Pipeline\Pipeline_Definer',
 		'\Tribe\Libs\Queues\Queues_Definer',
 		'\Tribe\Libs\Queues_Mysql\Mysql_Backend_Definer',
 		'\Tribe\Libs\Required_Page\Required_Page_Definer',

@@ -10,10 +10,7 @@ use Tribe\Project\Templates\Models\Collections\Tab_Collection;
 
 class Tabs_Model extends Base_Model {
 
-	/**
-	 * @return array
-	 */
-	public function get_data(): array {
+	public function init_data(): array {
 		return [
 			Tabs_Block_Controller::ATTRS       => $this->get_attrs(),
 			Tabs_Block_Controller::CLASSES     => $this->get_classes(),

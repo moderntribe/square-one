@@ -2,14 +2,14 @@
 
 namespace Tribe\Project\Templates\Components\follow;
 
-use Tribe\Project\Object_Meta\Theme_Options;
+use Tribe\Project\Object_Meta\Social_Settings;
 use Tribe\Project\Templates\Components\Abstract_Controller;
 use Tribe\Project\Templates\Models\Collections\Social_Link_Collection;
 use Tribe\Project\Templates\Models\Social_Link;
 
 class Follow_Controller extends Abstract_Controller {
 
-	private Theme_Options $settings;
+	private Social_Settings $settings;
 
 	/**
 	 * Change the order of this array to change the display order.
@@ -17,15 +17,15 @@ class Follow_Controller extends Abstract_Controller {
 	 * @var string[]
 	 */
 	private array $social_keys = [
-		Theme_Options::SOCIAL_FACEBOOK,
-		Theme_Options::SOCIAL_TWITTER,
-		Theme_Options::SOCIAL_YOUTUBE,
-		Theme_Options::SOCIAL_LINKEDIN,
-		Theme_Options::SOCIAL_PINTEREST,
-		Theme_Options::SOCIAL_INSTAGRAM,
+		Social_Settings::SOCIAL_FACEBOOK,
+		Social_Settings::SOCIAL_TWITTER,
+		Social_Settings::SOCIAL_YOUTUBE,
+		Social_Settings::SOCIAL_LINKEDIN,
+		Social_Settings::SOCIAL_PINTEREST,
+		Social_Settings::SOCIAL_INSTAGRAM,
 	];
 
-	public function __construct( Theme_Options $settings ) {
+	public function __construct( Social_Settings $settings ) {
 		$this->settings = $settings;
 	}
 
@@ -40,7 +40,7 @@ class Follow_Controller extends Abstract_Controller {
 			$link        = new Social_Link();
 			$link->title = $this->get_label( $social_site );
 			$link->url   = $url;
-			$link->class = $social_site;
+			$link->class = str_replace( 'social_', '', $social_site );
 
 			return $link->toArray();
 		}, $this->social_keys ) );
@@ -50,22 +50,22 @@ class Follow_Controller extends Abstract_Controller {
 
 	protected function get_label( string $site ): string {
 		switch ( $site ) {
-			case Theme_Options::SOCIAL_FACEBOOK:
+			case Social_Settings::SOCIAL_FACEBOOK:
 				return esc_html__( 'Like us on Facebook', 'tribe' );
 
-			case Theme_Options::SOCIAL_TWITTER:
+			case Social_Settings::SOCIAL_TWITTER:
 				return esc_html__( 'Follow us on Twitter', 'tribe' );
 
-			case Theme_Options::SOCIAL_YOUTUBE:
+			case Social_Settings::SOCIAL_YOUTUBE:
 				return esc_html__( 'Follow us on YouTube', 'tribe' );
 
-			case Theme_Options::SOCIAL_LINKEDIN:
+			case Social_Settings::SOCIAL_LINKEDIN:
 				return esc_html__( 'Add us on LinkedIn', 'tribe' );
 
-			case Theme_Options::SOCIAL_PINTEREST:
+			case Social_Settings::SOCIAL_PINTEREST:
 				return esc_html__( 'Follow us on Pinterest', 'tribe' );
 
-			case Theme_Options::SOCIAL_INSTAGRAM:
+			case Social_Settings::SOCIAL_INSTAGRAM:
 				return esc_html__( 'Follow us on Instagram', 'tribe' );
 
 			default:
