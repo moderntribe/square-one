@@ -1,4 +1,4 @@
->[!NOTICE]
+>[!NOTE]
 ># SquareOne Deprecated
 >
 >**We are no longer maintaining or making updates to this codebase.** SquareOne served us well for many years. However, it doesn't play particularly well with WordPress development architecture and best practices utilizing the Block & Site Editors.
