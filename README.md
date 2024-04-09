@@ -1,3 +1,11 @@
+>[!NOTICE]
+># SquareOne Deprecated
+>
+>**We are no longer maintaining or making updates to this codebase.** SquareOne served us well for many years. However, it doesn't play particularly well with WordPress development architecture and best practices utilizing the Block & Site Editors.
+>
+> We've been building with the Block Editor for several years now and have developed a new, lightweight framework for WordPress development we affectionately call _[Moose](https://github.com/moderntribe/moose/)_. Moose is designed to take advantage of all the latest features in WordPress.
+----
+
 ![./example/example.svg](./logo.svg)
 
 [![Codeception Tests](https://github.com/moderntribe/square-one/actions/workflows/ci.yml/badge.svg)](https://github.com/moderntribe/square-one/actions/workflows/ci.yml)
