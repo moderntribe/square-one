@@ -1,0 +1,8 @@
+{
+	"http-basic": {
+		"connect.advancedcustomfields.com": {
+			"username": "ACF License Key",
+			"password": "https://square1.tribe"
+		}
+	}
+}

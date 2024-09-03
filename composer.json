@@ -15,7 +15,6 @@
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "composer/installers": true,
-      "ffraenz/private-composer-installer": true,
       "johnpbloch/wordpress-core-installer": true,
       "cweagans/composer-patches": true,
       "phpstan/extension-installer": true,
@@ -28,6 +27,10 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "repositories": [
+    {
+      "type": "composer",
+      "url": "https://connect.advancedcustomfields.com"
+    },
     {
       "type": "composer",
       "url": "https://wpackagist.org"
@@ -43,36 +46,6 @@
     {
       "type": "vcs",
       "url": "git@github.com:bordoni/phpass.git"
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "gravityforms/gravityforms",
-        "version": "2.7.13",
-        "type": "wordpress-plugin",
-        "dist": {
-          "type": "zip",
-          "url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&token={%WP_PLUGIN_GF_TOKEN}&t={%VERSION}"
-        },
-        "require": {
-          "ffraenz/private-composer-installer": "^5.0"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "6.2.0",
-        "type": "wordpress-plugin",
-        "dist": {
-          "type": "zip",
-          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t={%VERSION}"
-        },
-        "require": {
-          "ffraenz/private-composer-installer": "^5.0"
-        }
-      }
     }
   ],
   "require": {
@@ -82,8 +55,6 @@
     "ext-imagick": "*",
     "ext-intl": "*",
     "ext-json": "*",
-    "advanced-custom-fields/advanced-custom-fields-pro": "*",
-    "gravityforms/gravityforms": "*",
     "guzzlehttp/psr7": "^1.4",
     "http-interop/http-factory-guzzle": "^1.2",
     "humanmade/s3-uploads": "3.0.4",
@@ -109,7 +80,8 @@
     "wpackagist-plugin/regenerate-thumbnails": "3.1.6",
     "wpackagist-plugin/user-switching": "1.7.0",
     "wpackagist-plugin/wordpress-seo": "21.0",
-    "wpackagist-plugin/wp-tota11y": "1.2.0"
+    "wpackagist-plugin/wp-tota11y": "1.2.0",
+    "wpengine/advanced-custom-fields-pro": "6.2.0"
   },
   "require-dev": {
     "brain/monkey": "2.*",
