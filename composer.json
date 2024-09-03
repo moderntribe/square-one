@@ -81,7 +81,7 @@
     "wpackagist-plugin/user-switching": "1.7.0",
     "wpackagist-plugin/wordpress-seo": "21.0",
     "wpackagist-plugin/wp-tota11y": "1.2.0",
-    "wpengine/advanced-custom-fields-pro": "6.3.4"
+    "wpengine/advanced-custom-fields-pro": "6.2.0"
   },
   "require-dev": {
     "brain/monkey": "2.*",
