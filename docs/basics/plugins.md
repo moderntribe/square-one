@@ -19,64 +19,28 @@ version of the plugin in `composer.json`.
 
 Update plugins by changing the version in `composer.json` and running `composer udpate`.
 
-## Proprietary Plugins
+## Proprietary Plugins.
 
-Some commonly used plugins are not available publicly, but still provide an API to download a licensed copy. The
-utility `ffraenz/private-composer-installer` allows us to provide our license key as an environment variable and
-install a proprietary plugin using Composer.
-
-We specifically use this to install [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/). Note
-that the plugin version listed in the `require` section of `composer.json` is meaningless, and should always be
-set to `*`.
-
-```
-"advanced-custom-fields/advanced-custom-fields-pro": "*"
-```
-
-In the `repositories` section we see the real magic to install the plugin.
+Advanced Cusotm Fields Pro is installed via Composer using [the plugin author's preferred method](https://www.advancedcustomfields.com/resources/installing-acf-pro-with-composer/), an auth.json file.
+There is a `auth-sample.json` file in the project root. Copy this to `auth.json` and provide a valid license key to
+allow composer to authenticate and install the plugin.
 
 ```
 {
-  "type": "package",
-  "package": {
-    "name": "advanced-custom-fields/advanced-custom-fields-pro",
-    "version": "5.8.11",
-    "type": "wordpress-plugin",
-    "dist": {
-      "type": "zip",
-      "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%WP_PLUGIN_ACF_KEY}&t={%VERSION}"
-    },
-    "require": {
-      "ffraenz/private-composer-installer": "^3.0"
+  "http-basic": {
+    "connect.advancedcustomfields.com": {
+      "username": "[your ACF Pro license key]",
+      "password": "https://square1.tribe"
     }
   }
 }
 ```
 
-The `version` property of the package sets the version that will be installed. The license key comes from an
-environment variable named `WP_PLUGIN_ACF_KEY`. By setting this in a `.env` file in the project's root directory,
-Composer will pass the key to ACF's download API.
-
-```
-WP_PLUGIN_ACF_KEY='abcdefghijklmnopqrstuvwxyz123456789abcdefghijklmnopqrstuvwxyz01234567890'
-```
-
-Gravity Forms is a special case, in that we cannot set a URL directly in `composer.json`. Instead, we have to provide
-a URL to a proxy that will request a temporary URL from another API. Its URL will look like:
-
-```
-"url": "https://composer.utility.mtribe.site/gravityforms/?key={%WP_PLUGIN_GF_KEY}&token={%WP_PLUGIN_GF_TOKEN}&t={%VERSION}"
-```
-
-Otherwise, it is configured exactly like ACF. Once again, the license key must be set in `.env`, with the name
-`WP_PLUGIN_GF_KEY`. Additionally, it requires a token for the proxy service, named `WP_PLUGIN_GF_TOKEN`.
-
-All of these values can be found in 1Password for use with Modern Tribe's projects.
-
 ### Uncooperative Plugins
 
-Unfortunately, there are some premium plugins that cannot be installed with Composer. For these, we have to take
-the old fashioned approach of downloading the plugin, copying it into the project, and committing the files.
+Unfortunately, there are some premium plugins that cannot be installed with Composer including Gravity Forms.
+For these, we have to take the old fashioned approach of downloading the plugin, copying it into the project,
+and committing the files.
 
 All plugins are gitignored by default, so any plugins installed this way should be force added to the repo.
 
