@@ -124,6 +124,7 @@ wp-content/themes/core/reports
 #######################
 /.garden-*
 /.env
+/auth.json
 /vendor
 dev/docker/composer/
 dev/docker/composer-config.json
